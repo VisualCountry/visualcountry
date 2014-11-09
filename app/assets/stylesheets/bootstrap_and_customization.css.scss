@@ -1,0 +1,50 @@
+@import 'bootstrap';
+
+/* Header */
+.header_logo {
+  width: 200px;
+ }
+
+
+/* Welcome Page*/
+.welcome {
+
+  h1 {
+    font-family: 'brandon_med';
+    font-size: 58px;
+    letter-spacing: 3px;
+    margin: 100px 0 30px 0;
+    opacity: 0.3;
+  }
+
+
+  h5 {
+      font-family: 'brandon_reg_it';
+      font-size: 24px;
+      letter-spacing: 3px;
+    }  
+  
+}
+
+.welcome_logo {
+  width: 250px;
+}
+
+.home-page-button {
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid #333;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 0px;
+
+  &:hover {
+    background-color: #eb1075;
+  }
+
+  a {
+    color: #000;
+  }
+}
