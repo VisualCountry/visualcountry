@@ -1,10 +1,20 @@
+<div class="container-fluid">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav nav-pills" role="tablist">
+        <li role="presentation" class="active"><a href="#"><img class="header_logo" alt="Visual Country" src="/assets/visualcountry_logo.png" /></a></li>
+        
+         <% if user_signed_in? %>
+          <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+         <% else %>  
+          <li role="presentation"><%= link_to 'Content Creators', content_creators_path %></li>
+          <li role="presentation"><%= link_to 'Brands / Agencies', brands_agencies_path %></li>
+          <li role="presentation"><%= link_to 'Sign In', new_user_session_path %></li>
+          <li role="presentation"><%= link_to 'Sign Up', new_user_registration_path %></li>
+           <% end %> 
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
 
 
 
-<ul class="nav nav-pills" role="tablist">
-  <li role="presentation" class="active"><a href="#"><img class="header_logo" alt="Visual Country" src="/assets/visualcountry_logo.png" /></a></li>
-  <li role="presentation"><%= link_to 'Content Creators', content_creators_path %></li>
-  <li role="presentation"><%= link_to 'Brands / Agencies', brands_agencies_path %></li>
-  <li role="presentation"><%= link_to 'Sign In', new_user_session_path %></li>
-  <li role="presentation"><%= link_to 'Sign Up', new_user_registration_path %></li>
-</ul>
