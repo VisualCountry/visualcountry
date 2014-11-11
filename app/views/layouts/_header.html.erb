@@ -1,17 +1,38 @@
 <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+   <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
       <ul class="nav nav-pills" role="tablist">
+        
         <li role="presentation" class="active"><%= link_to(image_tag("visualcountry_logo.png", :class =>"header_logo", :alt => "logo", :title => "Home"), "/") %></li>
         
          <% if user_signed_in? %>
           <li role="presentation"><%= link_to 'Content Creators', content_creators_path %></li>
           <li role="presentation"><%= link_to 'Brands / Agencies', brands_agencies_path %></li>
-          <li class="navbar-right"><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+          
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"> <%= image_tag("settings_icon.svg", :size => '20', :alt => "settings_icon") %>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+              <li role="presentation"><%= link_to 'Settings', edit_user_registration_path %></li>
+              <li role="presentation"><%= link_to 'Profile', profile_path(current_user) %></li>
+              <li role="presentation"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </div>
+
+           <li role="presentation"><%= link_to(image_tag(current_user.picture.url, :size => '25', :alt => "Vine Logo", :title => "Profile"), profile_path(current_user)) %></li>
+
          <% else %>  
           <li role="presentation"><%= link_to 'Content Creators', content_creators_path %></li>
           <li role="presentation"><%= link_to 'Brands / Agencies', brands_agencies_path %></li>
           <li role="presentation"><%= link_to 'Sign In', new_user_session_path %></li>
-          <li role="presentation" class="navbar-right"><%= link_to 'Sign Up', new_user_registration_path %></li>
+          <li role="presentation"><%= link_to 'Sign Up', new_user_registration_path %></li>
            <% end %> 
 
       </ul>

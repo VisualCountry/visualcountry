@@ -8,9 +8,10 @@ class PagesController < ApplicationController
   def brands
   end
 
-  def login
-  end
-
-  def signup
+  def connect
   end  
+
+  def interests
+  end  
+ 
 end

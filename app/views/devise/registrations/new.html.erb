@@ -4,9 +4,30 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
 
+    <div>
+      <h4>Tell us a little bit about yourself.</h4>
+      <p>Fill out your profile.</p>
+    </div>  
+    
+    <div class="field">
+      <%= f.label :picture %><br />
+      <%= f.file_field :picture, autofocus: true, class: "form-control" %>
+    </div>
+
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, autofocus: true, class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <p><%= f.label :username %><br />
+      <%= f.text_field :username, class: "form-control" %></p>
+    </div>
+
     <div class="field">
       <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true %>
+      <%= f.email_field :email, autofocus: true, class: "form-control" %>
     </div>
 
     <div class="field">
@@ -14,12 +35,22 @@
       <% if @validatable %>
       <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %><br />
-      <%= f.password_field :password, autocomplete: "off" %>
+      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
     </div>
 
     <div class="field">
       <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :bio %>
+       <%= f.text_area :bio, class: "form-control", :autofocus => true %>
+    </div>    
+
+    <div class="form-group">
+       <%= f.label :city %>
+       <%= f.text_field :city, class: "form-control", :autofocus => true %>
     </div>
 
     <div class="actions">

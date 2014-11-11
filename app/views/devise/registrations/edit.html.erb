@@ -5,6 +5,26 @@
     <%= devise_error_messages! %>
 
     <div class="field">
+      <%= f.label :picture %><br />
+      <%= f.file_field :picture, autofocus: true, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+       <%= f.label :name %>
+       <%= f.text_field :name, class: "form-control", :autofocus => true %>
+     </div>
+
+    <div class="form-group">
+    <%= f.label :bio %>
+     <%= f.text_area :bio, class: "form-control", :autofocus => true %>
+    </div>  
+
+    <div class="form-group">
+     <%= f.label :city %>
+     <%= f.text_field :city, class: "form-control", :autofocus => true %>
+    </div>
+
+    <div class="field">
       <%= f.label :email %><br />
       <%= f.email_field :email, autofocus: true %>
     </div>

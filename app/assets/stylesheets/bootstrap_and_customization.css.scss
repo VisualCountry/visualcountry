@@ -5,6 +5,7 @@
   width: 200px;
  }
 
+.nav .nav-pills
 
 /* Welcome Page*/
 .welcome {
@@ -42,9 +43,16 @@
 
   &:hover {
     background-color: #eb1075;
+    color: #ffffff;
   }
 
   a {
     color: #000;
+
   }
 }
+
+
+
+
+
