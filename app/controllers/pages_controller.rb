@@ -13,5 +13,7 @@ class PagesController < ApplicationController
 
   def interests
   end  
- 
+
+  def press
+  end  
 end

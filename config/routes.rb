@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :pictures
   resources :profiles, only: [:show]
+  
 
   devise_for :users
   root 'pages#home'
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   get 'brands-agencies' => 'pages#brands'
   get 'connect-profiles' => 'pages#connect'
   get 'interests' => 'pages#interests'
+   get 'brands-press' => 'pages#press'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

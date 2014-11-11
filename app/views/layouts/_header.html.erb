@@ -26,7 +26,8 @@
             </ul>
           </div>
 
-           <li role="presentation"><%= link_to(image_tag(current_user.picture.url, :size => '25', :alt => "Vine Logo", :title => "Profile"), profile_path(current_user)) %></li>
+           <li role="presentation"><%= link_to(image_tag(current_user.picture.url, :size => '25', :alt => "Vine Logo", :title => "Profile"), profile_path(current_user)) %>  </li>
+           <li role="presentation"><%= link_to current_user.name, profile_path(current_user)%>  </li>
 
          <% else %>  
           <li role="presentation"><%= link_to 'Content Creators', content_creators_path %></li>
