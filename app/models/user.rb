@@ -7,7 +7,9 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
 
-  #has_many :press_publications
+  has_many :presses
+  accepts_nested_attributes_for :presses, :reject_if => :all_blank, :allow_destroy => true
+
 end
 
 

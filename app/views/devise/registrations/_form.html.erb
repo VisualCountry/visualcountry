@@ -1,0 +1,19 @@
+<%= _form_for @current_user, url: edit_user_registration_path do |f| %>
+    <%= f.input do %>
+    <%= f.input :publication %>
+    <%= f.input :url %>
+    <h3>Press</h3>
+    <div>
+      <%= f.fields_for :presses do |press| %>
+        <%= render '/presses/press_fields', :f => press %>
+      <% end %>
+      <div>
+        <%= link_to_add_association 'add press', user, :presses %>
+      </div>
+    </div>
+    <%= f.actions do %>
+      <%= f.action :submit %>
+    <% end %>
+  <% end %>
+<% end %>
+

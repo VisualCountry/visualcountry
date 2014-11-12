@@ -41,3 +41,4 @@ end
 gem 'pry'
 
 gem "cocoon"
+gem 'nested_form_fields'

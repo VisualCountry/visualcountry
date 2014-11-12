@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :pictures
   resources :profiles, only: [:show]
+  resources :presses
   
 
   devise_for :users, :controllers => { :registrations => "registrations" }
