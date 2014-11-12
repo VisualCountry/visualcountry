@@ -1,0 +1,13 @@
+<%= render 'layouts/user_navigation' %> 
+
+<%= form_for(current_user, as: current_user, url: registration_path(current_user), html: { method: :put }) do |f| %>
+  <div class="form-group">
+    <%= f.label :press %>
+    <%= f.text_field :press, class: "form-control", :autofocus => true %>
+    <%= f.hidden_field :email, value: current_user.email %>
+  </div>
+  <div><%= f.submit %></div>
+
+
+<% end %>
+

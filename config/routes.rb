@@ -3,14 +3,15 @@ Rails.application.routes.draw do
   resources :profiles, only: [:show]
   
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
+  
   root 'pages#home'
 
   get 'content-creators' => 'pages#creators'
   get 'brands-agencies' => 'pages#brands'
   get 'connect-profiles' => 'pages#connect'
   get 'interests' => 'pages#interests'
-   get 'brands-press' => 'pages#press'
+  get 'brands-press' => 'profiles#press'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

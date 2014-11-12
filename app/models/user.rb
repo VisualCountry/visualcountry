@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_attached_file :picture
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
+  validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
+
+  #has_many :press_publications
 end
 
 

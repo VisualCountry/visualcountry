@@ -1,11 +1,38 @@
 @import 'bootstrap';
 
+/* Overall CSS */
+.container {
+    margin: 0 auto;
+}
+
+.clear {
+  clear: both;
+}
+
+a {
+  color: black;
+ 
+}
+
+a:hover {
+  color: black;
+}
+
+
 /* Header */
 .header_logo {
   width: 200px;
  }
 
-.nav .nav-pills
+.settings-icon {
+  margin-top: 10px;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  color: white;
+  background-color: #ffffff;
+}
+
 
 /* Welcome Page*/
 .welcome {
@@ -27,6 +54,10 @@
   
 }
 
+.welcome_container {
+  margin: 0 auto;
+} 
+
 .welcome_logo {
   width: 250px;
 }
@@ -42,14 +73,11 @@
   border-radius: 0px;
 
   &:hover {
-    background-color: #eb1075;
-    color: #ffffff;
+    text-decoration: none;
+    background-color: #fff;
   }
 
-  a {
-    color: #000;
-
-  }
+ 
 }
 
 
