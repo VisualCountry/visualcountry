@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   resources :pictures
   resources :profiles, only: [:show]
-  resources :presses
-  
+  resources "contacts", only: [:new, :create]
 
   devise_for :users, :controllers => { :registrations => "registrations" }
   
@@ -12,7 +11,10 @@ Rails.application.routes.draw do
   get 'brands-agencies' => 'pages#brands'
   get 'connect-profiles' => 'pages#connect'
   get 'interests' => 'pages#interests'
-  get 'brands-press' => 'profiles#press'
+  
+  
+  match '/contacts',     to: 'contacts#new',             via: 'get'
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112012734) do
+ActiveRecord::Schema.define(version: 20141113011518) do
+
+  create_table "clients", force: true do |t|
+    t.string   "client_name"
+    t.string   "url"
+    t.string   "user_id"
+    t.string   "integer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pictures", force: true do |t|
     t.string   "title"
@@ -28,6 +37,7 @@ ActiveRecord::Schema.define(version: 20141112012734) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "users", force: true do |t|
@@ -52,7 +62,6 @@ ActiveRecord::Schema.define(version: 20141112012734) do
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
     t.string   "brands"
-    t.string   "press"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

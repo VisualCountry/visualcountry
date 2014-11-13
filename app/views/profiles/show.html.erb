@@ -71,20 +71,16 @@
   <div>
      <div class="col-md-3"> 
         <h2>Press</h2>
-        <h4>Time Magazine</h4>
-        <h4>Time Magazine</h4>
-        <h4>Time Magazine</h4>
-        <h4>Time Magazine</h4>
-        <h4>Time Magazine</h4>
+        <h5><% @user.presses.each do |press| %></h5>
+            <%= press.publication_name %>
+          <% end %> 
      </div>    
-      <div class="col-md-3"> 
-        <h2>Clients</h2>
-        <h4>Lowes</h4>
-        <h4>Samsung</h4>
-        <h4>Coke</h4>
-        <h4>Tmobile</h4>
-        <h4>Nest</h4>
-     </div>  
+     <div class="col-md-3"> 
+        <h2>Client</h2>
+        <h5><% @user.clients.each do |client| %></h5>
+            <%= clients.client_name %>
+          <% end %> 
+     </div>    
   </div>  
 
 <div class="clear"></div>

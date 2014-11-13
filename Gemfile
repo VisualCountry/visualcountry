@@ -23,11 +23,16 @@ gem 'spring',        group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# attaching images
 gem "paperclip"
 
+# styling across the board
 gem 'bootstrap-sass'
 
+# Creating user profiles and login authentication
 gem 'devise'
+gem 'omniauth-facebook'
 
 group :development, :test do
      gem 'sqlite3'
@@ -38,7 +43,19 @@ group :production do
      gem 'rails_12factor'
 end
 
-gem 'pry'
+# Debuggers
+gem 'pry-rails'
+gem 'better_errors'
+gem 'binding_of_caller'
 
+# Nested Forms and forms
 gem "cocoon"
 gem 'nested_form_fields'
+gem 'simple_form'
+
+#mail contact form
+gem 'mail_form'
+
+
+
+
