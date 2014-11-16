@@ -17,11 +17,11 @@ class User < ActiveRecord::Base
 
 
   def facebook_follower_count
-    facebook_client.get_connections('me', 'friends').raw_response['summary']['total_count']
+    show_facebook? ? facebook_client.get_connections('me', 'friends').raw_response['summary']['total_count'] : 0
   end
 
   def instagram_follower_count
-    instagram_client.user['counts']['followed_by']
+      show_instagram? ? instagram_client.user['counts']['followed_by'] : 0
   end
 
   def instagram_following_count
@@ -29,11 +29,23 @@ class User < ActiveRecord::Base
   end
 
   def instagram_media
-    instagram_client.user_recent_media
+    show_instagram? ? instagram_client.user_recent_media : []
     #    instagram_client.user_recent_media.first['images']['standard_resolution']['url']
+  end
+  def total_social_count
+     self.facebook_follower_count + self.instagram_follower_count 
+  end
+
+  def show_instagram?
+    !! self.instagram_token
+  end
+
+  def show_facebook?
+    !! self.facebook_token
   end
 
 private
+
 
   def instagram_client
     @instagram_client ||= Instagram.client(:access_token => self.instagram_token)

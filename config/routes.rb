@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  delete 'facebook_link/destroy'
+
   delete 'instagram_link/destroy'
 
   root 'pages#home'

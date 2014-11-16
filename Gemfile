@@ -60,4 +60,5 @@ gem 'mail_form'
 # Social Media Gems
 gem 'koala'
 gem 'instagram'
+gem 'vine_client'
 
