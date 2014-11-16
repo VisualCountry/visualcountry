@@ -14,14 +14,21 @@
     </div>
     <div class="well">
      <h2> 
-       <%= image_tag("twitter_logo.svg", :size => '30', :alt => "Vine Logo") %> Twitter
-       <button type="button" class="btn btn-primary btn-lg">Connect</button>
+        <%= image_tag("twitter_logo.svg", :size => '30', :alt => "Vine Logo") %> Twitter
+        <button type="button" class="btn btn-primary btn-lg">Connect</button>
      </h2>
     </div>
     <div class="well">
      <h2> 
-       <%= image_tag("instagram_logo.svg", :size => '30', :alt => "Vine Logo") %> Instagram
-       <button type="button" class="btn btn-primary btn-lg">Connect</button>
+       <%= image_tag("instagram_logo.svg", :size => '30', :alt => "Vine Logo") %>
+       Instagram 
+       <% if current_user.instagram_token? %>
+       <p>followed by: <%= current_user.instagram_follower_count %></p>
+        
+       <%=link_to "Linked", instagram_link_destroy_path, method: :delete %>
+       <% else %>
+        <%= link_to 'Instagram', user_omniauth_authorize_path(:instagram), class: "btn btn-primary btn-lg" %>
+       <% end %>
      </h2>
     </div>
     <div class="well">
@@ -32,8 +39,13 @@
     </div>
     <div class="well">
      <h2> 
-       <%= image_tag("facebook_logo.svg", :size => '30', :alt => "Vine Logo") %> Facebook
-       <button type="button" class="btn btn-primary btn-lg">Connect</button>
+       <%= image_tag("facebook_logo.svg", :size => '30', :alt => "Facebook Logo") %> Facebook
+       <% if current_user.facebook_token? %>
+        Linked
+       <% else %>
+        <%= link_to 'Facebook', user_omniauth_authorize_path(:facebook), class: "btn btn-primary btn-lg" %>
+       <% end %>
+       <!--<button type="button" class="btn btn-primary btn-lg">Connect</button>-->
      </h2>
     </div>
     <div class="well">
@@ -51,3 +63,21 @@
 
 
   </div>  
+
+
+
+  <% if current_user %>
+    You're currently signed in as <%= current_user.name %>
+    <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+  <% else %>
+    <% link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook) %>
+  <% end %>  
+
+
+
+
+
+
+
+
+

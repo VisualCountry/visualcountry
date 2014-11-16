@@ -1,20 +1,22 @@
 Rails.application.routes.draw do
-  resources :pictures
-  resources :profiles, only: [:show]
-  resources "contacts", only: [:new, :create]
+  delete 'instagram_link/destroy'
 
-  devise_for :users, :controllers => { :registrations => "registrations" }
-  
   root 'pages#home'
 
+  resources :pictures
+  resources :profiles, only: [:show]
+  
+
+  devise_for :users, :controllers => { :registrations => :registrations, omniauth_callbacks: :omniauth_callbacks }
+  
   get 'content-creators' => 'pages#creators'
   get 'brands-agencies' => 'pages#brands'
   get 'connect-profiles' => 'pages#connect'
   get 'interests' => 'pages#interests'
   
-  
+  # for contact form
   match '/contacts',     to: 'contacts#new',             via: 'get'
-  
+  resources "contacts", only: [:new, :create]
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

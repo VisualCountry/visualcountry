@@ -33,6 +33,7 @@ gem 'bootstrap-sass'
 # Creating user profiles and login authentication
 gem 'devise'
 gem 'omniauth-facebook'
+gem 'omniauth-instagram'
 
 group :development, :test do
      gem 'sqlite3'
@@ -56,6 +57,7 @@ gem 'simple_form'
 #mail contact form
 gem 'mail_form'
 
-
-
+# Social Media Gems
+gem 'koala'
+gem 'instagram'
 

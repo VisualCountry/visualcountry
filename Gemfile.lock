@@ -27,6 +27,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    addressable (2.3.6)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.9)
     better_errors (2.0.0)
@@ -63,9 +64,16 @@ GEM
     execjs (2.2.2)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.9.1)
+      faraday (>= 0.7.4, < 0.10)
     hashie (3.3.1)
     hike (1.2.3)
     i18n (0.6.11)
+    instagram (1.1.3)
+      faraday (>= 0.7, < 0.10)
+      faraday_middleware (>= 0.8, < 0.10)
+      hashie (>= 0.4.0)
+      multi_json (~> 1.0, >= 1.0.3)
     jbuilder (2.2.4)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -74,6 +82,10 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     jwt (1.0.0)
+    koala (1.10.1)
+      addressable
+      faraday
+      multi_json
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mail_form (1.5.0)
@@ -98,6 +110,9 @@ GEM
       rack (~> 1.0)
     omniauth-facebook (2.0.0)
       omniauth-oauth2 (~> 1.2)
+    omniauth-instagram (1.0.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
     omniauth-oauth2 (1.2.0)
       faraday (>= 0.8, < 0.10)
       multi_json (~> 1.3)
@@ -191,11 +206,14 @@ DEPENDENCIES
   cocoon
   coffee-rails (~> 4.0.0)
   devise
+  instagram
   jbuilder (~> 2.0)
   jquery-rails
+  koala
   mail_form
   nested_form_fields
   omniauth-facebook
+  omniauth-instagram
   paperclip
   pg
   pry-rails

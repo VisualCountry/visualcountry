@@ -2,11 +2,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-         
-
-
-  
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:facebook, :instagram]
 
   has_attached_file :picture
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
@@ -18,6 +15,33 @@ class User < ActiveRecord::Base
   has_many :clients
   accepts_nested_attributes_for :clients
 
+  def facebook_data
+    graph = Koala::Facebook::API.new(self.facebook_token)
+    graph.get_connections('me', 'feed')
+  end
+
+  def facebook_follower_count
+    facebook_client.user['counts']['followed_by']
+  end
+
+  def instagram_follower_count
+    instagram_client.user['counts']['followed_by']
+  end
+
+  def instagram_following_count
+    instagram_client.user['counts']['follows']
+  end
+
+  private
+
+  def instagram_client
+    @instagram_client ||= Instagram.client(:access_token => self.instagram_token)
+  end
+
+  def instagram_recent_media 
+    instagram_client.user['']
+  end  
+
+
+
 end
-
-

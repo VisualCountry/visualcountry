@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141113011518) do
+ActiveRecord::Schema.define(version: 20141113232404) do
 
   create_table "clients", force: true do |t|
     t.string   "client_name"
@@ -62,6 +62,10 @@ ActiveRecord::Schema.define(version: 20141113011518) do
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
     t.string   "brands"
+    t.text     "facebook_token"
+    t.text     "twitter_token"
+    t.text     "instagram_token"
+    t.text     "pinterest_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
