@@ -41,7 +41,7 @@
      <h2> 
        <%= image_tag("facebook_logo.svg", :size => '30', :alt => "Facebook Logo") %> Facebook
        <% if current_user.facebook_token? %>
-        Linked
+        <p>followed by: <%= current_user.facebook_follower_count %></p>
        <% else %>
         <%= link_to 'Facebook', user_omniauth_authorize_path(:facebook), class: "btn btn-primary btn-lg" %>
        <% end %>
