@@ -13,60 +13,58 @@
   <div class="clear"></div>
 
   <div>  
-      <div class="col-md-1">  
-        <%= image_tag("vine_logo.svg", :size => '60', :alt => "Vine Logo") %>
-        <p>11,000,111</p>
-      </div>
-      <div class="col-md-1">    
-        <%= image_tag("twitter_logo.svg", :size => '60', :alt => "Twitter Logo") %>
-        <p>11,000,111</p>
-      </div>
+      <% if current_user.show_vine? %>
+        <div class="col-md-1">    
+          <%= image_tag("vine_logo.svg", :size => '60', :alt => "Vine Logo") %>
+          <p><%= current_user.vine_follower_count %></p>      
+        </div>
+      <% end %>
+
+     <% if current_user.show_twitter? %>
+        <div class="col-md-1">    
+          <%= image_tag("twitter_logo.svg", :size => '60', :alt => "Twitter Logo") %>
+          <p><%= current_user.twitter_follower_count %></p>      
+        </div>
+      <% end %>
+
       <% if current_user.show_instagram? %>
         <div class="col-md-1">    
           <%= image_tag("instagram_logo.svg", :size => '60', :alt => "Instagram Logo") %>
           <p><%= current_user.instagram_follower_count %></p>      
         </div>
       <% end %>
+
       <% if current_user.show_facebook? %>
         <div class="col-md-1">    
           <%= image_tag("facebook_logo.svg", :size => '60', :alt => "Facebook Logo") %>
           <p><%= current_user.facebook_follower_count %></p>
         </div>
-      <% end %>  
-      <div class="col-md-1">    
-        <%= image_tag("pinterest_logo.svg", :size => '60', :alt => "Pinterest Logo") %>
-        <p>11,000,111</p>
-      </div>
-      <div class="col-md-1">    
-        <%= image_tag("snapchat_logo.svg", :size => '60', :alt => "Snapchat Logo") %>
-        <p>11,000,111</p>
-      </div>
-      <div class="col-md-1">    
-        <%= image_tag("tumblr_logo.svg", :size => '60', :alt => "Tumblr Logo") %>
-        <p>11,000,111</p>
-      </div>  
+      <% end %> 
+
+       <% if current_user.show_pinterest? %>
+        <div class="col-md-1">    
+          <%= image_tag("pinterest_logo.svg", :size => '60', :alt => "Pinterest Logo") %>
+          <p><%= current_user.pinterest_follower_count %></p>
+        </div>
+      <% end %> 
+ 
   </div>  
 
   <div class="clear"></div>
 
+
+ 
+
+
+
+
   <div>
     <h2>Interests</h2>
-     <div class="col-md-2">
-      <button type="button" class="btn btn-default">News</button>
-     </div>
-     
-     <div class="col-md-2">
-      <button type="button" class="btn btn-default">Technology</button>
-     </div> 
-     
-     <div class="col-md-2">
-      <button type="button" class="btn btn-default">Food</button>
-     </div> 
-     
-     <div class="col-md-2"> 
-      <button type="button" class="btn btn-default">Curation</button>
-     </div> 
-    
+    <div>
+      <% @user.interests.each do |interest| %>
+        <button type="button" class="btn btn-default"><%= interest.interest %></button>
+      <% end %>
+    </div>   
   </div>  
 
 
@@ -82,7 +80,7 @@
      <div class="col-md-3"> 
         <h2>Client</h2>
         <h5><% @user.clients.each do |client| %></h5>
-            <%= clients.client_name %>
+            <%= client.client_name %>
           <% end %> 
      </div>    
   </div>  
@@ -94,6 +92,12 @@
     <% current_user.instagram_media.each do |picture| %>
       <%= link_to image_tag(picture['images']['standard_resolution']['url'], size: "300x300"), picture['link'] %>
       Likes <%= picture['likes']['count'] %>
+    <% end %>
+  </div>  
+  <div>
+    <% current_user.vine_media.each do |vine| %>
+      <%= link_to video_tag(vine['videoUrl'], size: "300x300"), vine['permalinkUrl'] %>
+      Likes <%=  %>
     <% end %>
   </div>  
 

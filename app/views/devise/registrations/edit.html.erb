@@ -8,6 +8,11 @@
     <%= render 'basic_info', f: f %>
     <%= render 'presses', f: f %>
     <%= render 'clients', f: f %>
+
+    <%= f.association :interests, as: :check_boxes, label_method: :interest %>
+
+
+
     <br>
 
     <div class="actions">

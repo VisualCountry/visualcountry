@@ -34,6 +34,8 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'omniauth-instagram'
+gem 'omniauth-twitter'
+gem 'omniauth-pinterest'
 
 group :development, :test do
      gem 'sqlite3'
@@ -61,4 +63,6 @@ gem 'mail_form'
 gem 'koala'
 gem 'instagram'
 gem 'vine_client'
+gem 'twitter'
+
 

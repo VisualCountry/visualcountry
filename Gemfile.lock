@@ -38,6 +38,7 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
+    buftok (0.2.0)
     builder (3.2.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -60,6 +61,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    equalizer (0.0.9)
     erubis (2.7.0)
     execjs (2.2.2)
     faraday (0.9.0)
@@ -68,6 +70,9 @@ GEM
       faraday (>= 0.7.4, < 0.10)
     hashie (3.3.1)
     hike (1.2.3)
+    http (0.6.3)
+      http_parser.rb (~> 0.6.0)
+    http_parser.rb (0.6.0)
     i18n (0.6.11)
     instagram (1.1.3)
       faraday (>= 0.7, < 0.10)
@@ -91,14 +96,18 @@ GEM
     mail_form (1.5.0)
       actionmailer (>= 3.2, < 5)
       activemodel (>= 3.2, < 5)
+    memoizable (0.4.2)
+      thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
     mime-types (2.4.3)
     minitest (5.4.2)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    naught (1.0.0)
     nested_form_fields (0.5.3)
       rails (>= 3.2.0)
+    oauth (0.4.7)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
@@ -113,11 +122,20 @@ GEM
     omniauth-instagram (1.0.1)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
+    omniauth-oauth (1.0.1)
+      oauth
+      omniauth (~> 1.0)
     omniauth-oauth2 (1.2.0)
       faraday (>= 0.8, < 0.10)
       multi_json (~> 1.3)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
+    omniauth-pinterest (1.0.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
+    omniauth-twitter (1.1.0)
+      multi_json (~> 1.3)
+      omniauth-oauth (~> 1.0)
     orm_adapter (0.5.0)
     paperclip (4.2.0)
       activemodel (>= 3.0.0)
@@ -171,6 +189,7 @@ GEM
     simple_form (3.0.2)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
+    simple_oauth (0.3.0)
     slop (3.6.0)
     spring (1.1.3)
     sprockets (2.11.3)
@@ -188,6 +207,17 @@ GEM
     tilt (1.4.1)
     turbolinks (2.5.1)
       coffee-rails
+    twitter (5.13.0)
+      addressable (~> 2.3)
+      buftok (~> 0.2.0)
+      equalizer (~> 0.0.9)
+      faraday (~> 0.9.0)
+      http (~> 0.6.0)
+      http_parser.rb (~> 0.6.0)
+      json (~> 1.8)
+      memoizable (~> 0.4.0)
+      naught (~> 1.0)
+      simple_oauth (~> 0.3.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.5.3)
@@ -217,6 +247,8 @@ DEPENDENCIES
   nested_form_fields
   omniauth-facebook
   omniauth-instagram
+  omniauth-pinterest
+  omniauth-twitter
   paperclip
   pg
   pry-rails
@@ -228,5 +260,6 @@ DEPENDENCIES
   spring
   sqlite3
   turbolinks
+  twitter
   uglifier (>= 1.3.0)
   vine_client

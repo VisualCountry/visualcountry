@@ -9,9 +9,6 @@ class PagesController < ApplicationController
   end
 
   def connect
-  end  
-
-  def interests
-  end  
+  end
 
 end

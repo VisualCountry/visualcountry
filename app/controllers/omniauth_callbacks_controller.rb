@@ -12,4 +12,19 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     current_user.save!
     redirect_to connect_profiles_path
   end
+
+  def twitter
+    auth_data = request.env['omniauth.auth']
+    current_user.twitter_token = auth_data['credentials']['token']
+    current_user.twitter_token_secret = auth_data['credentials']['secret']
+    current_user.save!
+    redirect_to connect_profiles_path
+  end
+
+  def Pinterest
+    auth_data = request.env['omniauth.auth']
+    current_user.pinterest_token = auth_data['credentials']['token']
+    current_user.save!
+    redirect_to connect_profiles_path
+  end
 end

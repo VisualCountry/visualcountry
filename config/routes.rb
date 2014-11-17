@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'vine_authentication' => 'vine_authentication#new'
+  post 'vine_authentication' => 'vine_authentication#create'
+  delete 'vine_authentication' => 'vine_authentication#destroy'
+
+  delete 'pinterest_link/destroy'
+
+  delete 'twitter_link/destroy'
+
   delete 'facebook_link/destroy'
 
   delete 'instagram_link/destroy'
