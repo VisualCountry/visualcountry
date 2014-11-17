@@ -96,8 +96,8 @@
   </div>  
   <div>
     <% current_user.vine_media.each do |vine| %>
-      <%= link_to video_tag(vine['videoUrl'], size: "300x300"), vine['permalinkUrl'] %>
-      Likes <%=  %>
+      <%= link_to video_tag(vine['videoUrl'], size: "300x300", :controls => true, :autobuffer => true), vine['permalinkUrl'] %>
+      Likes <%= vine['likes']['count'] %>
     <% end %>
   </div>  
 
