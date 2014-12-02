@@ -1,25 +1,32 @@
-<div>
-  <div class="container welcome welcome_container">    
-        <h1>CREATING & DISTRIBUTING SHORT VIDEOS FOR THE WORLD’S LEADING BRANDS</h1>
-        
-        <img class="welcome_logo" alt="Visual Country" src="/assets/visualcountry_logo.png" />
-        
-        <h5>Welcome, come on inside.</h5>
-
-        <button type="button" class="btn btn-default home-page-button"><%= link_to 'Content Creators', content_creators_path %></button>
-        
-        <button type="button" class="btn btn-default home-page-button"><%= link_to 'Brands / Agencies', brands_agencies_path %></button>
-
-  </div>
-</div>
-
-<div>
-image roll
-</div>  
-
 <div class="container">
-  <div class="col-md-4">    
-    <p>Contact us: info@visualcountry.com</p>
-  </div> 
+  <div class="welcome">    
+    <div class="row">
+      <div class="col-md-10 col-sm-offset-2">
+        <h1>CREATING & DISTRIBUTING SHORT VIDEOS FOR THE WORLD’S LEADING BRANDS</h1>
+      </div>  
+    </div>    
+
+    <div class="row">
+      <div class="col-md-offset-4 col-md-4 col-md-offset-4 wel-txt text-center">
+        <%= image_tag("visualcountry_logo.png", :class => "welcome_logo", :alt => "Visual Country") %>
+        <h5>Welcome, come on inside.</h5>
+      </div>  
+    </div>  
+
+    <div class="row">
+      <div class="col-md-offset-4 col-md-4 col-md-offset-4 text-center">
+        <%= link_to 'Content Creators', content_creators_path, :class => "btn btn-welcome" %>
+        <%= link_to 'Brands / Agencies', brands_agencies_path, :class => "btn btn-welcome" %>
+      </div>
+    </div> 
+
+    <p>image roll </p>
+     <div class="row">
+      <div class="col-md-offset-4 col-md-4 col-md-offset-4 text-center">
+        <%= link_to 'Contact us: info@visualcountry.com', content_creators_path%>
+    
+    </div>  
+  
+  </div>  
 </div>   
 

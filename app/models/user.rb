@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   end
 
   def total_social_count
-     self.facebook_follower_count + self.instagram_follower_count + self.vine_follower_count #+ self.twitter_follower_count + self.pinterest_follower_count
+     self.facebook_follower_count + self.instagram_follower_count + self.vine_follower_count + self.twitter_follower_count #+ self.pinterest_follower_count
   end
 
   def show_instagram?

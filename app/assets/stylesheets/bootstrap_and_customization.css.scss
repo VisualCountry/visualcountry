@@ -1,6 +1,11 @@
 @import 'bootstrap';
+@import 'bootstrap-sprockets';
 
-/* Overall CSS */
+
+
+/* Body
+============================================*/
+
 .container {
     margin: 0 auto;
 }
@@ -9,32 +14,102 @@
   clear: both;
 }
 
-a {
+.hidden { display: none; }
+
+
+/* Typography 
+============================================*/
+
+        /* Body */
+
+body {
+  font-family: "AkkLg_Pro", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #000;
+  background-color: #fff;
+}
+
+h1 {
+    font-family: 'AkkLg_Pro';
+    font-size: 58px;
+    letter-spacing: 0px;
+    margin: 0px 0 0px 0;
+    color: #000;
+}
+
+h2 {
+    font-family: 'brandon_med';
+    font-size: 34px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin: 10px 0 10qpx 0;
+    color: #000;
+}
+
+h3 {
+    font-family: 'AkkLg_Pro';
+    font-size: 32px;
+    letter-spacing: 0px;
+    margin: 0px 0 0px 0;
+    color: #000;
+}
+
+h4 {
+    font-family: 'AkkLg_Pro';
+    font-size: 22px;
+    letter-spacing: 0px;
+    margin: 0px 0 0px 0;
+    color: #000;
+}
+
+h5 {
+    font-family: 'AkkLg_Pro';
+    font-size: 24px;
+    letter-spacing: 0px;
+    margin: 10px 0 30px 0;
+    color: #000;
+    opacity: .3;
+}
+
+
+a, {
   color: black;
- 
 }
 
-a:hover {
-  color: black;
+ a:hover {
+  color: #000;
 }
 
-
-/* Header */
-.header_logo {
-  width: 200px;
- }
-
-.settings-icon {
-  margin-top: 10px;
-}
-
-.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
-  color: white;
-  background-color: #ffffff;
+a:hover,
+a:focus {
+  color: #000;
+  text-decoration: none;
 }
 
 
-/* Welcome Page*/
+          /* Welcome Page */
+
+.btn-welcome {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+  border-radius: 0;
+  width: 150px;
+
+}         
+
+.btn-welcome:hover,
+.btn-welcome:focus,
+.btn-welcome.focus,
+.btn-welcome:active,
+.btn-welcome.active,
+.open > .dropdown-toggle.btn-welcome {
+  color: #fff;
+  background-color: #ed177f;
+  border-color: #ed177f;
+}
+
 .welcome {
 
   h1 {
@@ -43,48 +118,280 @@ a:hover {
     letter-spacing: 3px;
     margin: 100px 0 30px 0;
     opacity: 0.3;
+    text-transform: uppercase;
   }
 
 
   h5 {
       font-family: 'brandon_reg_it';
-      font-size: 24px;
+      font-size: 22px;
       letter-spacing: 3px;
+      color: #000;
+      opacity: 1;
+      padding-top: 100px;
+      padding-bottom: 50px;
     }  
-  
+
+    .btn:hover,
+    .btn:focus,
+    .btn.focus {
+      color: #fff;
+    }
+
+    .btn-default {
+      color: #333;
+      background-color: #fff;
+      border-color: #ccc;
+      border-radius: 0;
+    }
+    .btn-default:hover,
+    .btn-default:focus,
+    .btn-default.focus,
+    .btn-default:active,
+    .btn-default.active,
+    .open > .dropdown-toggle.btn-default {
+      color: #fff;
+      background-color: #ed177f;
+      border-color: #adadad;
+    }
 }
 
-.welcome_container {
-  margin: 0 auto;
-} 
+ 
+
+/* Navigation Bar
+============================================*/
+.navbar-default {
+  background-color: #fff;
+  border-color: #fff;
+  font-family: AkkRg_Pro;
+}
+
+.nav > li > a:hover {
+  color: #000;
+  background-color: #fff;
+}
+
+.nav > li > a{
+  padding: 19px 15px;
+}
+
+.settings-icon {
+  margin: 19px 15px;
+  height: 20px;
+  width: 20px;
+}
+
+.navbar-profile {
+  width: 25px;
+  height: 25px;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background-color: #ffffff;
+  padding: 10px 15px;
+}
+
+
+/* Footer
+============================================*/
+.footer {
+  background-color: #fff;
+  width: 100%;
+  margin-top: 100px;
+}
+
+
+
+/* Layout
+====================================================== */
+
+.jumbotron {
+  background-color: inherit;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+ .btn:hover,
+    .btn:focus,
+    .btn.focus {
+      color: #000;
+    }
+
+    .btn-default {
+      color: #fff;
+      background-color: #ed177f;
+      border-color: #ed177f;
+      border-radius: 4;
+      margin: 20px 0px;
+    }
+    .btn-default:hover,
+    .btn-default:focus,
+    .btn-default.focus,
+    .btn-default:active,
+    .btn-default.active,
+    .open > .dropdown-toggle.btn-default {
+      color: #000;
+      background-color: #fff;
+      border-color: #ccc;
+    }
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.field{
+  margin: 10px 0;
+}
+
+.form-control-picture{
+  width: 200px;
+  height: 200px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border: 1px solid #000;
+}
+
+
+
+/* Welcome Page
+====================================================*/
+
+.wel-txt {
+  padding-left: 40px;
+}
+
 
 .welcome_logo {
   width: 250px;
 }
 
-.home-page-button {
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  background-image: none;
-  border: 1px solid #333;
-  white-space: nowrap;
-  padding: 6px 12px;
-  border-radius: 0px;
 
-  &:hover {
-    text-decoration: none;
-    background-color: #fff;
 
+/* Brands and Creators Pages
+======================================================*/
+
+    /* Brands Jumbotron*/
+.brands {
+  h1 {
+    margin: 0px 0px 25px 0;
+    padding: 0 0px 0 0;
   }
 
- 
+  h2 {
+    margin: 60px 0px 15px 0;
+    padding: 0 30px 0 0;
+  }
+
+  h3 {
+    margin: 0px 0px 45px 0;
+    padding: 0 30px 0 0;
+  }
+
+  h4 {
+    margin: 0px 0px 45px 0;
+    padding: 0 30px 0 0;
+  }
+
+  .col-md-2{
+    margin: 5px 10px;
+    padding: 0px 0px 5px 0;
+  }
+  .col-md-5{
+    margin: 0px;
+    padding: 0px;
+  }
+  
+}
+
+    /* Brands campaign stages*/
+
+.container-social-links{
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.social-logos{
+  margin: 0 8px;
+  height: 30px;
+  width: 30px;
+}
+
+.brand-stages-icons{
+  width: 130px; 
+  height: 130px;
+}
+
+.brand-campaign-stages{
+  h2{
+    margin: 15px 0 20px 0;
+    font-size: 28px;
+  }
+
+  .col-md-3{
+    padding: 15px;
+    width: 20%;
+  }
+
+  .col-md-offset-1 {
+    margin-left: 10%;
+  }  
+}
+
+    /* Brands List*/
+
+.client-logos{
+  width: 130px;
+  padding: 0 10px 0 10px;
+}    
+
+    /* Work Examples*/
+
+.work-examples-container{
+  margin: 40px 0;
+}
+
+    /* Contact Form*/
+
+.contact-container{
+  margin: 40px 0 150px 0;
+}
+
+    /* Creators Jumbotron*/
+
+.creators {
+
+  .col-md-offset-1{
+    margin-left: 4.16555555555555%;
+  }
+
+  h2 {
+    margin: 0px 0px 0px 0;
+    padding: 0 30px 0 0; 
+    font-size: 45px;
+    font-family: 'brandon_bold';
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin: 0px 0px 15px 0;
+    padding: 0 30px 0 0; 
+    text-transform: uppercase;
+  }
+
+  h4{
+    margin: 20px 0;
+  }
+}    
+
+.creator-img{
+  width: 424px;
+  margin: 20px 20px 70px 20px;
 }
 
 
-/* Contact Form */
 
-.hidden { display: none; }
+/* Contact Form 
+=======================================================*/
+
 
 /*flash*/
 
@@ -117,3 +424,4 @@ text-align: left;
 }
 
 
+ 
