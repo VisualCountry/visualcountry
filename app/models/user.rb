@@ -18,34 +18,48 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :clients
 
   def vine_follower_count
-    show_vine? ? vine_client.user_info['followerCount'] : 0
+    Rails.cache.fetch("vine-follower-count-#{self.id}", :exprires_in => 3600) do
+      show_vine? ? vine_client.user_info['followerCount'] : 0
+    end
   rescue
     'Incorrect credentials'
   end
 
   def vine_media
-    show_vine? ? vine_client.timelines.records : []
+    Rails.cache.fetch("vine-media-#{self.id}", :exprires_in => 3600) do
+      show_vine? ? vine_client.timelines.records : []
+    end
   end
 
   def facebook_follower_count
-    show_facebook? ? facebook_client.get_connections('me', 'friends').raw_response['summary']['total_count'] : 0
+    Rails.cache.fetch("facebook-follower-count-#{self.id}", :exprires_in => 3600) do
+      show_facebook? ? facebook_client.get_connections('me', 'friends').raw_response['summary']['total_count'] : 0
+    end
   end
 
   def instagram_follower_count
+    Rails.cache.fetch("instagram-follower-count-#{self.id}", :exprires_in => 3600) do
       show_instagram? ? instagram_client.user['counts']['followed_by'] : 0
+    end
   end
 
   def instagram_following_count
-    instagram_client.user['counts']['follows']
+    Rails.cache.fetch("instagram-following-count-#{self.id}", :exprires_in => 3600) do
+      instagram_client.user['counts']['follows']
+    end
   end
 
   def instagram_media
-    show_instagram? ? instagram_client.user_recent_media : []
+    Rails.cache.fetch("instagram-media-#{self.id}", :exprires_in => 3600) do
+      show_instagram? ? instagram_client.user_recent_media : []
+    end
     #    instagram_client.user_recent_media.first['images']['standard_resolution']['url']
   end
 
   def twitter_follower_count
-    show_twitter? ? twitter_client.current_user.followers_count : 0
+    Rails.cache.fetch("twitter-follower-count-#{self.id}", :exprires_in => 3600) do
+      show_twitter? ? twitter_client.current_user.followers_count : 0
+    end
   end
 
   def pinterest_follower_count
@@ -76,7 +90,7 @@ class User < ActiveRecord::Base
     !! self.vine_password
   end
 
-private
+  private
 
   def vine_client
     @vine_client ||= Vine::Client.new(self.vine_email, self.vine_password)

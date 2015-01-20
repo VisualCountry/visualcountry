@@ -65,4 +65,5 @@ gem 'instagram'
 gem 'vine_client'
 gem 'twitter'
 
-
+# Caching
+gem 'dalli'
