@@ -43,8 +43,9 @@ gem 'pg'
 
 gem 'unicorn'
 
-group :production do
+group :production, :staging do
   gem 'rails_12factor'
+  gem 'raygun4ruby'
 end
 
 # Debuggers
