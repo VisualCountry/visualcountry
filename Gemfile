@@ -41,6 +41,8 @@ gem 'omniauth-pinterest'
 
 gem 'pg'
 
+gem 'unicorn'
+
 group :production do
   gem 'rails_12factor'
 end
