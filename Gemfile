@@ -43,9 +43,11 @@ gem 'pg'
 
 gem 'unicorn'
 
+
 group :production, :staging do
   gem 'rails_12factor'
   gem 'raygun4ruby'
+  gem 'aws-sdk', '~> 1.20.0'
 end
 
 # Debuggers
