@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   end
 
   def instagram_media
-    return unless instagram_media
+    return unless instagram_client
 
     Rails.cache.fetch("instagram-media-#{self.id}", :exprires_in => 3600) do
       instagram_client.user_recent_media
