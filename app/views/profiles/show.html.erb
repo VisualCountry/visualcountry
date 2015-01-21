@@ -1,5 +1,5 @@
 <div class="container">
-  <div>  
+  <div>
       <div class="col-md-4">
         <%= image_tag @user.picture.url, :size => '300', :alt => "Vine Logo" %>
       </div>
@@ -8,52 +8,52 @@
         <h4>TOTAL FOLLOWERS: <%= current_user.total_social_count %></h4>
         <h2><%= @user.bio %></h2>
       </div>
-  </div>  
+  </div>
 
   <div class="clear"></div>
 
-  <div>  
-      <% if current_user.show_vine? %>
-        <div class="col-md-1">    
+  <div>
+      <% if current_user.vine_follower_count %>
+        <div class="col-md-1">
           <%= image_tag("vine_logo.svg", :size => '60', :alt => "Vine Logo") %>
-          <p><%= current_user.vine_follower_count %></p>      
+          <p><%= current_user.vine_follower_count %></p>
         </div>
       <% end %>
 
-     <% if current_user.show_twitter? %>
-        <div class="col-md-1">    
+     <% if current_user.twitter_follower_count %>
+        <div class="col-md-1">
           <%= image_tag("twitter_logo.svg", :size => '60', :alt => "Twitter Logo") %>
-          <p><%= current_user.twitter_follower_count %></p>      
+          <p><%= current_user.twitter_follower_count %></p>
         </div>
       <% end %>
 
-      <% if current_user.show_instagram? %>
-        <div class="col-md-1">    
+      <% if current_user.instagram_follower_count  %>
+        <div class="col-md-1">
           <%= image_tag("instagram_logo.svg", :size => '60', :alt => "Instagram Logo") %>
-          <p><%= current_user.instagram_follower_count %></p>      
+          <p><%= current_user.instagram_follower_count %></p>
         </div>
       <% end %>
 
-      <% if current_user.show_facebook? %>
-        <div class="col-md-1">    
+      <% if current_user.facebook_follower_count %>
+        <div class="col-md-1">
           <%= image_tag("facebook_logo.svg", :size => '60', :alt => "Facebook Logo") %>
           <p><%= current_user.facebook_follower_count %></p>
         </div>
-      <% end %> 
+      <% end %>
 
-       <% if current_user.show_pinterest? %>
-        <div class="col-md-1">    
+       <% if current_user.pinterest_follower_count %>
+        <div class="col-md-1">
           <%= image_tag("pinterest_logo.svg", :size => '60', :alt => "Pinterest Logo") %>
           <p><%= current_user.pinterest_follower_count %></p>
         </div>
-      <% end %> 
- 
-  </div>  
+      <% end %>
+
+  </div>
 
   <div class="clear"></div>
 
 
- 
+
 
 
 
@@ -64,41 +64,43 @@
       <% @user.interests.each do |interest| %>
         <button type="button" class="btn btn-default"><%= interest.interest %></button>
       <% end %>
-    </div>   
-  </div>  
+    </div>
+  </div>
 
 
 <div class="clear"></div>
 
   <div>
-     <div class="col-md-3"> 
+     <div class="col-md-3">
         <h2>Press</h2>
         <h5><% @user.presses.each do |press| %></h5>
             <%= press.publication_name %>
-          <% end %> 
-     </div>    
-     <div class="col-md-3"> 
+          <% end %>
+     </div>
+     <div class="col-md-3">
         <h2>Client</h2>
         <h5><% @user.clients.each do |client| %></h5>
             <%= client.client_name %>
-          <% end %> 
-     </div>    
-  </div>  
+          <% end %>
+     </div>
+  </div>
 
 <div class="clear"></div>
-
-
-   <div>
-    <% current_user.instagram_media.each do |picture| %>
-      <%= link_to image_tag(picture['images']['standard_resolution']['url'], size: "300x300"), picture['link'] %>
-      Likes <%= picture['likes']['count'] %>
-    <% end %>
-  </div>  
-  <div>
-    <% current_user.vine_media.each do |vine| %>
-      <%= link_to video_tag(vine['videoUrl'], size: "300x300", :controls => true, :autobuffer => true), vine['permalinkUrl'] %>
-      Likes <%= vine['likes']['count'] %>
-    <% end %>
-  </div>  
+  <% if current_user.instagram_media %>
+     <div>
+      <% current_user.instagram_media.each do |picture| %>
+        <%= link_to image_tag(picture['images']['standard_resolution']['url'], size: "300x300"), picture['link'] %>
+        Likes <%= picture['likes']['count'] %>
+      <% end %>
+    </div>
+  <% end %>
+  <% if current_user.vine_media %>
+    <div>
+      <% current_user.vine_media.each do |vine| %>
+        <%= link_to video_tag(vine['videoUrl'], size: "300x300", :controls => true, :autobuffer => true), vine['permalinkUrl'] %>
+        Likes <%= vine['likes']['count'] %>
+      <% end %>
+    </div>
+  <% end %>
 
 </div>
