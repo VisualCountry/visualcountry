@@ -5,7 +5,7 @@
       </div>
       <div class="col-md-4">
         <h1><%= @user.name %></h1>
-        <h4>TOTAL FOLLOWERS: <%= current_user.total_social_count %></h4>
+        <h4>TOTAL FOLLOWERS: <%= @user.total_social_count %></h4>
         <h2><%= @user.bio %></h2>
       </div>
   </div>
@@ -13,38 +13,38 @@
   <div class="clear"></div>
 
   <div>
-      <% if current_user.vine_follower_count %>
+      <% if @user.vine_follower_count %>
         <div class="col-md-1">
           <%= image_tag("vine_logo.svg", :size => '60', :alt => "Vine Logo") %>
-          <p><%= current_user.vine_follower_count %></p>
+          <p><%= @user.vine_follower_count %></p>
         </div>
       <% end %>
 
-     <% if current_user.twitter_follower_count %>
+     <% if @user.twitter_follower_count %>
         <div class="col-md-1">
           <%= image_tag("twitter_logo.svg", :size => '60', :alt => "Twitter Logo") %>
-          <p><%= current_user.twitter_follower_count %></p>
+          <p><%= @user.twitter_follower_count %></p>
         </div>
       <% end %>
 
-      <% if current_user.instagram_follower_count  %>
+      <% if @user.instagram_follower_count  %>
         <div class="col-md-1">
           <%= image_tag("instagram_logo.svg", :size => '60', :alt => "Instagram Logo") %>
-          <p><%= current_user.instagram_follower_count %></p>
+          <p><%= @user.instagram_follower_count %></p>
         </div>
       <% end %>
 
-      <% if current_user.facebook_follower_count %>
+      <% if @user.facebook_follower_count %>
         <div class="col-md-1">
           <%= image_tag("facebook_logo.svg", :size => '60', :alt => "Facebook Logo") %>
-          <p><%= current_user.facebook_follower_count %></p>
+          <p><%= @user.facebook_follower_count %></p>
         </div>
       <% end %>
 
-       <% if current_user.pinterest_follower_count %>
+       <% if @user.pinterest_follower_count %>
         <div class="col-md-1">
           <%= image_tag("pinterest_logo.svg", :size => '60', :alt => "Pinterest Logo") %>
-          <p><%= current_user.pinterest_follower_count %></p>
+          <p><%= @user.pinterest_follower_count %></p>
         </div>
       <% end %>
 
@@ -86,17 +86,17 @@
   </div>
 
 <div class="clear"></div>
-  <% if current_user.instagram_media %>
+  <% if @user.instagram_media %>
      <div>
-      <% current_user.instagram_media.each do |picture| %>
+      <% @user.instagram_media.each do |picture| %>
         <%= link_to image_tag(picture['images']['standard_resolution']['url'], size: "300x300"), picture['link'] %>
         Likes <%= picture['likes']['count'] %>
       <% end %>
     </div>
   <% end %>
-  <% if current_user.vine_media %>
+  <% if @user.vine_media %>
     <div>
-      <% current_user.vine_media.each do |vine| %>
+      <% @user.vine_media.each do |vine| %>
         <%= link_to video_tag(vine['videoUrl'], size: "300x300", :controls => true, :autobuffer => true), vine['permalinkUrl'] %>
         Likes <%= vine['likes']['count'] %>
       <% end %>
