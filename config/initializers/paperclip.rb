@@ -1,1 +1,1 @@
-Paperclip::Attachment.default_options[:s3_host_name] = 'content.visualcountry.com'
+Paperclip::Attachment.default_options[:s3_host_name] = ENV['AWS_S3_HOST_NAME']
