@@ -17,7 +17,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :pictures
   resources :profiles, only: [:show]
 
   get 'content-creators' => 'pages#creators'
