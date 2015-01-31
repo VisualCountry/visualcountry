@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :profiles, only: [:show]
+  resources :users, only: [:show], path: :profiles, as: :profiles
 
   get 'content-creators' => 'pages#creators'
   get 'brands-agencies' => 'pages#brands'
