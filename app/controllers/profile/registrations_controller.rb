@@ -1,4 +1,4 @@
-class Users::RegistrationsController < Devise::RegistrationsController
+class Profile::RegistrationsController < Devise::RegistrationsController
   def edit
     @user = User.find(current_user)
     @user.presses.build

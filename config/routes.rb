@@ -6,14 +6,18 @@ Rails.application.routes.draw do
     omniauth_callbacks: :omniauth_callbacks,
   }
 
-  namespace :users do
-    scope :link do
+  namespace :profile do
+    scope :edit do
       get 'social' => 'social_profiles_connection#show'
-      delete 'pinterest' => 'pinterest_link#destroy'
-      delete 'twitter' => 'twitter_link#destroy'
-      delete 'facebook' => 'facebook_link#destroy'
-      delete 'instagram' => 'instagram_link#destroy'
-      resource 'vine', only: [:new, :create, :destroy]
+      scope :social, as: :link do
+        delete 'pinterest' => 'pinterest_link#destroy'
+        delete 'twitter' => 'twitter_link#destroy'
+        delete 'facebook' => 'facebook_link#destroy'
+        delete 'instagram' => 'instagram_link#destroy'
+        delete 'vine' => 'vine#destroy'
+        resources :vine, only: [:new, :create]
+      end
+      get 'interests' => 'interests#edit'
     end
   end
 
@@ -21,7 +25,7 @@ Rails.application.routes.draw do
 
   get 'content-creators' => 'pages#creators'
   get 'brands-agencies' => 'pages#brands'
-  get 'interests' => 'pages#interests'
+
 
   # for contact form
   match '/contacts',     to: 'contacts#new',             via: 'get'
