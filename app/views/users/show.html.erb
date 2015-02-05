@@ -27,7 +27,7 @@
         </div>
       <% end %>
 
-      <% if @user.instagram_follower_count  %>
+      <% if @user.instagram_follower_count  %>`
         <div class="col-md-1">
           <%= image_tag("instagram_logo.svg", :size => '60', :alt => "Instagram Logo") %>
           <p><%= @user.instagram_follower_count %></p>
@@ -62,7 +62,7 @@
     <h2>Interests</h2>
     <div>
       <% @user.interests.each do |interest| %>
-        <button type="button" class="btn btn-default"><%= interest.interest %></button>
+        <button type="button" class="btn btn-default"><%= interest.name %></button>
       <% end %>
     </div>
   </div>

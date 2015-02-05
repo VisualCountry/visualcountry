@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         resources :vine, only: [:new, :create]
       end
       get 'interests' => 'interests#edit'
+      patch 'interests' => 'interests#update'
     end
   end
 
