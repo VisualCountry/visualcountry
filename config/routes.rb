@@ -19,6 +19,10 @@ Rails.application.routes.draw do
       end
       get 'interests' => 'interests#edit'
       patch 'interests' => 'interests#update'
+      get 'press' => 'press#edit'
+      patch 'press' => 'press#update'
+      get 'clients' => 'clients#edit'
+      patch 'clients' => 'clients#update'
     end
   end
 
