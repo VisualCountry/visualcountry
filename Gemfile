@@ -43,7 +43,6 @@ gem 'pg'
 
 gem 'unicorn'
 
-
 group :production, :staging do
   gem 'rails_12factor'
   gem 'raygun4ruby'
@@ -52,8 +51,6 @@ end
 
 # Debuggers
 gem 'pry-rails'
-gem 'better_errors'
-gem 'binding_of_caller'
 
 # Nested Forms and forms
 gem "cocoon"
@@ -71,3 +68,11 @@ gem 'twitter'
 
 # Caching
 gem 'dalli'
+
+# Testing
+group :development, :test do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
