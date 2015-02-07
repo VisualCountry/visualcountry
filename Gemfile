@@ -54,7 +54,6 @@ gem 'pry-rails'
 
 # Nested Forms and forms
 gem "cocoon"
-gem 'nested_form_fields'
 gem 'simple_form'
 
 #mail contact form
