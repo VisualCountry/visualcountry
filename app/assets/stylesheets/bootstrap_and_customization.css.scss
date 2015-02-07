@@ -17,7 +17,7 @@
 .hidden { display: none; }
 
 
-/* Typography 
+/* Typography
 ============================================*/
 
         /* Body */
@@ -96,8 +96,9 @@ a:focus {
   border-color: #ccc;
   border-radius: 0;
   width: 150px;
+  margin: 0 10px 0 10px;
 
-}         
+}
 
 .btn-welcome:hover,
 .btn-welcome:focus,
@@ -130,7 +131,7 @@ a:focus {
       opacity: 1;
       padding-top: 100px;
       padding-bottom: 50px;
-    }  
+    }
 
     .btn:hover,
     .btn:focus,
@@ -156,7 +157,7 @@ a:focus {
     }
 }
 
- 
+
 
 /* Navigation Bar
 ============================================*/
@@ -300,7 +301,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     margin: 0px;
     padding: 0px;
   }
-  
+
 }
 
     /* Brands campaign stages*/
@@ -316,7 +317,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 .brand-stages-icons{
-  width: 130px; 
+  width: 130px;
   height: 130px;
 }
 
@@ -333,7 +334,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
   .col-md-offset-1 {
     margin-left: 10%;
-  }  
+  }
 }
 
     /* Brands List*/
@@ -341,7 +342,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .client-logos{
   width: 130px;
   padding: 0 10px 0 10px;
-}    
+}
 
     /* Work Examples*/
 
@@ -365,7 +366,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
   h2 {
     margin: 0px 0px 0px 0;
-    padding: 0 30px 0 0; 
+    padding: 0 30px 0 0;
     font-size: 45px;
     font-family: 'brandon_bold';
     text-transform: uppercase;
@@ -373,14 +374,14 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
   h3 {
     margin: 0px 0px 15px 0;
-    padding: 0 30px 0 0; 
+    padding: 0 30px 0 0;
     text-transform: uppercase;
   }
 
   h4{
     margin: 20px 0;
   }
-}    
+}
 
 .creator-img{
   width: 424px;
@@ -389,7 +390,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
 
 
-/* Contact Form 
+/* Contact Form
 =======================================================*/
 
 
@@ -424,4 +425,4 @@ text-align: left;
 }
 
 
- 
+
