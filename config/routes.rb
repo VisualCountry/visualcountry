@@ -27,12 +27,9 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show], path: :profiles, as: :profiles
+  resources :contact_messages, only: [:create]
 
   get 'content-creators' => 'pages#creators'
   get 'brands-agencies' => 'pages#brands'
 
-
-  # for contact form
-  match '/contacts',     to: 'contacts#new',             via: 'get'
-  resources "contacts", only: [:new, :create]
 end
