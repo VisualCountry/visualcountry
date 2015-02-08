@@ -12,11 +12,11 @@ class User < ActiveRecord::Base
          :omniauthable, omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
 
   has_and_belongs_to_many :interests
-  has_many :presses
+  has_many :press
   has_and_belongs_to_many :clients
 
   accepts_nested_attributes_for :clients, allow_destroy: true
-  accepts_nested_attributes_for :presses, allow_destroy: true
+  accepts_nested_attributes_for :press, allow_destroy: true
 
   has_attached_file :picture
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
