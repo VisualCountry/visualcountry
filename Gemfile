@@ -56,9 +56,6 @@ gem 'pry-rails'
 gem "cocoon"
 gem 'simple_form'
 
-#mail contact form
-gem 'mail_form'
-
 # Social Media Gems
 gem 'koala'
 gem 'instagram'
