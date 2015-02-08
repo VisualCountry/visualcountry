@@ -6,6 +6,12 @@ Rails.application.routes.draw do
     omniauth_callbacks: :omniauth_callbacks,
   }
 
+  get '/admin' => 'admin/dashboard#index'
+
+  namespace :admin do
+    resources :contact_messages, only: [:index, :show]
+  end
+
   namespace :profile do
     scope :edit do
       get 'social' => 'social_profiles_connection#show'

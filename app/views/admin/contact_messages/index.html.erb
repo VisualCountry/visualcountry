@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email Address</th>
+    <th>Phone Number</th>
+    <th>Instagram Account</th>
+    <th>Vine Account</th>
+    <th>Body</th>
+    <th>Date</th>
+  </tr>
+  <% @contact_messages.each do |contact_message| %>
+    <tr>
+      <td><%= link_to contact_message.name, admin_contact_message_path(contact_message) %></td>
+      <td><%= contact_message.email_address %></td>
+      <td><%= contact_message.phone_number %></td>
+      <td><%= contact_message.instagram_account %></td>
+      <td><%= contact_message.vine_account %></td>
+      <td><%= contact_message.body %></td>
+      <td><%= contact_message.created_at %></td>
+    </tr>
+  <% end %>
+</table>
