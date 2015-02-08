@@ -2,6 +2,7 @@ class Profile::ClientsController < ApplicationController
   before_action :authenticate_user!
 
   def edit
+    current_user.clients.build
   end
 
   def update
@@ -15,6 +16,10 @@ class Profile::ClientsController < ApplicationController
   private
 
   def clients_params
-    params.require(:user).permit(clients_attributes: [:id, :name, :url, :_destroy])
+    safe_params = params.require(:user).permit(clients_attributes: [:id, :name, :url, :_destroy])
+    rejected_params = safe_params[:clients_attributes].reject do |id, client|
+      client[:name].blank? && client[:url].blank?
+    end
+    {'clients_attributes' => rejected_params}
   end
 end

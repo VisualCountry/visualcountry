@@ -1,6 +1,6 @@
 <%= render 'layouts/user_navigation' %>
 <div class="container">
-  <%= simple_form_for current_user, url: profile_clients_path do |f| %>
+  <%= simple_form_for current_user, url: profile_clients_path, html: { novalidate: true } do |f| %>
     <%= f.simple_fields_for :clients do |client| %>
       <%= render 'client_fields', f: client %>
     <% end %>
