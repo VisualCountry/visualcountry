@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :interests
   has_many :presses
-  has_many :clients
+  has_and_belongs_to_many :clients
 
   accepts_nested_attributes_for :clients, allow_destroy: true
   accepts_nested_attributes_for :presses, allow_destroy: true
