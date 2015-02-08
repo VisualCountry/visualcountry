@@ -1,11 +1,11 @@
 <%= render 'layouts/user_navigation' %>
-  <div class="col-md-6 col-md-offset-4">
+  <div class="container">
     <h1>Social Profiles</h1>
     <h2>Connect your accounts</h2>
     <h1><%= current_user.total_social_count %></h1>
     <p>Total Reach</p>
 
-  <p>Connect at least 2 accounts.</p>
+    <p>Connect at least 2 accounts.</p>
     <div class="well">
      <h2>
       <%= image_tag("vine_logo.svg", :size => '30', :alt => "Vine Logo") %> Vine
