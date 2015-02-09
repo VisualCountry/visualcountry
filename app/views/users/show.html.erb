@@ -1,106 +1,122 @@
-<div class="container">
-  <div>
-      <div class="col-md-4">
+<div class="container profiles">
+  <div class="row">
+    <div class="container-profile-img .col-sm-3">
         <%= image_tag @user.picture.url, :size => '300', :alt => "Vine Logo" %>
-      </div>
-      <div class="col-md-4">
-        <h1><%= @user.name %></h1>
-        <h4>TOTAL FOLLOWERS: <%= @user.total_social_count %></h4>
-        <h2><%= @user.bio %></h2>
-      </div>
+    </div>
+    <div class="container-user-info .col-md-5">
+      <h1><%= @user.name %></h1>
+      <h2>TOTAL FOLLOWERS: <%= @user.total_social_count %></h4>
+      <h3><%= @user.bio %></h3>
+    </div>
   </div>
 
-  <div class="clear"></div>
+  <div class="clearfix"></div>
 
-  <div>
+  <div class="row">
+    <div class="container-social-icons text-center col-md-12">
       <% if @user.vine_follower_count %>
         <div class="col-md-1">
-          <%= image_tag("vine_logo.svg", :size => '60', :alt => "Vine Logo") %>
-          <p><%= @user.vine_follower_count %></p>
+          <%= image_tag("vine_logo.svg", :class => "social-icons", :alt => "Vine Logo") %>
+          <h5><%= @user.vine_follower_count %></h5>
         </div>
       <% end %>
 
-     <% if @user.twitter_follower_count %>
+      <% if @user.twitter_follower_count %>
         <div class="col-md-1">
-          <%= image_tag("twitter_logo.svg", :size => '60', :alt => "Twitter Logo") %>
-          <p><%= @user.twitter_follower_count %></p>
+          <%= image_tag("twitter_logo.svg", :class => "social-icons", :alt => "Twitter Logo") %>
+          <h5><%= @user.twitter_follower_count %></h5>
         </div>
       <% end %>
 
       <% if @user.instagram_follower_count  %>`
         <div class="col-md-1">
-          <%= image_tag("instagram_logo.svg", :size => '60', :alt => "Instagram Logo") %>
-          <p><%= @user.instagram_follower_count %></p>
+          <%= image_tag("instagram_logo.svg", :class => "social-icons", :alt => "Instagram Logo") %>
+          <h5><%= @user.instagram_follower_count %></h5>
         </div>
       <% end %>
 
       <% if @user.facebook_follower_count %>
         <div class="col-md-1">
-          <%= image_tag("facebook_logo.svg", :size => '60', :alt => "Facebook Logo") %>
-          <p><%= @user.facebook_follower_count %></p>
+          <%= image_tag("facebook_logo.svg", :class => "social-icons", :alt => "Facebook Logo") %>
+          <h5><%= @user.facebook_follower_count %></h5>
         </div>
       <% end %>
 
-       <% if @user.pinterest_follower_count %>
+      <% if @user.pinterest_follower_count %>
         <div class="col-md-1">
-          <%= image_tag("pinterest_logo.svg", :size => '60', :alt => "Pinterest Logo") %>
-          <p><%= @user.pinterest_follower_count %></p>
+          <%= image_tag("pinterest_logo.svg", :class => "social-icons", :alt => "Pinterest Logo") %>
+          <h5><%= @user.pinterest_follower_count %></h5>
         </div>
       <% end %>
-
+    </div>
   </div>
 
-  <div class="clear"></div>
+  <div class="clearfix"></div>
 
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Interests</h1>
+      <div>
+        <% @user.interests.each do |interest| %>
+          <button type="button" class="btn btn-default btn-interests"><%= interest.name %></button>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
+  <div class="clearfix"></div>
 
-
-
-
-
-  <div>
-    <h2>Interests</h2>
+  <div class="row container-brands-clients">
     <div>
-      <% @user.interests.each do |interest| %>
-        <button type="button" class="btn btn-default"><%= interest.name %></button>
-      <% end %>
+       <div class="col-md-4">
+          <h1>Press</h1>
+          <% @user.press.each do |press| %>
+            <p><%= press.name %></p>
+          <% end %>
+       </div>
+       <div class="col-md-4">
+          <h1>Clients</h1>
+          <% @user.clients.each do |client| %>
+            <p><%= link_to client.name, client.url %></p>
+          <% end %>
+       </div>
     </div>
   </div>
 
+  <div class="clearfix"></div>
 
-<div class="clear"></div>
-
-  <div>
-     <div class="col-md-3">
-        <h2>Press</h2>
-        <h5><% @user.press.each do |press| %></h5>
-            <%= press.name %>
-          <% end %>
-     </div>
-     <div class="col-md-3">
-        <h2>Client</h2>
-        <h5><% @user.clients.each do |client| %></h5>
-            <%= link_to client.name, client.url %>
-          <% end %>
-     </div>
+  <div class="row text-center center-block">
+    <% if @user.instagram_media %>
+      <div>
+        <% @user.instagram_media.each do |picture| %>
+          <div class="social-post">
+            <div>
+              <%= link_to image_tag(picture['images']['standard_resolution']['url'], :class => "social-img"), picture['link'] %>
+            </div>
+            <div>
+              <p>Likes <%= picture['likes']['count'] %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 
-<div class="clear"></div>
-  <% if @user.instagram_media %>
-     <div>
-      <% @user.instagram_media.each do |picture| %>
-        <%= link_to image_tag(picture['images']['standard_resolution']['url'], size: "300x300"), picture['link'] %>
-        Likes <%= picture['likes']['count'] %>
-      <% end %>
-    </div>
-  <% end %>
-  <% if @user.vine_media %>
-    <div>
-      <% @user.vine_media.each do |vine| %>
-        <%= link_to video_tag(vine['videoUrl'], size: "300x300", :controls => true, :autobuffer => true), vine['permalinkUrl'] %>
-        Likes <%= vine['likes']['count'] %>
-      <% end %>
-    </div>
-  <% end %>
+  <div class="row text-center center-block">
+    <% if @user.vine_media %>
+      <div>
+        <% @user.vine_media.each do |vine| %>
+          <div class="social-post">
+            <div>
+              <%= link_to video_tag(vine['videoUrl'], :class => "social-img", :controls => true, :autobuffer => true), vine['permalinkUrl'] %>
+            </div>
+            <div>
+              <p>Likes <%= vine['likes']['count'] %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
 </div>

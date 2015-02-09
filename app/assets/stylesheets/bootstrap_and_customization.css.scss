@@ -399,40 +399,97 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 
+    /* User Profile Page */
 
-/* Contact Form
-=======================================================*/
+.profiles {
+
+ h1 {
+    margin: 0px 0px 0px 0;
+    padding: 0 0px 0 0;
+    font-size: 41px;
+    font-family: 'AkkBd_Pro';
+    text-transform: none;
+    letter-spacing: 2px;
+  }
+
+  h2 {
+    margin: 15px 0px 0px 0;
+    padding: 0 0px 0 0;
+    font-size: 24px;
+    font-family: 'brandon_med';
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  h3 {
+    margin: 35px 0px 15px 0;
+    padding: 0 0px 0 0;
+    font-family: 'AkkLg_Pro';
+    font-size: 39px;
+    text-transform: none;
+  }
+
+  h4{
+    margin: 20px 0;
+  }
+
+  h5{
+    margin: 10px 0px 10px 0;
+    padding: 0 0px 0 0;
+    font-size: 18px;
+    font-family: 'AkkBd_Pro';
+    text-transform: none;
+    letter-spacing: 2px;
+    opacity: 1;
+  }
+
+  p {
+    margin: 0px 0px 0px 0;
+    padding: 0 0px 0 0;
+    font-family: 'AkkLg_Pro';
+    font-size: 22px;
+    text-transform: none;
+  }
+
+  .container-profile-img{
+    float: left;
+    margin-right: 80px;
+  }
+
+  .container-user-info{
+    margin-right: 100px;
+  }
+
+  .container-social-icons{
+    margin: 20px 0;
+  }
+
+  .social-icons{
+    margin: 0 0px;
+    height: 60px;
+    width: 60px;
+  }
+
+  .btn-interests {
+    margin-right: 20px;
+  }
+
+  .container-brands-clients{
+    padding-bottom: 60px;
+    padding-top: 30px;
+  }
+
+  .social-img{
+    width: 300px;
+  }
+
+  .social-post{
+    width: 300px;
+    float: left;
+    margin: 20px;
+  }
 
 
-/*flash*/
-
-.alert-error {
-background-color: #f2dede;
-border-color: #eed3d7;
-color: #b94a48;
-text-align: left;
 }
-
-.alert-alert {
-background-color: #f2dede;
-border-color: #eed3d7;
-color: #b94a48;
-text-align: left;
-}
-
-.alert-success {
-background-color: #dff0d8;
-border-color: #d6e9c6;
-color: #468847;
-text-align: left;
-}
-
-.alert-notice {
-background-color: #dff0d8;
-border-color: #d6e9c6;
-color: #468847;
-text-align: left;
-}
-
 
 
