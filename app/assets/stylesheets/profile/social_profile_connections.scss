@@ -1,0 +1,17 @@
+.social-profiles {
+  width: 600px;
+
+  .social-profile {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #000000;
+
+    h2 {
+      display: inline;
+    }
+
+    .btn-default {
+      margin: 0;
+    }
+  }
+}
