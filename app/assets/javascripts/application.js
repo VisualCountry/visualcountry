@@ -20,4 +20,4 @@
 
 
 // Flash fallback of video.js
-videojs.options.flash.swf = "/assets/video-js.swf"
+videojs.options.flash.swf = "/assets/swf/video-js.swf"
