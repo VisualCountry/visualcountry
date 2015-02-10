@@ -11,9 +11,6 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require video-js.min
  *= require_self
- 
  */
-
-
-

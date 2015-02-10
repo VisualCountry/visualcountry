@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-offset-2">
         <h1>
-         <p>CREATING & DISTRIBUTING</p>
+         <p>CREATING &amp; DISTRIBUTING</p>
          <p>SHORT VIDEOS FOR THE</p>
          <p>WORLD’S LEADING BRANDS</p>
         </h1>
@@ -25,19 +25,20 @@
     </div>
   </div>
 </div>
-    <div class="row">
-      <div class="image_roll">
-        <%= video_tag "https://s3.amazonaws.com/ilovemeagan/videos/Coca-Cola/app+machine+with+sound1.mp4", :size => "250x250", :controls => true %>
-        <%= video_tag "https://s3.amazonaws.com/ilovemeagan/videos/Toaster+Strudel/toaster+strudel+with+sound.mp4", :size => "250x250", :controls => true %>
-        <%= video_tag "https://s3.amazonaws.com/ilovemeagan/videos/Another+Stories/other-stories-final-with-music1.mp4", :size => "250x250", :controls => true %>
-        <%= video_tag "https://s3.amazonaws.com/ilovemeagan/videos/Prius/PriusSmogSoundSwooshHarp+(1).mp4", :size => "250x250", :controls => true %>
-        <%= video_tag "https://s3.amazonaws.com/ilovemeagan/videos/Samsung/samsung-girls-stopmo-w-sound2-low.mp4", :size => "250x250", :controls => true %>
-        <%= video_tag "https://s3.amazonaws.com/ilovemeagan/videos/W+hotel/W_Cocktails_1_music_final_compressed.mp4", :size => "250x250", :controls => true %>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class=" text-center">
-        <%= link_to 'Contact us: info@visualcountry.com', content_creators_path%>
-      </div>
-    </div>
+<div class="row">
+  <div class="image_roll">
+    <%= videojs_tag "https://s3.amazonaws.com/ilovemeagan/videos/Coca-Cola/app+machine+with+sound1.mp4", width: '250', height: '250' %>
+    <%= videojs_tag "https://s3.amazonaws.com/ilovemeagan/videos/Toaster+Strudel/toaster+strudel+with+sound.mp4", width: '250', height: '250' %>
+    <%= videojs_tag "https://s3.amazonaws.com/ilovemeagan/videos/Another+Stories/other-stories-final-with-music1.mp4", width: '250', height: '250' %>
+    <%= videojs_tag "https://s3.amazonaws.com/ilovemeagan/videos/Prius/PriusSmogSoundSwooshHarp+(1).mp4", width: '250', height: '250' %>
+    <%= videojs_tag "https://s3.amazonaws.com/ilovemeagan/videos/Samsung/samsung-girls-stopmo-w-sound2-low.mp4", width: '250', height: '250' %>
+    <%= videojs_tag "https://s3.amazonaws.com/ilovemeagan/videos/W+hotel/W_Cocktails_1_music_final_compressed.mp4", width: '250', height: '250' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class=" text-center">
+    <%= link_to 'Contact us: info@visualcountry.com', content_creators_path%>
+  </div>
+</div>

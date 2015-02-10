@@ -15,4 +15,9 @@
 //= require bootstrap
 //= require turbolinks
 //= require cocoon
+//= require video
 //= require_tree .
+
+
+// Flash fallback of video.js
+videojs.options.flash.swf = "/assets/video-js.swf"
