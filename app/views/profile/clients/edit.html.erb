@@ -1,10 +1,12 @@
 <%= render 'layouts/user_navigation' %>
 <div class="container">
   <%= simple_form_for current_user, url: profile_clients_path, html: { novalidate: true } do |f| %>
-    <%= f.simple_fields_for :clients do |client| %>
-      <%= render 'client_fields', f: client %>
-    <% end %>
-    <%= link_to_add_association 'add client', f, :clients %>
+    <div id="client">
+      <%= f.simple_fields_for :clients do |client| %>
+        <%= render 'client_fields', f: client %>
+      <% end %>
+      <%= link_to_add_association 'add client', f, :clients %>
+    </div>
     <%= f.submit %>
   <% end %>
 </div>
