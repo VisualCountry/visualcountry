@@ -103,7 +103,7 @@
         <% @user.vine_media.each do |vine| %>
           <div class="social-post">
             <div>
-              <%= link_to video_tag(vine['videoUrl'], :class => "social-img", :controls => true, :autobuffer => true), vine['permalinkUrl'] %>
+              <%= link_to videojs_tag(vine['videoUrl'], class: 'social-img'), vine['permalinkUrl'] %>
             </div>
             <div>
               <p>Likes <%= vine['likes']['count'] %></p>

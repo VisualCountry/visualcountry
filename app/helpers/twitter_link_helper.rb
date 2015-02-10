@@ -1,2 +1,0 @@
-module TwitterLinkHelper
-end
