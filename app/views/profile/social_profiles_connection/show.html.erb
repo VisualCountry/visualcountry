@@ -1,115 +1,117 @@
 <%= render 'layouts/user_navigation' %>
-<div class="container text-center social-profiles">
-  <h3>Social Profiles</h3>
-  <h3>Connect your accounts</h3>
-  <h1><%= current_user.total_social_count %></h1>
-  <p>Total Reach</p>
+<div class="profile">
+  <div class="container text-center social-profiles">
+    <h3>Social Profiles</h3>
+    <h3>Connect your accounts</h3>
+    <h1><%= current_user.total_social_count %></h1>
+    <p>Total Reach</p>
 
-  <p class="pull-left">Connect at least 2 accounts.</p>
-  <div class="clearfix"></div>
+    <p class="pull-left">Connect at least 2 accounts.</p>
+    <div class="clearfix"></div>
 
-  <div class="social-profile">
-    <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-6">
-        <%= image_tag('vine_logo.svg', :size => '30', :alt => 'Vine Logo') %>
-        <h2>Vine</h2>
+    <div class="social-profile">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <%= image_tag('vine_logo.svg', :size => '30', :alt => 'Vine Logo') %>
+          <h2>Vine</h2>
+        </div>
+        <% if current_user.vine_password? %>
+          <div class="col-lg-3 col-md-3 col-sm-3">
+            <p class="count">followed by: <%= current_user.vine_follower_count %></p>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3">
+            <%= link_to image_tag('green_check_icon.svg', size: '30x30', class: 'pull-right'), profile_link_vine_path, method: :delete %>
+          </div>
+        <% else %>
+          <div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-3 col-offset-3">
+            <%= link_to 'Connect', new_profile_link_vine_path, class: 'btn btn-default btn-lg pull-right' %>
+          </div>
+        <% end %>
       </div>
-      <% if current_user.vine_password? %>
-        <div class="col-lg-3 col-md-3 col-sm-3">
-          <p class="count">followed by: <%= current_user.vine_follower_count %></p>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3">
-          <%= link_to image_tag('green_check_icon.svg', size: '30x30', class: 'pull-right'), profile_link_vine_path, method: :delete %>
-        </div>
-      <% else %>
-        <div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-3 col-offset-3">
-          <%= link_to 'Connect', new_profile_link_vine_path, class: 'btn btn-default btn-lg pull-right' %>
-        </div>
-      <% end %>
     </div>
-  </div>
 
-  <div class="social-profile">
-    <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-6">
-        <%= image_tag('twitter_logo.svg', :size => '30', :alt => 'Twitter Logo') %>
-        <h2>Twitter</h2>
+    <div class="social-profile">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <%= image_tag('twitter_logo.svg', :size => '30', :alt => 'Twitter Logo') %>
+          <h2>Twitter</h2>
+        </div>
+        <% if current_user.twitter_token? %>
+          <div class="col-lg-3 col-md-3 col-sm-3">
+            <p class="count">followed by: <%= current_user.twitter_follower_count %></p>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3">
+            <%= link_to image_tag('green_check_icon.svg', size: '40x40', class: 'pull-right'), profile_link_twitter_path, method: :delete %>
+          </div>
+        <% else %>
+          <div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-3 col-offset-3">
+            <%= link_to 'Connect', user_omniauth_authorize_path(:twitter), class: 'btn btn-default btn-lg pull-right' %>
+          </div>
+        <% end %>
       </div>
-      <% if current_user.twitter_token? %>
-        <div class="col-lg-3 col-md-3 col-sm-3">
-          <p class="count">followed by: <%= current_user.twitter_follower_count %></p>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3">
-          <%= link_to image_tag('green_check_icon.svg', size: '40x40', class: 'pull-right'), profile_link_twitter_path, method: :delete %>
-        </div>
-      <% else %>
-        <div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-3 col-offset-3">
-          <%= link_to 'Connect', user_omniauth_authorize_path(:twitter), class: 'btn btn-default btn-lg pull-right' %>
-        </div>
-      <% end %>
     </div>
-  </div>
 
-  <div class='social-profile'>
-    <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-6">
-        <%= image_tag('instagram_logo.svg', :size => '30', :alt => 'Instagram Logo') %>
-        <h2>Instagram</h2>
+    <div class='social-profile'>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <%= image_tag('instagram_logo.svg', :size => '30', :alt => 'Instagram Logo') %>
+          <h2>Instagram</h2>
+        </div>
+        <% if current_user.instagram_token? %>
+          <div class="col-lg-3 col-md-3 col-sm-3">
+            <p class="count">followed by: <%= current_user.instagram_follower_count %></p>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3">
+            <%= link_to image_tag('green_check_icon.svg', size: '30x30', class: 'pull-right'), profile_link_instagram_path, method: :delete %>
+          </div>
+        <% else %>
+          <div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-3 col-offset-3">
+            <%= link_to 'Connect', user_omniauth_authorize_path(:instagram), class: 'btn btn-default btn-lg pull-right' %>
+          </div>
+        <% end %>
       </div>
-      <% if current_user.instagram_token? %>
-        <div class="col-lg-3 col-md-3 col-sm-3">
-          <p class="count">followed by: <%= current_user.instagram_follower_count %></p>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3">
-          <%= link_to image_tag('green_check_icon.svg', size: '30x30', class: 'pull-right'), profile_link_instagram_path, method: :delete %>
-        </div>
-      <% else %>
-        <div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-3 col-offset-3">
-          <%= link_to 'Connect', user_omniauth_authorize_path(:instagram), class: 'btn btn-default btn-lg pull-right' %>
-        </div>
-      <% end %>
     </div>
-  </div>
 
-  <div class='social-profile'>
-    <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-6">
-        <%= image_tag('facebook_logo.svg', :size => '30', :alt => 'Facebook Logo') %>
-        <h2>Facebook</h2>
+    <div class='social-profile'>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <%= image_tag('facebook_logo.svg', :size => '30', :alt => 'Facebook Logo') %>
+          <h2>Facebook</h2>
+        </div>
+        <% if current_user.facebook_token? %>
+          <div class="col-lg-3 col-md-3 col-sm-3">
+            <p class="count">followed by: <%= current_user.facebook_follower_count %></p>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3">
+            <%= link_to image_tag('green_check_icon.svg', size: '30x30', class: 'pull-right'), profile_link_facebook_path, method: :delete %>
+          </div>
+        <% else %>
+          <div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-3 col-offset-3">
+            <%= link_to 'Connect', user_omniauth_authorize_path(:facebook), class: 'btn btn-default btn-lg pull-right' %>
+          </div>
+        <% end %>
       </div>
-      <% if current_user.facebook_token? %>
-        <div class="col-lg-3 col-md-3 col-sm-3">
-          <p class="count">followed by: <%= current_user.facebook_follower_count %></p>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3">
-          <%= link_to image_tag('green_check_icon.svg', size: '30x30', class: 'pull-right'), profile_link_facebook_path, method: :delete %>
-        </div>
-      <% else %>
-        <div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-3 col-offset-3">
-          <%= link_to 'Connect', user_omniauth_authorize_path(:facebook), class: 'btn btn-default btn-lg pull-right' %>
-        </div>
-      <% end %>
     </div>
-  </div>
 
-  <div class='social-profile'>
-    <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-6">
-        <%= image_tag('pinterest_logo.svg', :size => '30', :alt => 'Pinterest Logo') %>
-        <h2>Pinterest</h2>
+    <div class='social-profile'>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <%= image_tag('pinterest_logo.svg', :size => '30', :alt => 'Pinterest Logo') %>
+          <h2>Pinterest</h2>
+        </div>
+        <% if current_user.pinterest_token? %>
+          <div class="col-lg-3 col-md-3 col-sm-3">
+            <p class="count">followed by: <%= current_user.pinterest_follower_count %></p>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3">
+            <%= link_to image_tag('green_check_icon.svg', size: '30x30', class: 'pull-right'), profile_link_pinterest_path, method: :delete %>
+          </div>
+        <% else %>
+          <div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-3 col-offset-3">
+            <%= link_to 'Connect', user_omniauth_authorize_path(:pinterest), class: 'btn btn-default btn-lg pull-right' %>
+          </div>
+        <% end %>
       </div>
-      <% if current_user.pinterest_token? %>
-        <div class="col-lg-3 col-md-3 col-sm-3">
-          <p class="count">followed by: <%= current_user.pinterest_follower_count %></p>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3">
-          <%= link_to image_tag('green_check_icon.svg', size: '30x30', class: 'pull-right'), profile_link_pinterest_path, method: :delete %>
-        </div>
-      <% else %>
-        <div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-3 col-offset-3">
-          <%= link_to 'Connect', user_omniauth_authorize_path(:pinterest), class: 'btn btn-default btn-lg pull-right' %>
-        </div>
-      <% end %>
     </div>
   </div>
 </div>

@@ -1,117 +1,77 @@
-<div class="container profiles center-block">
-  <div class="row container-user-header">
-      <div class="container-profile-img ">
-          <%= image_tag @user.picture.url, :size => '300', :alt => "Vine Logo" %>
+<div class="user">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-4">
+        <%= image_tag(@user.picture.url, :size => '300', alt: 'Vine Logo') %>
       </div>
-      <div class="container-user-info ">
+
+      <div class="col-lg-8 col-md-8 col-sm-8">
         <h1><%= @user.name %></h1>
-        <h2>TOTAL FOLLOWERS: <%= @user.total_social_count %></h4>
+        <h2>TOTAL FOLLOWERS: <%= @user.total_social_count %></h2>
         <h3><%= @user.bio %></h3>
       </div>
-  </div>
+    </div>
 
-  <div class="clearfix"></div>
+    <br>
 
-  <div class="row">
-    <div class="container-social-icons text-center col-md-12">
-      <% if @user.vine_follower_count %>
-        <div class="col-md-1">
-          <%= image_tag("vine_logo.svg", :class => "social-icons", :alt => "Vine Logo") %>
-          <h5><%= @user.vine_follower_count %></h5>
-        </div>
-      <% end %>
-
-      <% if @user.twitter_follower_count %>
-        <div class="col-md-1">
-          <%= image_tag("twitter_logo.svg", :class => "social-icons", :alt => "Twitter Logo") %>
-          <h5><%= @user.twitter_follower_count %></h5>
-        </div>
-      <% end %>
-
-      <% if @user.instagram_follower_count  %>`
-        <div class="col-md-1">
-          <%= image_tag("instagram_logo.svg", :class => "social-icons", :alt => "Instagram Logo") %>
-          <h5><%= @user.instagram_follower_count %></h5>
-        </div>
-      <% end %>
-
-      <% if @user.facebook_follower_count %>
-        <div class="col-md-1">
-          <%= image_tag("facebook_logo.svg", :class => "social-icons", :alt => "Facebook Logo") %>
-          <h5><%= @user.facebook_follower_count %></h5>
-        </div>
-      <% end %>
-
-      <% if @user.pinterest_follower_count %>
-        <div class="col-md-1">
-          <%= image_tag("pinterest_logo.svg", :class => "social-icons", :alt => "Pinterest Logo") %>
-          <h5><%= @user.pinterest_follower_count %></h5>
-        </div>
+    <!-- FIXME -->
+    <div class="row">
+      <% %w(vine twitter instagram facebook pinterest).each do |social| %>
+        <%= render 'follower_counts', social: social %>
       <% end %>
     </div>
-  </div>
 
-  <div class="clearfix"></div>
-
-  <div class="row container-brands-clients center-block">
-    <div>
-      <div class="col-md-4">
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-4">
         <h1>Interests</h1>
-        <div>
-          <% @user.interests.each do |interest| %>
-            <button type="button" class="btn btn-default btn-interests"><%= interest.name %></button>
-          <% end %>
-        </div>
+        <% @user.interests.each do |interest| %>
+          <button type="button" class="btn btn-default btn-interests"><%= interest.name %></button>
+        <% end %>
       </div>
-        <div class="col-md-4">
-          <h1>Press</h1>
-          <% @user.press.each do |press| %>
-            <p><%= press.name %></p>
-          <% end %>
-        </div>
-        <div class="col-md-4">
-          <h1>Clients</h1>
-          <% @user.clients.each do |client| %>
-            <p><%= link_to client.name, client.url %></p>
-          <% end %>
-        </div>
+      <div class="col-lg-4 col-md-4 col-sm-4">
+        <h1>Press</h1>
+        <% @user.press.each do |press| %>
+          <p><%= press.name %></p>
+        <% end %>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4">
+        <h1>Clients</h1>
+        <% @user.clients.each do |client| %>
+          <p><%= link_to client.name, client.url %></p>
+        <% end %>
+      </div>
     </div>
-  </div>
 
-  <div class="clearfix"></div>
+    <br>
 
-  <div class="row text-center center-block">
     <% if @user.instagram_media %>
-      <div>
-        <% @user.instagram_media.each do |picture| %>
-          <div class="social-post">
-            <div>
-              <%= link_to image_tag(picture['images']['standard_resolution']['url'], :class => "social-img"), picture['link'] %>
+      <% @user.instagram_media.each_slice(3) do |instagram_group| %>
+        <div class="row">
+          <% instagram_group.each do |instagram_picture| %>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+              <%= link_to(image_tag(instagram_picture['images']['standard_resolution']['url'], class: 'social-image'), instagram_picture['link']) %>
+              <p class="text-center">Likes <%= instagram_picture['likes']['count'] %></p>
             </div>
-            <div>
-              <p>Likes <%= picture['likes']['count'] %></p>
-            </div>
-          </div>
-        <% end %>
-      </div>
+          <% end %>
+          <br>
+        </div>
+      <% end %>
     <% end %>
-  </div>
 
-  <div class="row text-center center-block">
     <% if @user.vine_media %>
-      <div>
-        <% @user.vine_media.each do |vine| %>
-          <div class="social-post">
-            <div>
-              <%= link_to videojs_tag(vine['videoUrl'], class: 'social-img'), vine['permalinkUrl'] %>
+      <% @user.vine_media.each_slice(3) do |vine_group| %>
+        <div class="row">
+          <% vine_group.each do |vine| %>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+              <%= link_to videojs_tag(vine['videoUrl'], class: 'social-video'), vine['permalinkUrl'] %>
+              <p class="text-center">Likes <%= vine['likes']['count'] %></p>
             </div>
-            <div>
-              <p>Likes <%= vine['likes']['count'] %></p>
-            </div>
-          </div>
-        <% end %>
-      </div>
+          <% end %>
+        </div>
+        <br>
+      <% end %>
     <% end %>
-  </div>
 
+  </div>
 </div>
