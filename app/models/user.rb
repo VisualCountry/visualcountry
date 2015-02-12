@@ -12,8 +12,10 @@ class User < ActiveRecord::Base
          :omniauthable, omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
 
   has_and_belongs_to_many :interests
-  has_many :press
+  has_and_belongs_to_many :focuses
   has_and_belongs_to_many :clients
+
+  has_many :press
 
   accepts_nested_attributes_for :clients, allow_destroy: true
   accepts_nested_attributes_for :press, allow_destroy: true
