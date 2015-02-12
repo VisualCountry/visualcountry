@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     omniauth_callbacks: :omniauth_callbacks,
   }
 
+  namespace :api do
+  resources :focuses, only: [:index]
+  end
+
   get '/admin' => 'admin/dashboard#index'
 
   namespace :admin do
