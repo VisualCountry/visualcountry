@@ -45,13 +45,15 @@
 
     <br>
 
+    <h1>Instagram</h1>
+    <hr>
     <% if @user.instagram_media %>
       <% @user.instagram_media.each_slice(3) do |instagram_group| %>
         <div class="row">
           <% instagram_group.each do |instagram_picture| %>
             <div class="col-lg-4 col-md-4 col-sm-4">
               <%= link_to(image_tag(instagram_picture['images']['standard_resolution']['url'], class: 'social-image'), instagram_picture['link']) %>
-              <p class="text-center">Likes <%= instagram_picture['likes']['count'] %></p>
+              <p><span class="glyphicon glyphicon-thumbs-up pink vcenter" aria-hidden="true"></span> <%= instagram_picture['likes']['count'] %></p>
             </div>
           <% end %>
           <br>
@@ -59,13 +61,17 @@
       <% end %>
     <% end %>
 
+    <br>
+
+    <h1>Vine</h1>
+    <hr>
     <% if @user.vine_media %>
       <% @user.vine_media.each_slice(3) do |vine_group| %>
         <div class="row">
           <% vine_group.each do |vine| %>
             <div class="col-lg-4 col-md-4 col-sm-4">
-              <%= link_to videojs_tag(vine['videoUrl'], class: 'social-video'), vine['permalinkUrl'] %>
-              <p class="text-center">Likes <%= vine['likes']['count'] %></p>
+              <%= videojs_tag(vine['videoUrl'], class: 'social-video') %>
+              <p><span class="glyphicon glyphicon-thumbs-up pink vcenter" aria-hidden="true"></span> <%= vine['likes']['count'] %></p>
             </div>
           <% end %>
         </div>
