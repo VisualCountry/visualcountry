@@ -16,6 +16,10 @@
   </div>
 
   <div class="form-group">
+    <%= f.input :focus_tokens, as: :text, label: 'Focuses', id: 'focus_tokens', input_html: { data: { pre: current_user.focuses.map(&:attributes) } } %>
+  </div>
+
+  <div class="form-group">
     <%= f.input :email, input_html: { class: 'form-control' }, autofocus: true %>
   </div>
 

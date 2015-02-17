@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.tokeninput
 //= require bootstrap
 //= require cocoon
 //= require video
@@ -20,3 +21,13 @@
 
 // Flash fallback of video.js
 videojs.options.flash.swf = "/assets/swf/video-js.swf"
+
+$(document).ready(function() {
+  $("#user_focus_tokens").tokenInput("/api/focuses.json", {
+    searchingText: 'Searching...',
+    minChars: 2,
+    preventDuplicates: true,
+    prePopulate: $('#user_focus_tokens').data('pre'),
+    resultsLimit: 5
+  });
+});
