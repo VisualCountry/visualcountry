@@ -8,6 +8,7 @@ module ApplicationHelper
       width: options[:width],
       height: options[:height],
       controls: true,
+      loop: true,
       autobuffer: true,
       data: {setup:'{}'},
       id: unique_id(src),

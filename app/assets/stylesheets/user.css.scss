@@ -43,7 +43,7 @@
     margin: 0;
     padding: 0;
     font-family: 'AkkLg_Pro';
-    font-size: 22px;
+    font-size: 20px;
     text-transform: none;
   }
 
@@ -73,7 +73,13 @@
 
   .pink {
     color: #EA1474;
-    margin: 10px 0 40px 0;
+  }
+
+  .post-icons {
+    margin: 10px 10px 40px 0;
+    font-size: 18px;
+    float: left;
+
   }
   .glyphicon {
     top: 3px;

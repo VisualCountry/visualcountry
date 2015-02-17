@@ -5,7 +5,11 @@
 
   <div class="form-group">
      <%= f.input :name, input_html: { class: 'form-control' }, autofocus: true %>
-   </div>
+  </div>
+
+  <div class="form-group">
+   <%= f.input :website, as: :string, input_html: { class: 'form-control' }, autofocus: true %>
+  </div>
 
   <div class="form-group">
    <%= f.input :bio, as: :text, input_html: { class: 'form-control' }, autofocus: true %>

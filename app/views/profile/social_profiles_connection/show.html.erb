@@ -3,7 +3,7 @@
   <div class="container text-center social-profiles">
     <h3>Social Profiles</h3>
     <h3>Connect your accounts</h3>
-    <h1><%= current_user.total_social_count %></h1>
+    <h1><%= number_with_delimiter(current_user.total_social_count) %></h1>
     <p>Total Reach</p>
 
     <p class="pull-left">Connect at least 2 accounts.</p>
@@ -17,7 +17,7 @@
         </div>
         <% if current_user.vine_password? %>
           <div class="col-lg-3 col-md-3 col-sm-3">
-            <p class="count">followed by: <%= current_user.vine_follower_count %></p>
+            <p class="count">followed by: <%= number_with_delimiter(current_user.vine_follower_count) %></p>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-3">
             <%= link_to image_tag('green_check_icon.svg', size: '30x30', class: 'pull-right'), profile_link_vine_path, method: :delete %>
@@ -38,7 +38,7 @@
         </div>
         <% if current_user.twitter_token? %>
           <div class="col-lg-3 col-md-3 col-sm-3">
-            <p class="count">followed by: <%= current_user.twitter_follower_count %></p>
+            <p class="count">followed by: <%= number_with_delimiter(current_user.twitter_follower_count) %></p>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-3">
             <%= link_to image_tag('green_check_icon.svg', size: '40x40', class: 'pull-right'), profile_link_twitter_path, method: :delete %>
@@ -59,7 +59,7 @@
         </div>
         <% if current_user.instagram_token? %>
           <div class="col-lg-3 col-md-3 col-sm-3">
-            <p class="count">followed by: <%= current_user.instagram_follower_count %></p>
+            <p class="count">followed by: <%= number_with_delimiter(current_user.instagram_follower_count) %></p>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-3">
             <%= link_to image_tag('green_check_icon.svg', size: '30x30', class: 'pull-right'), profile_link_instagram_path, method: :delete %>
@@ -80,7 +80,7 @@
         </div>
         <% if current_user.facebook_token? %>
           <div class="col-lg-3 col-md-3 col-sm-3">
-            <p class="count">followed by: <%= current_user.facebook_follower_count %></p>
+            <p class="count">followed by: <%= number_with_delimiter(current_user.facebook_follower_count) %></p>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-3">
             <%= link_to image_tag('green_check_icon.svg', size: '30x30', class: 'pull-right'), profile_link_facebook_path, method: :delete %>
@@ -101,7 +101,7 @@
         </div>
         <% if current_user.pinterest_token? %>
           <div class="col-lg-3 col-md-3 col-sm-3">
-            <p class="count">followed by: <%= current_user.pinterest_follower_count %></p>
+            <p class="count">followed by: <%= number_with_delimiter(current_user.pinterest_follower_count) %></p>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-3">
             <%= link_to image_tag('green_check_icon.svg', size: '30x30', class: 'pull-right'), profile_link_pinterest_path, method: :delete %>
