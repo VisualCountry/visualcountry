@@ -8,7 +8,9 @@
 
       <div class="col-lg-8 col-md-8 col-sm-8">
         <h1><%= @user.name %></h1>
-        <h2><%= link_to @user.website, "http://#{@user.website}" %></h2>
+        <% if @user.website %>
+          <h2><%= link_to @user.website, "http://#{@user.website}" %></h2>
+        <% end %>
         <h2>TOTAL FOLLOWERS: <%= number_with_delimiter(@user.total_social_count) %></h2>
         <h5> <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> <%= mail_to @user.email, @user.email %></h5>
         <h3><%= @user.bio %></h3>
@@ -47,9 +49,9 @@
 
     <br>
 
-    <h1>Instagram</h1>
-    <hr>
     <% if @user.instagram_media %>
+      <h1>Instagram</h1>
+      <hr>
       <% @user.instagram_media.first(9).each_slice(3) do |instagram_group| %>
         <div class="row">
           <% instagram_group.each do |instagram_picture| %>
@@ -66,9 +68,9 @@
 
     <br>
 
-    <h1>Vine</h1>
-    <hr>
     <% if @user.vine_media %>
+      <h1>Vine</h1>
+      <hr>
       <% @user.vine_media.each_slice(3) do |vine_group| %>
         <div class="row">
           <% vine_group.each do |vine| %>
