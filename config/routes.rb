@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   }
 
   namespace :api do
-  resources :focuses, only: [:index]
+    resources :focuses, only: [:index]
   end
 
   get '/admin' => 'admin/dashboard#index'
@@ -34,6 +34,8 @@ Rails.application.routes.draw do
       get 'clients' => 'clients#edit'
       patch 'clients' => 'clients#update'
     end
+    get 'search' => 'search#new'
+    post 'search' => 'search#create'
   end
 
   resources :users, only: [:show], path: :profiles, as: :profiles
@@ -41,5 +43,4 @@ Rails.application.routes.draw do
 
   get 'content-creators' => 'pages#creators'
   get 'brands-agencies' => 'pages#brands'
-
 end

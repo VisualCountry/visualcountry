@@ -1,11 +1,7 @@
 class User < ActiveRecord::Base
-  FOLLOWER_COUNT_METHODS = [
-    :facebook_follower_count,
-    :instagram_follower_count,
-    :vine_follower_count,
-    :twitter_follower_count,
-    :pinterest_follower_count
-  ]
+  SOCIAL_PROFILES = %w(vine twitter instagram facebook pinterest)
+
+  FOLLOWER_COUNT_METHODS = SOCIAL_PROFILES.map { |p| "#{p}_follower_count"}
 
   attr_reader :focus_tokens
 
@@ -25,6 +21,9 @@ class User < ActiveRecord::Base
   has_attached_file :picture
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
+
+  scope :has_name_like, ->(query) { where('name ILIKE ?', "%#{query}%") }
+  scope :has_interests, ->(*interests) { joins(:interests).where(interests: {name: [interests]}) }
 
   def vine_follower_count
     return unless self.vine_email && self.vine_password
