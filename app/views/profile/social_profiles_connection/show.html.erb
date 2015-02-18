@@ -41,7 +41,7 @@
             <p class="count">followed by: <%= number_with_delimiter(current_user.twitter_follower_count) %></p>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-3">
-            <%= link_to image_tag('green_check_icon.svg', size: '40x40', class: 'pull-right'), profile_link_twitter_path, method: :delete %>
+            <%= link_to image_tag('green_check_icon.svg', size: '30x30', class: 'pull-right'), profile_link_twitter_path, method: :delete %>
           </div>
         <% else %>
           <div class="col-lg-3 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-3 col-offset-3">

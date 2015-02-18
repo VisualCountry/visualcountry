@@ -35,5 +35,21 @@
   .basic-info {
 
   }
+
+  .clients {
+    margin: 20px 0;
+
+    .new-client {
+      margin: 30px 0;
+    }
+
+    .client-input {
+      margin: 5px 0;
+    }
+
+    .remove-client {
+      padding: 70px 20px;
+    }
+  }
 }
 

@@ -1,7 +1,7 @@
 <div class="nested-fields">
   <div class="field">
-    <%= f.input :name, validate: false, class: 'form-control', autofocus: true %>
-    <%= f.input :url, validate: false %>
+    <%= f.input :name, validate: false, input_html: { class: 'form-control' } %>
+    <%= f.input :url, validate: false , input_html: { class: 'form-control' }%>
     <%= link_to_remove_association "Remove Press", f %>
    </div>
 </div>

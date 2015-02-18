@@ -1,5 +1,10 @@
-<div class="nested-fields">
-  <%= f.input :name, validate: false %>
-  <%= f.input :url, validate: false %>
-  <%= link_to_remove_association "Remove Client", f %>
+<div class="nested-fields new-client">
+   <div class="col-md-10">
+    <%= f.input :name, validate: false, input_html: { class: 'form-control client-input' }  %>
+    <%= f.input :url, validate: false, input_html: { class: 'form-control client-input' } %>
+   </div>
+   <div class="col-md-2 remove-client">
+    <%= link_to_remove_association "X", f %>
+   </div>
+   <div class="clearfix"></div>
 </div>
