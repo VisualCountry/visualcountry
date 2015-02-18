@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
     :pinterest_follower_count
   ]
 
+  attr_reader :focus_tokens
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
