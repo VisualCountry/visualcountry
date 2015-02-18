@@ -8,7 +8,11 @@
 
       <div class="col-lg-8 col-md-8 col-sm-8">
         <h1><%= @user.name %></h1>
-        <h2>TOTAL FOLLOWERS: <%= @user.total_social_count %></h2>
+        <% if @user.website %>
+          <h2><%= link_to @user.website, "http://#{@user.website}" %></h2>
+        <% end %>
+        <h2>TOTAL FOLLOWERS: <%= number_with_delimiter(@user.total_social_count) %></h2>
+        <h5> <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> <%= mail_to @user.email, @user.email %></h5>
         <h3><%= @user.bio %></h3>
       </div>
     </div>
@@ -46,12 +50,15 @@
     <br>
 
     <% if @user.instagram_media %>
-      <% @user.instagram_media.each_slice(3) do |instagram_group| %>
+      <h1>Instagram</h1>
+      <hr>
+      <% @user.instagram_media.first(9).each_slice(3) do |instagram_group| %>
         <div class="row">
           <% instagram_group.each do |instagram_picture| %>
             <div class="col-lg-4 col-md-4 col-sm-4">
-              <%= link_to(image_tag(instagram_picture['images']['standard_resolution']['url'], class: 'social-image'), instagram_picture['link']) %>
-              <p class="text-center">Likes <%= instagram_picture['likes']['count'] %></p>
+              <%= link_to(image_tag(instagram_picture['images']['standard_resolution']['url'], class: 'social-image'),instagram_picture['link']) %>
+              <div class="post-icons"><span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span> <%= number_with_delimiter(instagram_picture['likes']['count'].round) %></div>
+              <div class="post-icons"><span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span> <%= number_with_delimiter(instagram_picture['comments']['count'].round) %></div>
             </div>
           <% end %>
           <br>
@@ -59,13 +66,20 @@
       <% end %>
     <% end %>
 
+    <br>
+
     <% if @user.vine_media %>
+      <h1>Vine</h1>
+      <hr>
       <% @user.vine_media.each_slice(3) do |vine_group| %>
         <div class="row">
           <% vine_group.each do |vine| %>
             <div class="col-lg-4 col-md-4 col-sm-4">
-              <%= link_to videojs_tag(vine['videoUrl'], class: 'social-video'), vine['permalinkUrl'] %>
-              <p class="text-center">Likes <%= vine['likes']['count'] %></p>
+              <%= videojs_tag(vine['videoUrl'], class: 'social-video') %>
+               <div class="post-icons"><span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span> <%= vine['likes']['count'] %></div>
+               <div class="post-icons"><span class="glyphicon glyphicon-refresh pink" aria-hidden="true"></span> <%= vine['reposts']['count'] %></div>
+               <div class="post-icons"><span class="glyphicon glyphicon-play-circle pink" aria-hidden="true"></span> <%= number_with_delimiter(vine['loops']['count'].round) %></div>
+               <div class="post-icons"><span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span> <%= number_with_delimiter(vine['comments']['count'].round) %></div>
             </div>
           <% end %>
         </div>
