@@ -20,7 +20,7 @@
   </div>
 
   <div class="form-group">
-    <%= f.input :focus_tokens, as: :text, label: 'Focuses', id: 'focus_tokens', input_html: { data: { pre: current_user.focuses.map(&:attributes) } } %>
+    <%= f.input :focus_tokens, as: :text, label: 'Focuses', id: 'focus_tokens', input_html: { data: { pre: current_user.focuses.map(&:attributes) }, class: 'form-control' } %>
   </div>
 
   <div class="form-group">

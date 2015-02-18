@@ -8,11 +8,13 @@
 
       <div class="col-lg-8 col-md-8 col-sm-8">
         <h1><%= @user.name %></h1>
-        <% if @user.website %>
-          <h2><%= link_to @user.website, "http://#{@user.website}" %></h2>
-        <% end %>
+
+        <p><%= @user.focuses.pluck(:name).join(', ') %></p>
+
+        <% if @user.website %><h2><%= link_to @user.website, "http://#{@user.website}" %></h2><% end %>
         <h2>TOTAL FOLLOWERS: <%= number_with_delimiter(@user.total_social_count) %></h2>
         <h5> <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> <%= mail_to @user.email, @user.email %></h5>
+
         <h3><%= @user.bio %></h3>
       </div>
     </div>

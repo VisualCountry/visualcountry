@@ -25,9 +25,9 @@ videojs.options.flash.swf = "/assets/swf/video-js.swf"
 $(document).ready(function() {
   $("#user_focus_tokens").tokenInput("/api/focuses.json", {
     searchingText: 'Searching...',
-    minChars: 2,
+    minChars: 1,
     preventDuplicates: true,
     prePopulate: $('#user_focus_tokens').data('pre'),
-    resultsLimit: 5
+    theme: "visual-country",
   });
 });
