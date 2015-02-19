@@ -22,9 +22,26 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
 
+
   def self.search(options = {})
     set_fuzzy_search_threshold
-    by_name(options[:name]) + by_interests(options[:interests])
+
+    # FIXME
+    if by_name(options[:name]) && by_interest_ids(options[:interests]) && by_social_profiles(options[:social_profiles])
+      by_name(options[:name]) & by_interest_ids(options[:interests]) & by_social_profiles(options[:social_profiles])
+    elsif !by_name(options[:name]) && by_interest_ids(options[:interests]) && by_social_profiles(options[:social_profiles])
+      by_interest_ids(options[:interests]) & by_social_profiles(options[:social_profiles])
+    elsif by_name(options[:name]) && !by_interest_ids(options[:interests]) && by_social_profiles(options[:social_profiles])
+      by_name(options[:name]) & by_social_profiles(options[:social_profiles])
+    elsif by_name(options[:name]) && by_interest_ids(options[:interests]) && !by_social_profiles(options[:social_profiles])
+      by_name(options[:name]) & by_interest_ids(options[:interests])
+    elsif by_name(options[:name]) && !by_interest_ids(options[:interests]) && !by_social_profiles(options[:social_profiles])
+      by_name(options[:name])
+    elsif !by_name(options[:name]) && by_interest_ids(options[:interests]) && !by_social_profiles(options[:social_profiles])
+      by_interest_ids(options[:interests])
+    elsif !by_name(options[:name]) && !by_interest_ids(options[:interests]) && by_social_profiles(options[:social_profiles])
+      by_social_profiles(options[:social_profiles])
+    end
   end
 
   def self.by_name(name)
@@ -33,10 +50,25 @@ class User < ActiveRecord::Base
     all.fuzzy_search(name: name)
   end
 
-  def self.by_interests(interests)
-    return unless interests
+  def self.by_interest_ids(interest_ids)
+    interest_ids = compact_empty_strings(interest_ids)
+    return unless interest_ids
 
-    all.joins(:interests).basic_search(interests: {id: interests})
+    joined_interest_ids = interest_ids.join('|')
+    all.joins(:interests).advanced_search(interests: {id: joined_interest_ids})
+  end
+
+  def self.by_social_profiles(social_profiles)
+    social_profiles = compact_empty_strings(social_profiles)
+    return unless social_profiles
+
+    collection = social_profiles.map do |social|
+      all & where.not("#{social}_token" => nil)
+    end.flatten.uniq.compact
+
+    collection.select do |user|
+      user.vine_email && user.vine_password
+    end
   end
 
   def vine_follower_count
@@ -113,6 +145,11 @@ class User < ActiveRecord::Base
 
   def self.set_fuzzy_search_threshold
     ActiveRecord::Base.connection.execute('SELECT set_limit(0.1);')
+  end
+
+  def self.compact_empty_strings(array)
+    array.reject! { |element| element == '' }
+    return unless array.present?
   end
 
   def vine_client
