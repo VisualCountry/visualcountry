@@ -1,7 +1,10 @@
 <div class="nested-fields">
-  <div class="field">
-    <%= f.input :name, validate: false, input_html: { class: 'form-control' } %>
-    <%= f.input :url, validate: false , input_html: { class: 'form-control' }%>
-    <%= link_to_remove_association "Remove Press", f %>
-   </div>
+  <div class="col-md-10">
+    <%= f.input :name, validate: false, input_html: { class: 'form-control press-input' } %>
+    <%= f.input :url, validate: false , input_html: { class: 'form-control press-input' }%>
+  </div>
+  <div class="col-md-1 remove-press">
+    <%= link_to_remove_association close_nested_form_icon, f %>
+  </div>
+  <div class="clearfix"></div>
 </div>

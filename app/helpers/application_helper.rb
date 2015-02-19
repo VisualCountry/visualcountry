@@ -24,4 +24,8 @@ module ApplicationHelper
   def unique_id(string)
     Digest::SHA1.hexdigest(string)[0..10]
   end
+
+  def close_nested_form_icon
+    content_tag :span, '', class: 'glyphicon glyphicon-inbox'
+  end
 end

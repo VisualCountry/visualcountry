@@ -3,10 +3,12 @@
   <div class="profile">
     <%= simple_form_for current_user, url: profile_clients_path, html: { novalidate: true } do |f| %>
       <div id="client" class="clients">
-        <%= f.simple_fields_for :clients do |client| %>
-          <%= render 'client_fields', f: client %>
-        <% end %>
-        <%= link_to_add_association 'add client', f, :clients %>
+        <ol>
+          <%= f.simple_fields_for :clients do |client| %>
+            <%= render 'client_fields', f: client %>
+          <% end %>
+          <%= link_to_add_association 'add client', f, :clients %>
+        </ol>
       </div>
       <%= f.submit %>
     <% end %>
