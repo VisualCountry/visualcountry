@@ -22,8 +22,22 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
 
-  scope :has_name_like, ->(query) { where('name ILIKE ?', "%#{query}%") }
-  scope :has_interests, ->(*interests) { joins(:interests).where(interests: {name: [interests]}) }
+  def self.search(options = {})
+    set_fuzzy_search_threshold
+    by_name(options[:name]) + by_interests(options[:interests])
+  end
+
+  def self.by_name(name)
+    return unless name
+
+    all.fuzzy_search(name: name)
+  end
+
+  def self.by_interests(interests)
+    return unless interests
+
+    all.joins(:interests).basic_search(interests: {id: interests})
+  end
 
   def vine_follower_count
     return unless self.vine_email && self.vine_password
@@ -96,6 +110,10 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def self.set_fuzzy_search_threshold
+    ActiveRecord::Base.connection.execute('SELECT set_limit(0.1);')
+  end
 
   def vine_client
     return unless self.vine_email && self.vine_password

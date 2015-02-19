@@ -65,6 +65,8 @@ gem 'twitter'
 # Caching
 gem 'dalli'
 
+gem 'textacular', '~> 3.0'
+
 # Testing
 group :development, :test do
   gem 'better_errors'

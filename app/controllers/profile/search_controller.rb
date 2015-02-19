@@ -1,8 +1,11 @@
 class Profile::SearchController < ApplicationController
-  def new
+  def index
+    @profiles = User.search(
+      name: params[:search][:query],
+      interests: params[:search][:interests]
+    )
   end
 
-  def create
-    binding.pry
+  def new
   end
 end

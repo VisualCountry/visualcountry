@@ -35,7 +35,7 @@ Rails.application.routes.draw do
       patch 'clients' => 'clients#update'
     end
     get 'search' => 'search#new'
-    post 'search' => 'search#create'
+    get 'search/results' => 'search#index'
   end
 
   resources :users, only: [:show], path: :profiles, as: :profiles
