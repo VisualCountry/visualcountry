@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
 
-  scope :by_name, -> (name) { fuzzy_search(name: name) if name.present? }
+  scope :by_name, -> (name) { User.where('name ILIKE ?', "%#{name}%") if name.present? }
 
   scope :by_interest_ids, -> (ids) do
     joins(:interests).where(interests: {id: nil_if_blank(ids)}) if ids
