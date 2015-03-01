@@ -1,17 +1,8 @@
 class User < ActiveRecord::Base
-  FOLLOWER_COUNT_METHODS = [
-    :facebook_follower_count,
-    :instagram_follower_count,
-    :vine_follower_count,
-    :twitter_follower_count,
-    :pinterest_follower_count
-  ]
-
   attr_reader :focus_tokens
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
+  SOCIAL_PROFILES = %w(vine twitter instagram facebook pinterest)
+  FOLLOWER_COUNT_METHODS = SOCIAL_PROFILES.map { |p| "#{p}_follower_count"}
 
   has_and_belongs_to_many :interests
   has_and_belongs_to_many :focuses
@@ -25,6 +16,32 @@ class User < ActiveRecord::Base
   has_attached_file :picture
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
+
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
+
+  scope :by_name, -> (name) { User.where('name ILIKE ?', "%#{name}%") if name.present? }
+
+  scope :by_interest_ids, -> (ids) do
+    joins(:interests).where(interests: {id: nil_if_blank(ids)}) if ids
+  end
+
+  scope :by_social_profiles, -> (social_profiles) do
+    column_names = social_profiles.map { |profile| "#{profile}_token" }
+    query = column_names.map { |column_name| "#{column_name} IS NOT NULL" }.join(' AND ')
+
+    where(query) if query
+  end
+
+  scope :by_vine, -> { where.not(vine_email: nil, vine_password: nil) }
+
+  def self.search(options = {})
+    all.
+      by_name(options[:name]).
+      by_interest_ids(nil_if_blank(options[:interests])).
+      by_social_profiles(nil_if_blank(options[:social_profiles]))
+  end
 
   def vine_follower_count
     return unless self.vine_email && self.vine_password
@@ -97,6 +114,10 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def self.nil_if_blank(array)
+    array.reject!(&:empty?)
+  end
 
   def vine_client
     return unless self.vine_email && self.vine_password

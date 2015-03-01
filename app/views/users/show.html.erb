@@ -23,7 +23,7 @@
 
     <!-- FIXME -->
     <div class="row">
-      <% %w(vine twitter instagram facebook pinterest).each do |social| %>
+      <% User::SOCIAL_PROFILES.each do |social| %>
         <%= render 'follower_counts', social: social %>
       <% end %>
     </div>
