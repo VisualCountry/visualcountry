@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20150301191633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_trgm"
 
   create_table "clients", force: true do |t|
     t.string   "name"
