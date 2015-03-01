@@ -1,13 +1,8 @@
 class User < ActiveRecord::Base
-  SOCIAL_PROFILES = %w(vine twitter instagram facebook pinterest)
-
-  FOLLOWER_COUNT_METHODS = SOCIAL_PROFILES.map { |p| "#{p}_follower_count"}
-
   attr_reader :focus_tokens
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
+  SOCIAL_PROFILES = %w(vine twitter instagram facebook pinterest)
+  FOLLOWER_COUNT_METHODS = SOCIAL_PROFILES.map { |p| "#{p}_follower_count"}
 
   has_and_belongs_to_many :interests
   has_and_belongs_to_many :focuses
@@ -22,53 +17,30 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
 
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
+
+  scope :by_name, -> (name) { fuzzy_search(name: name) if name.present? }
+
+  scope :by_interest_ids, -> (ids) do
+    joins(:interests).where(interests: {id: nil_if_blank(ids)}) if ids
+  end
+
+  scope :by_social_profiles, -> (social_profiles) do
+    column_names = social_profiles.map { |profile| "#{profile}_token" }
+    query = column_names.map { |column_name| "#{column_name} IS NOT NULL" }.join(' AND ')
+
+    where(query) if query
+  end
+
+  scope :by_vine, -> { where.not(vine_email: nil, vine_password: nil) }
 
   def self.search(options = {})
-    set_fuzzy_search_threshold
-
-    # FIXME
-    if by_name(options[:name]) && by_interest_ids(options[:interests]) && by_social_profiles(options[:social_profiles])
-      by_name(options[:name]) & by_interest_ids(options[:interests]) & by_social_profiles(options[:social_profiles])
-    elsif !by_name(options[:name]) && by_interest_ids(options[:interests]) && by_social_profiles(options[:social_profiles])
-      by_interest_ids(options[:interests]) & by_social_profiles(options[:social_profiles])
-    elsif by_name(options[:name]) && !by_interest_ids(options[:interests]) && by_social_profiles(options[:social_profiles])
-      by_name(options[:name]) & by_social_profiles(options[:social_profiles])
-    elsif by_name(options[:name]) && by_interest_ids(options[:interests]) && !by_social_profiles(options[:social_profiles])
-      by_name(options[:name]) & by_interest_ids(options[:interests])
-    elsif by_name(options[:name]) && !by_interest_ids(options[:interests]) && !by_social_profiles(options[:social_profiles])
-      by_name(options[:name])
-    elsif !by_name(options[:name]) && by_interest_ids(options[:interests]) && !by_social_profiles(options[:social_profiles])
-      by_interest_ids(options[:interests])
-    elsif !by_name(options[:name]) && !by_interest_ids(options[:interests]) && by_social_profiles(options[:social_profiles])
-      by_social_profiles(options[:social_profiles])
-    end
-  end
-
-  def self.by_name(name)
-    return unless name
-
-    all.fuzzy_search(name: name)
-  end
-
-  def self.by_interest_ids(interest_ids)
-    interest_ids = compact_empty_strings(interest_ids)
-    return unless interest_ids
-
-    joined_interest_ids = interest_ids.join('|')
-    all.joins(:interests).advanced_search(interests: {id: joined_interest_ids})
-  end
-
-  def self.by_social_profiles(social_profiles)
-    social_profiles = compact_empty_strings(social_profiles)
-    return unless social_profiles
-
-    collection = social_profiles.map do |social|
-      all & where.not("#{social}_token" => nil)
-    end.flatten.uniq.compact
-
-    collection.select do |user|
-      user.vine_email && user.vine_password
-    end
+    all.
+      by_name(options[:name]).
+      by_interest_ids(nil_if_blank(options[:interests])).
+      by_social_profiles(nil_if_blank(options[:social_profiles]))
   end
 
   def vine_follower_count
@@ -143,13 +115,8 @@ class User < ActiveRecord::Base
 
   private
 
-  def self.set_fuzzy_search_threshold
-    ActiveRecord::Base.connection.execute('SELECT set_limit(0.1);')
-  end
-
-  def self.compact_empty_strings(array)
-    array.reject! { |element| element == '' }
-    return unless array.present?
+  def self.nil_if_blank(array)
+    array.reject!(&:empty?)
   end
 
   def vine_client
