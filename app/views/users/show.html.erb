@@ -77,11 +77,11 @@
         <div class="row">
           <% vine_group.each do |vine| %>
             <div class="col-lg-4 col-md-4 col-sm-4">
-              <%= videojs_tag(vine['videoUrl'], class: 'social-video') %>
-               <div class="post-icons"><span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span> <%= vine['likes']['count'] %></div>
-               <div class="post-icons"><span class="glyphicon glyphicon-refresh pink" aria-hidden="true"></span> <%= vine['reposts']['count'] %></div>
-               <div class="post-icons"><span class="glyphicon glyphicon-play-circle pink" aria-hidden="true"></span> <%= number_with_delimiter(vine['loops']['count'].round) %></div>
-               <div class="post-icons"><span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span> <%= number_with_delimiter(vine['comments']['count'].round) %></div>
+              <%= videojs_tag(vine.videoUrl, class: 'social-video') %>
+               <div class="post-icons"><span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span> <%= vine.likes['count'] %></div>
+               <div class="post-icons"><span class="glyphicon glyphicon-refresh pink" aria-hidden="true"></span> <%= vine.reposts['count'] %></div>
+               <div class="post-icons"><span class="glyphicon glyphicon-play-circle pink" aria-hidden="true"></span> <%= number_with_delimiter(vine.loops['count'].round) %></div>
+               <div class="post-icons"><span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span> <%= number_with_delimiter(vine.comments['count'].round) %></div>
             </div>
           <% end %>
         </div>

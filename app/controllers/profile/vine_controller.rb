@@ -3,16 +3,24 @@ class Profile::VineController < ApplicationController
   end
 
   def create
-    current_user.vine_email = params[:vine][:email]
-    current_user.vine_password = params[:vine][:password]
-    current_user.save
+    vine_email = params[:vine][:email]
+    vine_password = params[:vine][:password]
+
+    vine_client = Vine.from_auth(vine_email, vine_password)
+
+    current_user.update(
+      vine_email: vine_email,
+      vine_password: vine_password,
+      vine_token: vine_client.token
+    )
+
     redirect_to profile_social_path
   end
 
    def destroy
-    current_user.vine_email = nil
-    current_user.vine_password = nil
-    current_user.save
+    current_user.update(vine_email: nil, vine_password: nil, vine_token: nil)
+    Rails.cache.delete("vine-follower-count-#{current_user.id}")
+    Rails.cache.delete("vine-media-#{current_user.id}")
     redirect_to profile_social_path
   end
 end

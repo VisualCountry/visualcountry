@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
 
-  scope :by_name, -> (name) { User.where('name ILIKE ?', "%#{name}%") if name.present? }
+  scope :by_name, -> (name) { User.where('"users".name ILIKE ?', "%#{name}%") if name.present? }
 
   scope :by_interest_ids, -> (ids) do
     joins(:interests).where(interests: {id: nil_if_blank(ids)}) if ids
@@ -34,8 +34,6 @@ class User < ActiveRecord::Base
     where(query) if query
   end
 
-  scope :by_vine, -> { where.not(vine_email: nil, vine_password: nil) }
-
   def self.search(options = {})
     all.
       by_name(options[:name]).
@@ -43,19 +41,28 @@ class User < ActiveRecord::Base
       by_social_profiles(nil_if_blank(options[:social_profiles]))
   end
 
-  def vine_follower_count
-    return unless self.vine_email && self.vine_password
-
-    Rails.cache.fetch("vine-follower-count-#{self.id}", :exprires_in => 3600) do
-      vine_client.user_info['followerCount']
-    end
-  end
-
-  def vine_media
+   def vine_media
     return unless vine_client
 
     Rails.cache.fetch("vine-media-#{self.id}", :exprires_in => 3600) do
-      vine_client.timelines.records
+      vine_client.media
+    end
+  end
+
+  def instagram_media
+    return unless instagram_client
+
+    Rails.cache.fetch("instagram-media-#{self.id}", :exprires_in => 3600) do
+      instagram_client.user_recent_media
+    end
+    #    instagram_client.user_recent_media.first['images']['standard_resolution']['url']
+  end
+
+  def vine_follower_count
+    return unless vine_client
+
+    Rails.cache.fetch("vine-follower-count-#{self.id}", :exprires_in => 3600) do
+      vine_client.user.followerCount
     end
   end
 
@@ -83,15 +90,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def instagram_media
-    return unless instagram_client
-
-    Rails.cache.fetch("instagram-media-#{self.id}", :exprires_in => 3600) do
-      instagram_client.user_recent_media
-    end
-    #    instagram_client.user_recent_media.first['images']['standard_resolution']['url']
-  end
-
   def twitter_follower_count
     return unless twitter_client
 
@@ -116,13 +114,13 @@ class User < ActiveRecord::Base
   private
 
   def self.nil_if_blank(array)
-    array.reject!(&:empty?)
+    array.reject(&:empty?)
   end
 
   def vine_client
-    return unless self.vine_email && self.vine_password
+    return unless self.vine_token
 
-    @vine_client ||= Vine::Client.new(self.vine_email, self.vine_password)
+    @vine_client ||= Vine.new(self.vine_token)
   end
 
   def pinterest_client
