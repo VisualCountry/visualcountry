@@ -15,7 +15,7 @@
           <%= image_tag('vine_logo.svg', :size => '30', :alt => 'Vine Logo') %>
           <h2>Vine</h2>
         </div>
-        <% if current_user.vine_password? %>
+        <% if current_user.vine_token? %>
           <div class="col-lg-3 col-md-3 col-sm-3">
             <p class="count">followed by: <%= number_with_delimiter(current_user.vine_follower_count) %></p>
           </div>

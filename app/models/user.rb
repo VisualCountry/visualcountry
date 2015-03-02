@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
     return unless vine_client
 
     Rails.cache.fetch("vine-media-#{self.id}", :exprires_in => 3600) do
-      vine_client.media
+      vine_client.media.first(9)
     end
   end
 
@@ -53,9 +53,8 @@ class User < ActiveRecord::Base
     return unless instagram_client
 
     Rails.cache.fetch("instagram-media-#{self.id}", :exprires_in => 3600) do
-      instagram_client.user_recent_media
+      instagram_client.user_recent_media.first(9)
     end
-    #    instagram_client.user_recent_media.first['images']['standard_resolution']['url']
   end
 
   def vine_follower_count

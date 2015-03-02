@@ -54,7 +54,7 @@
     <% if @user.instagram_media %>
       <h1>Instagram</h1>
       <hr>
-      <% @user.instagram_media.first(9).each_slice(3) do |instagram_group| %>
+      <% @user.instagram_media.each_slice(3) do |instagram_group| %>
         <div class="row">
           <% instagram_group.each do |instagram_picture| %>
             <div class="col-lg-4 col-md-4 col-sm-4">
