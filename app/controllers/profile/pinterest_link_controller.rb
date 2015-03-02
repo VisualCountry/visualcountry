@@ -1,7 +1,11 @@
 class Profile::PinterestLinkController < ApplicationController
   def destroy
-    current_user.pinterest_token = nil
-    current_user.save!
-    redirect_to profile_social_path
+    if current_user.update(pinterest_token: nil)
+      redirect_to profile_social_path
+    else
+      current_user.reload
+      flash[:alert] = 'Error removing Pinterest. Please try again later.'
+      render 'profile/social_profiles_connection/show'
+    end
   end
 end
