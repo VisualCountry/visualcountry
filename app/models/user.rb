@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   scope :by_name, -> (name) { User.where('"users".name ILIKE ?', "%#{name}%") if name.present? }
 
   scope :by_interest_ids, -> (ids) do
-    joins(:interests).where(interests: {id: nil_if_blank(ids)}) if ids
+    joins(:interests).where(interests: {id: nil_if_blank(ids)}) if ids.present?
   end
 
   scope :by_social_profiles, -> (social_profiles) do
