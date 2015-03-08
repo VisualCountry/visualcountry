@@ -38,7 +38,8 @@ class User < ActiveRecord::Base
     all.
       by_name(options[:name]).
       by_interest_ids(nil_if_blank(options[:interests])).
-      by_social_profiles(nil_if_blank(options[:social_profiles]))
+      by_social_profiles(nil_if_blank(options[:social_profiles])).
+      uniq
   end
 
    def vine_media
