@@ -5,16 +5,20 @@ class Profile::VineController < ApplicationController
   def create
     vine_email = params[:vine][:email]
     vine_password = params[:vine][:password]
-
     vine_client = Vine.from_auth(vine_email, vine_password)
 
-    current_user.update(
-      vine_email: vine_email,
-      vine_password: vine_password,
-      vine_token: vine_client.token
-    )
+    if vine_client
+      current_user.update(
+        vine_email: vine_email,
+        vine_password: vine_password,
+        vine_token: vine_client.token
+      )
 
-    redirect_to profile_social_path
+      redirect_to profile_social_path
+    else
+      flash[:alert] = 'Invalid Email or Password'
+      render :new
+    end
   end
 
    def destroy

@@ -2,6 +2,7 @@ class Vine
   class InvalidToken < StandardError; end
   class InvalidUsernameOrPassword < StandardError; end
   class ConnectionIssue < StandardError; end
+  class OverRateLimit < StandardError; end
 
   class Video < OpenStruct; end
   class User < OpenStruct; end
@@ -12,11 +13,13 @@ class Vine
 
   def initialize(vine_token, email = nil, password = nil)
     @token = vine_token || fetch_token(email, password)
-    @user_id = fetch_user_id(token)
+    @user_id = fetch_user_id if token
   end
 
   def self.from_auth(email, password)
-    new(nil, email, password)
+    new(nil, email, password).tap do |client|
+      return false unless client.valid?
+    end
   end
 
   def media
@@ -30,6 +33,10 @@ class Vine
     @user ||= User.new(user_data)
   end
 
+  def valid?
+    !!token
+  end
+
   private
 
   attr_reader :user_id, :user_data
@@ -39,9 +46,11 @@ class Vine
       payload = {username: email, password: password}
       post("#{VINE_BASE_URL}/users/authenticate", payload).fetch('key')
     end
+  rescue InvalidUsernameOrPassword
+    false
   end
 
-  def fetch_user_id(token)
+  def fetch_user_id
     user_data.fetch('userId')
   end
 
@@ -70,6 +79,8 @@ class Vine
     raise InvalidToken
   rescue RestClient::BadRequest => exception
     raise InvalidUsernameOrPassword
+  rescue RestClient::RequestFailed => exception
+    raise OverRateLimit
   rescue SocketError => exception
     raise ConnectionIssue
   end
