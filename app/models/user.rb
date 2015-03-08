@@ -21,6 +21,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
 
+  delegate :media, :follower_count, to: :instagram, prefix: true, allow_nil: true
+  delegate :media, :follower_count, to: :vine, prefix: true, allow_nil: true
+  delegate :follower_count, to: :twitter, prefix: true, allow_nil: true
+  delegate :follower_count, to: :facebook, prefix: true, allow_nil: true
+
   scope :by_name, -> (name) { User.where('"users".name ILIKE ?', "%#{name}%") if name.present? }
 
   scope :by_interest_ids, -> (ids) do
@@ -42,68 +47,6 @@ class User < ActiveRecord::Base
       uniq
   end
 
-   def vine_media
-    return unless vine_client
-
-    Rails.cache.fetch("vine-media-#{self.id}", :exprires_in => 3600) do
-      vine_client.media.first(9)
-    end
-  end
-
-  def instagram_media
-    return unless instagram_client
-
-    Rails.cache.fetch("instagram-media-#{self.id}", :exprires_in => 3600) do
-      instagram_client.user_recent_media.first(9)
-    end
-  end
-
-  def vine_follower_count
-    return unless vine_client
-
-    Rails.cache.fetch("vine-follower-count-#{self.id}", :exprires_in => 3600) do
-      vine_client.user.followerCount
-    end
-  end
-
-  def facebook_follower_count
-    return unless facebook_client
-
-    Rails.cache.fetch("facebook-follower-count-#{self.id}", :exprires_in => 3600) do
-      facebook_client.get_connections('me', 'friends').raw_response['summary']['total_count']
-    end
-  end
-
-  def instagram_follower_count
-    return unless instagram_client
-
-    Rails.cache.fetch("instagram-follower-count-#{self.id}", :exprires_in => 3600) do
-      instagram_client.user['counts']['followed_by']
-    end
-  end
-
-  def instagram_following_count
-    return unless instagram_client
-
-    Rails.cache.fetch("instagram-following-count-#{self.id}", :exprires_in => 3600) do
-      instagram_client.user['counts']['follows']
-    end
-  end
-
-  def twitter_follower_count
-    return unless twitter_client
-
-    Rails.cache.fetch("twitter-follower-count-#{self.id}", :exprires_in => 3600) do
-      twitter_client.current_user.followers_count
-    end
-  end
-
-  def pinterest_follower_count
-    return unless pinterest_client
-
-    #show_pinterest? ? pinterest_client.user_followed_by : 0
-  end
-
   def total_social_count
     FOLLOWER_COUNT_METHODS.inject(0) do |sum, method|
       count = send(method)
@@ -111,44 +54,29 @@ class User < ActiveRecord::Base
     end
   end
 
+  def instagram
+    @instagram ||= InstagramService.from_user(self)
+  end
+
+  def vine
+    @vine ||= VineService.from_user(self)
+  end
+
+  def twitter
+    @twitter ||= TwitterService.from_user(self)
+  end
+
+  def facebook
+    @facebook ||= FacebookService.from_user(self)
+  end
+
+  def pinterest_follower_count
+    #TODO
+  end
+
   private
 
   def self.nil_if_blank(array)
     array.reject(&:empty?)
-  end
-
-  def vine_client
-    return unless self.vine_token
-
-    @vine_client ||= Vine.new(self.vine_token)
-  end
-
-  def pinterest_client
-    return unless self.pinterest_token
-
-    @pinterest_client ||= Pinterest::Base.new(:access_token => self.pinterest_token)
-  end
-
-  def twitter_client
-    return unless self.twitter_token && self.twitter_token_secret
-
-    @twitter_client ||= Twitter::REST::Client.new do |config|
-      config.consumer_key        = ENV.fetch('TWITTER_CONSUMER_KEY')
-      config.consumer_secret     = ENV.fetch('TWITTER_SECRET_KEY')
-      config.access_token        = self.twitter_token
-      config.access_token_secret = self.twitter_token_secret
-    end
-  end
-
-  def instagram_client
-    return unless self.instagram_token
-
-    @instagram_client ||= Instagram.client(:access_token => self.instagram_token)
-  end
-
-  def facebook_client
-    return unless self.facebook_token
-
-    @facebook_client ||= Koala::Facebook::API.new(self.facebook_token)
   end
 end

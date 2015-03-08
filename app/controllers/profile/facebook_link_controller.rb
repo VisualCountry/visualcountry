@@ -1,7 +1,7 @@
 class Profile::FacebookLinkController < ApplicationController
   def destroy
     if current_user.update(facebook_token: nil)
-      Rails.cache.delete("facebook-follower-count-#{current_user.id}")
+      Rails.cache.delete("facebook_client_#{current_user.id}")
       redirect_to profile_social_path
     else
       current_user.reload
