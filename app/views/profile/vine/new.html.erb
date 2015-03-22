@@ -1,5 +1,8 @@
-<%= simple_form_for :vine, url: profile_link_vine_index_path do |f| %>
-  <%= f.input :email %>
-  <%= f.input :password %>
-  <%= f.submit %>
-<% end %>
+<div class="container text-center">
+  <h4> Enter your Vine email and password. Make sure you have added your email login on Vine.co</h4>
+  <%= simple_form_for :vine, url: profile_link_vine_index_path do |f| %>
+    <%= f.input :email %>
+    <%= f.input :password %>
+    <%= f.submit %>
+  <% end %>
+</div>

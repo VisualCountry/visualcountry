@@ -8,14 +8,13 @@
 
       <div class="col-lg-8 col-md-8 col-sm-8">
         <h1><%= @user.name %></h1>
-
         <p><%= @user.focuses.pluck(:name).join(', ') %></p>
+        <h4><%= @user.bio %></h4>
+        <h5><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></h5>
+        <h5><span class="glyphicon glyphicon-link" aria-hidden="true"></span> <% if @user.website %><%= link_to @user.website, "http://#{@user.website}" %><% end %></h5>
+        <h5><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <%= mail_to @user.email, @user.email %></h5>
 
-        <% if @user.website %><h2><%= link_to @user.website, "http://#{@user.website}" %></h2><% end %>
-        <h2>TOTAL FOLLOWERS: <%= number_with_delimiter(@user.total_social_count) %></h2>
-        <h5> <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> <%= mail_to @user.email, @user.email %></h5>
 
-        <h3><%= @user.bio %></h3>
       </div>
     </div>
 
@@ -23,6 +22,11 @@
 
     <!-- FIXME -->
     <div class="row">
+      <div style="float: left;">
+        <h4><div>TOTAL FOLLOWERS:</div></h4>
+        <h1><div><%= number_with_delimiter(@user.total_social_count) %></div></h1>
+      </div>
+
       <% User::SOCIAL_PROFILES.each do |social| %>
         <%= render 'follower_counts', social: social %>
       <% end %>
