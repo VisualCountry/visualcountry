@@ -8,6 +8,8 @@ namespace :users do
         if user.send("cached_#{profile}_follower_count=", profile_follower_count)
           puts "Updated #{user.email}'s cached_#{profile}_follower_count to #{profile_follower_count}"
         end
+
+        user.save
       end
     end
   end
