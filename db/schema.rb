@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308170319) do
+ActiveRecord::Schema.define(version: 20150322162736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20150308170319) do
     t.integer  "cached_vine_follower_count"
     t.integer  "cached_facebook_follower_count"
     t.integer  "cached_pinterest_follower_count"
+    t.integer  "total_follower_count"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

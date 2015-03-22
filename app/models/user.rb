@@ -1,8 +1,11 @@
 class User < ActiveRecord::Base
   attr_reader :focus_tokens
 
-  SOCIAL_PROFILES = %w(vine twitter instagram facebook pinterest)
-  FOLLOWER_COUNT_METHODS = SOCIAL_PROFILES.map { |p| "#{p}_follower_count"}
+  SOCIAL_PLATFORMS = %w(vine twitter instagram facebook pinterest)
+  FOLLOWER_COUNT_METHODS = SOCIAL_PLATFORMS.map { |p| "#{p}_follower_count"}
+  FOLLOWER_COUNT_COLUMNS = FOLLOWER_COUNT_METHODS.map { |p| "cached_#{p}"}
+
+  after_save :update_total_follower_count!
 
   has_and_belongs_to_many :interests
   has_and_belongs_to_many :focuses
@@ -21,10 +24,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
 
-  delegate :media, :follower_count, to: :instagram, prefix: true, allow_nil: true
-  delegate :media, :follower_count, to: :vine, prefix: true, allow_nil: true
-  delegate :follower_count, to: :twitter, prefix: true, allow_nil: true
-  delegate :follower_count, to: :facebook, prefix: true, allow_nil: true
+  delegate :media, to: :instagram, prefix: true, allow_nil: true
+  delegate :media, to: :vine, prefix: true, allow_nil: true
 
   scope :by_name, -> (name) { User.where('"users".name ILIKE ?', "%#{name}%") if name.present? }
 
@@ -47,12 +48,39 @@ class User < ActiveRecord::Base
       uniq
   end
 
-  def total_social_count
-    FOLLOWER_COUNT_METHODS.inject(0) do |sum, method|
-      count = send(method)
-      count == nil ? sum += 0 : sum += count
-    end
+  def update_total_follower_count!
+    return unless (changed & FOLLOWER_COUNT_COLUMNS).present?
+
+    changes_applied
+    total_follower_count = follower_counts.inject(:+)
+    update(total_follower_count: total_follower_count)
   end
+
+  def warm_follower_count_cache
+    !!follower_counts
+  end
+
+  def instagram_follower_count
+    from_database_or_service(:instagram)
+  end
+
+  def vine_follower_count
+    from_database_or_service(:vine)
+  end
+
+  def twitter_follower_count
+    from_database_or_service(:twitter)
+  end
+
+  def facebook_follower_count
+    from_database_or_service(:facebook)
+  end
+
+  def pinterest_follower_count
+    #TODO
+  end
+
+  private
 
   def instagram
     @instagram ||= InstagramService.from_user(self)
@@ -70,11 +98,23 @@ class User < ActiveRecord::Base
     @facebook ||= FacebookService.from_user(self)
   end
 
-  def pinterest_follower_count
-    #TODO
+  def from_database_or_service(platform)
+    follower_count = "cached_#{platform}_follower_count"
+
+    if attribute_present?(follower_count)
+      attributes[follower_count]
+    else
+      return unless send(platform)
+
+      send(platform).follower_count.tap do |count|
+        update!(follower_count => count)
+      end
+    end
   end
 
-  private
+  def follower_counts
+    FOLLOWER_COUNT_METHODS.map { |p| send(p) }.compact
+  end
 
   def self.nil_if_blank(array)
     array.reject(&:empty?)
