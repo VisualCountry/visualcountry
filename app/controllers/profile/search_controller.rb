@@ -3,7 +3,9 @@ class Profile::SearchController < ApplicationController
     @profiles = User.search(
       name: params[:search][:query],
       interests: params[:search][:interests],
-      social_profiles: params[:search][:social_profiles]
+      social_profiles: params[:search][:social_profiles],
+      min_followers: params[:search][:min_followers],
+      max_followers: params[:search][:max_followers],
     )
   end
 

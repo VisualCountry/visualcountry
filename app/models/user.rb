@@ -40,11 +40,29 @@ class User < ActiveRecord::Base
     where(query) if query
   end
 
+  # TODO: Abstract to query object
+  scope :by_follower_count, -> (min_followers, max_followers, social_profiles) do
+    return if min_followers.empty? && max_followers.empty?
+
+    min_followers = (min_followers.empty? ? min_followers = 0 : min_followers.to_i)
+    max_followers = (max_followers.empty? ? max_followers =  Float::INFINITY : max_followers.to_i)
+
+    if nil_if_blank(social_profiles).empty?
+      where(total_follower_count: min_followers..max_followers)
+    else
+      follower_count_columns_for_sql = nil_if_blank(social_profiles).map { |p| "cached_#{p}_follower_count" }.join(' + ')
+      users = User.find_by_sql("SELECT *, (#{follower_count_columns_for_sql}) sum FROM users;")
+      matched_users = users.reject { |user| !user.sum.present? }
+      matched_users.select { |result| result.sum > min_followers && result.sum < max_followers }
+    end
+  end
+
   def self.search(options = {})
     all.
       by_name(options[:name]).
       by_interest_ids(nil_if_blank(options[:interests])).
       by_social_profiles(nil_if_blank(options[:social_profiles])).
+      by_follower_count(options[:min_followers], options[:max_followers], options[:social_profiles]).
       uniq
   end
 
