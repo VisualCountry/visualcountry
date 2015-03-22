@@ -1,7 +1,6 @@
 class Profile::TwitterLinkController < ApplicationController
   def destroy
-    if current_user.update(twitter_token: nil, twitter_token_secret: nil)
-       Rails.cache.delete("twitter_client_#{current_user.id}")
+    if current_user.update(twitter_token: nil, twitter_token_secret: nil, cached_twitter_follower_count: nil)
       redirect_to profile_social_path
     else
       current_user.reload

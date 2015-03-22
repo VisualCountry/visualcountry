@@ -18,10 +18,6 @@ class BaseService
     user.send("#{service}_token")
   end
 
-  def service_data
-    raise NotImplementedError
-  end
-
   def client
     raise NotImplementedError
   end

@@ -24,10 +24,10 @@
     <div class="row">
       <div style="float: left;">
         <h4><div>TOTAL FOLLOWERS:</div></h4>
-        <h1><div><%= number_with_delimiter(@user.total_social_count) %></div></h1>
+        <h1><div><%= number_with_delimiter(@user.total_follower_count) %></div></h1>
       </div>
 
-      <% User::SOCIAL_PROFILES.each do |social| %>
+      <% User::SOCIAL_PLATFORMS.each do |social| %>
         <%= render 'follower_counts', social: social %>
       <% end %>
     </div>

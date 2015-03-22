@@ -1,12 +1,12 @@
 namespace :users do
   task update_follower_counts: [:environment] do
     User.all.each do |user|
-      User::SOCIAL_PROFILES.each do |profile|
-        next unless user.send("#{profile}_token")
+      User::SOCIAL_PLATFORMS.each do |platform|
+        next unless user.send("#{platform}_token")
 
-        profile_follower_count = user.send("#{profile}_follower_count")
-        if user.send("cached_#{profile}_follower_count=", profile_follower_count)
-          puts "Updated #{user.email}'s cached_#{profile}_follower_count to #{profile_follower_count}"
+        platform_follower_count = user.send("#{platform}_follower_count")
+        if user.send("cached_#{platform}_follower_count=", platform_follower_count)
+          puts "Updated #{user.email}'s cached_#{platform}_follower_count to #{platform_follower_count}"
         end
 
         user.save

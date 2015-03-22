@@ -1,7 +1,6 @@
 class Profile::PinterestLinkController < ApplicationController
   def destroy
-    if current_user.update(pinterest_token: nil)
-      Rails.cache.delete("pinterest_client_#{current_user.id}")
+    if current_user.update(pinterest_token: nil, cached_pinterest_follower_count: nil)
       redirect_to profile_social_path
     else
       current_user.reload
