@@ -1,0 +1,68 @@
+.search_results {
+  h1, h2, h3, h4, h5 {
+    padding: 0;
+  }
+
+  h1 {
+    margin: 8px 0px 2px 0;
+    font-size: 20px;
+    font-family: 'brandon_med';
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  h2 {
+    margin: 0px;
+    font-size: 15px;
+    font-family: 'AkkLg_Pro';
+    text-transform: none;
+    letter-spacing: 2px;
+  }
+
+  h3 {
+    margin: 0px 0px 0px 0;
+    font-family: 'AkkLg_Pro';
+    font-size: 20px;
+    text-transform: none;
+  }
+
+  h4 {
+    font-size: 30px;
+  }
+
+  h5 {
+    margin: 4px 0px 4px 0;
+    font-size: 13px;
+    font-family: 'AkkBd_Pro';
+    text-transform: none;
+    letter-spacing: 2px;
+    opacity: 1;
+  }
+
+  h6 {
+    margin: 0px;
+    font-size: 60px;
+    font-family: 'brandon_med';
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+    font-family: 'AkkLg_Pro';
+    font-size: 15px;
+    text-transform: none;
+  }
+
+  .social-follower-count {
+    margin: 10px 0px 10px 0;
+    padding: 0 0px 0 0;
+    font-size: 10px;
+    font-family: 'AkkBd_Pro';
+    text-transform: none;
+    letter-spacing: 2px;
+    opacity: 1;
+  }
+
+}
