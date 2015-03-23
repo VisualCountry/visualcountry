@@ -164,8 +164,8 @@ a:focus {
 .btn-welcome.active,
 .open > .dropdown-toggle.btn-welcome {
   color: #fff;
-  background-color: #ed177f;
-  border-color: #ed177f;
+  background-color: #F38D87;
+  border-color: #F38D87;
 }
 
 .welcome {
@@ -209,7 +209,7 @@ a:focus {
     .btn-default.active,
     .open > .dropdown-toggle.btn-default {
       color: #fff;
-      background-color: #ed177f;
+      background-color: #F38D87;
       border-color: #adadad;
     }
 }
@@ -241,6 +241,7 @@ a:focus {
   margin: 19px 15px;
   height: 20px;
   width: 20px;
+  color: #F38D87;
 }
 
 .navbar-profile {
@@ -287,8 +288,8 @@ a:focus {
 
     .btn-default {
       color: #fff;
-      background-color: #ed177f;
-      border-color: #ed177f;
+      background-color: #F38D87;
+      border-color: #F38D87;
       border-radius: 4;
       margin: 20px 0px;
     }
@@ -298,9 +299,10 @@ a:focus {
     .btn-default:active,
     .btn-default.active,
     .open > .dropdown-toggle.btn-default {
-      color: #000;
-      background-color: #fff;
-      border-color: #ccc;
+      color: #fff;
+      background-color: #F38D87;
+      border-color: #F38D87;
+      opacity: 1;
     }
 
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
@@ -458,101 +460,6 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 
-    /* User Profile Page */
 
-.profiles {
-
- h1 {
-    margin: 0px 0px 0px 0;
-    padding: 0 0px 0 0;
-    font-size: 41px;
-    font-family: 'AkkBd_Pro';
-    text-transform: none;
-    letter-spacing: 2px;
-  }
-
-  h2 {
-    margin: 15px 0px 0px 0;
-    padding: 0 0px 0 0;
-    font-size: 24px;
-    font-family: 'brandon_med';
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-
-  h3 {
-    margin: 35px 0px 15px 0;
-    padding: 0 0px 0 0;
-    font-family: 'AkkLg_Pro';
-    font-size: 39px;
-    text-transform: none;
-  }
-
-  h4{
-    margin: 20px 0;
-  }
-
-  h5{
-    margin: 10px 0px 10px 0;
-    padding: 0 0px 0 0;
-    font-size: 18px;
-    font-family: 'AkkBd_Pro';
-    text-transform: none;
-    letter-spacing: 2px;
-    opacity: 1;
-  }
-
-  p {
-    margin: 0px 0px 0px 0;
-    padding: 0 0px 0 0;
-    font-family: 'AkkLg_Pro';
-    font-size: 22px;
-    text-transform: none;
-  }
-
-  .container-user-header {
-    margin-bottom: 20px;
-  }
-  .container-profile-img{
-    float: left;
-    margin-right: 80px;
-    margin-left: 30px;
-  }
-
-  .container-user-info{
-    margin-right: 100px;
-  }
-
-  .container-social-icons{
-    margin: 20px 0;
-  }
-
-  .social-icons{
-    margin: 0 0px;
-    height: 60px;
-    width: 60px;
-  }
-
-  .btn-interests {
-    margin-right: 20px;
-  }
-
-  .container-brands-clients{
-    padding-bottom: 60px;
-    padding-top: 30px;
-  }
-
-  .social-img{
-    width: 300px;
-  }
-
-  .social-post{
-    width: 300px;
-    float: left;
-    margin: 20px;
-  }
-
-
-}
 
 

@@ -7,24 +7,28 @@
       </div>
 
       <div class="col-lg-8 col-md-8 col-sm-8">
-        <h1><%= @user.name %></h1>
-        <p><%= @user.focuses.pluck(:name).join(', ') %></p>
-        <h4><%= @user.bio %></h4>
-        <h5><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></h5>
-        <h5><span class="glyphicon glyphicon-link" aria-hidden="true"></span> <% if @user.website %><%= link_to @user.website, "http://#{@user.website}" %><% end %></h5>
-        <h5><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <%= mail_to @user.email, @user.email %></h5>
-
-
+        <div class="name-focus">
+          <h1><%= @user.name %></h1>
+          <p><%= @user.focuses.pluck(:name).join(', ') %></p>
+        </div>
+        <div>
+          <h4 class="bio"><%= @user.bio %></h4>
+        </div>
+        <div class="geo-contact">
+          <h5><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= @user.city %> </h5>
+          <h5><span class="glyphicon glyphicon-link" aria-hidden="true"></span> <% if @user.website %><%= link_to @user.website, "http://#{@user.website}" %><% end %></h5>
+          <h5><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <%= mail_to @user.email, @user.email %></h5>
+        </div>
       </div>
     </div>
 
     <br>
 
     <!-- FIXME -->
-    <div class="row">
-      <div style="float: left;">
-        <h4><div>TOTAL FOLLOWERS:</div></h4>
-        <h1><div><%= number_with_delimiter(@user.total_follower_count) %></div></h1>
+    <div class="row social-row">
+      <div class="total-follower-count text-center col-lg-4 col-md-4 col-sm-4">
+        <h2><div>TOTAL FOLLOWERS:</div></h2>
+        <h6><div><%= number_with_delimiter(@user.total_follower_count) %></div></h6>
       </div>
 
       <% User::SOCIAL_PLATFORMS.each do |social| %>
@@ -62,7 +66,7 @@
         <div class="row">
           <% instagram_group.each do |instagram_picture| %>
             <div class="col-lg-4 col-md-4 col-sm-4">
-              <%= link_to(image_tag(instagram_picture['images']['standard_resolution']['url'], class: 'social-image'),instagram_picture['link']) %>
+              <%= link_to(image_tag(instagram_picture['images']['standard_resolution']['url'], class: 'platform-media'),instagram_picture['link']) %>
               <div class="post-icons"><span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span> <%= number_with_delimiter(instagram_picture['likes']['count'].round) %></div>
               <div class="post-icons"><span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span> <%= number_with_delimiter(instagram_picture['comments']['count'].round) %></div>
             </div>
@@ -81,7 +85,7 @@
         <div class="row">
           <% vine_group.each do |vine| %>
             <div class="col-lg-4 col-md-4 col-sm-4">
-              <%= videojs_tag(vine.videoUrl, class: 'social-video') %>
+              <%= videojs_tag(vine.videoUrl, class: 'platform-video') %>
                <div class="post-icons"><span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span> <%= vine.likes['count'] %></div>
                <div class="post-icons"><span class="glyphicon glyphicon-refresh pink" aria-hidden="true"></span> <%= vine.reposts['count'] %></div>
                <div class="post-icons"><span class="glyphicon glyphicon-play-circle pink" aria-hidden="true"></span> <%= number_with_delimiter(vine.loops['count'].round) %></div>

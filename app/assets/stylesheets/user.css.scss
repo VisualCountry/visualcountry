@@ -12,8 +12,8 @@
   }
 
   h2 {
-    margin: 15px 0px 0px 0;
-    font-size: 24px;
+    margin: 0px;
+    font-size: 20px;
     font-family: 'brandon_med';
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -27,16 +27,24 @@
   }
 
   h4 {
-    margin: 20px 0;
+    font-size: 30px;
   }
 
   h5 {
-    margin: 10px 0px 10px 0;
+    margin: 4px 0px 4px 0;
     font-size: 18px;
     font-family: 'AkkBd_Pro';
     text-transform: none;
     letter-spacing: 2px;
     opacity: 1;
+  }
+
+  h6 {
+    margin: 0px;
+    font-size: 60px;
+    font-family: 'brandon_med';
+    text-transform: uppercase;
+    letter-spacing: 2px;
   }
 
   p {
@@ -47,7 +55,17 @@
     text-transform: none;
   }
 
-  .count {
+  .social-row{
+    margin: 15px 0 30px 0;
+  }
+
+  .total-follower-count{
+    float: left;
+    margin: 10px 0px 0 0px;
+    padding: 0 12px 0 0;
+  }
+
+  .social-follower-count {
     margin: 10px 0px 10px 0;
     padding: 0 0px 0 0;
     font-size: 18px;
@@ -57,31 +75,46 @@
     opacity: 1;
   }
 
-  .social-icons {
-    display: inline;
-    margin: 100px 0;
-  }
-
   .social-icon {
     width: 60px;
     height: 60px;
   }
 
-  .social-image {
+  .platform-media {
+    width: 300px;
+  }
+
+  .platform-video {
     width: 300px;
   }
 
   .pink {
-    color: #EA1474;
+    color: #F38D87;
   }
 
   .post-icons {
     margin: 10px 10px 40px 0;
     font-size: 18px;
     float: left;
-
   }
+
   .glyphicon {
     top: 3px;
+  }
+
+  .name-focus {
+  }
+
+  .bio {
+    padding: 15px 0 0 0;
+  }
+
+  .geo-contact{
+    padding: 15px 0 0 0;
+  }
+
+  .btn-interests{
+    margin: 10px 0 0 0;
+    cursor: auto;
   }
 }

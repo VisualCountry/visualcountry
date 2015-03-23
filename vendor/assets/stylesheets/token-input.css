@@ -33,7 +33,7 @@ li.token-input-token-visual-country {
     height: 15px;
     margin: 2px;
     padding: 4px 3px;
-    background-color: #ed177f;
+    background-color: #F38D87;
     color: #fff;
     cursor: default;
     font-size: 13px;
@@ -115,6 +115,6 @@ div.token-input-dropdown-visual-country ul li em {
 }
 
 div.token-input-dropdown-visual-country ul li.token-input-selected-dropdown-item-visual-country {
-    background-color: #ed177f;
+    background-color: #F38D87;
     color: #fff;
 }
