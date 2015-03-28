@@ -1,4 +1,4 @@
-class VineService < BaseService
+class VineAdapter < BaseAdapter
   def self.from_user(user)
     super(user, :vine)
   end

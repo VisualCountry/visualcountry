@@ -1,4 +1,4 @@
-class FacebookService < BaseService
+class FacebookAdapter < BaseAdapter
   def self.from_user(user)
     super(user, :facebook)
   end

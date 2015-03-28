@@ -1,4 +1,4 @@
-class BaseService
+class BaseAdapter
   def initialize(user, service)
     @user = user
     @service = service

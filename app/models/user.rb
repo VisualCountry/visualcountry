@@ -101,19 +101,19 @@ class User < ActiveRecord::Base
   private
 
   def instagram
-    @instagram ||= InstagramService.from_user(self)
+    @instagram ||= InstagramAdapter.from_user(self)
   end
 
   def vine
-    @vine ||= VineService.from_user(self)
+    @vine ||= VineAdapter.from_user(self)
   end
 
   def twitter
-    @twitter ||= TwitterService.from_user(self)
+    @twitter ||= TwitterAdapter.from_user(self)
   end
 
   def facebook
-    @facebook ||= FacebookService.from_user(self)
+    @facebook ||= FacebookAdapter.from_user(self)
   end
 
   def from_database_or_service(platform)

@@ -1,4 +1,4 @@
-class InstagramService < BaseService
+class InstagramAdapter < BaseAdapter
   def self.from_user(user)
     super(user, :instagram)
   end

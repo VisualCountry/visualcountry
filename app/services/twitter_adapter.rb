@@ -1,4 +1,4 @@
-class TwitterService < BaseService
+class TwitterAdapter < BaseAdapter
   def self.from_user(user)
     return unless user.twitter_token && user.twitter_token_secret
 
