@@ -1,0 +1,110 @@
+.brands-creators-marketing_page{
+  /* Brands Jumbotron*/
+  .brands {
+    h1 {
+      margin: 0 0 25px 0;
+      padding: 0 0 0 0;
+    }
+
+    h2 {
+      margin: 60px 0 15px 0;
+      padding: 0 0 0 0;
+    }
+
+    h3 {
+      margin: 0 0 45px 0;
+      padding: 0 0 0 0;
+    }
+
+    h4 {
+      margin: 0 0 45px 0;
+      padding: 0 0 0 0;
+    }
+
+    .left-writeup {
+      float: left;
+      width: 40%;
+    }
+
+    .container-right-images {
+      float: left;
+      width: 60%;
+    }
+
+    .right-images-row {
+      width: auto;
+    }
+
+    .right-images {
+      width: 173px;
+      height: 159px;
+      margin: 0 5px 10px 5px;
+    }
+  }
+  /* Brands campaign stages*/
+  .container-social-icons {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .social-icons {
+    margin: 0 8px;
+    height: 30px;
+    width: 30px;
+  }
+
+  .campaign-stages {
+    h2 {font-size: 28px;}
+    margin-left: 12%;
+  }
+
+  .container-stages-icons {
+    width: 20%;
+    height: auto;
+    margin: 0 8px;
+    float: left;
+  }
+
+  .stages-icons {
+    width: 130px;
+    height: 130px;
+  }
+  /* Brands List*/
+  .client-logos {
+    width: 130px;
+    padding: 0 10px 0 10px;
+  }
+  /* Work Examples*/
+  .work-examples-container {
+    margin: 40px 0;
+  }
+  /* Contact Form*/
+  .contact-container {
+    margin: 40px 0 150px 0;
+  }
+  /* Creators Jumbotron*/
+  .creators {
+    h2 {
+      margin: 0 0 0 0;
+      padding: 0 0 0 0;
+      font-size: 45px;
+      font-family: 'brandon_bold';
+      text-transform: uppercase;
+    }
+
+    h3 {
+      margin: 0 0 15px 0;
+      padding: 0 0 0 0;
+      text-transform: uppercase;
+    }
+
+    h4 {
+      margin: 20px 0;
+    }
+  }
+
+  .creator-img {
+    width: 424px;
+    margin: 20px 20px 70px 20px;
+  }
+}

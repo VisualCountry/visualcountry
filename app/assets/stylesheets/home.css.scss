@@ -1,0 +1,76 @@
+$accent-color: #F58D86;
+$light-color: #B4B3B4;
+$medium-color: #4B4D4D;
+$dar-color: #232323;
+
+.welcome {
+
+  .email {
+    margin: 100px 0 0 0;
+    text-align: center;
+  }
+
+  .welcome_logo {
+  width: 250px;
+  }
+
+ h1 {
+  font-family: 'brandon_med';
+  font-size: 58px;
+  letter-spacing: 3px;
+  margin: 100px 0 30px 0;
+  text-transform: uppercase;
+  }
+
+h5 {
+    font-family: 'brandon_reg_it';
+    font-size: 22px;
+    letter-spacing: 3px;
+    padding-top: 100px;
+    padding-bottom: 10px;
+  }
+
+  .btn:hover,
+  .btn:focus,
+  .btn.focus {
+    color: #fff;
+  }
+
+  .btn-default {
+    color: $accent-color;
+    background-color: #fff;
+    border-color: $light-color;
+    border-radius: 0;
+  }
+  .btn-default:hover,
+  .btn-default:focus,
+  .btn-default.focus,
+  .btn-default:active,
+  .btn-default.active,
+  .open > .dropdown-toggle.btn-default {
+    color: #fff;
+    background-color: $accent-color;
+    border-color: $accent-color;
+  }
+
+  .btn-welcome {
+    color: $medium-color;
+    background-color: #fff;
+    border-color: $light-color;
+    border-radius: 0;
+    width: 150px;
+    margin: 0 10px 0 10px;
+
+  }
+
+  .btn-welcome:hover,
+  .btn-welcome:focus,
+  .btn-welcome.focus,
+  .btn-welcome:active,
+  .btn-welcome.active,
+  .open > .dropdown-toggle.btn-welcome {
+    color: #fff;
+    background-color: $accent-color;
+    border-color: $accent-color;
+  }
+}

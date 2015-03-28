@@ -8,14 +8,14 @@
 
       <div class="col-lg-8 col-md-8 col-sm-8">
         <div class="name-focus">
-          <h1><%= @user.name %></h1>
-          <p><%= @user.focuses.pluck(:name).join(', ') %></p>
+          <h2><%= @user.name %></h2>
+          <h5><%= @user.focuses.pluck(:name).join(', ') %></h5>
         </div>
         <div>
           <h4 class="bio"><%= @user.bio %></h4>
         </div>
         <div class="geo-contact">
-          <h5><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= @user.city if @user.city  %> </h5>
+          <h5><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= @user.city if @user.city %> </h5>
           <h5><span class="glyphicon glyphicon-link" aria-hidden="true"></span> <% if @user.website %><%= link_to @user.website, "http://#{@user.website}" %><% end %></h5>
           <h5><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <%= mail_to @user.email, @user.email %></h5>
         </div>
@@ -25,34 +25,36 @@
     <br>
 
     <!-- FIXME -->
+    <hr>
     <div class="row social-row">
       <div class="total-follower-count text-center col-lg-4 col-md-4 col-sm-4">
-        <h2><div>TOTAL FOLLOWERS:</div></h2>
-        <h6><div><%= number_with_delimiter(@user.total_follower_count) %></div></h6>
+        <h3><div>TOTAL FOLLOWERS:</div></h3>
+        <h1><div><%= number_with_delimiter(@user.total_follower_count) %></div></h1>
       </div>
 
       <% User::SOCIAL_PLATFORMS.each do |social| %>
         <%= render 'follower_counts', social: social %>
       <% end %>
     </div>
+    <hr>
 
     <div class="row">
       <div class="col-lg-4 col-md-4 col-sm-4">
-        <h1>Interests</h1>
+        <h2>Interests</h2>
         <% @user.interests.each do |interest| %>
           <button type="button" class="btn btn-default btn-interests"><%= interest.name %></button>
         <% end %>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4">
-        <h1>Press</h1>
+        <h2>Press</h2>
         <% @user.press.each do |press| %>
-          <p><%= press.name %></p>
+          <h5><%= press.name %></h5>
         <% end %>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4">
-        <h1>Clients</h1>
+        <h2>Clients</h2>
         <% @user.clients.each do |client| %>
-          <p><%= link_to client.name, client.url %></p>
+          <h5><%= link_to client.name, client.url %></h5>
         <% end %>
       </div>
     </div>
@@ -60,7 +62,7 @@
     <br>
 
     <% if @user.instagram_media %>
-      <h1>Instagram</h1>
+      <h6>Recent Instagram Posts</h6>
       <hr>
       <% @user.instagram_media.first(9).each_slice(3) do |instagram_group| %>
         <div class="row">
@@ -79,7 +81,7 @@
     <br>
 
     <% if @user.vine_media %>
-      <h1>Vine</h1>
+      <h6>Recent Vine Videos</h6>
       <hr>
       <% @user.vine_media.first(9).each_slice(3) do |vine_group| %>
         <div class="row">

@@ -10,8 +10,116 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
  *= require video-js
  *= require token-input
+ *= require_tree .
  *= require_self
  */
+
+.clear {
+  clear: both;
+}
+
+.hidden { display: none; }
+
+$accent-color: #F58D86;
+$light-color: #B4B3B4;
+$medium-color: #4B4D4D;
+$dar-color: #232323;
+
+body {
+  font-family: "AkkLg_Pro", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: $medium-color;
+  background-color: #fff;
+}
+
+p {
+  font-family: "AkkLg_Pro", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: $medium-color;
+}
+
+h1 {
+  font-family: 'brandon_med';
+  font-size: 58px;
+  letter-spacing: 3px;
+  color: $light-color;
+}
+
+h2 {
+  font-family: 'AkkBd_Pro';
+  font-size: 40px;
+  text-transform: none;
+  letter-spacing: 2px;
+  color: $medium-color;
+}
+
+h3 {
+  font-family: 'AkkLg_Pro';
+  font-size: 40px;
+  letter-spacing: 1px;
+  color: $medium-color;
+}
+
+h4 {
+  font-family: 'AkkLg_Pro';
+  font-size: 30px;
+  letter-spacing: 1px;
+  color: $medium-color;
+}
+
+h5 {
+  font-family: 'AkkLg_Pro';
+  font-size: 24px;
+  letter-spacing: 1px;
+  color: $medium-color;
+}
+
+a,
+a:hover,
+a:focus {
+  color: $medium-color;
+  text-decoration: none;
+}
+
+.dropdown-menu {
+  left: -120px;
+  text-align: right;
+}
+
+.jumbotron {
+  background-color: inherit;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.btn:hover,
+  .btn:focus,
+  .btn.focus {
+    color: $medium-color;
+  }
+
+.btn-default {
+  color: #fff;
+  background-color: $accent-color;
+  border-color: $accent-color;
+  border-radius: 4;
+  margin: 20px 0;
+}
+  .btn-default:hover,
+  .btn-default:focus,
+  .btn-default.focus,
+  .btn-default:active,
+  .btn-default.active,
+  .open > .dropdown-toggle.btn-default {
+    color: #fff;
+    background-color: $accent-color;
+    border-color: $accent-color;
+    opacity: 1;
+  }
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}

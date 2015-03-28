@@ -1,6 +1,6 @@
 <% if @user.send("#{social}_follower_count") %>
   <div class="col-lg-1 col-md-1 col-sm-1">
-    <%= image_tag("#{social}_logo.svg", class: 'social-icon', alt: "#{social} Logo") %>
-    <p class="social-follower-count"><%= number_with_delimiter(@user.send("#{social}_follower_count")) %></p>
+    <%= image_tag("#{social}_logo_sq.svg", class: 'social-icon', alt: "#{social} Logo") %>
+    <h5 class="social-follower-count"><%= number_with_delimiter(@user.send("#{social}_follower_count")) %></h5>
   </div>
 <% end %>
