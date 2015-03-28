@@ -6,6 +6,7 @@
     <%= f.input :min_followers, required: false %>
     <%= f.input :max_followers, required: false %>
     <%= f.input :social_profiles, as: :check_boxes, collection: User::SOCIAL_PLATFORMS, required: false %>
+    <%= f.input :focuses, as: :check_boxes, collection: Focus.all, required: false %>
     <%= f.submit %>
   <% end %>
 </div>

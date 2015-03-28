@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     joins(:interests).where(interests: {id: nil_if_blank(ids)}) if ids.present?
   end
 
+  scope :by_focus_ids, -> (ids) do
+    includes(:focuses).joins(:focuses).where(focuses: {id: nil_if_blank(ids)}) if ids.present?
+  end
+
   scope :by_social_profiles, -> (social_profiles) do
     column_names = social_profiles.map { |profile| "#{profile}_token" }
     query = column_names.map { |column_name| "#{column_name} IS NOT NULL" }.join(' AND ')
@@ -63,6 +67,7 @@ class User < ActiveRecord::Base
       by_interest_ids(nil_if_blank(options[:interests])).
       by_social_profiles(nil_if_blank(options[:social_profiles])).
       by_follower_count(options[:min_followers], options[:max_followers], options[:social_profiles]).
+      by_focus_ids(nil_if_blank(options[:focuses])).
       uniq
   end
 
