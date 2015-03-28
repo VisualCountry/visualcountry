@@ -65,9 +65,9 @@ class User < ActiveRecord::Base
     all.
       by_name(options[:name]).
       by_interest_ids(nil_if_blank(options[:interests])).
+      by_focus_ids(nil_if_blank(options[:focuses])).
       by_social_profiles(nil_if_blank(options[:social_profiles])).
       by_follower_count(options[:min_followers], options[:max_followers], options[:social_profiles]).
-      by_focus_ids(nil_if_blank(options[:focuses])).
       uniq
   end
 
