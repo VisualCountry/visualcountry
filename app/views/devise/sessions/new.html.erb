@@ -19,6 +19,9 @@
         </div>
       <% end -%>
 
+      <p><%= link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook) %></p>
+      <p><%= link_to 'Sign in with Twitter', user_omniauth_authorize_path(:twitter) %></p>
+
       <div class="actions text-center">
         <%= f.submit "Log in", :class => "btn btn-default" %>
         <br>

@@ -1,0 +1,8 @@
+<div class="container">
+  <h3>Please enter your email</h3>
+
+  <%= simple_form_for :email, url: omniauth_add_email_index_path, method: :post do |f| %>
+    <%= f.input :email, as: :string %>
+    <%= f.submit class: 'btn btn-default  ' %>
+  <% end %>
+</div>

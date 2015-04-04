@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
   delegate :media, to: :instagram, prefix: true, allow_nil: true
   delegate :media, to: :vine, prefix: true, allow_nil: true
 
+  enum gender: [:female, :male, :other]
+
   scope :by_name, -> (name) { User.where('"users".name ILIKE ?', "%#{name}%") if name.present? }
 
   scope :by_interest_ids, -> (ids) do
@@ -101,6 +103,13 @@ class User < ActiveRecord::Base
 
   def pinterest_follower_count
     #TODO
+  end
+
+  # Devise, I hate you so much.
+  def update_without_password(params, *options)
+    result = update_attributes(params, *options)
+    clean_up_passwords
+    result
   end
 
   private
