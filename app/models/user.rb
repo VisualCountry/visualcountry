@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   FOLLOWER_COUNT_METHODS = SOCIAL_PLATFORMS.map { |p| "#{p}_follower_count"}
   FOLLOWER_COUNT_COLUMNS = FOLLOWER_COUNT_METHODS.map { |p| "cached_#{p}"}
 
-  before_save :set_username
   after_save :update_total_follower_count!
 
   has_and_belongs_to_many :interests
@@ -72,12 +71,6 @@ class User < ActiveRecord::Base
       by_social_profiles(nil_if_blank(options[:social_profiles])).
       by_follower_count(options[:min_followers], options[:max_followers], options[:social_profiles]).
       uniq
-  end
-
-  def set_username
-    return unless username.blank?
-
-    update(username: "#{name}.#{DateTime.now.to_i}")
   end
 
   def update_total_follower_count!
