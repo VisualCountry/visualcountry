@@ -1,6 +1,10 @@
 class Profile::TwitterLinkController < ApplicationController
   def destroy
-    if current_user.update(twitter_token: nil, twitter_token_secret: nil, cached_twitter_follower_count: nil)
+    if current_user.update(
+      twitter_token: nil,
+      twitter_token_secret: nil,
+      cached_twitter_follower_count: nil,
+      twitter_uid: nil)
       redirect_to profile_social_path
     else
       current_user.reload

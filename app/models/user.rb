@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   FOLLOWER_COUNT_METHODS = SOCIAL_PLATFORMS.map { |p| "#{p}_follower_count"}
   FOLLOWER_COUNT_COLUMNS = FOLLOWER_COUNT_METHODS.map { |p| "cached_#{p}"}
 
+  before_save :set_username
   after_save :update_total_follower_count!
 
   has_and_belongs_to_many :interests
@@ -26,6 +27,8 @@ class User < ActiveRecord::Base
 
   delegate :media, to: :instagram, prefix: true, allow_nil: true
   delegate :media, to: :vine, prefix: true, allow_nil: true
+
+  enum gender: [:female, :male, :other]
 
   scope :by_name, -> (name) { User.where('"users".name ILIKE ?', "%#{name}%") if name.present? }
 
@@ -71,6 +74,12 @@ class User < ActiveRecord::Base
       uniq
   end
 
+  def set_username
+    return unless username.blank?
+
+    update(username: "#{name}.#{DateTime.now.to_i}")
+  end
+
   def update_total_follower_count!
     return unless (changed & FOLLOWER_COUNT_COLUMNS).present?
 
@@ -101,6 +110,13 @@ class User < ActiveRecord::Base
 
   def pinterest_follower_count
     #TODO
+  end
+
+  # Devise, I hate you so much.
+  def update_without_password(params, *options)
+    result = update_attributes(params, *options)
+    clean_up_passwords
+    result
   end
 
   private
