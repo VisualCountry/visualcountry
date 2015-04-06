@@ -18,6 +18,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'pg'
 gem 'unicorn'
 
+gem 'geocoder'
+
 # CSS Frameworks
 gem 'bootstrap-sass'
 
@@ -61,6 +63,11 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'capybara-webkit'
+  gem 'launchy'
 end
 
 group :development do

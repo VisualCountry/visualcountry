@@ -5,6 +5,20 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+include Warden::Test::Helpers
+Warden.test_mode!
+
+Geocoder.configure(lookup: :test)
+
+geocoder_stubs_file = File.expand_path(
+  "../fixtures/geocoder_stubs.json",
+  __FILE__,
+)
+geocoder_stubs = JSON.parse(File.read(geocoder_stubs_file))
+geocoder_stubs.each do |query, result|
+  Geocoder::Lookup::Test.add_stub(query, result)
+end
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

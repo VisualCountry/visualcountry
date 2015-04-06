@@ -63,6 +63,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  geocoded_by :city
+
+  reverse_geocoded_by :latitude, :longitude do |obj, (result, _)|
+    if result.present?
+      obj.city = "#{result.city}, #{result.state_code}"
+    end
+  end
+
+  after_validation :geocode, :reverse_geocode
+
   def self.search(options = {})
     all.
       by_name(options[:name]).
