@@ -19,6 +19,8 @@ gem 'pg'
 gem 'unicorn'
 
 # CSS Frameworks
+gem 'bitters'
+gem 'bourbon'
 gem 'bootstrap-sass'
 
 # HTTP Client
