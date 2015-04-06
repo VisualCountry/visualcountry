@@ -83,6 +83,7 @@ GEM
     faraday_middleware (0.9.1)
       faraday (>= 0.7.4, < 0.10)
     hashie (3.3.1)
+    high_voltage (2.2.1)
     hike (1.2.3)
     http (0.6.3)
       http_parser.rb (~> 0.6.0)
@@ -283,6 +284,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   factory_girl_rails
+  high_voltage (~> 2.2.1)
   instagram
   jbuilder (~> 2.0)
   jquery-rails
