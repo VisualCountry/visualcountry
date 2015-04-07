@@ -14,5 +14,25 @@ describe User do
 
       expect(user.city).to eq "New York, NY"
     end
+
+    it "performs geocoding when the address changes" do
+      user = create(:user, city: "NYC")
+
+      user.city = "New York City"
+
+      expect(user).to receive(:geocode)
+      expect(user).to receive(:reverse_geocode)
+      user.save!
+    end
+
+    it "doesn't perform geocoding if the address doesn't change" do
+      user = create(:user, city: "NYC")
+
+      user.username = "New Username"
+
+      expect(user).not_to receive(:geocode)
+      expect(user).not_to receive(:reverse_geocode)
+      user.save!
+    end
   end
 end

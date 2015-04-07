@@ -71,7 +71,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  after_validation :geocode, :reverse_geocode
+  after_validation(
+    :geocode,
+    :reverse_geocode,
+    if: -> (obj) { obj.city_changed? },
+  )
 
   def self.search(options = {})
     all.
