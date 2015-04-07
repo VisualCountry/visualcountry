@@ -12,20 +12,30 @@
  *
  *= require video-js
  *= require token-input
- *= require_tree .
  *= require_self
  */
+
+// vendor
+@import "bootstrap-and-customization";
+
+// base
+@import "variables";
+
+// views
+@import "brands-creators-marketing-page";
+@import "font";
+@import "footer";
+@import "header";
+@import "home";
+@import "profile";
+@import "search-results";
+@import "user";
 
 .clear {
   clear: both;
 }
 
 .hidden { display: none; }
-
-$accent-color: #F58D86;
-$light-color: #B4B3B4;
-$medium-color: #4B4D4D;
-$dar-color: #232323;
 
 body {
   font-family: "AkkLg_Pro", Helvetica, Arial, sans-serif;
