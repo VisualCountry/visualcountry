@@ -71,11 +71,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  after_validation(
-    :geocode,
-    :reverse_geocode,
-    if: -> (obj) { obj.city_changed? },
-  )
+  after_validation :normalize_city_name, if: :city_changed?
 
   def self.search(options = {})
     all.
@@ -127,6 +123,25 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def normalize_city_name
+    find_coordinates_from_city_name
+    find_canonical_city_name_from_coordinates
+  end
+
+  def find_coordinates_from_city_name
+    self.latitude, self.longitude = Rails.cache.fetch([:geocode, city]) do
+      geocode
+      [latitude, longitude]
+    end
+  end
+
+  def find_canonical_city_name_from_coordinates
+    self.city = Rails.cache.fetch([:reverse_geocode, latitude, longitude]) do
+      reverse_geocode
+      city
+    end
+  end
 
   def instagram
     @instagram ||= InstagramAdapter.from_user(self)
