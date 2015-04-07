@@ -1,30 +1,42 @@
 <div class="basic-info">
   <div class="field">
-    <%= f.input :picture, as: :file, input_html: { class: 'form-control' }, autofocus: true %>
+    <%= f.input :picture, as: :file, autofocus: true %>
   </div>
 
   <div class="form-group">
-     <%= f.input :name, input_html: { class: 'form-control' }, autofocus: true %>
+     <%= f.input :name, autofocus: true %>
   </div>
 
   <div class="form-group">
-   <%= f.input :website, as: :string, input_html: { class: 'form-control' }, autofocus: true %>
+   <%= f.input :website, as: :string, autofocus: true %>
   </div>
 
   <div class="form-group">
-   <%= f.input :bio, as: :text, input_html: { class: 'form-control' }, autofocus: true %>
+   <%= f.input :bio, as: :text, autofocus: true %>
   </div>
 
   <div class="form-group">
-   <%= f.input :city, input_html: { class: 'form-control' }, autofocus: true %>
+   <%= f.input :city, autofocus: true %>
   </div>
 
   <div class="form-group">
-    <%= f.input :focus_tokens, as: :text, label: 'Focuses', id: 'focus_tokens', input_html: { data: { pre: current_user.focuses.map(&:attributes) }, class: 'form-control' } %>
+    <%= f.input :focus_tokens, as: :text, label: "Focuses", id: "focus_tokens", input_html: { data: { pre: current_user.focuses.map(&:attributes) } } %>
   </div>
 
   <div class="form-group">
-    <%= f.input :email, input_html: { class: 'form-control' }, autofocus: true %>
+   <%= f.input :birthday, start_year: Date.current.year - 120, end_year: Date.current.year %>
+  </div>
+
+  <div class="form-group">
+   <%= f.input :gender, collection: User.genders %>
+  </div>
+
+  <div class="form-group">
+   <%= f.input :ethnicity, collection: User.ethnicities.keys %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :email, autofocus: true %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -32,10 +44,10 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.input :password, label: "Password (leave blank if you don't want to change it)", input_html: { class: 'form-control' }, autocomplete: 'off' %>
+    <%= f.input :password, label: "Password (leave blank if you don't want to change it)", autocomplete: "off" %>
   </div>
 
   <div class="form-group">
-    <%= f.input :password_confirmation, input_html: { class: 'form-control' }, autocomplete: 'off' %>
+    <%= f.input :password_confirmation, autocomplete: "off" %>
   </div>
 </div>

@@ -27,7 +27,20 @@ class User < ActiveRecord::Base
   delegate :media, to: :instagram, prefix: true, allow_nil: true
   delegate :media, to: :vine, prefix: true, allow_nil: true
 
-  enum gender: [:female, :male, :other]
+  enum gender: {
+    "Female" => 0,
+    "Male" => 1,
+    "Other" => 2,
+  }
+  enum ethnicity: {
+    "Hispanic or Latino" => 0,
+    "Native American" => 1,
+    "Asian" => 2,
+    "Black or African American" => 3,
+    "Native Hawaiian or other Pacific Islander" => 4,
+    "White" => 5,
+    "Other/prefer not to answer" => 6,
+}
 
   scope :by_name, -> (name) { User.where('"users".name ILIKE ?', "%#{name}%") if name.present? }
 

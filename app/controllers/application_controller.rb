@@ -17,9 +17,67 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :remember_me, :name, :website, :city, :bio, :picture) }
-    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email, :password, :remember_me) }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password, :password_confirmation, :name, :website, :city, :bio, :picture, {presses_attributes: [:publication_name, :url]}, {clients_attributes: [:client_name, :url]}, {interest_ids: []}, :focus_tokens) }
+    configure_sign_in_sanitizer
+    configure_sign_up_sanitizer
+    configure_account_update_sanitizer
   end
 
+  def configure_sign_up_sanitizer
+    devise_parameter_sanitizer.for(:sign_up) do |u|
+      u.permit(
+        :email,
+        :password,
+        :password_confirmation,
+        :remember_me,
+        :name,
+        :website,
+        :city,
+        :bio,
+        :picture,
+      )
+    end
+  end
+
+  def configure_sign_in_sanitizer
+    devise_parameter_sanitizer.for(:sign_in) do |u|
+      u.permit(
+        :email,
+        :password,
+        :remember_me,
+      )
+    end
+  end
+
+  def configure_account_update_sanitizer
+    devise_parameter_sanitizer.for(:account_update) do |u|
+      u.permit(
+        :email,
+        :password,
+        :password_confirmation,
+        :name,
+        :website,
+        :city,
+        :bio,
+        :focus_tokens,
+        :ethnicity,
+        :birthday,
+        :picture,
+        {
+          presses_attributes: [
+            :publication_name,
+            :url,
+          ]
+        },
+        {
+          clients_attributes: [
+            :client_name,
+            :url,
+          ]
+        },
+        {
+          interest_ids: [],
+        },
+      )
+    end
+  end
 end
