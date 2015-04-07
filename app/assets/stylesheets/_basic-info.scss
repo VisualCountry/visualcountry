@@ -13,7 +13,6 @@
 }
 
 .basic-info-photo {
-  $svg-size: 140px;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -29,22 +28,17 @@
   }
 
   svg {
+    @include size(140px, 140px);
     display: block;
-    height: $svg-size;
-    width: $svg-size;
     margin-bottom: 1em;
   }
 
   input[type="file"] {
-    bottom: 0;
+    @include position(absolute, 0 0 0 0);
     cursor: pointer;
     font-size: 200px;
-    left: 0;
     margin: 0;
     opacity: 0;
     padding: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
   }
 }

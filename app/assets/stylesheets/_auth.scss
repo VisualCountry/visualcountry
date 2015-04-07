@@ -1,8 +1,6 @@
 .social-auth-buttons {
+  @include padding(2em 4em null 4em);
   margin-bottom: 4em;
-  padding-left: 4em;
-  padding-right: 4em;
-  padding-top: 2em;
 
   @media (min-width: $md-breakpoint) {
     padding-top: 8em;
@@ -10,10 +8,9 @@
 }
 
 .social-auth-button {
+  @include margin(null auto null auto);
   color: #fff;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
   padding: 1em;
   text-align: right;
   position: relative;
@@ -75,9 +72,8 @@
 }
 
 .sign-up-form-fields {
+  @include padding(null 4em null 4em);
   margin-bottom: 4em;
-  padding-left: 4em;
-  padding-right: 4em;
 
   @media (min-width: $md-breakpoint) {
     border-left: $base-border;
@@ -85,7 +81,6 @@
 }
 
 .sign-up-button {
+  @include margin(null auto null auto);
   display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
