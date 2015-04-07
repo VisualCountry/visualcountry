@@ -69,6 +69,7 @@ end
 group :test do
   gem 'capybara-webkit'
   gem 'launchy'
+  gem 'webmock'
 end
 
 group :development do

@@ -45,6 +45,28 @@
     ]
   ],
   [
+    "Brooklyn",
+    [
+      {
+        "latitude": 40.6781784,
+        "longitude": -73.9441579,
+        "city": "New York",
+        "state_code": "NY"
+      }
+    ]
+  ],
+  [
+    "Los Angeles",
+    [
+      {
+        "latitude": 34.0522342,
+        "longitude": -118.2436849,
+        "city": "Los Angeles",
+        "state_code": "CA"
+      }
+    ]
+  ],
+  [
     [40.7143528, -74.0059731],
     [
       {
@@ -56,6 +78,24 @@
         "state_code": "NY",
         "country": "United States",
         "country_code": "US"
+      }
+    ]
+  ],
+  [
+    [40.6781784, -73.9441579],
+    [
+      {
+        "city": "Brooklyn",
+        "state_code": "NY"
+      }
+    ]
+  ],
+  [
+    [34.0522342, -118.2436849],
+    [
+      {
+        "city": "Los Angeles",
+        "state_code": "CA"
       }
     ]
   ]

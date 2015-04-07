@@ -1,15 +1,24 @@
 class Profile::SearchController < ApplicationController
   def index
-    @profiles = User.search(
-      name: params[:search][:query],
-      interests: params[:search][:interests],
-      social_profiles: params[:search][:social_profiles],
-      min_followers: params[:search][:min_followers],
-      max_followers: params[:search][:max_followers],
-      focuses: params[:search][:focuses],
-    )
+    @profiles = User.search(search_params)
   end
 
   def new
+  end
+
+  private
+
+  def search_params
+    params.
+      require(:search).
+      permit(
+        :focuses,
+        :interests,
+        :max_followers,
+        :min_followers,
+        :near,
+        :query,
+        :social_profiles,
+      )
   end
 end

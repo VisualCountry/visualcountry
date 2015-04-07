@@ -31,6 +31,14 @@ class User < ActiveRecord::Base
 
   scope :by_name, -> (name) { User.where('"users".name ILIKE ?', "%#{name}%") if name.present? }
 
+  def self.by_location(location)
+    if location.present?
+      near(location)
+    else
+      all
+    end
+  end
+
   scope :by_interest_ids, -> (ids) do
     joins(:interests).where(interests: {id: nil_if_blank(ids)}) if ids.present?
   end
@@ -53,10 +61,10 @@ class User < ActiveRecord::Base
     min_followers = (min_followers.empty? ? min_followers = 0 : min_followers.to_i)
     max_followers = (max_followers.empty? ? max_followers =  Float::INFINITY : max_followers.to_i)
 
-    if nil_if_blank(social_profiles).empty?
+    if social_profiles.empty?
       where(total_follower_count: min_followers..max_followers)
     else
-      follower_count_columns_for_sql = nil_if_blank(social_profiles).map { |p| "cached_#{p}_follower_count" }.join(' + ')
+      follower_count_columns_for_sql = social_profiles.map { |p| "cached_#{p}_follower_count" }.join(' + ')
       users = User.find_by_sql("SELECT *, (#{follower_count_columns_for_sql}) sum FROM users;")
       matched_users = users.reject { |user| !user.sum.present? }
       matched_users.select { |result| result.sum > min_followers && result.sum < max_followers }
@@ -74,12 +82,16 @@ class User < ActiveRecord::Base
   after_validation :normalize_city_name, if: :city_changed?
 
   def self.search(options = {})
-    all.
-      by_name(options[:name]).
-      by_interest_ids(nil_if_blank(options[:interests])).
-      by_focus_ids(nil_if_blank(options[:focuses])).
-      by_social_profiles(nil_if_blank(options[:social_profiles])).
-      by_follower_count(options[:min_followers], options[:max_followers], options[:social_profiles]).
+    by_name(options[:query]).
+      by_location(options[:near]).
+      by_interest_ids(options[:interests]).
+      by_focus_ids(options[:focuses]).
+      by_social_profiles(options[:social_profiles] || []).
+      by_follower_count(
+        options[:min_followers],
+        options[:max_followers],
+        options[:social_profiles] || [],
+      ).
       uniq
   end
 

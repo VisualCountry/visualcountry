@@ -2,6 +2,7 @@
   <h1>Search</h1>
   <%= simple_form_for :search, method: :get, url: profile_search_results_path do |f| %>
     <%= f.input :query, required: false %>
+    <%= f.input :near, required: false %>
     <%= f.input :interests, as: :check_boxes, collection: Interest.all, required: false %>
     <%= f.input :min_followers, required: false %>
     <%= f.input :max_followers, required: false %>
