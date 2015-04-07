@@ -1,0 +1,50 @@
+.basic-info-focus {
+  height: 164px;
+}
+
+.basic-info-bio,
+.basic-info-photo {
+  // 3 columns minus gutters, makes it square
+  height: (750px / 3) - 30px;
+
+  @media (min-width: $md-breakpoint) {
+    height: (970px / 3) - 30px;
+  }
+}
+
+.basic-info-photo {
+  $svg-size: 140px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (min-width: $md-breakpoint) {
+    margin-bottom: 4em;
+  }
+
+  &:hover svg,
+  &:focus svg {
+    opacity: 0.8;
+  }
+
+  svg {
+    display: block;
+    height: $svg-size;
+    width: $svg-size;
+    margin-bottom: 1em;
+  }
+
+  input[type="file"] {
+    bottom: 0;
+    cursor: pointer;
+    font-size: 200px;
+    left: 0;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}

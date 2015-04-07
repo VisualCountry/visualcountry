@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row">
+      <header class="text-center">
+        <h2>Basic Info</h2>
+        <h3>Tell us a little bit about yourself.</h3>
+        <p>
+          We are excited to work together on some great projects. The more
+          detailed your profile, the better we can match you to campaigns that
+          suit your interests and skill sets.
+        </p>
+      </header>
+    </div>
+
+    <form>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="field">
+            <div class="flat-form-control basic-info-photo">
+              <%= embedded_svg "camera_icon.svg" %>
+              <p>upload a picture</p>
+              <input type="file" class="flat-form-control basic-info-photo">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-8">
+          <div class="form-group">
+            <textarea placeholder="Short Bio" class="flat-form-control basic-info-bio"></textarea>
+            <p class="form-help-text">max 300 characters</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <input type="text" class="flat-form-control" placeholder="City">
+            <input type="text" class="flat-form-control" placeholder="Gender">
+            <input type="text" class="flat-form-control" placeholder="Ethnicity">
+            <input type="text" class="flat-form-control" placeholder="Age">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <textarea placeholder="Focus" class="flat-form-control basic-info-focus"></textarea>
+          <p class="form-help-text">
+            Choose some focuses that best describe your strongests skills. Are
+            you a director, model, animator, viner, makeup artist?
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <input type="submit" value="Save and Continue" class="btn btn-default sign-up-button">
+      </div>
+    </form>
+  </div>
+</div>
