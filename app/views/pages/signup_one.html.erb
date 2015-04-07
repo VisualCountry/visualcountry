@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row">
+      <header class="text-center">
+        <h2>Create a New Account</h2>
+        <h4>Join the Visual Country community to start getting connected to top brands! Let’s get started on setting up your account. Already have one? <a href="#">Sign in here</a>.</h4>
+      </header>
+    </div>
+
+    <form class="sign-up-form">
+      <div class="row">
+        <div class="col-md-6 social-auth-buttons">
+          <a href="#" class="social-auth-button social-auth-button-facebook clearfix">
+            <%= embedded_svg "facebook_logo.svg" %>
+            <span>Sign in with <strong>Facebook</strong></span>
+          </a>
+          <a href="#" class="social-auth-button social-auth-button-twitter clearfix">
+            <%= embedded_svg "twitter_logo.svg" %>
+            <span>Sign in with <strong>Twitter</strong></span>
+          </a>
+        </div>
+
+        <div class="col-md-6 sign-up-form-fields">
+          <div class="field">
+            <input class="flat-form-control" type="text" id="name" name="name" placeholder="Name*">
+          </div>
+
+          <div class="field">
+            <input class="flat-form-control" type="text" id="username" name="username" placeholder="Username*">
+          </div>
+
+          <div class="field">
+            <input class="flat-form-control" type="text" id="email" name="email" placeholder="Email*">
+          </div>
+
+          <div class="field">
+            <input class="flat-form-control" type="text" id="password" name="password" placeholder="Password*">
+          </div>
+
+          <div class="field">
+            <input class="flat-form-control" type="text" id="password-confirmation" name="password-confirmation" placeholder="Password Confirmation*">
+          </div>
+
+          <p>Brand or Agency? <a href="#">Request a demo here</a> to get access to find the best creators on Visual Country for your next campaign</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <h4 class="text-center">By signing in you agree to our <a href="#">terms and conditions</a>.</h4>
+        <input type="submit" value="Sign Up" class="btn btn-default sign-up-button">
+      </div>
+    </form>
+  </div>
+</div>

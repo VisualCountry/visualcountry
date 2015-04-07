@@ -1,0 +1,29 @@
+.flat-form-control {
+  background-color: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  border: $base-border;
+  font-size: 1.25em;
+  margin-bottom: 1em;
+  padding: 0.5em 0.75em;
+  transition: border-color;
+  width: 100%;
+
+  &:hover {
+    border-color: darken($base-border-color, 10%);
+  }
+
+  &:focus {
+    border-color: $accent-color;
+    outline: none;
+  }
+
+  &:disabled {
+    background-color: #eee;
+    cursor: not-allowed;
+
+    &:hover {
+      border: $base-border;
+    }
+  }
+}

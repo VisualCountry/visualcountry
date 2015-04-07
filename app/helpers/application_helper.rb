@@ -28,4 +28,10 @@ module ApplicationHelper
   def close_nested_form_icon
     content_tag :span, '', class: 'glyphicon glyphicon-inbox'
   end
+
+  def embedded_svg(filename, options = {})
+    assets = Rails.application.assets
+    file = assets.find_asset(filename)
+    render file: file.pathname
+  end
 end

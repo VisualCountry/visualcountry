@@ -1,0 +1,91 @@
+.social-auth-buttons {
+  margin-bottom: 4em;
+  padding-left: 4em;
+  padding-right: 4em;
+  padding-top: 2em;
+
+  @media (min-width: $md-breakpoint) {
+    padding-top: 8em;
+  }
+}
+
+.social-auth-button {
+  color: #fff;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
+  text-align: right;
+  position: relative;
+
+  &:hover,
+  &:focus {
+    color: #fff;
+  }
+
+  &:active {
+    top: 1px;
+  }
+
+  @media (min-width: $md-breakpoint) {
+    width: 280px;
+  }
+
+  span {
+    display: inline-block;
+    line-height: 2em;
+  }
+
+  svg {
+    float: left;
+    height: 2em;
+    width: 2em;
+
+    path {
+      fill: currentColor;
+    }
+  }
+}
+
+.social-auth-button-facebook {
+  background-color: $facebook-blue;
+  margin-bottom: 1em;
+
+  &:hover,
+  &:focus {
+    background-color: darken($facebook-blue, 3%);
+  }
+}
+
+.social-auth-button-twitter {
+  background-color: $twitter-blue;
+
+  &:hover,
+  &:focus {
+    background-color: darken($twitter-blue, 2%);
+  }
+}
+
+.sign-up-form {
+  margin-top: 2em;
+
+  @media (min-width: $md-breakpoint) {
+    margin-top: 4em;
+  }
+}
+
+.sign-up-form-fields {
+  margin-bottom: 4em;
+  padding-left: 4em;
+  padding-right: 4em;
+
+  @media (min-width: $md-breakpoint) {
+    border-left: $base-border;
+  }
+}
+
+.sign-up-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

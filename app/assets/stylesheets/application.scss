@@ -18,10 +18,12 @@
 // vendor
 @import "bootstrap-and-customization";
 
-// base
+// Base
 @import "variables";
+@import "forms";
 
 // views
+@import "auth";
 @import "brands-creators-marketing-page";
 @import "font";
 @import "footer";
@@ -116,7 +118,8 @@ a:focus {
   background-color: $accent-color;
   border-color: $accent-color;
   border-radius: 4;
-  margin: 20px 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
   .btn-default:hover,
   .btn-default:focus,

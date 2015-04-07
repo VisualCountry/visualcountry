@@ -1,6 +1,15 @@
-// Colors
+// Breakpoints
+$sm-breakpoint: 768px;
+$md-breakpoint: 992px;
 
-$accent-color: #F58D86;
-$light-color: #B4B3B4;
-$medium-color: #4B4D4D;
+// Colors
+$twitter-blue: #3498dc;
+$facebook-blue: #287fb9;
+$accent-color: #f58d86;
+$light-color: #b4b3b4;
+$medium-color: #4b4d4d;
 $dark-color: #232323;
+
+// Borders
+$base-border-color: #e1e1e1;
+$base-border: 1px solid $base-border-color;
