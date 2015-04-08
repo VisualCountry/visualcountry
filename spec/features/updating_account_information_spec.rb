@@ -27,11 +27,11 @@ feature "Updating account infomation" do
 
     expect(page).to have_field("Website", new_attrs.website)
     expect(page).to have_field("Email", new_attrs.email)
-    expect(page).to have_select("Gender", new_attrs.gender)
-    expect(page).to have_select("Ethnicity", new_attrs.ethnicity)
-    expect(page).to have_select("user_birthday_1i", new_attrs.birthday.strftime("%Y"))
-    expect(page).to have_select("user_birthday_2i", new_attrs.birthday.strftime("%B"))
-    expect(page).to have_select("user_birthday_3i", new_attrs.birthday.strftime("%e"))
+    expect(page).to have_select("Gender", selected: new_attrs.gender)
+    expect(page).to have_select("Ethnicity", selected: new_attrs.ethnicity)
+    expect(page).to have_select("user_birthday_1i", selected: new_attrs.birthday.strftime("%Y"))
+    expect(page).to have_select("user_birthday_2i", selected: new_attrs.birthday.strftime("%B"))
+    expect(page).to have_select("user_birthday_3i", selected: new_attrs.birthday.strftime("%e"))
   end
 
   def fill_in_password(password)

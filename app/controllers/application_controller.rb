@@ -60,6 +60,7 @@ class ApplicationController < ActionController::Base
         :bio,
         :focus_tokens,
         :ethnicity,
+        :gender,
         :birthday,
         :picture,
         {
