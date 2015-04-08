@@ -9,6 +9,8 @@ class ProfileSearchQuery
       by_location(options[:near]).
       by_gender(options[:gender]).
       by_ethnicity(options[:ethnicity]).
+      by_minimum_age(options[:min_age]).
+      by_maximum_age(options[:max_age]).
       by_interest_ids(options[:interests]).
       by_focus_ids(options[:focuses]).
       by_social_profiles(options.fetch(:social_profiles, [])).
@@ -44,6 +46,22 @@ class ProfileSearchQuery
     def by_ethnicity(ethnicity)
       if ethnicity.present?
         where(ethnicity: User.ethnicities[ethnicity])
+      else
+        all
+      end
+    end
+
+    def by_minimum_age(min_age)
+      if min_age.present?
+        where("birthday <= :deadline", deadline: min_age.to_i.years.ago)
+      else
+        all
+      end
+    end
+
+    def by_maximum_age(max_age)
+      if max_age.present?
+        where("birthday >= :deadline", deadline: max_age.to_i.years.ago)
       else
         all
       end

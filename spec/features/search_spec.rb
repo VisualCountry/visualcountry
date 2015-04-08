@@ -75,4 +75,41 @@ feature "Searching User profiles" do
       expect(page).to have_content asian_user.name
     end
   end
+
+  feature "searching by age" do
+    scenario "specifying a minimum age only returns older users" do
+      age_20_user = create(:user, birthday: 20.years.ago)
+      age_30_user = create(:user, birthday: 30.years.ago)
+
+      visit profile_search_path
+      fill_in "Min age", with: 25
+      click_on "Save Search"
+
+      expect(page).to have_content age_30_user.name
+      expect(page).to have_no_content age_20_user.name
+    end
+
+    scenario "specifying a maximum age only returns younger users" do
+      age_20_user = create(:user, birthday: 20.years.ago)
+      age_30_user = create(:user, birthday: 30.years.ago)
+
+      visit profile_search_path
+      fill_in "Max age", with: 25
+      click_on "Save Search"
+
+      expect(page).to have_content age_20_user.name
+      expect(page).to have_no_content age_30_user.name
+    end
+
+    scenario "not specifying an age returns all users" do
+      age_20_user = create(:user, birthday: 20.years.ago)
+      age_30_user = create(:user, birthday: 30.years.ago)
+
+      visit profile_search_path
+      click_on "Save Search"
+
+      expect(page).to have_content age_20_user.name
+      expect(page).to have_content age_30_user.name
+    end
+  end
 end

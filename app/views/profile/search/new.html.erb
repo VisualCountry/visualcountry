@@ -10,6 +10,8 @@
     <%= f.input :focuses, as: :check_boxes, collection: Focus.all %>
     <%= f.input :gender, collection: User.genders.keys %>
     <%= f.input :ethnicity, collection: User.ethnicities.keys %>
+    <%= f.input :min_age %>
+    <%= f.input :max_age %>
     <%= f.submit %>
   <% end %>
 </div>

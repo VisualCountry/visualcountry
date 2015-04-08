@@ -20,6 +20,8 @@ class Profile::SearchController < ApplicationController
         :query,
         :gender,
         :ethnicity,
+        :min_age,
+        :max_age,
         :social_profiles,
       )
   end
