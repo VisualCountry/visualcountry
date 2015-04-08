@@ -21,17 +21,21 @@
 
 // Base
 @import "variables";
+@import "font";
 @import "forms";
 
-// views
+// Patterns and Components
+@import "checkbox-buttons";
+
+// Views
 @import "auth";
 @import "social-profiles";
 @import "basic-info";
 @import "brands-creators-marketing-page";
-@import "font";
 @import "footer";
 @import "header";
 @import "home";
+@import "interests";
 @import "profile";
 @import "search-results";
 @import "user";

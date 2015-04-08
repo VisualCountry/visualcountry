@@ -1,0 +1,30 @@
+.checkbox-button {
+  + .checkbox-button {
+    margin-top: 10px; // Overrides bootstrap forms checkbox styling
+  }
+
+  label {
+    @include transition(all 0.1s ease-in);
+    border: 1px solid #000;
+    cursor: pointer;
+    display: block;
+    font-size: 18px;
+    line-height: 1;
+    padding: 1em;
+    text-align: center;
+
+    &:hover {
+      background-color: rgba($accent-color, 0.15);
+    }
+  }
+
+  input[type="checkbox"] {
+    display: none;
+
+    &:checked + label {
+      background-color: $accent-color;
+      border-color: $accent-color;
+      color: #fff;
+    }
+  }
+}

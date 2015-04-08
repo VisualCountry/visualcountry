@@ -1,11 +1,15 @@
 <%= render 'layouts/user_navigation' %>
 <div class="container">
-  <h1>Interests</h1>
-  <h2>What are your passions?</h2>
-  <p>Pick as many as you like.</p>
+  <header class="row text-center">
+    <h1>Interests</h1>
+    <h2>What are your passions?</h2>
+    <p>Pick as many as you like.</p>
+  </header>
 
   <%= simple_form_for current_user, url: profile_interests_path do |f| %>
-    <%= f.association :interests, as: :check_boxes %>
-    <%= f.submit class: "btn btn-default"  %>
+    <div class="row">
+      <%= f.association :interests, as: :check_boxes, item_wrapper_class: "checkbox-button col-sm-6 col-md-3", label: false %>
+    </div>
+    <%= f.submit class: "btn btn-default interests-submit-button", value: "Update Interests"  %>
   <% end %>
 </div>
