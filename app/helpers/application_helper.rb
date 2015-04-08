@@ -28,4 +28,10 @@ module ApplicationHelper
   def close_nested_form_icon
     content_tag :span, '', class: 'glyphicon glyphicon-inbox'
   end
+
+  def signed_in_admin?
+    user_signed_in? && current_user.admin?
+  end
 end
+
+

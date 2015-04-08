@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show], path: :profiles, as: :profiles
-  resources :contact_messages, only: [:create]
+  resources :contact_messages, only: [:create, :destroy]
 
   resources :omniauth_add_email, only: [:new, :create]
 

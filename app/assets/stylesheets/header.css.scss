@@ -11,23 +11,31 @@
   }
 
   .nav > li > a {
-    padding: 19px 15px;
+    padding: 19px 5px;
   }
 
   .settings-icon {
-    margin: 19px 15px;
+    margin: 16px 15px;
     height: 20px;
     width: 20px;
-    color: #F58C85;
+    color: #F58D86;
   }
 
   .navbar-profile {
     width: 25px;
     height: 25px;
+    margin: 0 5px 0 20px;
   }
 
   .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
     background-color: #ffffff;
     padding: 10px 15px;
+  }
+  .navbar-titles {
+    padding: 0 10px;
+  }
+
+  .pink {
+   color: #F58D86;
   }
 }
