@@ -29,6 +29,18 @@ module ApplicationHelper
     content_tag :span, '', class: 'glyphicon glyphicon-inbox'
   end
 
+  def truncated_count(count)
+    number_to_human(
+      count,
+      format: "%n%u",
+      units: {
+        thousand: "K",
+        million: "M",
+        billion: "B",
+      },
+    )
+  end
+
   def embedded_svg(filename, options = {})
     assets = Rails.application.assets
     file = assets.find_asset(filename)
