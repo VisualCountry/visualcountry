@@ -68,7 +68,7 @@
   <% if @user.instagram_media %>
     <h6>Recent Instagram Posts</h6>
     <div class="row">
-    <% @user.instagram_media.first(9).each do |instagram| %>
+    <% @user.instagram_media.first(9).each do |instagram_picture| %>
       <div class="col-sm-4">
         <%= link_to(image_tag(instagram_picture['images']['standard_resolution']['url'], class: 'platform-media'),instagram_picture['link']) %>
         <ul class="user-post-icons">
