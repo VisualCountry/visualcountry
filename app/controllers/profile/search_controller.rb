@@ -18,6 +18,8 @@ class Profile::SearchController < ApplicationController
         :min_followers,
         :near,
         :query,
+        :gender,
+        :ethnicity,
         :social_profiles,
       )
   end

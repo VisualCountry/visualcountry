@@ -1,13 +1,15 @@
 <div class="container">
   <h1>Search</h1>
-  <%= simple_form_for :search, method: :get, url: profile_search_results_path do |f| %>
-    <%= f.input :query, required: false %>
-    <%= f.input :near, required: false %>
-    <%= f.input :interests, as: :check_boxes, collection: Interest.all, required: false %>
-    <%= f.input :min_followers, required: false %>
-    <%= f.input :max_followers, required: false %>
-    <%= f.input :social_profiles, as: :check_boxes, collection: User::SOCIAL_PLATFORMS, required: false %>
-    <%= f.input :focuses, as: :check_boxes, collection: Focus.all, required: false %>
+  <%= simple_form_for :search, method: :get, url: profile_search_results_path, defaults: { required: false } do |f| %>
+    <%= f.input :query %>
+    <%= f.input :near %>
+    <%= f.input :interests, as: :check_boxes, collection: Interest.all %>
+    <%= f.input :min_followers %>
+    <%= f.input :max_followers %>
+    <%= f.input :social_profiles, as: :check_boxes, collection: User::SOCIAL_PLATFORMS %>
+    <%= f.input :focuses, as: :check_boxes, collection: Focus.all %>
+    <%= f.input :gender, collection: User.genders.keys %>
+    <%= f.input :ethnicity, collection: User.ethnicities.keys %>
     <%= f.submit %>
   <% end %>
 </div>

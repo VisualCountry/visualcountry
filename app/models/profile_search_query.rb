@@ -7,6 +7,8 @@ class ProfileSearchQuery
     relation.
       by_name(options[:query]).
       by_location(options[:near]).
+      by_gender(options[:gender]).
+      by_ethnicity(options[:ethnicity]).
       by_interest_ids(options[:interests]).
       by_focus_ids(options[:focuses]).
       by_social_profiles(options.fetch(:social_profiles, [])).
@@ -26,6 +28,22 @@ class ProfileSearchQuery
     def by_name(name)
       if name.present?
         where('"users".name ILIKE ?', "%#{name}%")
+      else
+        all
+      end
+    end
+
+    def by_gender(gender)
+      if gender.present?
+        where(gender: User.genders[gender])
+      else
+        all
+      end
+    end
+
+    def by_ethnicity(ethnicity)
+      if ethnicity.present?
+        where(ethnicity: User.ethnicities[ethnicity])
       else
         all
       end
