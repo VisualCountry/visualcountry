@@ -42,48 +42,6 @@ class User < ActiveRecord::Base
     "Other/prefer not to answer" => 6,
 }
 
-  scope :by_name, -> (name) { User.where('"users".name ILIKE ?', "%#{name}%") if name.present? }
-
-  def self.by_location(location)
-    if location.present?
-      near(location)
-    else
-      all
-    end
-  end
-
-  scope :by_interest_ids, -> (ids) do
-    joins(:interests).where(interests: {id: nil_if_blank(ids)}) if ids.present?
-  end
-
-  scope :by_focus_ids, -> (ids) do
-    includes(:focuses).joins(:focuses).where(focuses: {id: nil_if_blank(ids)}) if ids.present?
-  end
-
-  scope :by_social_profiles, -> (social_profiles) do
-    column_names = social_profiles.map { |profile| "#{profile}_token" }
-    query = column_names.map { |column_name| "#{column_name} IS NOT NULL" }.join(' AND ')
-
-    where(query) if query
-  end
-
-  # TODO: Abstract to query object
-  scope :by_follower_count, -> (min_followers, max_followers, social_profiles) do
-    return if min_followers.empty? && max_followers.empty?
-
-    min_followers = (min_followers.empty? ? min_followers = 0 : min_followers.to_i)
-    max_followers = (max_followers.empty? ? max_followers =  Float::INFINITY : max_followers.to_i)
-
-    if social_profiles.empty?
-      where(total_follower_count: min_followers..max_followers)
-    else
-      follower_count_columns_for_sql = social_profiles.map { |p| "cached_#{p}_follower_count" }.join(' + ')
-      users = User.find_by_sql("SELECT *, (#{follower_count_columns_for_sql}) sum FROM users;")
-      matched_users = users.reject { |user| !user.sum.present? }
-      matched_users.select { |result| result.sum > min_followers && result.sum < max_followers }
-    end
-  end
-
   geocoded_by :city
 
   reverse_geocoded_by :latitude, :longitude do |obj, (result, _)|
@@ -93,20 +51,6 @@ class User < ActiveRecord::Base
   end
 
   after_validation :normalize_city_name, if: :city_changed?
-
-  def self.search(options = {})
-    by_name(options[:query]).
-      by_location(options[:near]).
-      by_interest_ids(options[:interests]).
-      by_focus_ids(options[:focuses]).
-      by_social_profiles(options[:social_profiles] || []).
-      by_follower_count(
-        options[:min_followers],
-        options[:max_followers],
-        options[:social_profiles] || [],
-      ).
-      uniq
-  end
 
   def update_total_follower_count!
     return unless (changed & FOLLOWER_COUNT_COLUMNS).present?
@@ -200,9 +144,5 @@ class User < ActiveRecord::Base
 
   def follower_counts
     FOLLOWER_COUNT_METHODS.map { |p| send(p) }.compact
-  end
-
-  def self.nil_if_blank(array)
-    array.reject(&:empty?)
   end
 end

@@ -1,6 +1,6 @@
 class Profile::SearchController < ApplicationController
   def index
-    @profiles = User.search(search_params)
+    @profiles = ProfileSearchQuery.new.search(search_params)
   end
 
   def new
