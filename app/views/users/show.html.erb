@@ -1,103 +1,114 @@
-<div class="user">
-  <div class="container">
+<div class="container user">
 
-    <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-4">
-        <%= image_tag(@user.picture.url(:medium), :size => '300', alt: 'Profile Pic') %>
-      </div>
-
-      <div class="col-lg-8 col-md-8 col-sm-8">
-        <div class="name-focus">
-          <h2><%= @user.name %></h2>
-          <h5><%= @user.focuses.pluck(:name).join(', ') %></h5>
-        </div>
-        <div>
-          <h4 class="bio"><%= @user.bio %></h4>
-        </div>
-        <div class="geo-contact">
-          <h5><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= @user.city if @user.city %> </h5>
-          <h5><span class="glyphicon glyphicon-link" aria-hidden="true"></span> <% if @user.website %><%= link_to @user.website, "http://#{@user.website}" %><% end %></h5>
-          <h5><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <%= mail_to @user.email, @user.email %></h5>
-        </div>
-      </div>
+  <header class="row user-row">
+    <div class="col-sm-4">
+      <%= image_tag(@user.picture.url(:medium), alt: 'Profile Pic', class: "user-avatar") %>
     </div>
 
-    <br>
+    <div class="col-sm-8">
+      <h2><%= @user.name %></h2>
+      <h5><%= @user.focuses.pluck(:name).join(', ') %></h5>
+      <h4 class="user-bio"><%= @user.bio %></h4>
 
-    <!-- FIXME -->
-    <hr>
-    <div class="row social-row">
-      <div class="total-follower-count text-center col-lg-4 col-md-4 col-sm-4">
-        <h3><div>TOTAL FOLLOWERS:</div></h3>
-        <h1><div><%= number_with_delimiter(@user.total_follower_count) %></div></h1>
-      </div>
+      <ul class="user-meta">
+        <% if @user.city.present? %>
+          <li data-role="geo-contact">
+            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+            <%= @user.city %>
+          </li>
+        <% end %>
 
-      <% User::SOCIAL_PLATFORMS.each do |social| %>
-        <%= render 'follower_counts', social: social %>
-      <% end %>
+        <% if @user.website.present? %>
+          <li>
+            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+            <%= link_to @user.website, "http://#{@user.website}" %>
+          </li>
+        <% end %>
+
+        <li>
+          <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+          <%= mail_to @user.email, @user.email %>
+        </li>
+      </ul>
     </div>
-    <hr>
+  </header>
 
-    <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-4">
-        <h2>Interests</h2>
-        <% @user.interests.each do |interest| %>
-          <button type="button" class="btn btn-default btn-interests"><%= interest.name %></button>
-        <% end %>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-4">
-        <h2>Press</h2>
-        <% @user.press.each do |press| %>
-          <h5><%= press.name %></h5>
-        <% end %>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-4">
-        <h2>Clients</h2>
-        <% @user.clients.each do |client| %>
-          <h5><%= link_to client.name, client.url %></h5>
-        <% end %>
-      </div>
-    </div>
+  <div class="row user-row user-total-follower-row">
+    <dl class="user-total-follower-count col-sm-4">
+      <dt>TOTAL FOLLOWERS:</dt>
+      <dd><%= number_with_delimiter(@user.total_follower_count) %></dd>
+    </dl>
 
-    <br>
-
-    <% if @user.instagram_media %>
-      <h6>Recent Instagram Posts</h6>
-      <hr>
-      <% @user.instagram_media.first(9).each_slice(3) do |instagram_group| %>
-        <div class="row">
-          <% instagram_group.each do |instagram_picture| %>
-            <div class="col-lg-4 col-md-4 col-sm-4">
-              <%= link_to(image_tag(instagram_picture['images']['standard_resolution']['url'], class: 'platform-media'),instagram_picture['link']) %>
-              <div class="post-icons"><span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span> <%= number_with_delimiter(instagram_picture['likes']['count'].round) %></div>
-              <div class="post-icons"><span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span> <%= number_with_delimiter(instagram_picture['comments']['count'].round) %></div>
-            </div>
-          <% end %>
-          <br>
-        </div>
-      <% end %>
+    <% User::SOCIAL_PLATFORMS.each do |social| %>
+      <%= render 'follower_counts', social: social %>
     <% end %>
-
-    <br>
-
-    <% if @user.vine_media %>
-      <h6>Recent Vine Videos</h6>
-      <hr>
-      <% @user.vine_media.first(9).each_slice(3) do |vine_group| %>
-        <div class="row">
-          <% vine_group.each do |vine| %>
-            <div class="col-lg-4 col-md-4 col-sm-4">
-              <%= videojs_tag(vine.videoUrl, class: 'platform-video') %>
-               <div class="post-icons"><span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span> <%= vine.likes['count'] %></div>
-               <div class="post-icons"><span class="glyphicon glyphicon-refresh pink" aria-hidden="true"></span> <%= vine.reposts['count'] %></div>
-               <div class="post-icons"><span class="glyphicon glyphicon-play-circle pink" aria-hidden="true"></span> <%= number_with_delimiter(vine.loops['count'].round) %></div>
-               <div class="post-icons"><span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span> <%= number_with_delimiter(vine.comments['count'].round) %></div>
-            </div>
-          <% end %>
-        </div>
-        <br>
-      <% end %>
-    <% end %>
-
   </div>
+
+  <div class="row">
+    <div class="col-sm-4 user-subsection">
+      <h2>Interests</h2>
+      <% @user.interests.each do |interest| %>
+        <button type="button" class="btn btn-default btn-interests"><%= interest.name %></button>
+      <% end %>
+    </div>
+    <div class="col-sm-4 user-subsection">
+      <h2>Press</h2>
+      <% @user.press.each do |press| %>
+        <h5><%= press.name %></h5>
+      <% end %>
+    </div>
+    <div class="col-sm-4 user-subsection">
+      <h2>Clients</h2>
+      <% @user.clients.each do |client| %>
+        <h5><%= link_to client.name, client.url %></h5>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @user.instagram_media %>
+    <h6>Recent Instagram Posts</h6>
+    <div class="row">
+    <% @user.instagram_media.first(9).each do |instagram| %>
+      <div class="col-sm-4">
+        <%= link_to(image_tag(instagram_picture['images']['standard_resolution']['url'], class: 'platform-media'),instagram_picture['link']) %>
+        <ul class="user-post-icons">
+          <li class="user-post-icon">
+            <span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span>
+            <%= number_with_delimiter(instagram_picture['likes']['count'].round) %>
+          </li>
+          <li class="user-post-icon">
+            <span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span>
+            <%= number_with_delimiter(instagram_picture['comments']['count'].round) %>
+        </ul>
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if @user.vine_media %>
+    <h6>Recent Vine Videos</h6>
+    <div class="row">
+    <% @user.vine_media.first(9).each do |vine| %>
+      <div class="col-sm-6 col-md-4">
+        <%= videojs_tag(vine.videoUrl, class: 'platform-video') %>
+        <ul class="user-post-icons">
+          <li class="user-post-icon">
+            <span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span>
+            <%= vine.likes['count'] %>
+          </li>
+          <li class="user-post-icon">
+            <span class="glyphicon glyphicon-refresh pink" aria-hidden="true"></span>
+            <%= vine.reposts['count'] %>
+          </li>
+          <li class="user-post-icon">
+            <span class="glyphicon glyphicon-play-circle pink" aria-hidden="true"></span>
+            <%= number_with_delimiter(vine.loops['count'].round) %>
+          </li>
+          <li class="user-post-icon">
+            <span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span>
+            <%= number_with_delimiter(vine.comments['count'].round) %>
+          </li>
+        </ul>
+      </div>
+    <% end %>
+  <% end %>
 </div>

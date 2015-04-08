@@ -15,7 +15,7 @@ feature "User addresses are normalized through reverse geocoding" do
     click_on "Update my account"
 
     visit profile_path(user)
-    within ".geo-contact" do
+    within "[data-role='geo-contact']" do
       expect(page).to have_content "New York, NY"
     end
   end
