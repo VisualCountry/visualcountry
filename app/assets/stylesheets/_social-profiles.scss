@@ -1,52 +1,75 @@
-.total-reach {
-  margin-bottom: 40px;
-  margin-top: 30px;
-}
-
-.total-reach-count {
-  font-size: 42px;
-  line-height: 1;
-  margin-bottom: 10px;
-
-  @media (min-width: $md-breakpoint) {
-    font-size: 72px;
-  }
-}
-
 .social-profile {
-  align-items: center;
-  border: 1px solid #000;
-  display: flex;
-  margin-bottom: 20px;
-  padding: 20px;
-  text-align: left;
-
-  svg {
-    @include size(30px, 30px);
-    margin-right: 20px;
+  h2 {
+    margin-bottom: 0;
+    margin-top: 100px;
   }
 
-  path {
-    fill: $accent-color;
+  h3 {
+    margin-bottom: 0;
+    margin-top: 0;
   }
 
-  .btn-default {
+  dt {
+    color: $accent-color;
+    font-size: 24px;
+    font-family: 'brandon_light_it';
+  }
+
+  .total-reach {
+    margin-bottom: 40px;
+    margin-top: 30px;
+  }
+
+  .total-reach-count {
+    font-size: 42px;
+    line-height: 1;
+    margin-bottom: 10px;
+
+    @media (min-width: $md-breakpoint) {
+      font-size: 80px;
+    }
+  }
+
+  .social-profile {
+    align-items: center;
+    border: 1px solid $light-color;
+    display: flex;
+    margin-bottom: 20px;
+    padding: 10px;
+    text-align: left;
+
+    svg {
+      @include size(30px, 30px);
+      margin-right: 20px;
+
+      @media (min-width: $md-breakpoint) {
+      @include size(65px, 65px);
+      margin-right: 20px;
+      }
+    }
+
+    path {
+      fill: $accent-color;
+    }
+
+    .btn-default {
+      margin: 0;
+    }
+  }
+
+  .social-network {
+    flex: 1;
+    font-size: 24px;
+    font-weight: 300;
     margin: 0;
+
+    @media (min-width: $md-breakpoint) {
+      font-size: 30px;
+    }
   }
-}
 
-.social-network {
-  flex: 1;
-  font-size: 24px;
-  font-weight: 300;
-  margin: 0;
-
-  @media (min-width: $md-breakpoint) {
-    font-size: 40px;
+  .social-follower-count {
+    margin-bottom: 0;
+    margin-right: 10px;
   }
-}
-
-.social-follower-count {
-  margin-bottom: 0;
-  margin-right: 10px;
 }
