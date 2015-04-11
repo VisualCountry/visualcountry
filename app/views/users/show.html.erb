@@ -1,8 +1,7 @@
 <div class="container user">
-
   <header class="row user-row">
     <div class="col-sm-4">
-      <%= image_tag(@user.picture.url(:medium), alt: 'Profile Pic', class: "user-avatar") %>
+      <%= image_tag(@user.picture.url(:medium), alt: 'Profile Pic') %>
     </div>
 
     <div class="col-sm-8">
@@ -67,48 +66,50 @@
 
   <% if @user.instagram_media %>
     <h6>Recent Instagram Posts</h6>
-    <div class="row">
-    <% @user.instagram_media.first(9).each do |instagram_picture| %>
-      <div class="col-sm-4">
-        <%= link_to(image_tag(instagram_picture['images']['standard_resolution']['url'], class: 'platform-media'),instagram_picture['link']) %>
-        <ul class="user-post-icons">
-          <li class="user-post-icon">
-            <span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span>
-            <%= number_with_delimiter(instagram_picture['likes']['count'].round) %>
-          </li>
-          <li class="user-post-icon">
-            <span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span>
-            <%= number_with_delimiter(instagram_picture['comments']['count'].round) %>
-        </ul>
-      </div>
-    <% end %>
+    <div class="row user-social-instagram">
+      <% @user.instagram_media.first(9).each do |instagram_picture| %>
+        <div class="col-sm-6 col-md-4">
+          <%= link_to(image_tag(instagram_picture['images']['standard_resolution']['url'], class: 'platform-media'),instagram_picture['link']) %>
+          <ul class="user-post-icons">
+            <li class="user-post-icon">
+              <span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span>
+              <%= number_with_delimiter(instagram_picture['likes']['count'].round) %>
+            </li>
+            <li class="user-post-icon">
+              <span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span>
+              <%= number_with_delimiter(instagram_picture['comments']['count'].round) %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 
   <% if @user.vine_media %>
     <h6>Recent Vine Videos</h6>
     <div class="row">
-    <% @user.vine_media.first(9).each do |vine| %>
-      <div class="col-sm-6 col-md-4">
-        <%= videojs_tag(vine.videoUrl, class: 'platform-video') %>
-        <ul class="user-post-icons">
-          <li class="user-post-icon">
-            <span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span>
-            <%= vine.likes['count'] %>
-          </li>
-          <li class="user-post-icon">
-            <span class="glyphicon glyphicon-refresh pink" aria-hidden="true"></span>
-            <%= vine.reposts['count'] %>
-          </li>
-          <li class="user-post-icon">
-            <span class="glyphicon glyphicon-play-circle pink" aria-hidden="true"></span>
-            <%= number_with_delimiter(vine.loops['count'].round) %>
-          </li>
-          <li class="user-post-icon">
-            <span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span>
-            <%= number_with_delimiter(vine.comments['count'].round) %>
-          </li>
-        </ul>
-      </div>
+      <% @user.vine_media.first(9).each do |vine| %>
+        <div class="col-sm-6 col-md-4">
+          <%= videojs_tag(vine.videoUrl, class: 'platform-video') %>
+          <ul class="user-post-icons">
+            <li class="user-post-icon">
+              <span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span>
+              <%= vine.likes['count'] %>
+            </li>
+            <li class="user-post-icon">
+              <span class="glyphicon glyphicon-refresh pink" aria-hidden="true"></span>
+              <%= vine.reposts['count'] %>
+            </li>
+            <li class="user-post-icon">
+              <span class="glyphicon glyphicon-play-circle pink" aria-hidden="true"></span>
+              <%= number_with_delimiter(vine.loops['count'].round) %>
+            </li>
+            <li class="user-post-icon">
+              <span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span>
+              <%= number_with_delimiter(vine.comments['count'].round) %>
+            </li>
+          </ul>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

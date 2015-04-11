@@ -17,9 +17,14 @@
   align-items: center;
   border: 1px solid #000;
   display: flex;
-  margin-bottom: 20px;
-  padding: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
   text-align: left;
+
+  @media (min-width: $sm-breakpoint) {
+    margin-bottom: 20px;
+    padding: 20px;
+  }
 
   svg {
     @include size(30px, 30px);
@@ -37,9 +42,13 @@
 
 .social-network {
   flex: 1;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 300;
   margin: 0;
+
+  @media (min-width: $sm-breakpoint) {
+    font-size: 24px;
+  }
 
   @media (min-width: $md-breakpoint) {
     font-size: 40px;
@@ -47,6 +56,20 @@
 }
 
 .social-follower-count {
+  display: none;
   margin-bottom: 0;
   margin-right: 10px;
+
+  @media (min-width: $sm-breakpoint) {
+    display: block;
+  }
+}
+
+.btn-social {
+  @media (min-width: $md-breakpoint) {
+    border-radius: 6px;
+    font-size: 18px;
+    line-height: 1.3;
+    padding: 10px 16px;
+  }
 }
