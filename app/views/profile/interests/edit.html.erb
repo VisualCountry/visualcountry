@@ -1,9 +1,11 @@
 <%= render 'layouts/user_navigation' %>
-<div class="container">
-  <header class="row text-center">
-    <h1>Interests</h1>
-    <h2>What are your passions?</h2>
-    <p>Pick as many as you like.</p>
+<div class="container interests">
+  <header class="row">
+    <h2 class="text-center">Interests</h2>
+    <div class="row col-xs-offset-2 col-sm-offset-2 col-md-offset-3">
+      <h3 class="text-left">What are your passions?</h3>
+      <h5 class="text-left">Select as many as you like.</h5>
+    </div>
   </header>
 
   <%= simple_form_for current_user, url: profile_interests_path do |f| %>

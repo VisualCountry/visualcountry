@@ -1,17 +1,56 @@
-<div class="container">
-  <h1>Search</h1>
-  <%= simple_form_for :search, method: :get, url: profile_search_results_path, defaults: { required: false } do |f| %>
-    <%= f.input :query %>
-    <%= f.input :near %>
-    <%= f.input :interests, as: :check_boxes, collection: Interest.all %>
-    <%= f.input :min_followers %>
-    <%= f.input :max_followers %>
-    <%= f.input :social_profiles, as: :check_boxes, collection: User::SOCIAL_PLATFORMS %>
-    <%= f.input :focuses, as: :check_boxes, collection: Focus.all %>
-    <%= f.input :gender, collection: User.genders.keys %>
-    <%= f.input :ethnicity, collection: User.ethnicities.keys %>
-    <%= f.input :min_age %>
-    <%= f.input :max_age %>
-    <%= f.submit %>
-  <% end %>
+<div class="container search">
+  <div class="row">
+    <h2 class="text-center">Search</h2>
+    <h3 class="text-center">Looking for Someone?</h3>
+    <%= simple_form_for :search, method: :get, url: profile_search_results_path, defaults: { required: false } do |f| %>
+      <div class="row field">
+        <h5>Search by User</h5>
+        <%= f.input :query, class: "form-control", :autofocus => true %>
+      </div>
+      <div class="row">
+        <h5>Filter by Interest</h5>
+        <%= f.input :interests, as: :check_boxes, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3", label: false, collection: Interest.all %>
+      </div>
+      <div class="row">
+        <h5>Filter by Followers</h5>
+        <div class="col-xs-6 col-sm-6 col-md-3">
+          <%= f.input :min_followers %>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3">
+          <%= f.input :max_followers %>
+        </div>
+      </div>
+      <div class="row">
+        <h5>Filter by Social Platform</h5>
+        <%= f.input :social_profiles, as: :check_boxes, item_wrapper_class: "platform-checkbox-button col-xs-6 col-sm-6 col-md-3", label: false, collection: User::SOCIAL_PLATFORMS %>
+      </div>
+      <div class="row">
+        <h5>Filter by Location</h5>
+        <%= f.input :near %>
+      </div>
+      <div class="row">
+        <h5>Filter by Focus</h5>
+        <%= f.input :focuses, as: :check_boxes, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3", label: false, collection: Focus.all %>
+      </div>
+      <div class="row">
+        <h5>Filter by Gender</h5>
+        <%= f.input :gender, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3", label: false, collection: User.genders.keys %>
+      </div>
+      <div class="row">
+        <h5>Filter by Ethnicity</h5>
+        <%= f.input :ethnicity, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3", label: false, collection: User.ethnicities.keys %>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-3">
+          <h5>Filter by Min Age</h5>
+          <%= f.input :min_age %>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3">
+          <h5>Filter by Max Age</h5>
+          <%= f.input :max_age %>
+        </div>
+      </div>
+        <%= f.submit class: "btn btn-default search-button", value: "Search"  %>
+    <% end %>
+  </div>
 </div>
