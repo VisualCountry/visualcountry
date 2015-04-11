@@ -1,22 +1,30 @@
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Email Address</th>
-    <th>Phone Number</th>
-    <th>Instagram Account</th>
-    <th>Vine Account</th>
-    <th>Body</th>
-    <th>Date</th>
-  </tr>
-  <% @contact_messages.each do |contact_message| %>
+<div class="container admin">
+  <div class="row">
+  <%= link_to 'Back to Dashboard', admin_path, :class => "btn btn-default button" %>
+  </div>
+
+  <table class="table">
     <tr>
-      <td><%= link_to contact_message.name, admin_contact_message_path(contact_message) %></td>
-      <td><%= contact_message.email_address %></td>
-      <td><%= contact_message.phone_number %></td>
-      <td><%= contact_message.instagram_account %></td>
-      <td><%= contact_message.vine_account %></td>
-      <td><%= contact_message.body %></td>
-      <td><%= contact_message.created_at %></td>
+      <th><h4>Name</h4></th>
+      <th><h4>Email Address</h4></th>
+      <th><h4>Phone Number</h4></th>
+      <th><h4>Instagram Account</h4></th>
+      <th><h4>Vine Account</h4></th>
+      <th><h4>Body</h4></th>
+      <th><h4>Date</h4></th>
     </tr>
-  <% end %>
-</table>
+    <% @contact_messages.each do |contact_message| %>
+      <tr>
+        <td><%= link_to contact_message.name, admin_contact_message_path(contact_message) %></td>
+        <td><%= contact_message.email_address %></td>
+        <td><%= contact_message.phone_number %></td>
+        <td><%= contact_message.instagram_account %></td>
+        <td><%= contact_message.vine_account %></td>
+        <td><%= contact_message.body %></td>
+        <td><%= contact_message.created_at %></td>
+        <td><%= link_to "Delete", contact_message, :method => :delete %></td>
+          </div>
+      </tr>
+    <% end %>
+  </table>
+</div>

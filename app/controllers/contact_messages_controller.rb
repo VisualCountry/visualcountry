@@ -12,6 +12,17 @@ class ContactMessagesController < ApplicationController
     end
   end
 
+  def destroy
+    @contact_message = ContactMessage.find(params[:id])
+    if @contact_message.destroy
+      redirect_to admin_contact_messages_path
+      flash[:success] = "Message Deleted"  #flash not showing on screen
+    else
+      redirect_to admin_contact_messages_path
+      flash[:success] = "Error Deleting Try again"
+    end
+  end
+
   private
 
   def contact_message_params

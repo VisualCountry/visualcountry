@@ -39,10 +39,18 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show], path: :profiles, as: :profiles
-  resources :contact_messages, only: [:create]
+  resources :contact_messages, only: [:create, :destroy]
 
   resources :omniauth_add_email, only: [:new, :create]
 
   get 'content-creators' => 'pages#creators'
   get 'brands-agencies' => 'pages#brands'
+  get "about" => "pages#about"
+  get "team" => "pages#team"
+  get "contact" => "pages#contact"
+  get "faq" => "pages#faq"
+  get "jobs" => "pages#jobs"
+  get "terms" => "pages#terms"
+  get "privacy" => "pages#privacy"
+  get "about" => "pages#about"
 end
