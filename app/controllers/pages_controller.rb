@@ -14,6 +14,33 @@ class PagesController < ApplicationController
   def connect
   end
 
+  def about
+
+  end
+
+  def team
+
+  end
+
+  def contact
+
+  end
+
+  def faq
+
+  end
+
+  def jobs
+
+  end
+  def terms
+
+  end
+
+  def privacy
+
+  end
+
   private
 
   def set_contact_message

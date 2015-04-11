@@ -45,4 +45,12 @@ Rails.application.routes.draw do
 
   get 'content-creators' => 'pages#creators'
   get 'brands-agencies' => 'pages#brands'
+  get "about" => "pages#about"
+  get "team" => "pages#team"
+  get "contact" => "pages#contact"
+  get "faq" => "pages#faq"
+  get "jobs" => "pages#jobs"
+  get "terms" => "pages#terms"
+  get "privacy" => "pages#privacy"
+  get "about" => "pages#about"
 end
