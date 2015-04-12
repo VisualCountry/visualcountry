@@ -1,6 +1,8 @@
 <%= render 'layouts/user_navigation' %>
 <div class="container">
   <div class="profile">
+    <h2>Clients</h2>
+    <h3>Links to some projects you have worked on and clients you have worked with.</h3>
     <%= simple_form_for current_user, url: profile_clients_path, html: { novalidate: true } do |f| %>
       <div id="client" class="clients">
         <ol>

@@ -42,7 +42,7 @@
                 <li><%= link_to profile_interests_path do %><p><span class="glyphicon glyphicon-pencil pink" title="Edit Interests"></span></p><% end %></li>
                 <li><%= link_to profile_press_path do %><p><span class="glyphicon glyphicon-bullhorn pink" title="Edit Press"></span></p><% end %></li>
                 <li><%= link_to profile_clients_path do %><p><span class="glyphicon glyphicon-briefcase pink" title="Edit Clients"></span></p><% end %></li>
-                <li><%= link_to  do %><p><span class="glyphicon glyphicon-question-sign pink" title="Help"></span></p><% end %></li>
+                <li><%= link_to faq_path do %><p><span class="glyphicon glyphicon-question-sign pink" title="Help"></span></p><% end %></li>
                 <li><%= link_to(image_tag(current_user.picture.url(:thumb), :class =>"navbar-profile", :alt => "Profile Pic", :title => "Profile"), profile_path(current_user)) %></li>
                 <li><%= link_to current_user.name, profile_path(current_user), :title => "User"%></li>
 

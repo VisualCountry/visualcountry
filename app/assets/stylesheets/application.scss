@@ -40,6 +40,19 @@
 @import "profile";
 @import "search-results";
 @import "user";
+@import "about";
+@import "faq";
+@import "jobs";
+@import "privacy";
+@import "team";
+@import "terms";
+@import "admin";
+@import "search";
+
+
+
+
+
 
 .clear {
   clear: both;
@@ -56,7 +69,7 @@ body {
 
 p {
   font-family: "AkkLg_Pro", Helvetica, Arial, sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.42857143;
   color: $medium-color;
 }
@@ -70,7 +83,7 @@ h1 {
 
 h2 {
   font-family: 'AkkBd_Pro';
-  font-size: 40px;
+  font-size: 38px;
   text-transform: none;
   letter-spacing: 2px;
   color: $medium-color;
@@ -78,21 +91,21 @@ h2 {
 
 h3 {
   font-family: 'AkkLg_Pro';
-  font-size: 40px;
+  font-size: 30px;
   letter-spacing: 1px;
   color: $medium-color;
 }
 
 h4 {
   font-family: 'AkkLg_Pro';
-  font-size: 30px;
+  font-size: 22px;
   letter-spacing: 1px;
   color: $medium-color;
 }
 
 h5 {
   font-family: 'AkkLg_Pro';
-  font-size: 24px;
+  font-size: 18px;
   letter-spacing: 1px;
   color: $medium-color;
 }
