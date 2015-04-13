@@ -44,7 +44,6 @@
           <% if current_user.instagram_token? %>
             <p class="social-follower-count">followed by: <%= number_with_delimiter(current_user.instagram_follower_count) %></p>
             <%= link_to image_tag("green_check_icon.svg", size: "30x30"), profile_link_instagram_path, method: :delete %>
-            </div>
           <% else %>
             <%= link_to "Connect", user_omniauth_authorize_path(:instagram), class: "btn btn-default btn-social" %>
           <% end %>
