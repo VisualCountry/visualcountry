@@ -1,6 +1,6 @@
 class Profile::SearchController < ApplicationController
   def index
-    @profiles = ProfileSearchQuery.new.search(search_params)
+    @profiles = ProfileSearchQuery.new(search_params).search
   end
 
   def new
@@ -12,8 +12,6 @@ class Profile::SearchController < ApplicationController
     params.
       require(:search).
       permit(
-        :focuses,
-        :interests,
         :max_followers,
         :min_followers,
         :near,
@@ -22,7 +20,9 @@ class Profile::SearchController < ApplicationController
         :ethnicity,
         :min_age,
         :max_age,
-        :social_profiles,
+        social_profiles: [],
+        focuses: [],
+        interests: [],
       )
   end
 end

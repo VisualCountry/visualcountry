@@ -6,7 +6,7 @@ describe ProfileSearchQuery do
       brooklyn_user = create(:user, city: "Brooklyn")
       la_user = create(:user, city: "Los Angeles")
 
-      users_near_nyc = ProfileSearchQuery.new.search(near: "NYC")
+      users_near_nyc = ProfileSearchQuery.new(near: "NYC").search
 
       expect(users_near_nyc).to include brooklyn_user
       expect(users_near_nyc).not_to include la_user
