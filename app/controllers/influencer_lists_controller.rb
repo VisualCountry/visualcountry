@@ -23,6 +23,12 @@ class InfluencerListsController < ApplicationController
     @influencer_lists = current_user.influencer_lists
   end
 
+  def destroy
+    list = find_influencer_list
+    list.destroy
+    redirect_to influencer_lists_path, alert: "\"#{list.name}\" deleted!"
+  end
+
   private
 
   def find_influencer_list

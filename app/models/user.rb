@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :clients
 
   has_many :press
-  has_many :influencer_lists
+  has_many :influencer_lists, dependent: :destroy
 
   accepts_nested_attributes_for :clients, allow_destroy: true
   accepts_nested_attributes_for :press, allow_destroy: true

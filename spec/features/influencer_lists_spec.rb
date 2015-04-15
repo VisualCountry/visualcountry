@@ -40,4 +40,18 @@ feature "Creating/updating/deleting influencer lists" do
     expect(page).to have_link list_1.name
     expect(page).to have_link list_2.name
   end
+
+  scenario "can delete a list" do
+    admin = create(:admin)
+    list_1 = create(:influencer_list, owner: admin)
+    list_2 = create(:influencer_list, owner: admin)
+    login_as(admin)
+
+    visit influencer_list_path(list_1)
+    click_on "Delete List"
+
+    expect(page).to have_content "\"#{list_1.name}\" deleted!"
+    expect(page).to have_no_link list_1.name
+    expect(page).to have_link list_2.name
+  end
 end
