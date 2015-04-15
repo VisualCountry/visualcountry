@@ -19,11 +19,25 @@ feature "Creating/updating/deleting influencer lists" do
     admin = create(:admin)
     users = create_list(:user, 3)
     list = create(:influencer_list, owner: admin, users: users)
+    login_as(admin)
 
     visit influencer_list_path(list)
 
     users.each do |user|
-      expect(page).to have_content user.name
+      expect(page).to have_link user.name
     end
+  end
+
+  scenario "can see a list of all my lists" do
+    admin = create(:admin)
+    list_1 = create(:influencer_list, owner: admin)
+    list_2 = create(:influencer_list, owner: admin)
+    login_as(admin)
+
+    visit influencer_lists_path
+
+    expect(page).to have_link "New List"
+    expect(page).to have_link list_1.name
+    expect(page).to have_link list_2.name
   end
 end

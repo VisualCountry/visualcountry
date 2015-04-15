@@ -1,4 +1,6 @@
 class InfluencerListsController < ApplicationController
+  before_action :authorize_admin!
+
   def new
     @influencer_list = InfluencerList.new
   end
@@ -15,6 +17,10 @@ class InfluencerListsController < ApplicationController
 
   def show
     @influencer_list = find_influencer_list
+  end
+
+  def index
+    @influencer_lists = current_user.influencer_lists
   end
 
   private

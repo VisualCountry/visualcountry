@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe User do
+  it { is_expected.to have_many :influencer_lists }
+
   describe "geocoding using AR callbacks from the geocoder gem" do
     it "saves the lat/lon of the user's location" do
       latitude = 40.6936488
