@@ -27,9 +27,5 @@ describe Profile::InterestsController do
         expect(response).to redirect_to profile_interests_path
       end
     end
-
-    context 'with invalid data' do
-      it 're-renders the page'
-    end
   end
 end
