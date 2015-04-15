@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show], path: :profiles, as: :profiles
   resources :contact_messages, only: [:create]
+  resources :influencer_lists, only: [:show, :new, :create], path: :lists
 
   resources :omniauth_add_email, only: [:new, :create]
 

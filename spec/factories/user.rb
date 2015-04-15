@@ -20,6 +20,10 @@ FactoryGirl.define do
     password "testtest"
     password_confirmation "testtest"
 
+    factory :admin do
+      admin true
+    end
+
     trait :with_twitter do
       twitter_token "twitter-token"
     end

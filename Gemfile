@@ -70,6 +70,7 @@ end
 group :test do
   gem 'capybara-webkit'
   gem 'launchy'
+  gem 'shoulda-matchers'
   gem 'webmock'
 end
 

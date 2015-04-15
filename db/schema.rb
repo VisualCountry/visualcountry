@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407211754) do
+ActiveRecord::Schema.define(version: 20150415170609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,15 @@ ActiveRecord::Schema.define(version: 20150407211754) do
   end
 
   add_index "focuses_users", ["focus_id", "user_id"], name: "index_focuses_users_on_focus_id_and_user_id", using: :btree
+
+  create_table "influencer_lists", force: true do |t|
+    t.string   "name",       null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "influencer_lists", ["user_id"], name: "index_influencer_lists_on_user_id", using: :btree
 
   create_table "interests", force: true do |t|
     t.string   "name"
