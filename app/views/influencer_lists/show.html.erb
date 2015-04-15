@@ -1,1 +1,7 @@
 <h1 class="list-name"><%= @influencer_list.name %></h1>
+
+<ul>
+  <% @influencer_list.users.each do |user| %>
+    <li><%= link_to user.name, profile_path(user) %></li>
+  <% end %>
+</ul>

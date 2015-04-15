@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415170609) do
+ActiveRecord::Schema.define(version: 20150415202836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,16 @@ ActiveRecord::Schema.define(version: 20150415170609) do
     t.integer "interest_id"
     t.integer "user_id"
   end
+
+  create_table "list_memberships", force: true do |t|
+    t.integer  "user_id",            null: false
+    t.integer  "influencer_list_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "list_memberships", ["influencer_list_id"], name: "index_list_memberships_on_influencer_list_id", using: :btree
+  add_index "list_memberships", ["user_id"], name: "index_list_memberships_on_user_id", using: :btree
 
   create_table "presses", force: true do |t|
     t.string   "name"
