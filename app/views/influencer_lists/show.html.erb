@@ -6,7 +6,7 @@
 <% @influencer_list.users.each do |user| %>
   <div class="user-<%= user.id %>">
     <p><%= link_to user.name, profile_path(user) %></p>
-    <%= form_for(:list_membership, url: list_membership_path(user.membership_to(@influencer_list)), method: :delete) do |f| %>
+    <%= form_for(:list_membership, url: list_membership_path(user.membership_in(@influencer_list)), method: :delete) do |f| %>
       <%= f.submit "Remove" %>
     <% end %>
   </div>

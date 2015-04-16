@@ -79,13 +79,13 @@ describe User do
     end
   end
 
-  describe "#membership_to" do
-    it "returns a user's membership to the given list" do
+  describe "#membership_in" do
+    it "returns a user's membership in the given list" do
       user = create(:user)
       list = create(:influencer_list)
       membership = create(:list_membership, user: user, influencer_list: list)
 
-      expect(user.membership_to(list)).to eq membership
+      expect(user.membership_in(list)).to eq membership
     end
   end
 end
