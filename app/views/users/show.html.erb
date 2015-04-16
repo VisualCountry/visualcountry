@@ -34,8 +34,9 @@
 
   <div class="row">
     <p>Add to lists</p>
-    <%= simple_form_for(:list_membership, url: profile_list_memberships_path(@user)) do |f| %>
-      <%= f.input :influencer_list, as: :select, collection: @available_lists %>
+    <%= simple_form_for(:list_membership, url: list_memberships_path) do |f| %>
+      <%= f.hidden_field :profile_id, value: @user.id %>
+      <%= f.input :influencer_list_id, as: :select, collection: @available_lists %>
       <%= f.submit "Add" %>
     <% end %>
   </div>
