@@ -1,8 +1,12 @@
 require "rails_helper"
 
 feature "Searching User profiles" do
+  before do
+    login_as(create(:admin))
+  end
+
   feature "searching by query" do
-    it "matches users by name" do
+    scenario "matches users by name" do
       alice = create(:user, name: "Alice")
       bob = create(:user, name: "Bob")
 

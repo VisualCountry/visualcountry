@@ -1,4 +1,6 @@
 class Profile::SearchController < ApplicationController
+  before_action :authorize_admin!
+
   def index
     @profiles = ProfileSearchQuery.new(search_params).search
   end
