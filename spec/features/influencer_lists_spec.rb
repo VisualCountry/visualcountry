@@ -41,6 +41,22 @@ feature "Creating/updating/deleting influencer lists" do
     expect(page).to have_link list_2.name
   end
 
+  scenario "can rename a list" do
+    admin = create(:admin)
+    list = create(:influencer_list, owner: admin)
+    new_name = "My Favorite List"
+    login_as(admin)
+
+    visit influencer_list_path(list)
+    click_link "Rename List"
+    fill_in "Name", with: new_name
+    click_on "Update"
+
+    within ".list-name" do
+      expect(page).to have_content new_name
+    end
+  end
+
   scenario "can delete a list" do
     admin = create(:admin)
     list_1 = create(:influencer_list, owner: admin)

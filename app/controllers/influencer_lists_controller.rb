@@ -15,6 +15,20 @@ class InfluencerListsController < ApplicationController
     end
   end
 
+  def edit
+    @influencer_list = find_influencer_list
+  end
+
+  def update
+    @influencer_list = find_influencer_list
+
+    if @influencer_list.update(influencer_list_params)
+      redirect_to @influencer_list
+    else
+      render :edit
+    end
+  end
+
   def show
     @influencer_list = find_influencer_list
   end
