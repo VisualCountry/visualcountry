@@ -1,10 +1,11 @@
 class BulkListMembershipsController < ApplicationController
   def create
+    list = find_list
     find_users.each do |user|
-      find_list.add_user(user)
+      list.add_user(user)
     end
 
-    redirect_to find_list
+    redirect_to list
   end
 
   private
