@@ -16,6 +16,15 @@ describe InfluencerList do
 
       expect(list.users).to include user
     end
+
+    it "does nothing if the user is already on the list" do
+      user = create(:user)
+      list = create(:influencer_list, users: [user])
+
+      list.add_user(user)
+
+      expect(list.users).to include user
+    end
   end
 
   describe "#remove_user" do

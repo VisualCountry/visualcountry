@@ -6,7 +6,9 @@ class InfluencerList < ActiveRecord::Base
   validates :name, presence: true, uniqueness: { scope: :user_id }
 
   def add_user(user)
-    users << user
+    if users.exclude?(user)
+      users << user
+    end
   end
 
   def remove_user(user)
