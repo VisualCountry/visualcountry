@@ -97,6 +97,10 @@ class User < ActiveRecord::Base
     influencer_lists.select { |list| list.users.exclude?(user) }
   end
 
+  def membership_to(list)
+    ListMembership.find_by(user: self, influencer_list: list)
+  end
+
   private
 
   def normalize_city_name

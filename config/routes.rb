@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show], path: :profiles, as: :profiles do
-    resources :list_memberships, only: [:create]
+    resources :list_memberships, only: [:create, :destroy]
   end
   resources :contact_messages, only: [:create]
   resources :influencer_lists, path: :lists

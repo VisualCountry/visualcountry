@@ -25,4 +25,20 @@ feature "Add and remove users from lists" do
 
     expect(find_field("Influencer list")).to have_no_content list.name
   end
+
+  scenario "an admin can remove a user from one of their lists" do
+    admin = create(:admin)
+    user_1 = create(:user)
+    user_2 = create(:user)
+    list = create(:influencer_list, owner: admin, users: [user_1, user_2])
+    login_as(admin)
+
+    visit influencer_list_path(list)
+    within ".user-#{user_2.id}" do
+      click_on "Remove"
+    end
+
+    expect(page).to have_link user_1.name
+    expect(page).to have_no_link user_2.name
+  end
 end

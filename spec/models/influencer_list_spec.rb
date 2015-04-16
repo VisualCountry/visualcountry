@@ -17,4 +17,15 @@ describe InfluencerList do
       expect(list.users).to include user
     end
   end
+
+  describe "#remove_user" do
+    it "removes a user from the list" do
+      user = create(:user)
+      list = create(:influencer_list, users: [user])
+
+      list.remove_user(user)
+
+      expect(list.users).not_to include user
+    end
+  end
 end

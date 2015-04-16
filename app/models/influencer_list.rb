@@ -8,4 +8,8 @@ class InfluencerList < ActiveRecord::Base
   def add_user(user)
     users << user
   end
+
+  def remove_user(user)
+    users.delete(user)
+  end
 end
