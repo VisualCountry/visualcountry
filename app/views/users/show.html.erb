@@ -32,6 +32,14 @@
     </div>
   </header>
 
+  <div class="row">
+    <p>Add to lists</p>
+    <%= simple_form_for(:list_membership, url: profile_list_memberships_path(@user)) do |f| %>
+      <%= f.input :influencer_list, as: :select, collection: @available_lists %>
+      <%= f.submit "Add" %>
+    <% end %>
+  </div>
+
   <div class="row user-row user-total-follower-row">
     <dl class="user-total-follower-count col-sm-4">
       <dt>TOTAL FOLLOWERS:</dt>

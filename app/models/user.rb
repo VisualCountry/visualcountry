@@ -92,6 +92,10 @@ class User < ActiveRecord::Base
     result
   end
 
+  def lists_without(user)
+    influencer_lists.select { |list| list.users.exclude?(user) }
+  end
+
   private
 
   def normalize_city_name

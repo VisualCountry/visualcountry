@@ -4,4 +4,8 @@ class InfluencerList < ActiveRecord::Base
   has_many :users, through: :list_memberships
 
   validates :name, presence: true, uniqueness: { scope: :user_id }
+
+  def add_user(user)
+    users << user
+  end
 end

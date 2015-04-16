@@ -1,0 +1,28 @@
+require "rails_helper"
+
+feature "Add and remove users from lists" do
+  scenario "an admin can add a user to one of their lists" do
+    admin = create(:admin)
+    list = create(:influencer_list, owner: admin)
+    user = create(:user)
+    login_as(admin)
+
+    visit profile_path(user)
+    select list.name, from: "Influencer list"
+    click_on "Add"
+
+    visit influencer_list_path(list)
+    expect(page).to have_link user.name
+  end
+
+  scenario "when a user is on a list, they can't be added to the list again" do
+    admin = create(:admin)
+    user = create(:user)
+    list = create(:influencer_list, owner: admin, users: [user])
+    login_as(admin)
+
+    visit profile_path(user)
+
+    expect(find_field("Influencer list")).to have_no_content list.name
+  end
+end

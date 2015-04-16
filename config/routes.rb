@@ -38,7 +38,9 @@ Rails.application.routes.draw do
     get 'search/results' => 'search#index'
   end
 
-  resources :users, only: [:show], path: :profiles, as: :profiles
+  resources :users, only: [:show], path: :profiles, as: :profiles do
+    resources :list_memberships, only: [:create]
+  end
   resources :contact_messages, only: [:create]
   resources :influencer_lists, path: :lists
 

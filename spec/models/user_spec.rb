@@ -65,4 +65,17 @@ describe User do
       ).to be_present
     end
   end
+
+  describe "#lists_without" do
+    it "returns the lists that the user's not on" do
+      user = create(:user)
+      member = create(:user)
+      create(:influencer_list, owner: user, users: [member])
+      empty_list = create(:influencer_list, owner: user)
+
+      lists = user.lists_without(member)
+
+      expect(lists).to eq [empty_list]
+    end
+  end
 end
