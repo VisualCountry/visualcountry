@@ -23,7 +23,8 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
+         :omniauthable, :confirmable,
+         omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
 
   delegate :media, to: :instagram, prefix: true, allow_nil: true
   delegate :media, to: :vine, prefix: true, allow_nil: true
