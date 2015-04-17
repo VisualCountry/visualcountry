@@ -17,6 +17,30 @@ feature "Searching User profiles" do
       expect(page).to have_content alice.name
       expect(page).to have_no_content bob.name
     end
+
+    scenario "matches users by bio" do
+      alice = create(:user, bio: "Antarctic explorer")
+      bob = create(:user, name: "Ramen enthusiast")
+
+      visit profile_search_path
+      fill_in "Query", with: "Explorer"
+      click_on "Save Search"
+
+      expect(page).to have_content alice.name
+      expect(page).to have_no_content bob.name
+    end
+
+    scenario "matches users by special interests" do
+      alice = create(:user, special_interests: "Writing Capybara tests")
+      bob = create(:user, special_interests: "Embroidery and arson")
+
+      visit profile_search_path
+      fill_in "Query", with: "capybara"
+      click_on "Save Search"
+
+      expect(page).to have_content alice.name
+      expect(page).to have_no_content bob.name
+    end
   end
 
   feature "searching by location" do

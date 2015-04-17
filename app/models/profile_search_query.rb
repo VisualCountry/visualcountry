@@ -15,7 +15,7 @@ class ProfileSearchQuery
 
   def search
     relation.
-      by_name(query).
+      by_query(query).
       by_location(near).
       by_gender(gender).
       by_ethnicity(ethnicity).
@@ -51,9 +51,12 @@ class ProfileSearchQuery
   end
 
   module Scopes
-    def by_name(name)
-      if name.present?
-        where('"users".name ILIKE ?', "%#{name}%")
+    def by_query(query)
+      if query.present?
+        where(
+          "name ILIKE :query OR bio ILIKE :query OR special_interests ILIKE :query",
+          query: "%#{query}%",
+        )
       else
         all
       end
