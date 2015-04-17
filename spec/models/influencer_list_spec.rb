@@ -27,6 +27,18 @@ describe InfluencerList do
     end
   end
 
+  describe "#add_users" do
+    it "adds the users that aren't already on the list" do
+      old_users = create_list(:user, 2)
+      list = create(:influencer_list, users: old_users)
+      new_user = create(:user)
+
+      list.add_users([old_users.first, new_user])
+
+      expect(list.users).to include new_user, *old_users
+    end
+  end
+
   describe "#remove_user" do
     it "removes a user from the list" do
       user = create(:user)

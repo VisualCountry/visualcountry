@@ -11,6 +11,10 @@ class InfluencerList < ActiveRecord::Base
     end
   end
 
+  def add_users(new_users)
+    self.users |= new_users
+  end
+
   def remove_user(user)
     users.delete(user)
   end
