@@ -58,6 +58,7 @@
       <% @user.interests.each do |interest| %>
         <button type="button" class="btn btn-default btn-interests"><%= interest.name %></button>
       <% end %>
+      <p><%= @user.special_interests %></p>
     </div>
     <div class="col-sm-4 user-subsection">
       <h2>Press</h2>
