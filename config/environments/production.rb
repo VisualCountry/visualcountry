@@ -76,8 +76,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # REMINDER TO SET TO ACTUAL HOST NAME
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: ENV.fetch('SMTP_DOMAIN') }
 
   config.paperclip_defaults = {
     :storage => :s3,
@@ -87,5 +86,15 @@ Rails.application.configure do
       :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     }
+  }
+
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.mandrillapp.com',
+    port:                 25,
+    enable_starttls_auto: true,
+    user_name:            ENV.fetch('MANDRILL_USERNAME'),
+    password:             ENV.fetch('MANDRILL_APIKEY'),
+    authentication:       'login',
+    domain:               ENV.fetch('SMTP_DOMAIN'),
   }
 end
