@@ -97,7 +97,7 @@
     <div class="row">
       <% @user.vine_media.first(9).each do |vine| %>
         <div class="col-sm-6 col-md-4">
-          <%= videojs_tag(vine.videoUrl, class: 'platform-video') %>
+          <%= videojs_tag(vine.videoUrl, class: 'platform-video', thumbnail: vine.thumbnailUrl) %>
           <ul class="user-post-icons">
             <li class="user-post-icon">
               <span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span>
