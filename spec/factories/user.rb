@@ -19,6 +19,7 @@ FactoryGirl.define do
     bio "Coolest dog ever."
     password "testtest"
     password_confirmation "testtest"
+    confirmed_at { 1.day.ago }
 
     factory :admin do
       admin true
