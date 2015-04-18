@@ -18,6 +18,7 @@
                <% if signed_in_admin? %>
                 <li><%= link_to profile_search_path do %><p><span class="glyphicon glyphicon-search pink" title="Search Users"></span></p><% end %></li>
                 <li><%= link_to admin_path do %><p><span class="glyphicon glyphicon-stats pink" title="Admin Dashboard"></span></p><% end %></li>
+                <li><%= link_to influencer_lists_path do %><p><span class="glyphicon glyphicon-list pink" title="Influencers Lists"></span></p><% end %></li>
                 <li><%= link_to(image_tag(current_user.picture.url(:thumb), :class =>"navbar-profile", :alt => "Profile Pic", :title => "Profile"), profile_path(current_user)) %></li>
                 <li><%= link_to current_user.name, profile_path(current_user)%></li>
 
