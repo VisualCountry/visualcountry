@@ -1,14 +1,17 @@
-<div class="container text-center footer "
+<div class="container text-center footer">
   <hr>
-
-  <h5>About</h5>
-  <h5>Team</h5>
-  <h5>Contact</h5>
-  <h5>FAQ</h5>
-  <h5>Jobs</h5>
-  <h5>Terms of Service</h5>
-  <h5>Privacy</h5>
-  <p>Made in NYC</p>
-  <p> <span class="glyphicon glyphicon-copyright-mark"></span> Copyright 2015 All Rights Reserved  Visual Country LLC</p>
+  <div class="row footer-basic-centered">
+    <p class="footer-links">
+      <%= link_to "About", about_path %>
+      <%= link_to "Team", team_path %>
+      <%= link_to "Contact", contact_path %>
+      <%= link_to "FAQ", faq_path %>
+      <%= link_to "Jobs", jobs_path %>
+      <%= link_to "Terms of Service", terms_path %>
+      <%= link_to "Privacy", privacy_path %>
+   </p>
+    <p class="footer-copyright">Copyright &copy; 2015 All Rights Reserved Visual Country LLC </p>
+    <p class="footer-made-nyc">Made In NYC</p>
+  </div>
 </div>
 

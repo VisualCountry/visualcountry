@@ -83,11 +83,11 @@
           <ul class="user-post-icons">
             <li class="user-post-icon">
               <span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span>
-              <%= number_with_delimiter(instagram_picture['likes']['count'].round) %>
+              <%= truncated_count(instagram_picture['likes']['count'].round) %>
             </li>
             <li class="user-post-icon">
               <span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span>
-              <%= number_with_delimiter(instagram_picture['comments']['count'].round) %>
+              <%= truncated_count(instagram_picture['comments']['count'].round) %>
           </ul>
         </div>
       <% end %>
@@ -111,11 +111,11 @@
             </li>
             <li class="user-post-icon">
               <span class="glyphicon glyphicon-play-circle pink" aria-hidden="true"></span>
-              <%= number_with_delimiter(vine.loops['count'].round) %>
+              <%= truncated_count(vine.loops['count'].round) %>
             </li>
             <li class="user-post-icon">
               <span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span>
-              <%= number_with_delimiter(vine.comments['count'].round) %>
+              <%= truncated_count(vine.comments['count'].round) %>
             </li>
           </ul>
         </div>

@@ -46,4 +46,8 @@ module ApplicationHelper
     file = assets.find_asset(filename)
     render file: file.pathname
   end
+
+  def signed_in_admin?
+    user_signed_in? && current_user.admin?
+  end
 end

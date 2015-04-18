@@ -1,6 +1,8 @@
 <%= render 'layouts/user_navigation' %>
 <div class="container">
   <div class="profile">
+    <h2>Press</h2>
+    <h3>Share some stories or articles written about you.</h3>
     <%= simple_form_for current_user, url: profile_press_path, html: { novalidate: true } do |f| %>
       <div id="press" class="press">
         <%= f.simple_fields_for :press do |press| %>

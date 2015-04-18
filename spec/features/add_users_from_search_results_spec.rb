@@ -12,7 +12,7 @@ feature "Add users from search results" do
 
     visit profile_search_path
     fill_in "Max age", with: 30
-    click_on "Save Search"
+    click_button "Search"
     select list.name, from: "Influencer list"
     click_on "Add"
 
