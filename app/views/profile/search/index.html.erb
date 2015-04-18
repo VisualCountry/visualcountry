@@ -1,36 +1,22 @@
-<div class="container row">
-  <p>Add all results to a list:</p>
-  <%= simple_form_for(:bulk_list_membership, url: bulk_list_memberships_path ) do |f| %>
-    <% @profiles.each do |profile| %>
-      <%= f.hidden_field :user_ids, multiple: true, value: profile.id %>
+<div class="container">
+  <div class="row">
+    <p>Add all results to a list:</p>
+    <%= simple_form_for(:bulk_list_membership, url: bulk_list_memberships_path ) do |f| %>
+      <% @profiles.each do |profile| %>
+        <%= f.hidden_field :user_ids, multiple: true, value: profile.id %>
+      <% end %>
+      <%= f.input :influencer_list, as: :select, collection: current_user.influencer_lists %>
+      <%= f.submit "Add" %>
     <% end %>
-    <%= f.input :influencer_list, as: :select, collection: current_user.influencer_lists %>
-    <%= f.submit "Add" %>
-  <% end %>
+  </div>
 </div>
 
 <div class="container search_results">
   <% @profiles.each_slice(3) do |profile_group| %>
     <div class="row">
       <% profile_group.each do |profile| %>
-        <div class="col-lg-4 col-md-4 col-sm-4">
-          <%= link_to image_tag(profile.picture.url(:medium), :size => '300', alt: 'Profile Pic'), "/profiles/#{profile.id}"  %>
-          <h1><%= profile.name %></h1>
-          <p><%= profile.focuses.map(&:name).join(', ') %></p>
-          <h5><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <%= profile.city if profile.city %> </h5>
-          <h5><span class="glyphicon glyphicon-link" aria-hidden="true"></span> <% if profile.website %><%= link_to profile.website, "http://#{profile.website}" %><% end %></h5>
-          <h5><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <%= mail_to profile.email, profile.email %></h5>
-          <h3>TOTAL FOLLOWERS: <%= number_with_delimiter(profile.total_follower_count) %></h3>
-          <div class="row">
-            <% User::SOCIAL_PLATFORMS.each do |platform| %>
-              <% if profile.send("#{platform}_follower_count") %>
-                <div class="col-lg-2 col-md-2 col-sm-2">
-                  <%= image_tag("#{platform}_logo.svg", size: '30', alt: "#{platform} Logo") %>
-                  <h6 class="social-follower-count "><%= truncated_count(profile.send("#{platform}_follower_count")) %></h6>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 user-<%= profile.id %>">
+          <%= render 'shared/profile_card', user: profile %>
         </div>
       <% end %>
       <br>

@@ -35,7 +35,7 @@ feature "Add and remove users from lists" do
 
     visit influencer_list_path(list)
     within ".user-#{user_2.id}" do
-      click_on "Remove"
+      click_link "Remove"
     end
 
     expect(page).to have_link user_1.name

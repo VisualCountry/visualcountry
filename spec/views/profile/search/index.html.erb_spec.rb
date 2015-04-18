@@ -2,12 +2,12 @@ require "rails_helper"
 
 describe "profile/search/index.html.erb" do
   it "displays truncated thousands" do
-    allow(view).to receive(:current_user).and_return(build(:admin))
+    allow(view).to receive(:current_user).and_return(create(:admin))
 
     assign(
       :profiles,
       [
-        build(
+        create(
           :user,
           cached_twitter_follower_count: 45_678,
           cached_vine_follower_count: 1_234_567,
