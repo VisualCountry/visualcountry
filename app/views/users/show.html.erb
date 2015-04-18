@@ -63,7 +63,7 @@
     <div class="col-sm-4 user-subsection">
       <h2>Press</h2>
       <% @user.press.each do |press| %>
-        <h5><%= press.name %></h5>
+        <h5><%= link_to press.name, press.url %></h5>
       <% end %>
     </div>
     <div class="col-sm-4 user-subsection">
