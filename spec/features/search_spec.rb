@@ -12,7 +12,7 @@ feature "Searching User profiles" do
 
       visit profile_search_path
       fill_in "Query", with: "alice"
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content alice.name
       expect(page).to have_no_content bob.name
@@ -24,7 +24,7 @@ feature "Searching User profiles" do
 
       visit profile_search_path
       fill_in "Query", with: "Explorer"
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content alice.name
       expect(page).to have_no_content bob.name
@@ -36,7 +36,7 @@ feature "Searching User profiles" do
 
       visit profile_search_path
       fill_in "Query", with: "capybara"
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content alice.name
       expect(page).to have_no_content bob.name
@@ -50,7 +50,7 @@ feature "Searching User profiles" do
 
       visit profile_search_path
       fill_in "Near", with: "NYC"
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content brooklyn_user.name
       expect(page).to have_no_content la_user.name
@@ -61,7 +61,7 @@ feature "Searching User profiles" do
       la_user = create(:user, city: "Los Angeles")
 
       visit profile_search_path
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content brooklyn_user.name
       expect(page).to have_content la_user.name
@@ -74,8 +74,10 @@ feature "Searching User profiles" do
       female_user = create(:user, gender: "Female")
 
       visit profile_search_path
-      select("Male", from: "Gender")
-      click_on "Save Search"
+      within('.gender-selection') do
+        select("Male")
+      end
+      click_button "Search"
 
       expect(page).to have_content male_user.name
       expect(page).to have_no_content female_user.name
@@ -86,7 +88,7 @@ feature "Searching User profiles" do
       female_user = create(:user, gender: "Female")
 
       visit profile_search_path
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content male_user.name
       expect(page).to have_content female_user.name
@@ -99,8 +101,10 @@ feature "Searching User profiles" do
       asian_user = create(:user, ethnicity: "Asian")
 
       visit profile_search_path
-      select("Hispanic or Latino", from: "Ethnicity")
-      click_on "Save Search"
+      within('.ethnicity-selection') do
+        select("Hispanic or Latino")
+      end
+      click_button "Search"
 
       expect(page).to have_content hispanic_user.name
       expect(page).to have_no_content asian_user.name
@@ -111,7 +115,7 @@ feature "Searching User profiles" do
       asian_user = create(:user, ethnicity: "Asian")
 
       visit profile_search_path
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content hispanic_user.name
       expect(page).to have_content asian_user.name
@@ -125,7 +129,7 @@ feature "Searching User profiles" do
 
       visit profile_search_path
       fill_in "Min age", with: 25
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content age_30_user.name
       expect(page).to have_no_content age_20_user.name
@@ -137,7 +141,7 @@ feature "Searching User profiles" do
 
       visit profile_search_path
       fill_in "Max age", with: 25
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content age_20_user.name
       expect(page).to have_no_content age_30_user.name
@@ -148,7 +152,7 @@ feature "Searching User profiles" do
       age_30_user = create(:user, birthday: 30.years.ago)
 
       visit profile_search_path
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content age_20_user.name
       expect(page).to have_content age_30_user.name
@@ -165,7 +169,7 @@ feature "Searching User profiles" do
 
       visit profile_search_path
       check "Photography"
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content photographer.name
       expect(page).to have_no_content cook.name
@@ -182,7 +186,7 @@ feature "Searching User profiles" do
       visit profile_search_path
       check "Photography"
       check "Cooking"
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content photographer.name
       expect(page).to have_content cook.name
@@ -200,7 +204,7 @@ feature "Searching User profiles" do
 
       visit profile_search_path
       check "Photographer"
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content photographer.name
       expect(page).to have_no_content director.name
@@ -217,7 +221,7 @@ feature "Searching User profiles" do
       visit profile_search_path
       check "Photographer"
       check "Director"
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content photographer.name
       expect(page).to have_content director.name
@@ -246,7 +250,7 @@ feature "Searching User profiles" do
       visit profile_search_path
       fill_in "Min followers", with: 50
       fill_in "Max followers", with: 500
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content target_user.name
       expect(page).to have_no_content unpopular_user.name
@@ -277,7 +281,7 @@ feature "Searching User profiles" do
         fill_in "Min followers", with: 50
         fill_in "Max followers", with: 500
         check "instagram"
-        click_on "Save Search"
+        click_button "Search"
 
         expect(page).to have_content target_user.name
         expect(page).to have_no_content twitter_user.name
@@ -300,7 +304,7 @@ feature "Searching User profiles" do
 
         visit profile_search_path
         check "instagram"
-        click_on "Save Search"
+        click_button "Search"
 
         expect(page).to have_content instagram_user.name
         expect(page).to have_no_content twitter_user.name
@@ -327,7 +331,7 @@ feature "Searching User profiles" do
           visit profile_search_path
           fill_in "Max followers", with: 500
           check "twitter"
-          click_on "Save Search"
+          click_button "Search"
 
           expect(page).to have_content middle_user.name
           expect(page).to have_content unpopular_user.name
@@ -354,7 +358,7 @@ feature "Searching User profiles" do
           visit profile_search_path
           fill_in "Min followers", with: 50
           check "twitter"
-          click_on "Save Search"
+          click_button "Search"
 
           expect(page).to have_content middle_user.name
           expect(page).to have_content popular_user.name
@@ -377,7 +381,7 @@ feature "Searching User profiles" do
       visit profile_search_path
       check "Cooking"
       check "Photographer"
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content cooking_photographer.name
       expect(page).to have_no_content tech_photographer.name
@@ -420,7 +424,7 @@ feature "Searching User profiles" do
       check "instagram"
       check "twitter"
       check "Director"
-      click_on "Save Search"
+      click_button "Search"
 
       expect(page).to have_content target_user.name
       expect(page).to have_no_content directing_twitter_user.name

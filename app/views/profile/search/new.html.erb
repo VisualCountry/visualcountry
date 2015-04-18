@@ -34,11 +34,15 @@
       </div>
       <div class="row">
         <h5>Filter by Gender</h5>
-        <%= f.input :gender, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3", label: false, collection: User.genders.keys %>
+        <div class="gender-selection">
+          <%= f.input :gender, item_wrapper_class: "col-xs-6 col-sm-6 col-md-3 gender", label: false, collection: User.genders.keys %>
+        </div>
       </div>
       <div class="row">
         <h5>Filter by Ethnicity</h5>
-        <%= f.input :ethnicity, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3", label: false, collection: User.ethnicities.keys %>
+        <div class="ethnicity-selection">
+          <%= f.input :ethnicity, item_wrapper_class: "col-xs-6 col-sm-6 col-md-3", label: false, collection: User.ethnicities.keys %>
+        </div>
       </div>
       <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-3">
