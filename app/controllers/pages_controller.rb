@@ -15,30 +15,24 @@ class PagesController < ApplicationController
   end
 
   def about
-
   end
 
   def team
-
   end
 
   def contact
-
   end
 
   def faq
-
   end
 
   def jobs
-
   end
-  def terms
 
+  def terms
   end
 
   def privacy
-
   end
 
   private
@@ -46,5 +40,4 @@ class PagesController < ApplicationController
   def set_contact_message
     @contact_message = ContactMessage.new
   end
-
 end
