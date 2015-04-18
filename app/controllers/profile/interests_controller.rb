@@ -15,6 +15,6 @@ class Profile::InterestsController < ApplicationController
   private
 
   def interest_params
-    params.require(:user).permit(interest_ids: [])
+    params.require(:user).permit(:special_interests, interest_ids: [])
   end
 end

@@ -40,7 +40,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show], path: :profiles, as: :profiles
   resources :contact_messages, only: [:create, :destroy]
-
+  resources :influencer_lists, path: :lists
+  resources :list_memberships, only: [:create, :destroy]
+  resources :bulk_list_memberships, only: [:create]
   resources :omniauth_add_email, only: [:new, :create]
 
   get 'content-creators' => 'pages#creators'

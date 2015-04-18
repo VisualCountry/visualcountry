@@ -2,6 +2,8 @@ require "rails_helper"
 
 describe "profile/search/index.html.erb" do
   it "displays truncated thousands" do
+    allow(view).to receive(:current_user).and_return(build(:admin))
+
     assign(
       :profiles,
       [

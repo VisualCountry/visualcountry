@@ -1,8 +1,7 @@
 <div class="container user">
-
   <header class="row user-row">
     <div class="col-sm-4">
-      <%= image_tag(@user.picture.url(:medium), alt: 'Profile Pic', class: "user-avatar") %>
+      <%= image_tag(@user.picture.url(:medium), alt: 'Profile Pic') %>
     </div>
 
     <div class="col-sm-8">
@@ -33,6 +32,15 @@
     </div>
   </header>
 
+  <div class="row">
+    <p>Add to lists</p>
+    <%= simple_form_for(:list_membership, url: list_memberships_path) do |f| %>
+      <%= f.hidden_field :profile_id, value: @user.id %>
+      <%= f.input :influencer_list_id, as: :select, collection: @available_lists %>
+      <%= f.submit "Add" %>
+    <% end %>
+  </div>
+
   <div class="row user-row user-total-follower-row">
     <dl class="user-total-follower-count col-sm-4">
       <dt>TOTAL FOLLOWERS:</dt>
@@ -50,6 +58,7 @@
       <% @user.interests.each do |interest| %>
         <button type="button" class="btn btn-default btn-interests"><%= interest.name %></button>
       <% end %>
+      <p><%= @user.special_interests %></p>
     </div>
     <div class="col-sm-4 user-subsection">
       <h2>Press</h2>
@@ -67,48 +76,50 @@
 
   <% if @user.instagram_media %>
     <h6>Recent Instagram Posts</h6>
-    <div class="row">
-    <% @user.instagram_media.first(9).each do |instagram_picture| %>
-      <div class="col-sm-4 col-md-4">
-        <%= link_to(image_tag(instagram_picture['images']['standard_resolution']['url'], class: 'platform-media'),instagram_picture['link']) %>
-        <ul class="user-post-icons">
-          <li class="user-post-icon">
-            <span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span>
-            <%= truncated_count(instagram_picture['likes']['count'].round) %>
-          </li>
-          <li class="user-post-icon">
-            <span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span>
-            <%= truncated_count(instagram_picture['comments']['count'].round) %>
-        </ul>
-      </div>
-    <% end %>
+    <div class="row user-social-instagram">
+      <% @user.instagram_media.first(9).each do |instagram_picture| %>
+        <div class="col-sm-6 col-md-4">
+          <%= link_to(image_tag(instagram_picture['images']['standard_resolution']['url'], class: 'platform-media'),instagram_picture['link']) %>
+          <ul class="user-post-icons">
+            <li class="user-post-icon">
+              <span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span>
+              <%= truncated_count(instagram_picture['likes']['count'].round) %>
+            </li>
+            <li class="user-post-icon">
+              <span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span>
+              <%= truncated_count(instagram_picture['comments']['count'].round) %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 
   <% if @user.vine_media %>
     <h6>Recent Vine Videos</h6>
     <div class="row">
-    <% @user.vine_media.first(9).each do |vine| %>
-      <div class="col-sm-6 col-md-4">
-        <%= videojs_tag(vine.videoUrl, class: 'platform-media') %>
-        <ul class="user-post-icons">
-          <li class="user-post-icon">
-            <span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span>
-            <%= vine.likes['count'] %>
-          </li>
-          <li class="user-post-icon">
-            <span class="glyphicon glyphicon-refresh pink" aria-hidden="true"></span>
-            <%= vine.reposts['count'] %>
-          </li>
-          <li class="user-post-icon">
-            <span class="glyphicon glyphicon-play-circle pink" aria-hidden="true"></span>
-            <%= truncated_count(vine.loops['count'].round) %>
-          </li>
-          <li class="user-post-icon">
-            <span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span>
-            <%= truncated_count(vine.comments['count'].round) %>
-          </li>
-        </ul>
-      </div>
+      <% @user.vine_media.first(9).each do |vine| %>
+        <div class="col-sm-6 col-md-4">
+          <%= videojs_tag(vine.videoUrl, class: 'platform-video', thumbnail: vine.thumbnailUrl) %>
+          <ul class="user-post-icons">
+            <li class="user-post-icon">
+              <span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span>
+              <%= vine.likes['count'] %>
+            </li>
+            <li class="user-post-icon">
+              <span class="glyphicon glyphicon-refresh pink" aria-hidden="true"></span>
+              <%= vine.reposts['count'] %>
+            </li>
+            <li class="user-post-icon">
+              <span class="glyphicon glyphicon-play-circle pink" aria-hidden="true"></span>
+              <%= truncated_count(vine.loops['count'].round) %>
+            </li>
+            <li class="user-post-icon">
+              <span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span>
+              <%= truncated_count(vine.comments['count'].round) %>
+            </li>
+          </ul>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

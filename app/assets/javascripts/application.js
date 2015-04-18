@@ -20,9 +20,11 @@
 
 
 // Flash fallback of video.js
-videojs.options.flash.swf = "/assets/swf/video-js.swf"
+videojs.options.flash.swf = "/assets/swf/video-js.swf";
 
 $(document).ready(function() {
+
+  // Initialize token inputs for user profile page
   $("#user_focus_tokens").tokenInput("/api/focuses.json", {
     searchingText: 'Searching...',
     minChars: 1,
@@ -30,4 +32,13 @@ $(document).ready(function() {
     prePopulate: $('#user_focus_tokens').data('pre'),
     theme: "visual-country",
   });
+
+  // Manually set posters for mobile since Video.js doesn't automagically
+  $('[data-videojs-thumbnail]').each(function(index, element) {
+    var $id     = $(element).attr('id'),
+        $poster = $(element).data('videojs-thumbnail'),
+        player  = videojs($id);
+
+    player.poster($poster);
+  })
 });

@@ -1,6 +1,5 @@
 FactoryGirl.define do
-  factory :focu, :class => 'Focus' do
-    name "MyString"
+  factory :focus do
+    name "My favorite thing"
   end
-
 end

@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe User do
+  it { is_expected.to have_many(:influencer_lists).dependent(:destroy) }
+
   describe "geocoding using AR callbacks from the geocoder gem" do
     it "saves the lat/lon of the user's location" do
       latitude = 40.6936488
@@ -61,6 +63,29 @@ describe User do
       expect(
         Rails.cache.fetch([:reverse_geocode, user.latitude, user.longitude])
       ).to be_present
+    end
+  end
+
+  describe "#lists_without" do
+    it "returns the lists that the user's not on" do
+      user = create(:user)
+      member = create(:user)
+      create(:influencer_list, owner: user, users: [member])
+      empty_list = create(:influencer_list, owner: user)
+
+      lists = user.lists_without(member)
+
+      expect(lists).to eq [empty_list]
+    end
+  end
+
+  describe "#membership_in" do
+    it "returns a user's membership in the given list" do
+      user = create(:user)
+      list = create(:influencer_list)
+      membership = create(:list_membership, user: user, influencer_list: list)
+
+      expect(user.membership_in(list)).to eq membership
     end
   end
 end

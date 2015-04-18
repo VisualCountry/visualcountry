@@ -10,7 +10,7 @@ module ApplicationHelper
       controls: true,
       loop: true,
       autobuffer: true,
-      data: {setup:'{}'},
+      data: {setup:'{}', 'videojs-thumbnail' => options[:thumbnail]},
       id: unique_id(src),
       class: options[:class] += ' video-js vjs-default-skin'
     }

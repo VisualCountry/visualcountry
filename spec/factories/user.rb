@@ -15,9 +15,22 @@ FactoryGirl.define do
     email
     username
     name
-    city 'New York City'
-    bio 'Coolest dog ever.'
-    password 'testtest'
-    password_confirmation 'testtest'
+    city "New York City"
+    bio "Coolest dog ever."
+    password "testtest"
+    password_confirmation "testtest"
+    confirmed_at { 1.day.ago }
+
+    factory :admin do
+      admin true
+    end
+
+    trait :with_twitter do
+      twitter_token "twitter-token"
+    end
+
+    trait :with_instagram do
+      instagram_token "instagram-token"
+    end
   end
 end

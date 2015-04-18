@@ -1,35 +1,62 @@
 class ProfileSearchQuery
-  def initialize(relation = User.all)
-    @relation = relation.extending(Scopes)
+  def initialize(options = {})
+    @query = options[:query]
+    @near = options[:near]
+    @gender = options[:gender]
+    @ethnicity = options[:ethnicity]
+    @min_age = options[:min_age]
+    @max_age = options[:max_age]
+    @interests = options.fetch(:interests, []).select(&:present?)
+    @focuses = options.fetch(:focuses, []).select(&:present?)
+    @social_profiles = options.fetch(:social_profiles, []).select(&:present?)
+    @min_followers = options[:min_followers]
+    @max_followers = options[:max_followers]
   end
 
-  def search(options = {})
+  def search
     relation.
-      by_name(options[:query]).
-      by_location(options[:near]).
-      by_gender(options[:gender]).
-      by_ethnicity(options[:ethnicity]).
-      by_minimum_age(options[:min_age]).
-      by_maximum_age(options[:max_age]).
-      by_interest_ids(options[:interests]).
-      by_focus_ids(options[:focuses]).
-      by_social_profiles(options.fetch(:social_profiles, [])).
-      by_follower_count(
-        options[:min_followers],
-        options[:max_followers],
-        options.fetch(:social_profiles, []),
-      ).
+      by_query(query).
+      by_location(near).
+      by_gender(gender).
+      by_ethnicity(ethnicity).
+      by_minimum_age(min_age).
+      by_maximum_age(max_age).
+      by_interest_ids(interests).
+      by_focus_ids(focuses).
+      by_social_profiles(social_profiles).
+      by_minimum_follower_count(min_followers, social_profiles).
+      by_maximum_follower_count(max_followers, social_profiles).
       uniq
   end
 
   private
 
-  attr_reader :relation
+  attr_reader(
+    :ethnicity,
+    :focuses,
+    :gender,
+    :interests,
+    :max_age,
+    :max_followers,
+    :min_age,
+    :min_followers,
+    :near,
+    :query,
+    :relation,
+    :social_profiles,
+  )
+
+  def relation
+    User.all.extending(Scopes)
+  end
 
   module Scopes
-    def by_name(name)
-      if name.present?
-        where('"users".name ILIKE ?', "%#{name}%")
+    def by_query(query)
+      if query.present?
+        where(
+          "name ILIKE :query OR bio ILIKE :query OR special_interests ILIKE :query",
+          query: "%#{query}%",
+        )
       else
         all
       end
@@ -69,7 +96,7 @@ class ProfileSearchQuery
 
     def by_interest_ids(ids)
       if ids.present?
-        joins(:interests).where(interests: { id: ids.select(&:present?) })
+        joins(:interests).where(interests: { id: ids })
       else
         all
       end
@@ -77,39 +104,44 @@ class ProfileSearchQuery
 
     def by_focus_ids(ids)
       if ids.present?
-        includes(:focuses).joins(:focuses).where(focuses: { id: ids.select(&:present?) })
+        includes(:focuses).joins(:focuses).where(focuses: { id: ids })
       else
         all
       end
     end
 
     def by_social_profiles(social_profiles)
-      column_names = social_profiles.map { |profile| "#{profile}_token" }
-      query = column_names.map { |column_name| "#{column_name} IS NOT NULL" }.join(' AND ')
+      query = social_profiles.inject({}) do |attrs, profile|
+        attrs.merge("#{profile}_token" => nil)
+      end
 
-      if query
-        where(query)
+      if query.present?
+        where.not(query)
       else
         all
       end
     end
 
-    def by_follower_count(min_followers, max_followers, social_profiles)
-      if min_followers.present? || max_followers.present?
-        min_followers = min_followers.to_i
-        max_followers = if max_followers.blank?
-          Float::INFINITY
-        else
-          max_followers.to_i
-        end
-
+    def by_minimum_follower_count(count, social_profiles)
+      if count.present?
         if social_profiles.empty?
-          where(total_follower_count: min_followers..max_followers)
+          where("total_follower_count >= ?", count.to_i)
         else
-          follower_count_columns_for_sql = social_profiles.map { |p| "cached_#{p}_follower_count" }.join(' + ')
-          users = User.find_by_sql("SELECT *, (#{follower_count_columns_for_sql}) sum FROM users;")
-          matched_users = users.reject { |user| user.sum.blank? }
-          matched_users.select { |result| result.sum > min_followers && result.sum < max_followers }
+          sum_expr = columns_for(social_profiles).join(" + ")
+          where("#{sum_expr} >= ?", count)
+        end
+      else
+        all
+      end
+    end
+
+    def by_maximum_follower_count(count, social_profiles)
+      if count.present?
+        if social_profiles.empty?
+          where("total_follower_count < ?", count.to_i)
+        else
+          sum_expr = columns_for(social_profiles).join(" + ")
+          where("#{sum_expr} < ?", count)
         end
       else
         all
@@ -122,6 +154,11 @@ class ProfileSearchQuery
       else
         all
       end
+    end
+
+    def columns_for(profiles)
+      (profiles & User::SOCIAL_PLATFORMS).
+        map { |platform| "cached_#{platform}_follower_count" }
     end
   end
 end

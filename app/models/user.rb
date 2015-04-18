@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :clients
 
   has_many :press
+  has_many :influencer_lists, dependent: :destroy
 
   accepts_nested_attributes_for :clients, allow_destroy: true
   accepts_nested_attributes_for :press, allow_destroy: true
@@ -22,7 +23,8 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
+         :omniauthable, :confirmable,
+         omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
 
   delegate :media, to: :instagram, prefix: true, allow_nil: true
   delegate :media, to: :vine, prefix: true, allow_nil: true
@@ -89,6 +91,14 @@ class User < ActiveRecord::Base
     result = update_attributes(params, *options)
     clean_up_passwords
     result
+  end
+
+  def lists_without(user)
+    influencer_lists.select { |list| list.users.exclude?(user) }
+  end
+
+  def membership_in(list)
+    ListMembership.find_by(user: self, influencer_list: list)
   end
 
   private
