@@ -46,7 +46,7 @@ class InfluencerListsController < ApplicationController
   private
 
   def find_influencer_list
-    InfluencerList.find(params[:id])
+    InfluencerList.find_by(uuid: params[:id])
   end
 
   def influencer_list_params
