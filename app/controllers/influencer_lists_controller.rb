@@ -1,5 +1,5 @@
 class InfluencerListsController < ApplicationController
-  before_action :authorize_admin!
+  before_action :authorize_admin!, except: [:show]
 
   def new
     @influencer_list = InfluencerList.new

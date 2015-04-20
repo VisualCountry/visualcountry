@@ -6,4 +6,8 @@ class Guest
   def admin?
     false
   end
+
+  def owns_list?(_)
+    false
+  end
 end

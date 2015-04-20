@@ -88,4 +88,20 @@ describe User do
       expect(user.membership_in(list)).to eq membership
     end
   end
+
+  describe "#owns_list?" do
+    it "returns true if the user's the owner of the influencer list" do
+      user = create(:user)
+      list = create(:influencer_list, owner: user)
+
+      expect(user.owns_list?(list)).to eq true
+    end
+
+    it "returns false if the user's not the owner of the influencer list" do
+      user = create(:user)
+      list = create(:influencer_list)
+
+      expect(user.owns_list?(list)).to eq false
+    end
+  end
 end

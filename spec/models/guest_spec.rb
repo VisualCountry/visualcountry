@@ -8,4 +8,10 @@ describe Guest do
   it "isn't an admin" do
     expect(Guest.new).not_to be_admin
   end
+
+  it "doesn't own any lists" do
+    list = create(:influencer_list)
+
+    expect(Guest.new.owns_list?(list)).to eq false
+  end
 end

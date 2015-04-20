@@ -105,6 +105,10 @@ class User < ActiveRecord::Base
     ListMembership.find_by(user: self, influencer_list: list)
   end
 
+  def owns_list?(list)
+    list.owner == self
+  end
+
   private
 
   def normalize_city_name
