@@ -25,9 +25,13 @@ class InfluencerList < ActiveRecord::Base
     uuid
   end
 
+  def fresh_uuid
+    SecureRandom.uuid
+  end
+
   private
 
   def assign_uuid
-    self.uuid = SecureRandom.uuid
+    self.uuid = fresh_uuid
   end
 end

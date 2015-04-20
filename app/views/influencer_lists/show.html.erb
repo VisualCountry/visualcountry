@@ -4,6 +4,10 @@
   <% if current_user.owns_list?(@influencer_list) %>
     <%= link_to "Rename List", edit_influencer_list_path(@influencer_list) %>
     <%= button_to "Delete List", @influencer_list, method: :delete %>
+    <%= simple_form_for(:list_copy, url: list_copy_path) do |f| %>
+      <%= f.hidden_field :id, value: @influencer_list.id %>
+      <%= f.submit "Copy List" %>
+    <% end %>
   <% end %>
 
   <br>
