@@ -24,8 +24,11 @@ class TwitterAuthenticator
   attr_reader :auth_data, :user
 
   def find_user
-    @find_user ||=
-      (user || User.find_by(twitter_uid: uid))
+    @find_user = if user && user.has_account?
+      user
+    else
+      User.find_by(twitter_uid: uid)
+    end
   end
 
   def update_twitter_token(user)

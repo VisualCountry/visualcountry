@@ -15,7 +15,7 @@
 
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
              <ul class="nav nav-pills pull-right" role="tablist">
-               <% if signed_in_admin? %>
+               <% if current_user.admin? %>
                 <li><%= link_to profile_search_path do %><p><span class="glyphicon glyphicon-search pink" title="Search Users"></span></p><% end %></li>
                 <li><%= link_to admin_path do %><p><span class="glyphicon glyphicon-stats pink" title="Admin Dashboard"></span></p><% end %></li>
                 <li><%= link_to influencer_lists_path do %><p><span class="glyphicon glyphicon-list pink" title="Influencers Lists"></span></p><% end %></li>
@@ -37,7 +37,7 @@
                   </li>
                 </ul>
 
-               <% elsif user_signed_in? %>
+               <% elsif current_user.has_account? %>
                 <li><%= link_to edit_user_registration_path do %><p><span class="glyphicon glyphicon-info-sign pink" title="Edit Basic Info"></span></p><% end %></li>
                 <li><%= link_to profile_social_path do %><p><span class="glyphicon glyphicon-plus-sign pink" title="Connect Social Profiles"></span></p><% end %></li>
                 <li><%= link_to profile_interests_path do %><p><span class="glyphicon glyphicon-pencil pink" title="Edit Interests"></span></p><% end %></li>

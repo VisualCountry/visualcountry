@@ -34,7 +34,7 @@ describe OmniauthCallbacksController do
       }
       get :facebook
 
-      expect(controller.current_user).to eq nil
+      expect(controller.current_user).not_to have_account
       expect(response).to redirect_to root_path
       expect(flash[:alert]).to eq "Unable to sign into Facebook"
     end

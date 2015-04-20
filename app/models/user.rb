@@ -86,6 +86,10 @@ class User < ActiveRecord::Base
     #TODO
   end
 
+  def has_account?
+    true
+  end
+
   # Devise, I hate you so much.
   def update_without_password(params, *options)
     result = update_attributes(params, *options)

@@ -6,12 +6,18 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def authorize_admin!
-    authenticate_user! unless current_user
+    if !current_user.has_account?
+      authenticate_user!
+    end
 
     unless current_user.admin?
       flash[:alert] = 'You are not authorized'
       redirect_to root_path
     end
+  end
+
+  def current_user
+    super || Guest.new
   end
 
   protected
