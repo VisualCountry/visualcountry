@@ -50,4 +50,12 @@ module ApplicationHelper
   def signed_in_admin?
     user_signed_in? && current_user.admin?
   end
+
+  def active_if_on(path)
+    if current_page?(path)
+      "active"
+    else
+      ""
+    end
+  end
 end

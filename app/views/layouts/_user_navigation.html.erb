@@ -1,7 +1,7 @@
 <ul class="nav nav-tabs container">
-  <li class="<%= current_page?(profile_social_path) ? 'active' : '' %>"><%= link_to 'Social Profiles', profile_social_path %></li>
-  <li class="<%= current_page?(edit_user_registration_path) ? 'active' : '' %>"><%= link_to 'Basic Info', edit_user_registration_path %></li>
-  <li class="<%= current_page?(profile_interests_path) ? 'active' : '' %>"><%= link_to 'Interests', profile_interests_path %></li>
-  <li class="<%= current_page?(profile_press_path) ? 'active' : '' %>"><%= link_to 'Press', profile_press_path %></li>
-  <li class="<%= current_page?(profile_clients_path) ? 'active' : '' %>"><%= link_to 'Clients', profile_clients_path %></li>
+  <li class="<%= active_if_on(profile_social_path) %>"><%= link_to "Social Profiles", profile_social_path %></li>
+  <li class="<%= active_if_on(edit_user_registration_path) %>"><%= link_to "Basic Info", edit_user_registration_path %></li>
+  <li class="<%= active_if_on(profile_interests_path) %>"><%= link_to "Interests", profile_interests_path %></li>
+  <li class="<%= active_if_on(profile_press_path) %>"><%= link_to "Press", profile_press_path %></li>
+  <li class="<%= active_if_on(profile_clients_path) %>"><%= link_to "Clients", profile_clients_path %></li>
 </ul>

@@ -25,6 +25,7 @@ feature "Updating account infomation" do
     fill_in_password("password")
     click_on "Update my account"
 
+    visit edit_user_registration_path
     expect(page).to have_field("Website", new_attrs.website)
     expect(page).to have_field("Email", new_attrs.email)
     expect(page).to have_select("Gender", selected: new_attrs.gender)
