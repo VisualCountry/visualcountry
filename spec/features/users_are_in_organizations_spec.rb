@@ -8,8 +8,22 @@ feature "Users are in organizations" do
 
     visit profile_path(user)
 
-    expect(page).to have_content organization_1.name
-    expect(page).to have_content organization_2.name
+    expect(page).to have_link organization_1.name
+    expect(page).to have_link organization_2.name
+  end
+
+  scenario "an admin can add a user to an organization" do
+    admin = create(:admin)
+    user = create(:user)
+    organization = create(:organization)
+    login_as(admin)
+
+    visit profile_path(user)
+    select organization.name, from: "Organization"
+    click_on "Add to organization"
+
+    visit organization_path(organization)
+    expect(page).to have_link user.name
   end
 
   scenario "an admin can remove a user from an organization" do
@@ -31,7 +45,7 @@ feature "Users are in organizations" do
 
     visit organization_path(organization)
 
-    expect(page).to have_content user_1.name
-    expect(page).to have_content user_2.name
+    expect(page).to have_link user_1.name
+    expect(page).to have_link user_2.name
   end
 end

@@ -55,6 +55,17 @@
     </div>
   <% end %>
 
+  <% if current_user.admin? %>
+    <div class="row">
+      <p>Add to organization</p>
+      <%= simple_form_for(:organization_membership, url: organization_memberships_path) do |f| %>
+        <%= f.hidden_field :profile_id, value: @user.id %>
+        <%= f.input :organization_id, as: :select, collection: @available_organizations %>
+        <%= f.submit "Add to organization" %>
+      <% end %>
+    </div>
+  <% end %>
+
   <div class="row user-row user-total-follower-row">
     <dl class="user-total-follower-count col-sm-4">
       <dt>TOTAL FOLLOWERS:</dt>
