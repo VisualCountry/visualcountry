@@ -33,7 +33,7 @@
     </div>
   </header>
 
-  <% if @available_lists %>
+  <% if current_user.admin? %>
     <div class="row">
       <p>Add to lists</p>
       <%= simple_form_for(:list_membership, url: list_memberships_path) do |f| %>
@@ -41,6 +41,17 @@
         <%= f.input :influencer_list_id, as: :select, collection: @available_lists %>
         <%= f.submit "Add" %>
       <% end %>
+    </div>
+  <% end %>
+
+  <% if @user.organizations.any? %>
+    <div class="row">
+      <p>Organizations:</p>
+      <ul>
+        <% @user.organizations.each do |organization| %>
+          <li><%= link_to organization.name, organization %></li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
 
