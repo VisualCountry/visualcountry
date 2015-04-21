@@ -2,6 +2,8 @@ require "rails_helper"
 
 describe User do
   it { is_expected.to have_many(:influencer_lists).dependent(:destroy) }
+  it { is_expected.to have_many(:organization_memberships).dependent(:destroy) }
+  it { is_expected.to have_many(:organizations) }
 
   describe "geocoding using AR callbacks from the geocoder gem" do
     it "saves the lat/lon of the user's location" do

@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   has_many :press
   has_many :influencer_lists, dependent: :destroy
 
+  has_many :organization_memberships, dependent: :destroy
+  has_many :organizations, through: :organization_memberships
+
   accepts_nested_attributes_for :clients, allow_destroy: true
   accepts_nested_attributes_for :press, allow_destroy: true
 
