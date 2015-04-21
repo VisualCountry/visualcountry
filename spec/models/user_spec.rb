@@ -2,6 +2,7 @@ require "rails_helper"
 
 describe User do
   it { is_expected.to have_many(:influencer_lists).dependent(:destroy) }
+  it { is_expected.to have_many(:list_memberships).dependent(:destroy) }
   it { is_expected.to have_many(:organization_memberships).dependent(:destroy) }
   it { is_expected.to have_many(:organizations) }
 
@@ -81,13 +82,27 @@ describe User do
     end
   end
 
-  describe "#membership_in" do
+  describe "#list_membership_in" do
     it "returns a user's membership in the given list" do
       user = create(:user)
       list = create(:influencer_list)
       membership = create(:list_membership, user: user, influencer_list: list)
 
-      expect(user.membership_in(list)).to eq membership
+      expect(user.list_membership_in(list)).to eq membership
+    end
+  end
+
+  describe "#organization_membership_in" do
+    it "returns a user's membership in the given organization" do
+      user = create(:user)
+      organization = create(:organization)
+      membership = create(
+        :organization_membership,
+        organization: organization,
+        user: user,
+      )
+
+      expect(user.organization_membership_in(organization)).to eq membership
     end
   end
 

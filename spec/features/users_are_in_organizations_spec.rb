@@ -12,6 +12,18 @@ feature "Users are in organizations" do
     expect(page).to have_content organization_2.name
   end
 
+  scenario "an admin can remove a user from an organization" do
+    admin = create(:admin)
+    user = create(:user)
+    organization = create(:organization, users: [user])
+    login_as(admin)
+
+    visit organization_path(organization)
+    click_on "Remove"
+
+    expect(page).to have_no_link user.name
+  end
+
   scenario "an organization's users are listed on its show page" do
     user_1 = create(:user)
     user_2 = create(:user)

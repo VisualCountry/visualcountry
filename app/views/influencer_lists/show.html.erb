@@ -18,7 +18,7 @@
         <div class="col-lg-4 col-md-4 col-sm-4 user-<%= user.id %>">
           <%= render "shared/profile_card", user: user %>
           <% if current_user.owns_list?(@influencer_list) %>
-            <%= link_to "Remove", list_membership_path(user.membership_in(@influencer_list)), method: :delete, class: "btn btn-default" %>
+            <%= link_to "Remove", list_membership_path(user.list_membership_in(@influencer_list)), method: :delete, class: "btn btn-default" %>
           <% end %>
         </div>
       <% end %>

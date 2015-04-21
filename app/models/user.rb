@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_many :press
   has_many :influencer_lists, dependent: :destroy
 
+  has_many :list_memberships, dependent: :destroy
+
   has_many :organization_memberships, dependent: :destroy
   has_many :organizations, through: :organization_memberships
 
@@ -104,8 +106,12 @@ class User < ActiveRecord::Base
     influencer_lists.select { |list| list.users.exclude?(user) }
   end
 
-  def membership_in(list)
-    ListMembership.find_by(user: self, influencer_list: list)
+  def list_membership_in(list)
+    list_memberships.find_by(influencer_list: list)
+  end
+
+  def organization_membership_in(organization)
+    organization_memberships.find_by(organization: organization)
   end
 
   def owns_list?(list)

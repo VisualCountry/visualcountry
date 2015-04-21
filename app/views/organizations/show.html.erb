@@ -2,6 +2,9 @@
 
 <ul>
   <% @organization.users.each do |user| %>
-    <li><%= link_to user.name, profile_path(user) %></li>
+    <li>
+      <%= link_to user.name, profile_path(user) %>
+      <%= button_to "Remove", organization_membership_path(user.organization_membership_in(@organization)), method: :delete %>
+    </li>
   <% end %>
 </ul>
