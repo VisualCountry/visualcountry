@@ -3,6 +3,10 @@ class OrganizationsController < ApplicationController
     @organization = find_organization
   end
 
+  def index
+    @organizations = Organization.all
+  end
+
   def new
     @organization = Organization.new
   end
