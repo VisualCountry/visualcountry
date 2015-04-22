@@ -21,6 +21,20 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def edit
+    @organization = find_organization
+  end
+
+  def update
+    @organization = find_organization
+
+    if @organization.update(organization_params)
+      redirect_to @organization
+    else
+      render :edit
+    end
+  end
+
   def destroy
     organization = find_organization
     organization.destroy

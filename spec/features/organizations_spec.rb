@@ -28,6 +28,22 @@ describe "Creating/updating/deleting organizations" do
     expect(page).to have_link organization_2.name
   end
 
+  scenario "can rename a organization" do
+    admin = create(:admin)
+    organization = create(:organization)
+    new_name = "My Favorite Organization"
+    login_as(admin)
+
+    visit organization_path(organization)
+    click_link "Rename Organization"
+    fill_in "Name", with: new_name
+    click_on "Update"
+
+    within ".organization-name" do
+      expect(page).to have_content new_name
+    end
+  end
+
   scenario "can delete an organization" do
     admin = create(:admin)
     organization_1 = create(:organization)

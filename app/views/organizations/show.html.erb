@@ -1,6 +1,7 @@
 <h1 class="organization-name"><%= @organization.name %></h1>
 
 <% if current_user.admin? %>
+  <%= link_to "Rename Organization", edit_organization_path(@organization) %>
   <%= button_to "Delete Organization", @organization, method: :delete %>
 <% end %>
 
