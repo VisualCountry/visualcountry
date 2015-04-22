@@ -1,5 +1,9 @@
 <h1 class="organization-name"><%= @organization.name %></h1>
 
+<% if current_user.admin? %>
+  <%= button_to "Delete Organization", @organization, method: :delete %>
+<% end %>
+
 <ul>
   <% @organization.users.each do |user| %>
     <li>

@@ -21,6 +21,12 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def destroy
+    organization = find_organization
+    organization.destroy
+    redirect_to organizations_path, alert: "\"#{organization.name}\" deleted!"
+  end
+
   private
 
   def find_organization

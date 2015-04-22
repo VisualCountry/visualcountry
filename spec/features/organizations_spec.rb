@@ -27,4 +27,18 @@ describe "Creating/updating/deleting organizations" do
     expect(page).to have_link organization_1.name
     expect(page).to have_link organization_2.name
   end
+
+  scenario "can delete an organization" do
+    admin = create(:admin)
+    organization_1 = create(:organization)
+    organization_2 = create(:organization)
+    login_as(admin)
+
+    visit organization_path(organization_1)
+    click_on "Delete Organization"
+
+    expect(page).to have_content "\"#{organization_1.name}\" deleted!"
+    expect(page).to have_no_link organization_1.name
+    expect(page).to have_link organization_2.name
+  end
 end
