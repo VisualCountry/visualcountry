@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   resources :omniauth_add_email, only: [:new, :create]
   resources :organizations
   resources :organization_memberships, only: [:create, :destroy]
+  resources :organization_list_memberships, only: [:create, :destroy]
   post "list-copy" => "list_copies#create"
 
   get 'content-creators' => 'pages#creators'

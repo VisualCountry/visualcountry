@@ -1,6 +1,7 @@
 class OrganizationsController < ApplicationController
   def show
     @organization = find_organization
+    @available_lists = InfluencerList.all - @organization.influencer_lists
   end
 
   def index

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     @user = find_user
     if current_user.admin?
       @available_lists = current_user.lists_without(@user)
-      @available_organizations = Organization.all
+      @available_organizations = Organization.all - @user.organizations
     end
   end
 

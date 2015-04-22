@@ -4,6 +4,8 @@ describe InfluencerList do
   it { is_expected.to belong_to :owner }
   it { is_expected.to have_many(:list_memberships).dependent(:destroy) }
   it { is_expected.to have_many(:users).through(:list_memberships) }
+  it { is_expected.to have_many(:organization_list_memberships).dependent(:destroy) }
+  it { is_expected.to have_many(:organizations) }
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_uniqueness_of(:name).scoped_to(:user_id) }
 
@@ -47,6 +49,20 @@ describe InfluencerList do
       list.remove_user(user)
 
       expect(list.users).not_to include user
+    end
+  end
+
+  describe "#organization_membership" do
+    it "returns the membership between the list and the organization" do
+      list = create(:influencer_list)
+      organization = create(:organization)
+      membership = create(
+        :organization_list_membership,
+        influencer_list: list,
+        organization: organization,
+      )
+
+      expect(list.organization_membership(organization)).to eq membership
     end
   end
 end

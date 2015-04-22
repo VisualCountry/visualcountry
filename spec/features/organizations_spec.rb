@@ -57,4 +57,33 @@ describe "Creating/updating/deleting organizations" do
     expect(page).to have_no_link organization_1.name
     expect(page).to have_link organization_2.name
   end
+
+  scenario "can add an organization to a list" do
+    admin = create(:admin)
+    organization = create(:organization)
+    list = create(:influencer_list)
+    login_as(admin)
+
+    visit organization_path(organization)
+    select list.name, from: "Influencer list"
+    click_on "Add List"
+
+    expect(page).to have_link list.name
+  end
+
+  scenario "can remove a list from an organization" do
+    admin = create(:admin)
+    list_1 = create(:influencer_list)
+    list_2 = create(:influencer_list)
+    organization = create(:organization, influencer_lists: [list_1, list_2])
+    login_as(admin)
+
+    visit organization_path(organization)
+    within ".influencer-list-#{list_2.id}" do
+      click_on "Remove"
+    end
+
+    expect(page).to have_content list_1.name
+    expect(page).to have_no_link list_2.name
+  end
 end
