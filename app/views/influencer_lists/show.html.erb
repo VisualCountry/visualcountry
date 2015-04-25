@@ -1,6 +1,6 @@
+<%= render "layouts/sidebar" %>
 <div class="container">
-  <h1 class="list-name"><%= @influencer_list.name %></h1>
-
+  <%= render "layouts/list_nav_bar" %>
   <% if current_user.owns_list?(@influencer_list) %>
     <%= link_to "Rename List", edit_influencer_list_path(@influencer_list) %>
     <%= button_to "Delete List", @influencer_list, method: :delete %>

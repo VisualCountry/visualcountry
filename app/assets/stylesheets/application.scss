@@ -48,6 +48,10 @@
 @import "terms";
 @import "admin";
 @import "search";
+@import "sidebar";
+@import "sidebar";
+@import "search-nav-bar";
+@import "list-nav-bar";
 
 
 
@@ -156,4 +160,18 @@ a:focus {
 
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.well {
+  padding: 10px;
+  margin: 5px 10px;
+  background-color: #fff;
+}
+
+.pink {
+color: $accent-color;
+}
+
+.green {
+color: $green;
 }

@@ -1,4 +1,6 @@
+<%= render "layouts/sidebar" %>
 <div class="container">
+  <%= render "layouts/search_nav_bar" %>
   <div class="row">
     <p>Add all results to a list:</p>
     <%= simple_form_for(:bulk_list_membership, url: bulk_list_memberships_path ) do |f| %>
