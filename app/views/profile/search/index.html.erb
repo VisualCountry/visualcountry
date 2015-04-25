@@ -2,7 +2,7 @@
 <div class="container">
   <%= render "layouts/search_nav_bar" %>
   <div class="search-users">
-    <div class="search_results">
+    <div class="profile-card">
       <% @profiles.each_slice(3) do |profile_group| %>
         <div class="row">
           <% profile_group.each do |profile| %>

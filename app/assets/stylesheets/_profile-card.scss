@@ -1,0 +1,65 @@
+.profile-card {
+  margin: 5px;
+
+  h1, h2, h3, h4, h5 {
+    padding: 0;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: 'AkkLg_Pro';
+    font-size: 26px;
+    text-transform: none;
+  }
+
+  h2 {
+    margin: 2px 0 2px 0;
+    font-size: 14px;
+    font-family: 'Akklg_Pro';
+    text-transform: none;
+    letter-spacing: 2px;
+    opacity: 1;
+  }
+
+  h3 {
+    margin: 0;
+    font-family: 'AkkBd_Pro';
+    font-size: 13px;
+    text-transform: capitalize;
+    color: $light-color;
+    text-align: center;
+  }
+
+  h4 {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    font-size: 10px;
+    font-family: 'AkkLg_Pro';
+    text-transform: uppercase;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+    font-family: 'AkkLg_Pro';
+    font-size: 14px;
+    text-transform: none;
+  }
+
+  .all-social-icons {
+    margin: 10px 5px 0px 5px;
+  }
+
+  .social-icons {
+    margin-right: 4px;
+  }
+
+  .follower-count {
+    margin-top: 5px;
+  }
+
+  hr {
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+}
