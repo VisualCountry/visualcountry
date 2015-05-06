@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 
   namespace :profile do
     scope :edit do
+      resources :albums do
+        resources :photos
+      end
       get 'social' => 'social_profiles_connection#show'
       scope :social, as: :link do
         delete 'pinterest' => 'pinterest_link#destroy'
