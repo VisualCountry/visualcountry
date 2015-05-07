@@ -1,7 +1,6 @@
 class Profile::PhotosController < ApplicationController
   before_action :authenticate_user!
-
-  before_action :set_album
+  before_filter :set_album
 
   def show
     @photo = @album.photos.find params[:id]

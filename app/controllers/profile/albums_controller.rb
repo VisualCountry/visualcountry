@@ -17,4 +17,9 @@ class Profile::AlbumsController < ApplicationController
       render :new
     end
   end
+
+  private
+  def album_params
+    params.require(:album).permit(:title)
+  end
 end
