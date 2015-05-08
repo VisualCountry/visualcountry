@@ -14,7 +14,7 @@ class Profile::PhotosController < ApplicationController
     @photo = @album.photos.new params[:photo]
     @photo.album = @album
     if @photo.save
-      redirect_to @album
+      redirect_to profile_albums_path
     else
       render :new
     end

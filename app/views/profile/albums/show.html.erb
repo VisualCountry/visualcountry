@@ -1,6 +1,6 @@
 <h1><%= @album.title %></h1>
 
-<p><%= link_to 'Upload new photo', new_album_photo_path(@album) %></p>
+<p><%= link_to 'Upload new photo', new_profile_album_photo_path(@album, Photo.new) %></p>
 
 <% @album.photos.each do |photo| %>
   <%= link_to [@album, photo] do %>

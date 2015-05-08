@@ -10,9 +10,9 @@ class Profile::AlbumsController < ApplicationController
   end
 
   def create
-    @album = Album.new params[:album]
+    @album = Album.new album_params[:album]
     if @album.save
-      redirect_to @album
+      redirect_to profile_albums_path
     else
       render :new
     end
