@@ -1,7 +1,19 @@
 <div class="container">
-  <h1>My Lists</h1>
+  <% if @my_lists.present? %>
+    <h1>My Lists</h1>
 
-  <%= link_to "New List", new_influencer_list_path %>
+    <%= link_to "New List", new_influencer_list_path %>
 
-  <%= render @influencer_lists %>
+    <%= render @my_lists %>
+  <% end %>
+
+  <% if @organizations.present? %>
+    <h1>Organizations</h1>
+    <% @organizations.each do |organization| %>
+      <h2><%= organization.name %></h2>
+      <% organization.influencer_lists.each do |list| %>
+        <%= render list %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
