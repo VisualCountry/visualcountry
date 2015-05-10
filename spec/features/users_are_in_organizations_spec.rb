@@ -5,6 +5,7 @@ feature "Users are in organizations" do
     user = create(:user)
     organization_1 = create(:organization, users: [user])
     organization_2 = create(:organization, users: [user])
+    login_as(user)
 
     visit profile_path(user)
 
@@ -42,6 +43,7 @@ feature "Users are in organizations" do
     user_1 = create(:user)
     user_2 = create(:user)
     organization = create(:organization, users: [user_1, user_2])
+    login_as(user_1)
 
     visit organization_path(organization)
 

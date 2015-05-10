@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :authenticate_user!, only: [:connect]
+  skip_before_action :authenticate_user!
   before_action :set_contact_message, only: [:creators, :brands, :contact]
 
   def home
@@ -9,9 +9,6 @@ class PagesController < ApplicationController
   end
 
   def brands
-  end
-
-  def connect
   end
 
   def about

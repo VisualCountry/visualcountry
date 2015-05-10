@@ -18,7 +18,7 @@
       <div class="well">
         <h2>Lists</h2>
         <% current_user.influencer_lists.each do |list| %>
-          <%= link_to list.name, list %>
+          <%= link_to list.name, influencer_list_path(id: list.uuid) %>
         <% end %>
       </div>
     </div>
