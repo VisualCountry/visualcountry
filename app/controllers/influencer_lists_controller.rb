@@ -1,5 +1,5 @@
 class InfluencerListsController < ApplicationController
-  before_action :authorize_admin!, except: [:show]
+  before_action :authorize_admin!, except: [:show, :index]
 
   def new
     @influencer_list = InfluencerList.new
@@ -34,7 +34,8 @@ class InfluencerListsController < ApplicationController
   end
 
   def index
-    @influencer_lists = current_user.influencer_lists
+    @my_lists = current_user.influencer_lists
+    @organizations = current_user.organizations
   end
 
   def destroy
