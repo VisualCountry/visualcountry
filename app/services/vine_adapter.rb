@@ -17,5 +17,9 @@ class VineAdapter < BaseAdapter
 
   def client
     @client ||= Vine.new(service_token)
+  rescue Vine::InvalidToken
+    token = Vine.new(nil, user.vine_email, user.vine_password).token
+    user.update(vine_token: token)
+    retry
   end
 end
