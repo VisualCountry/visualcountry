@@ -6,7 +6,13 @@
         <%= link_to admin_path do %><span class="glyphicon glyphicon-stats" title="Admin Dashboard"></span> Admin Dashboard <span class="sr-only">(current)</span><% end %>
         </li>
         <li class="active">
+        <%= link_to profile_social_path do %><span class="glyphicon glyphicon glyphicon-cog" title="User Settings"></span> User Settings <span class="sr-only">(current)</span><% end %>
+        </li>
+        <li class="active">
         <%= link_to profile_search_path do %><span class="glyphicon glyphicon-search" title="Search"></span> Search <span class="sr-only">(current)</span><% end %>
+        </li>
+        <li class="active">
+        <%= link_to organizations_path do %><span class="glyphicon glyphicon glyphicon-user" title="lists"></span> Organizations <span class="sr-only">(current)</span><% end %>
         </li>
         <li class="active">
         <%= link_to influencer_lists_path do %><span class="glyphicon glyphicon-list" title="lists"></span> Lists <span class="sr-only">(current)</span><% end %>
