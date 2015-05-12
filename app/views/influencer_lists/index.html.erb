@@ -1,7 +1,7 @@
 <%= render "layouts/sidebar" %>
 <div class="container">
   <% if @my_lists.present? %>
-    <h1>My Lists</h1>
+    <h2>My Lists</h2>
 
     <%= link_to "New List", new_influencer_list_path %>
 
@@ -9,9 +9,9 @@
   <% end %>
 
   <% if @organizations.present? %>
-    <h1>Organizations</h1>
+    <h2>Organizations</h2>
     <% @organizations.each do |organization| %>
-      <h2><%= organization.name %></h2>
+      <h3><%= organization.name %></h3>
       <% organization.influencer_lists.each do |list| %>
         <%= render list %>
       <% end %>

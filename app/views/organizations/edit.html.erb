@@ -1,7 +1,11 @@
 <%= render "layouts/sidebar" %>
 <div class="container">
 
-  <h1>Rename an organization</h1>
+  <h2>Rename an organization</h2>
 
   <%= render "form", organization: @organization %>
+
+  <div class="actions">
+        <%= link_to 'Back', :back, class: 'btn btn-default' %>
+  </div>
 </div>
