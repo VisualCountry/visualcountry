@@ -2,6 +2,8 @@ class InfluencerListsController < ApplicationController
   before_action :authorize_admin!, except: [:show, :index]
   skip_before_action :authenticate_user!, only: [:show]
 
+  layout 'application_with_sidebar'
+
   def new
     @influencer_list = InfluencerList.new
   end

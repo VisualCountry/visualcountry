@@ -1,27 +1,24 @@
-<%= render "layouts/sidebar" %>
 <%= render 'layouts/user_navigation' %>
-<div class="container">
-  <h2>Press</h2>
-  <h3>Share some stories or articles written about you.</h3>
-  <div id="press" class="links-manager">
-    <%= simple_form_for current_user, url: profile_press_path, html: { novalidate: true } do |f| %>
-      <ol role="list-to-manage">
-        <%= f.simple_fields_for :press do |press| %>
-          <%= render 'press_fields', f: press %>
+<h2>Press</h2>
+<h3>Share some stories or articles written about you.</h3>
+<div id="press" class="links-manager">
+  <%= simple_form_for current_user, url: profile_press_path, html: { novalidate: true } do |f| %>
+    <ol role="list-to-manage">
+      <%= f.simple_fields_for :press do |press| %>
+        <%= render 'press_fields', f: press %>
+      <% end %>
+    </ol>
+    <div class="row">
+      <div class="col-sm-12">
+        <%= link_to_add_association f, :press, "data-association-insertion-node" => "[role='list-to-manage']" , "data-association-insertion-method" => :append do %>
+          <span class="glyphicon glyphicon-plus-sign green add-row">
         <% end %>
-      </ol>
-      <div class="row">
-        <div class="col-sm-12">
-          <%= link_to_add_association f, :press, "data-association-insertion-node" => "[role='list-to-manage']" , "data-association-insertion-method" => :append do %>
-            <span class="glyphicon glyphicon-plus-sign green add-row">
-          <% end %>
-        </div>
       </div>
-      <div class="row">
-        <div class="col-sm-12">
-          <%= f.submit class: "text-center btn btn-default" %>
-        </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <%= f.submit class: "text-center btn btn-default" %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>

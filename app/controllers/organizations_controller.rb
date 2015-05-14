@@ -1,4 +1,5 @@
 class OrganizationsController < ApplicationController
+  layout 'application_with_sidebar'
   def show
     @organization = find_organization
     @available_lists = InfluencerList.all - @organization.influencer_lists

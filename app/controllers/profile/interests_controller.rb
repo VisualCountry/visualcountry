@@ -1,6 +1,8 @@
 class Profile::InterestsController < ApplicationController
   before_action :authenticate_user!
 
+  layout 'application_with_sidebar'
+
   def edit
   end
 

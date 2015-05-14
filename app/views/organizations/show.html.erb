@@ -1,5 +1,4 @@
-<%= render "layouts/sidebar" %>
-<div class="container">
+
   <h2 class="organization-name"><%= @organization.name %></h2>
 
   <% if current_user.admin? %>
@@ -39,4 +38,3 @@
       </li>
     <% end %>
   </ul>
-</div>

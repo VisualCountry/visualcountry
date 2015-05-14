@@ -1,26 +1,22 @@
-<%= render "layouts/sidebar" %>
-<div class="container">
-  <h2 class="page-header">Dashboard</h2>
-  <div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-4">
-      <div class="well">
-        <h2><%= link_to 'Messages Inbox', admin_contact_messages_path %></h2>
-        <h3><%= ContactMessage.all.count %></h3>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-4 col-sm-4">
-      <div class="well">
-        <h2> Total VC Users </h2>
-        <h3><%= User.all.count %></h3>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-4 col-sm-4">
-      <div class="well">
-        <h2>Lists</h2>
-        <% current_user.influencer_lists.each do |list| %>
-          <%= link_to list.name, influencer_list_path(id: list.uuid) %>
-        <% end %>
-      </div>
+<h2 class="page-header">Dashboard</h2>
+<div class="row">
+  <div class="col-lg-4 col-md-4 col-sm-4">
+    <div class="well">
+      <h2><%= link_to 'Messages Inbox', admin_contact_messages_path %></h2>
+      <h3><%= ContactMessage.all.count %></h3>
     </div>
   </div>
-</div>
+  <div class="col-lg-4 col-md-4 col-sm-4">
+    <div class="well">
+      <h2> Total VC Users </h2>
+      <h3><%= User.all.count %></h3>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-4">
+    <div class="well">
+      <h2>Lists</h2>
+      <% current_user.influencer_lists.each do |list| %>
+        <%= link_to list.name, influencer_list_path(id: list.uuid) %>
+      <% end %>
+    </div>
+  </div>

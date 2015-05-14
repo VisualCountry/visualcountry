@@ -1,18 +1,14 @@
-<%= render "layouts/sidebar" %>
-<div class="container">
-  <%= render "layouts/search_nav_bar" %>
-  <div class="search-users">
-    <div class="profile-card">
-      <% @profiles.each_slice(3) do |profile_group| %>
-        <div class="row">
-          <% profile_group.each do |profile| %>
-            <div class="col-lg-4 col-md-4 col-sm-4 user-<%= profile.id %>">
-              <%= render 'shared/profile_card', user: profile %>
-            </div>
-          <% end %>
-          <br>
-        </div>
-      <% end %>
-    </div>
+<%= render "layouts/search_nav_bar" %>
+<div class="search-users">
+  <div class="profile-card">
+    <% @profiles.each_slice(3) do |profile_group| %>
+      <div class="row">
+        <% profile_group.each do |profile| %>
+          <div class="col-lg-4 col-md-4 col-sm-4 user-<%= profile.id %>">
+            <%= render 'shared/profile_card', user: profile %>
+          </div>
+        <% end %>
+        <br>
+      </div>
+    <% end %>
   </div>
-</div>

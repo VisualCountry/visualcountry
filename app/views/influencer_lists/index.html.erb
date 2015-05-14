@@ -1,20 +1,19 @@
-<%= render "layouts/sidebar" %>
-<div class="container">
-  <% if @my_lists.present? %>
-    <h2>My Lists</h2>
 
-    <%= link_to "New List", new_influencer_list_path %>
+<% if @my_lists.present? %>
+  <h2>My Lists</h2>
 
-    <%= render @my_lists %>
-  <% end %>
+  <%= link_to "New List", new_influencer_list_path %>
 
-  <% if @organizations.present? %>
-    <h2>Organizations</h2>
-    <% @organizations.each do |organization| %>
-      <h3><%= organization.name %></h3>
-      <% organization.influencer_lists.each do |list| %>
-        <%= render list %>
-      <% end %>
+  <%= render @my_lists %>
+<% end %>
+
+<% if @organizations.present? %>
+  <h2>Organizations</h2>
+  <% @organizations.each do |organization| %>
+    <h3><%= organization.name %></h3>
+    <% organization.influencer_lists.each do |list| %>
+      <%= render list %>
     <% end %>
   <% end %>
-</div>
+<% end %>
+
