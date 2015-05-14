@@ -23,7 +23,32 @@
         <%= link_to 'Brands / Agencies', brands_agencies_path, :class => "btn btn-welcome" %>
       </div>
     </div>
+</div>
+</div>
 
+<div class="carousel">
+  <div class="carousel__main owl-carousel">
+        <% video = "http://v.cdn.vine.co/r/videos/0D5993BBA11133449481996713984_216bf81b742.5.1.2776422149822758089.mp4?versionId=yro3TuGLxtlGHKxoIgWbRc4oapSG5o.Y"%>
+        <% thumb = "http://s3-us-west-2.amazonaws.com/staging-content.visualcountry.com/users/pictures/000/000/001/medium/amberleesquare.jpg?1427567938" %>
+        <% 10.times do %>
+        <div class="carousel__item">
+  <%= videojs_tag(video, class: 'platform-video', thumbnail: thumb) %>
+        </div>
+
+        <% end %>
+  </div>
+  <div class="carousel__navigation">
+    <a class="btn carousel__navigation__prev">
+      <span class="glyphicon glyphicon-chevron-left">
+    </a>
+    <a class="btn carousel__navigation__next">
+      <span class="glyphicon glyphicon-chevron-right">
+    </a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="welcome">
     <div class="row">
       <div class="email">
         Contact us: <%= mail_to "info@visualcountry.com", "info[at]visualcountry.com"%>

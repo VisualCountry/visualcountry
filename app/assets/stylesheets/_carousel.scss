@@ -1,0 +1,76 @@
+.carousel {
+  text-align: center;
+}
+.owl-item {
+  text-align: center;
+}
+
+
+@media (min-width: 1600px) {
+  .carousel__main {
+    width: 1600px;
+  }
+}
+
+@media (min-width: 1260px) {
+  .carousel__main {
+    width: 1260px;
+  }
+}
+
+@media (min-width: 920px) {
+  .carousel__main {
+    width: 920px;
+  }
+}
+
+@media (min-width: 580px) {
+  .carousel__main {
+    width: 580px;
+  }
+}
+
+@media (min-width: 240px) {
+  .carousel__main {
+    width: 240px;
+  }
+}
+
+
+.carousel__main {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.carousel__item{
+  margin-left: auto;
+  margin-right: auto;
+  color: #FFF;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+
+  .vjs-poster {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.carousel__navigation{
+  text-align: center;
+  .btn {
+    font-size: 20px;
+  }
+}
+
+//use styles below to disable ugly selection
+.carousel__navigation a{
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}

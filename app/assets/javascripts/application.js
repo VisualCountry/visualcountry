@@ -16,6 +16,7 @@
 //= require bootstrap
 //= require cocoon
 //= require video
+//= require owl.carousel
 //= require_tree .
 
 
@@ -40,5 +41,33 @@ $(document).ready(function() {
         player  = videojs($id);
 
     player.poster($poster);
+  });
+$(document).ready(function() {
+
+  var owl = $(".carousel .carousel__main");
+
+  owl.owlCarousel({
+
+      pagination: false,
+
+      itemsCustom : [
+        [0, 1],
+        [240, 1],
+        [580, 2],
+        [920, 3],
+        [1260, 4],
+        [1600, 5]
+      ],
+  });
+
+  // Custom Navigation Events
+  $(".carousel__navigation__next").click(function(){
+    owl.trigger('owl.next');
   })
+  $(".carousel__navigation__prev").click(function(){
+    owl.trigger('owl.prev');
+  })
+
+
+});
 });

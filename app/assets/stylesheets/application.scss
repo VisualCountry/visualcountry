@@ -12,12 +12,15 @@
  *
  *= require video-js
  *= require token-input
+ *= require owl.carousel
+ *= require owl.theme
  *= require_self
  */
 
 // Vendor
 @import "bourbon";
 @import "bootstrap-and-customization";
+
 
 // Base
 @import "variables";
@@ -53,6 +56,7 @@
 @import "list-nav-bar";
 @import "profile-card";
 @import "links_manager";
+@import "carousel";
 
 
 

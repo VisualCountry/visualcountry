@@ -53,6 +53,8 @@ gem 'simple_form'
 # Debuggers
 gem 'pry-rails'
 
+gem 'owlcarousel-rails'
+
 group :production, :staging do
   gem 'rails_12factor'
   gem 'raygun4ruby'
