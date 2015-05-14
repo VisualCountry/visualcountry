@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def close_nested_form_icon
-    content_tag :span, '', class: 'glyphicon glyphicon-inbox'
+    content_tag :span, '', class: 'glyphicon glyphicon-remove-circle'
   end
 
   def truncated_count(count)

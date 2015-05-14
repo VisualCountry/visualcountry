@@ -1,19 +1,27 @@
 <%= render "layouts/sidebar" %>
 <%= render 'layouts/user_navigation' %>
 <div class="container">
-  <div class="profile">
-    <h2>Clients</h2>
-    <h3>Links to some projects you have worked on and clients you have worked with.</h3>
+  <h2>Clients</h2>
+  <h3>Links to some projects you have worked on and clients you have worked with.</h3>
+  <div id="client" class="links-manager">
     <%= simple_form_for current_user, url: profile_clients_path, html: { novalidate: true } do |f| %>
-      <div id="client" class="clients">
-        <ol>
-          <%= f.simple_fields_for :clients do |client| %>
-            <%= render 'client_fields', f: client %>
+      <ol role="list-to-manage">
+        <%= f.simple_fields_for :clients do |client| %>
+          <%= render 'client_fields', f: client %>
+        <% end %>
+      </ol>
+      <div class="row">
+        <div class="col-sm-12">
+          <%= link_to_add_association f, :clients, "data-association-insertion-node" => "[role='list-to-manage']" , "data-association-insertion-method" => :append do %>
+            <span class="glyphicon glyphicon-plus-sign green add-row">
           <% end %>
-          <%= link_to_add_association 'add client', f, :clients %>
-        </ol>
+        </div>
       </div>
-      <%= f.submit %>
+      <div class="row">
+        <div class="col-sm-12">
+          <%= f.submit class: "text-center btn btn-default" %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>

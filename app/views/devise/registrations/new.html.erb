@@ -6,10 +6,10 @@
     </header>
   </div>
 
-  <form class="sign-up-form">
+  <div class="sign-up-form">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
       <div class="row">
-        <%= devise_error_messages! %>
         <div class="col-md-6 social-auth-buttons">
           <%= link_to user_omniauth_authorize_path(:facebook), class: "social-auth-button social-auth-button-facebook clearfix" do %>
             <%= embedded_svg "facebook_logo.svg" %>
@@ -56,5 +56,5 @@
         </div>
 
     <% end %>
-  </form>
+  </div>
 </div>

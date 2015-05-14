@@ -52,6 +52,7 @@
 @import "search-nav-bar";
 @import "list-nav-bar";
 @import "profile-card";
+@import "links_manager";
 
 
 
@@ -69,6 +70,7 @@ body {
   font-size: 14px;
   color: $medium-color;
   background-color: #fff;
+  padding-top: 70px;
 }
 
 p {
