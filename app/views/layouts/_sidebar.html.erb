@@ -1,39 +1,34 @@
-<div class="container-fluid sidebar">
-  <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-      <ul class="nav nav-sidebar">
-        <li class="active">
-        <%= link_to admin_path do %><span class="glyphicon glyphicon-stats" title="Admin Dashboard"></span> Admin Dashboard <span class="sr-only">(current)</span><% end %>
-        </li>
-        <li class="active">
-        <%= link_to profile_social_path do %><span class="glyphicon glyphicon glyphicon-cog" title="User Settings"></span> User Settings <span class="sr-only">(current)</span><% end %>
-        </li>
-        <li class="active">
-        <%= link_to profile_search_path do %><span class="glyphicon glyphicon-search" title="Search"></span> Search <span class="sr-only">(current)</span><% end %>
-        </li>
-        <li class="active">
-        <%= link_to organizations_path do %><span class="glyphicon glyphicon glyphicon-user" title="lists"></span> Organizations <span class="sr-only">(current)</span><% end %>
-        </li>
-        <li class="active">
-        <%= link_to influencer_lists_path do %><span class="glyphicon glyphicon-list" title="lists"></span> Lists <span class="sr-only">(current)</span><% end %>
-        </li>
-      </ul>
-      <ul class="nav nav-sidebar">
-        <li>
-          <% current_user.influencer_lists.each do |list| %>
-            <%= link_to list.name, list, class: "well" %>
-          <% end %>
-        </li>
-      </ul>
-      <hr>
-      <ul class="text-center">
-        <button type="button" class="btn btn-new-list">
-          <span class="glyphicon glyphicon-plus-sign green" aria-hidden="true"></span>  New List
-        </button>
-      </ul>
-    </div>
-  </div>
-</div>
+<ul class="nav nav-sidebar">
+  <li class="active">
+  <%= link_to admin_path do %><span class="glyphicon glyphicon-stats" title="Admin Dashboard"></span> Admin Dashboard <span class="sr-only">(current)</span><% end %>
+  </li>
+  <li class="active">
+  <%= link_to profile_social_path do %><span class="glyphicon glyphicon glyphicon-cog" title="User Settings"></span> User Settings <span class="sr-only">(current)</span><% end %>
+  </li>
+  <li class="active">
+  <%= link_to profile_search_path do %><span class="glyphicon glyphicon-search" title="Search"></span> Search <span class="sr-only">(current)</span><% end %>
+  </li>
+  <li class="active">
+  <%= link_to organizations_path do %><span class="glyphicon glyphicon glyphicon-user" title="lists"></span> Organizations <span class="sr-only">(current)</span><% end %>
+  </li>
+  <li class="active">
+  <%= link_to influencer_lists_path do %><span class="glyphicon glyphicon-list" title="lists"></span> Lists <span class="sr-only">(current)</span><% end %>
+  </li>
+</ul>
+<ul class="nav nav-sidebar">
+  <li>
+    <% current_user.influencer_lists.each do |list| %>
+      <%= link_to list.name, list, class: "well" %>
+    <% end %>
+  </li>
+</ul>
+<hr>
+<ul class="text-center">
+  <button type="button" class="btn btn-new-list">
+    <span class="glyphicon glyphicon-plus-sign green" aria-hidden="true"></span>  New List
+  </button>
+</ul>
+
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

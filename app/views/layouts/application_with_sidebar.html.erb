@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VisualCountry</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <%= render 'layouts/header' %>
+  <div class="container text-center">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  </div>
+  <div class="container-fluid" %>
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <%= render "layouts/sidebar" %>
+      </div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+  <%= render 'layouts/footer' %>
+</body>
+</html>
