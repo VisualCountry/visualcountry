@@ -1,12 +1,13 @@
 <li>
   <div class="nested-fields new-client">
       <div class="col-md-10">
-      <%= f.input :name, validate: false, input_html: { class: 'form-control client-input' }  %>
-      <%= f.input :url, validate: false, input_html: { class: 'form-control client-input' } %>
+      <%= f.input :name, validate: false, label: false, placeholder: "Name", input_html: { class: 'flat-form-control client-input' }  %>
+      <%= f.input :url, validate: false, label: false, placeholder: "URL", input_html: { class: 'flat-form-control client-input' } %>
       </div>
       <div class="col-md-1 remove-client">
-      <%= link_to_remove_association "X", f %>
+      <%= link_to_remove_association  f do %>
+        <span class="glyphicon glyphicon-remove-circle">
+      <% end %>
       </div>
-      <div class="clearfix"></div>
   </div>
 </li>
