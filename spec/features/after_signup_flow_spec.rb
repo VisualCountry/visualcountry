@@ -2,10 +2,12 @@ require "rails_helper"
 
 feature "After-signup flow" do
   scenario "a new user is guided through the after-signup flow" do
-    user = build(:user)
     bio = "Actuary"
     special_interests = "Fire poi"
     interest = create(:interest)
+
+    user = build(:user)
+
 
     register_new_account(user)
     skip_social_profile_page
@@ -16,7 +18,7 @@ feature "After-signup flow" do
     expect(page).to have_content user.name
     expect(page).to have_content bio
     visit profile_interests_path
-    expect(page).to have_checked_field interest.name
+    expect(checkbox_for_interest(interest).value).to eq("1")
     expect(page).to have_content special_interests
   end
 
@@ -41,8 +43,16 @@ feature "After-signup flow" do
   end
 
   def add_interests(interest, special_interests)
-    check interest.name
-    fill_in "Special interests", with: special_interests
+    label_for_interest(interest).click
+    fill_in "user_special_interests", with: special_interests
     click_on "Update Interests"
+  end
+
+  def label_for_interest(interest)
+    find("label[for='user_interest_ids_#{interest.id}']")
+  end
+
+  def checkbox_for_interest(interest)
+    find("#user_interest_ids_#{interest.id}", visible: false)
   end
 end

@@ -23,7 +23,7 @@ feature "Updating account infomation" do
     select(new_attrs.birthday.strftime("%B"), from: "user_birthday_2i")
     select(new_attrs.birthday.strftime("%e"), from: "user_birthday_3i")
     fill_in_password("password")
-    click_on "Update my account"
+    click_on "Save & Continue"
 
     visit edit_user_registration_path
     expect(page).to have_field("Website", new_attrs.website)

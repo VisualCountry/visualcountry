@@ -12,7 +12,7 @@ feature "User addresses are normalized through reverse geocoding" do
       with: user.password,
     )
     fill_in("Password confirmation", with: user.password)
-    click_on "Update my account"
+    click_on "Save & Continue"
 
     visit profile_path(user)
     within "[data-role='geo-contact']" do

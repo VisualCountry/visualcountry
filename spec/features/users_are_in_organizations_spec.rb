@@ -34,7 +34,7 @@ feature "Users are in organizations" do
     login_as(admin)
 
     visit organization_path(organization)
-    click_on "Remove"
+    find("[role='remove_user_from_organization']").click
 
     expect(page).to have_no_link user.name
   end

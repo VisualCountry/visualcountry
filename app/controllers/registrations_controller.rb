@@ -1,5 +1,8 @@
 class RegistrationsController < Devise::RegistrationsController
-layout 'application_with_sidebar'
+
+  def edit
+    render "edit", layout: "application_with_sidebar"
+  end
 
   protected
 
