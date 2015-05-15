@@ -16,8 +16,7 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
              <ul class="nav nav-pills pull-right" role="tablist">
                <% if current_user.admin? %>
-                <li><%= link_to profile_search_path do %><h4><span class="glyphicon glyphicon-search pink" title="Searchgit djdjd
-                 Users"></span></h4><% end %></li>
+                <li><%= link_to profile_search_path do %><h4><span class="glyphicon glyphicon-search pink" title="Search Users"></span></h4><% end %></li>
                 <li><%= link_to admin_path do %><h4><span class="glyphicon glyphicon-stats pink" title="Admin Dashboard"></span></h4><% end %></li>
                 <li><%= link_to influencer_lists_path do %><h4><span class="glyphicon glyphicon-list pink" title="Lists"></span></h4><% end %></li>
                 <li><%= link_to organizations_path do %><h4><span class="glyphicon glyphicon glyphicon-user pink" title="Organizations"></span></h4><% end %></li>
