@@ -1,0 +1,20 @@
+- content_for :sub_nav do
+  .main-layout.text-center
+    %h2.list-name.text-center= @influencer_list.name
+  .dropdown.pull-left
+    %button#list-dropdown.btn.btn-menu.dropdown-toggle{"aria-expanded" => "true", "data-toggle" => "dropdown", :type => "button"}
+      Menu
+      %span.caret
+    %ul.dropdown-menu{"aria-labelledby" => "list-dropdown", :role => "menu"}
+      - if current_user.owns_list?(@influencer_list)
+        %li{:role => "presentation"}= link_to "Rename List", edit_influencer_list_path(@influencer_list)
+        %li{:role => "presentation"}= button_to "Delete List", @influencer_list, method: :delete
+        %li{:role => "presentation"}
+          = simple_form_for(:list_copy, url: list_copy_path) do |f|
+            = f.hidden_field :id, value: @influencer_list.id
+            = f.submit "Copy List"
+  = link_to profile_search_path do
+    %span.glyphicon.glyphicon-search.pink{:title => "Search"}
+    New Search
+    %span
+  %hr/

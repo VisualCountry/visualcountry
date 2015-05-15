@@ -28,6 +28,30 @@
   }
 }
 
+select.flat-form-control {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.flat-select:after {
+  top: 50%;
+  left: 90%;
+  position: absolute;
+  pointer-events: none;
+  margin-top: -2px;
+  z-index: 100;
+  content: "\e252";
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $accent-color;
+}
+
 .form-help-text {
   margin-top: -1em;
 }

@@ -57,7 +57,7 @@
 @import "profile-card";
 @import "links_manager";
 @import "carousel";
-
+@import "filter_form";
 
 
 
@@ -204,4 +204,15 @@ color: $green;
   margin-top: 30px;
 }
 
-
+.main-layout {
+  /* background-color: #ADD8E6; */
+  @media (min-width: $screen-sm-min) {
+    width: $container-sm;
+  }
+  @media (min-width: $screen-md-min) {
+    width: $container-md;
+  }
+  @media (min-width: $screen-lg-min) {
+    width: $container-lg;
+  }
+}
