@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+layout 'application_with_sidebar'
 
   protected
 

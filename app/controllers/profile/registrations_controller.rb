@@ -1,7 +1,5 @@
 class Profile::RegistrationsController < Devise::RegistrationsController
 
-  layout 'application_with_sidebar'
-
   def edit
     @user = User.find(current_user)
     @user.presses.build
