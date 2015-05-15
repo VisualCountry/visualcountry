@@ -51,8 +51,8 @@ $(document).ready(function() {
       pagination: false,
 
       itemsCustom : [
-        [0, 1],
-        [240, 1],
+        [0, 0],
+        [240, 0],
         [580, 2],
         [920, 3],
         [1260, 4],

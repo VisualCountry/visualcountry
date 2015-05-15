@@ -11,14 +11,7 @@
   }
 
   .nav > li > a {
-    padding: 19px 5px;
-  }
-
-  .settings-icon {
-    margin: 16px 15px;
-    height: 20px;
-    width: 20px;
-    color: #F58D86;
+    padding: 5px 5px;
   }
 
   .navbar-profile {
@@ -34,5 +27,15 @@
 
   .navbar-titles {
     padding: 0 10px;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
+
+  h5 {
+    font-size: 14px;
+    letter-spacing: 0px;
+    padding-top: 1px;
   }
 }

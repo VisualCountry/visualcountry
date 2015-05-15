@@ -6,21 +6,10 @@
 }
 
 
-@media (min-width: 1600px) {
-  .carousel__main {
-    width: 1600px;
-  }
-}
 
-@media (min-width: 1260px) {
+@media (min-width: 240px) {
   .carousel__main {
-    width: 1260px;
-  }
-}
-
-@media (min-width: 920px) {
-  .carousel__main {
-    width: 920px;
+    width: 240px;
   }
 }
 
@@ -30,17 +19,29 @@
   }
 }
 
-@media (min-width: 240px) {
+@media (min-width: 920px) {
   .carousel__main {
-    width: 240px;
+    width: 920px;
   }
 }
 
+@media (min-width: 1260px) {
+  .carousel__main {
+    width: 1260px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .carousel__main {
+    width: 1600px;
+  }
+}
 
 .carousel__main {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  margin-top: 40px;
 }
 
 .carousel__item{
@@ -62,6 +63,9 @@
   text-align: center;
   .btn {
     font-size: 20px;
+    margin: 0 0px;
+    color: $light-color;
+    padding-top: 20px;
   }
 }
 
