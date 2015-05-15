@@ -54,6 +54,7 @@ gem 'simple_form'
 gem 'pry-rails'
 
 gem 'owlcarousel-rails'
+gem 'haml'
 
 group :production, :staging do
   gem 'rails_12factor'
@@ -75,6 +76,8 @@ group :test do
   gem 'shoulda-matchers'
   gem 'vcr'
   gem 'webmock'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 group :development do

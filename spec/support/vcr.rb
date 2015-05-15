@@ -7,4 +7,9 @@ VCR.configure do |config|
 
   # Make sure that we can communicate with code climate in semaphore
   config.ignore_hosts 'codeclimate.com'
+
+  config.allow_http_connections_when_no_cassette = true
+
+  config.configure_rspec_metadata!
+  config.ignore_localhost = true
 end
