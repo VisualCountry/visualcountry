@@ -1,0 +1,36 @@
+.row
+  .col-sm-4
+    .field
+      .flat-form-control.basic-info-photo
+        = embedded_svg "camera_icon.svg"
+        %p upload a picture
+        = f.input :picture, as: :file, autofocus: true, class: "flat-form-control basic-info-photo"
+  .col-sm-8
+    .form-group
+      = f.input :name, autofocus: true, class: "flat-form-control", placeholder: 'Name'
+    .form-group
+      = f.text_area :bio, as: :text, autofocus: true, class: "flat-form-control basic-info-bio", placeholder: 'Short Bio'
+      %p.form-help-text max 300 characters
+.row
+  .col-md-6
+    .form-group
+      = f.input :website, as: :string, autofocus: true, class: "flat-form-control", placeholder: 'Website'
+      = f.input :city, autofocus: true, class: "flat-form-control", placeholder: 'City'
+      = f.input :email, autofocus: true
+      = f.input :password, label: "Password (leave blank if you don't want to change it)", autocomplete: "off"
+      = f.input :password_confirmation, autocomplete: "off"
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      %div
+        Currently waiting confirmation for: #{resource.unconfirmed_email}
+  .col-md-6
+    .form-group
+      = f.input :focus_tokens, as: :text, label: "Focuses", id: "focus_tokens", input_html: { data: { pre: current_user.focuses.map(&:attributes) } }
+    %p.form-help-text
+      Choose some focuses that best describe your strongests skills. Are
+      you a director, model, animator, viner, makeup artist?
+    .form-group
+      = f.input :birthday, start_year: Date.current.year - 120, end_year: Date.current.year
+    .form-group
+      = f.input :gender, collection: User.genders.keys
+    .form-group
+      = f.input :ethnicity, collection: User.ethnicities.keys
