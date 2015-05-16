@@ -1,23 +1,27 @@
 <%= render 'layouts/user_navigation' %>
 <div class="interests">
   <header class="row">
-    <h2 class="text-center">Interests</h2>
-    <div class="row col-xs-offset-2 col-sm-offset-2 col-md-offset-3">
-      <h3 class="text-left">What are your passions?</h3>
-      <h5 class="text-left">Select as many as you like.</h5>
+    <div class="text-center">
+      <h2>Interests</h2>
+      <h3>What are your passions?</h3>
+      <h5>Select as many as you like.</h5>
     </div>
   </header>
+  <div class="row">
+    <div class="col-xsm-10 col-sm-10 col-md-10 col-md-offset-1 col-sm-offset-1 col-xsm-3">
+      <%= simple_form_for current_user, url: profile_interests_path do |f| %>
+        <%= f.association :interests, as: :check_boxes, item_wrapper_class: "checkbox-button col-sm-6 col-md-3", label: false %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xsm-10 col-sm-10 col-md-10 col-md-offset-1 col-sm-offset-1 col-xsm-3">
+        <div class="special-interests">
+          <p>Tell us about any unique and awesome skills you might have.</p>
+          <%= f.text_area :special_interests, class: "flat-form-control", placeholder: 'Special Interests' %>
+        </div>
 
-  <%= simple_form_for current_user, url: profile_interests_path do |f| %>
-    <div class="row">
-      <%= f.association :interests, as: :check_boxes, item_wrapper_class: "checkbox-button col-sm-6 col-md-3", label: false %>
+        <%= f.submit class: "btn btn-default interests-submit-button", value: "Update Interests" %>
+      <% end %>
     </div>
-
-    <div class="row">
-      <%= f.text_area :special_interests, class: "flat-form-control", placeholder: 'Special Interests'  %>
-    </div>
-    <div class="row">
-      <%= f.submit class: "btn btn-default interests-submit-button", value: "Update Interests"  %>
-    </div>
-  <% end %>
+  </div>
 </div>
