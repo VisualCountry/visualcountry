@@ -21,21 +21,24 @@
               <%= f.label :remember_me %>
             </div>
           <% end -%>
-
-          <div>
-            <%= link_to user_omniauth_authorize_path(:facebook), class: "social-auth-button social-auth-button-facebook clearfix" do %>
-              <%= embedded_svg "facebook_logo.svg" %>
-              <%= 'Sign in with Facebook' %>
-            <% end %>
+          <div class="sign-in-social-auth">
+            <div class="text-center sign-in-button">
+              <%= f.submit "Log in", :class => "btn btn-default text" %>
+            </div>
+            <div>
+              <%= link_to user_omniauth_authorize_path(:facebook), class: "social-auth-button social-auth-button-facebook sign-in-social-auth-buttons clearfix" do %>
+                <%= embedded_svg "facebook_logo.svg" %>
+                <%= 'Sign in with Facebook' %>
+              <% end %>
+            </div>
+            <div>
+              <%= link_to user_omniauth_authorize_path(:twitter), class: "social-auth-button social-auth-button-twitter sign-in-social-auth-buttons clearfix" do %>
+                <%= embedded_svg "twitter_logo.svg" %>
+                <%= 'Sign in with Twitter' %>
+              <% end %>
+            </div>
           </div>
-          <div>
-            <%= link_to user_omniauth_authorize_path(:twitter), class: "social-auth-button social-auth-button-twitter clearfix" do %>
-              <%= embedded_svg "twitter_logo.svg" %>
-              <%= 'Sign in with Twitter' %>
-            <% end %>
-</div>
           <div class="actions text-center">
-            <%= f.submit "Log in", :class => "btn btn-default" %>
             <br>
             <%= render "devise/shared/links" %>
           </div>
