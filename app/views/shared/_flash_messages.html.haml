@@ -1,0 +1,5 @@
+- flash_messages do |msg_class, message|
+  %div{class: "alert #{msg_class} fade in"}
+    %button.close{data: { dismiss: 'alert' } }
+      %span.glyphicon.glyphicon-remove
+    =message
