@@ -8,11 +8,6 @@
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
   %body
     = render 'layouts/header'
-
-    .container.text-center
-      %p.notice= notice
-      %p.alert= alert
-
     .container-fluid
       .row
         .col-sm-3.col-md-2.sidebar
@@ -22,6 +17,12 @@
             = yield :sub_nav
         .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2
           .main-layout
+            - flash_messages do |msg_class, message|
+              %div{class: "alert #{msg_class} fade in"}
+                %button.close{data: { dismiss: 'alert' } }
+                  %span.glyphicon.glyphicon-remove
+                =message
+
             = yield
 
     = render 'layouts/footer'
