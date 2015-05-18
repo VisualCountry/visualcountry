@@ -21,6 +21,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(_)
-    profile_interests_path
+    edit_user_registration_path
   end
 end
