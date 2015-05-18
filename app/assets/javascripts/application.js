@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.tokeninput
+//= require jquery.jcrop
+//= require papercrop
 //= require bootstrap
 //= require cocoon
 //= require video
@@ -28,7 +30,7 @@ $(document).ready(function() {
   // Initialize token inputs for user profile page
   $("#user_focus_tokens").tokenInput("/api/focuses.json", {
     searchingText: 'Searching...',
-    minChars: 1,
+    minChars: 0,
     preventDuplicates: true,
     prePopulate: $('#user_focus_tokens').data('pre'),
     theme: "visual-country",
@@ -37,37 +39,20 @@ $(document).ready(function() {
   // Manually set posters for mobile since Video.js doesn't automagically
   $('[data-videojs-thumbnail]').each(function(index, element) {
     var $id     = $(element).attr('id'),
-        $poster = $(element).data('videojs-thumbnail'),
-        player  = videojs($id);
+      $poster = $(element).data('videojs-thumbnail'),
+      player  = videojs($id);
 
     player.poster($poster);
   });
-$(document).ready(function() {
 
-  var owl = $(".carousel .carousel__main");
-
-  owl.owlCarousel({
-
-      pagination: false,
-
-      itemsCustom : [
-        [0, 0],
-        [240, 0],
-        [580, 2],
-        [920, 3],
-        [1260, 4],
-        [1600, 5]
-      ],
+  $("[role='auto-submit-file']").change(function() {
+    $(this).parents("form").submit();
   });
 
-  // Custom Navigation Events
-  $(".carousel__navigation__next").click(function(){
-    owl.trigger('owl.next');
-  })
-  $(".carousel__navigation__prev").click(function(){
-    owl.trigger('owl.prev');
-  })
+  // document.getElementById("file").onchange = function() {
+    // document.getElementById("form").submit();
+  // };
 
 
 });
-});
+

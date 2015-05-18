@@ -55,6 +55,7 @@ gem 'pry-rails'
 
 gem 'owlcarousel-rails'
 gem 'haml'
+gem 'papercrop'
 
 group :production, :staging do
   gem 'rails_12factor'

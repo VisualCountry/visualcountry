@@ -11,9 +11,9 @@
  * file per style scope.
  *
  *= require video-js
- *= require token-input
  *= require owl.carousel
  *= require owl.theme
+ *= require jquery.jcrop
  *= require_self
  */
 
@@ -58,6 +58,7 @@
 @import "links_manager";
 @import "carousel";
 @import "filter_form";
+@import "token-input";
 
 
 

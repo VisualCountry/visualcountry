@@ -2,43 +2,81 @@
   height: 164px;
 }
 
-.basic-info-bio,
-.basic-info-photo {
-  // 3 columns minus gutters, makes it square
-  height: (750px / 3) - 30px;
-
-  @media (min-width: $md-breakpoint) {
-    height: (970px / 3) - 30px;
-  }
+.basic-info__bio {
+  height: 300 - 126px;
 }
 
-.basic-info-photo {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.basic-info__section {
+  margin-bottom: 15px;
+}
 
-  @media (min-width: $md-breakpoint) {
-    margin-bottom: 4em;
-  }
 
-  &:hover svg,
-  &:focus svg {
-    opacity: 0.8;
-  }
-
-  svg {
-    @include size(140px, 140px);
-    display: block;
-    margin-bottom: 1em;
-  }
-
+.basic-info__photo {
   input[type="file"] {
     @include position(absolute, 0 0 0 0);
-    cursor: pointer;
+    /* cursor: pointer; */
     font-size: 200px;
     margin: 0;
     opacity: 0;
     padding: 0;
   }
 }
+
+.basic-info__photo__label {
+  width: 302px;
+  height: 302px;
+  background-color: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  border: $base-border;
+  margin-bottom: 1em;
+  transition: border-color;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.basic-info__birthday {
+  select {
+    float: left;
+    width: 33.333%;
+  }
+}
+
+.basic-info__photo__upload {
+  width: 150px;
+  height: 150px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .glyphicon {
+    font-size: 100px;
+    color: $accent-color;
+  }
+}
+
+.basic-info__photo__reupload {
+  display: none;
+}
+.basic-info__photo__label:hover .basic-info__photo__reupload {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 75px;
+  left: 90px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .glyphicon {
+    font-size: 100px;
+    color: $accent-color;
+  }
+  background-color: rgba(255,255,255,0.6);
+  border-radius: 0px;
+}
+
+

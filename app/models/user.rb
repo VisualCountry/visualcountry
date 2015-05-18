@@ -23,7 +23,9 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :press, allow_destroy: true
 
   has_attached_file :picture, :styles => { :medium => "300x300#", :thumb => "50x50#" }, :default_url => "missing.png"
+  crop_attached_file :picture
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
+
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
 
   devise :database_authenticatable, :registerable,
