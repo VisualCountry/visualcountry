@@ -1,0 +1,20 @@
+- if current_user.admin?
+  = link_to "New List", new_influencer_list_path
+- if @my_lists.present?
+  %h2 My Lists
+  = link_to "New List", new_influencer_list_path
+  = render @my_lists
+- else
+.row
+  .col-md-10.col-md-offset-1.text-center
+    %h3 Looking for social media influencers and creative talent for your next video campaign?
+    %h3 We can help!
+    %h5 Reach out to here and we will create a custom list of potential collaborators to get your next campaign started.
+    %hr/
+- if @organizations.present?
+  %h2 Organizations
+  - @organizations.each do |organization|
+    %h3= organization.name
+    - organization.influencer_lists.each do |list|
+      = render list
+

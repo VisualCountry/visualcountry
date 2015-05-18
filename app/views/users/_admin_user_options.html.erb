@@ -1,6 +1,6 @@
 <div class="row">
-  <hr>
   <% if current_user.admin? %>
+    <hr>
     <div class="col-md-4">
       <p>Add User to list</p>
       <%= simple_form_for(:list_membership, url: list_memberships_path) do |f| %>
