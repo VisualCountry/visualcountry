@@ -45,14 +45,5 @@ $(document).ready(function() {
     player.poster($poster);
   });
 
-  $("[role='auto-submit-file']").change(function() {
-    $(this).parents("form").submit();
-  });
-
-  // document.getElementById("file").onchange = function() {
-    // document.getElementById("form").submit();
-  // };
-
-
 });
 
