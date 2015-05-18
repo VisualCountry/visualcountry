@@ -73,3 +73,16 @@
     margin-right: 10px;
   }
 }
+
+.social-profile__connected {
+  @extend .glyphicon-ok;
+  @extend .green;
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+
+}
+.social-profile__connected:hover {
+  @extend .glyphicon-remove;
+  color: red;
+}
