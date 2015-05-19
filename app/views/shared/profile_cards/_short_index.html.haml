@@ -1,0 +1,5 @@
+.profile-cards.profile-cards--short
+  .row
+    -profiles.each do |profile|
+      .col-lg-4.col-md-4.col-sm-5.col-xs-12
+        = render 'shared/profile_cards/show_short', user: profile

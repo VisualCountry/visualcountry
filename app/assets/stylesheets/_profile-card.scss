@@ -9,8 +9,13 @@
   h1 {
     margin: 0;
     font-family: 'AkkLg_Pro';
-    font-size: 26px;
+    font-size: 18px;
     text-transform: none;
+  }
+
+  .small-header {
+    font-size: 12px;
+    letter-spacing: 1px;
   }
 
   h2 {
@@ -66,4 +71,10 @@
 }
 
 .profile-cards {
+}
+
+.profile-cards--short {
+  .profile-card {
+    height: 330px;
+  }
 }

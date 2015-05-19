@@ -1,19 +1,43 @@
 - if current_user.admin?
   = link_to "New List", new_influencer_list_path
+
 - if @my_lists.present?
   %h2 My Lists
-  = render @my_lists
-- else
-.row
-  .col-md-10.col-md-offset-1.text-center
-    %h3 Looking for social media influencers and creative talent for your next video campaign?
-    %h3 We can help!
-    %h5 Reach out to here and we will create a custom list of potential collaborators to get your next campaign started.
-    %hr/
+  = render "influencer_lists/ordered", lists: @my_lists
+
 - if @organizations.present?
   %h2 Organizations
-  - @organizations.each do |organization|
-    %h3= organization.name
-    - organization.influencer_lists.each do |list|
-      = render list
+  #organizations.panel-group.panel-group--flat{"aria-multiselectable" => "true", :role => "tablist"}
+    - @organizations.each_with_index do |organization, index|
+      - org_id = "orgheading#{organization.id}"
+      - org_body_id = "orgbody#{organization.id}"
+      - expanded = index == 0
+      .panel
+        .panel-heading{:role => "tab", id: org_id}
+          %h4.panel-title
+            - if expanded
+              %a{"aria-controls" => org_body_id, "aria-expanded" => "true", "data-parent" => "#organizations", "data-toggle" => "collapse", :href => "##{org_body_id}" }
+                = organization.name.capitalize
+                %span.glyphicon.collapse-arrow
+            - else
+              %a.collapsed{"aria-controls" => org_body_id, "aria-expanded" => "false", "data-parent" => "#organizations", "data-toggle" => "collapse", :href => "##{org_body_id}" }
+                = organization.name.capitalize
+                %span.glyphicon.collapse-arrow
+        .panel-collapse.collapse{"aria-labelledby" => org_id, :role => "tabpanel", id: org_body_id, class: expanded ? 'in' : ''}
+          .panel-body
+            %p
+              Lists
+            = render "influencer_lists/ordered",  lists: organization.influencer_lists
+            %p
+              Members
+            = render "shared/profile_cards/short_index", profiles: organization.users
+
+
+- else
+  .row
+    .col-md-10.col-md-offset-1.text-center
+      %h3 Looking for social media influencers and creative talent for your next video campaign?
+      %h3 We can help!
+      %h5 Reach out to here and we will create a custom list of potential collaborators to get your next campaign started.
+      %hr/
 
