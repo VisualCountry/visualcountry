@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def show
     @user = find_user
     if current_user.admin?
-      @available_lists = current_user.lists_without(@user)
+      @available_lists = InfluencerList.all - current_user.lists_member_of
       @available_organizations = Organization.all - @user.organizations
     end
   end
