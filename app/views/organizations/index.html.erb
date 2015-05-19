@@ -1,9 +1,0 @@
-
-<h2>All Organizations</h2>
-
-<% if current_user.admin? %>
-  <%= link_to "New Organization", new_organization_path %>
-<% end %>
-
-<%= render @organizations %>
-

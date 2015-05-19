@@ -1,4 +1,4 @@
-%h2= @organization.name.titleize
+= render "layouts/organization_nav_bar"
 - if current_user.admin?
   %p
     = link_to edit_organization_path(@organization), class: 'glyphicon glyphicon-pencil' do
