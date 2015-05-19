@@ -121,6 +121,10 @@ class User < ActiveRecord::Base
     list.owner == self
   end
 
+  def can_manage_list?(list)
+    list.organizations.where(id: organizations.map(&:id)).any?
+  end
+
   private
 
   def normalize_city_name
@@ -175,4 +179,5 @@ class User < ActiveRecord::Base
   def follower_counts
     FOLLOWER_COUNT_METHODS.map { |p| send(p) }.compact
   end
+
 end
