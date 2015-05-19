@@ -1,9 +1,6 @@
 = render "layouts/search_nav_bar"
 .search-users
-  .profile-card
-    - @profiles.each_slice(4) do |profile_group|
-      .row
-        - profile_group.each do |profile|
-          %div{:class => "col-lg-4 col-md-4 col-sm-5 col-xs-12 user-#{profile.id}"}
-            = render 'shared/profile_card', user: profile
-        %br/
+  .row
+    - @profiles.each do |profile|
+      .col-lg-4.col-md-4.col-sm-5.col-xs-12
+        = render 'shared/profile_card', user: profile
