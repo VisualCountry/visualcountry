@@ -1,0 +1,16 @@
+= render 'layouts/user_navigation'
+.interests.text-center
+  %h2 Clients
+  %h5 Links to some projects you have worked on and clients you have worked with.
+  #client.links-manager
+    = simple_form_for current_user, url: profile_clients_path, html: { novalidate: true } do |f|
+      %ol{:role => "list-to-manage"}
+        = f.simple_fields_for :clients do |client|
+          = render 'client_fields', f: client
+      .row
+        .col-sm-12
+          = link_to_add_association f, :clients, "data-association-insertion-node" => "[role='list-to-manage']" , "data-association-insertion-method" => :append do
+            %span.glyphicon.glyphicon-plus-sign.green.add-row
+      .row
+        .col-sm-12.text-center
+          = f.submit class: "btn btn-default centered-button"

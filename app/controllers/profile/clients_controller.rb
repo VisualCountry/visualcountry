@@ -9,7 +9,7 @@ class Profile::ClientsController < ApplicationController
 
   def update
     if current_user.update(clients_params)
-      redirect_to profile_clients_path
+      redirect_to profile_clients_path, notice: "Successfully Updated Clients"
     else
       render :edit
     end

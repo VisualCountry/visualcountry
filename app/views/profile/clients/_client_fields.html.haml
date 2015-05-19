@@ -1,0 +1,8 @@
+%li.nested-fields
+  .list-row
+    .row
+      .col-sm-11.input-groups
+        = f.input :name, validate: false, label: false, placeholder: "Name", input_html: { class: 'flat-form-control client-input' }
+        = f.input :url, validate: false, label: false, placeholder: "URL", input_html: { class: 'flat-form-control client-input' }
+      .col-sm-1.remove-button
+        = link_to_remove_association close_nested_form_icon, f

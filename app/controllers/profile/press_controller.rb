@@ -8,7 +8,7 @@ class Profile::PressController < ApplicationController
 
   def update
     if current_user.update(press_params)
-      redirect_to profile_press_path
+      redirect_to profile_press_path, notice: "Successfully Updated Press"
     else
       render :edit
     end
