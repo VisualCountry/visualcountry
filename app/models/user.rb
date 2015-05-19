@@ -13,8 +13,14 @@ class User < ActiveRecord::Base
 
   has_many :press
   has_many :influencer_lists, dependent: :destroy
-
   has_many :list_memberships, dependent: :destroy
+
+  #for some reason this is not working - have more pressing issues to solve at the moment, see method below
+  # has_many :lists_member_of, through: :list_memberships, class_name: "InfluencerList", foreign_key: :user_id
+
+  def lists_member_of
+    list_memberships.map(&:influencer_list).compact
+  end
 
   has_many :organization_memberships, dependent: :destroy
   has_many :organizations, through: :organization_memberships
