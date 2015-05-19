@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
 
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
+  validates :bio, length: { maximum: 300 }
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,

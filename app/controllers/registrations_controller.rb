@@ -1,8 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
 
-  def edit
-    render "edit", layout: "application_with_sidebar"
-  end
+  layout "application_with_sidebar", only: [:update, :edit]
 
   protected
 
