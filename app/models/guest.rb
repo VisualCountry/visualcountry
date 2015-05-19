@@ -10,4 +10,8 @@ class Guest
   def owns_list?(_)
     false
   end
+
+  def can_manage_list?(_)
+    false
+  end
 end

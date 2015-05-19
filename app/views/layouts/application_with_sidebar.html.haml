@@ -15,9 +15,14 @@
         - if content_for?(:sub_nav)
           .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.search-navbar-fixed-top{:role => "navigation"}
             = yield :sub_nav
-        .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2
-          .main-layout
-            = render "shared/flash_messages"
-            = yield
+          .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2
+            .main-layout.sublayout
+              = render "shared/flash_messages"
+              = yield
+        - else
+          .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2
+            .main-layout
+              = render "shared/flash_messages"
+              = yield
 
     = render 'layouts/footer'

@@ -1,5 +1,6 @@
 ul.dropdown-menu--form {
-  left: 9px;
+  border-radius: 0px;
+  left: 10px;
   width: 250px;
   text-align: left;
   label {
@@ -22,7 +23,8 @@ ul.dropdown-menu--form {
 }
 
 ul.dropdown-menu--icons {
-  left: 9px;
+  border-radius: 0px;
+  left: 10px;
   text-align: left;
 
   .btn-link {

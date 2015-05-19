@@ -34,6 +34,12 @@ class InfluencerListsController < ApplicationController
 
   def show
     @influencer_list = find_influencer_list
+    case current_user
+    when Guest
+      render :show, layout: "application"
+    else
+      render :show, layout: "application_with_sidebar"
+    end
   end
 
   def index
