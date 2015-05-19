@@ -35,7 +35,6 @@
           - if current_user.instagram_token?
             %p.social-follower-count
               followed by: #{number_with_delimiter(current_user.instagram_follower_count)}
-            = link_to image_tag("green_check_icon.svg", size: "30x30")
             = render "shared/social_connection_link", social_link: profile_link_instagram_path
           - else
             = link_to "Connect", user_omniauth_authorize_path(:instagram), class: "btn btn-default"
