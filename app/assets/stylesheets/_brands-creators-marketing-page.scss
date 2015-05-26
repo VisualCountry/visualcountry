@@ -77,11 +77,27 @@
     width: 130px;
     height: 130px;
   }
-  /* Brands List*/
+  /* Client List*/
+
+  .client-blurb {
+    margin-bottom: 20px;
+  }
+
+  .client-logo-container {
+    padding: 0 70px;
+  }
+
   .client-logos {
     width: 130px;
-    padding: 0 10px 0 10px;
+    padding: 0 10px 10px 10px;
   }
+
+  .client-logos-wide {
+    width: 100px;
+    padding: 0 10px 10px 10px;
+  }
+
+
   /* Work Examples*/
   .work-examples-container {
     margin: 40px 0;
