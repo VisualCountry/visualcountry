@@ -60,7 +60,6 @@
 @import "filter_form";
 @import "token-input";
 @import "contact";
-@import "masonry";
 @import "dropdown_menu";
 @import "organization_lists";
 
@@ -217,7 +216,6 @@ color: $green;
 }
 
 .main-layout {
-  /* background-color: #ADD8E6; */
   @media (min-width: $screen-sm-min) {
     width: $container-sm;
   }

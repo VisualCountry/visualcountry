@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
   before_filter :authorize_admin!
+
   layout 'application_with_sidebar'
 
   def show
