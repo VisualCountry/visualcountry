@@ -18,10 +18,6 @@ class User < ActiveRecord::Base
   #for some reason this is not working - have more pressing issues to solve at the moment, see method below
   # has_many :lists_member_of, through: :list_memberships, class_name: "InfluencerList", foreign_key: :user_id
 
-  def lists_member_of
-    list_memberships.map(&:influencer_list).compact
-  end
-
   has_many :organization_memberships, dependent: :destroy
   has_many :organizations, through: :organization_memberships
 
@@ -127,8 +123,15 @@ class User < ActiveRecord::Base
     list.owner == self
   end
 
+  def lists_member_of
+    list_memberships.map(&:influencer_list).compact
+  end
+
   def can_manage_list?(list)
-    list.organizations.where(id: organizations.map(&:id)).any?
+    return true if admin?
+    return true if list.owner == self
+
+    list.organizations.where(id: organization_ids).any?
   end
 
   private

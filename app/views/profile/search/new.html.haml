@@ -5,7 +5,7 @@
   = simple_form_for :search, method: :get, url: profile_search_results_path, defaults: { required: false } do |f|
 
     .filter-form__item
-      = f.input :query, input_html: { class: "flat-form-control", :autofocus => true }, label: false
+      = f.input :query, input_html: { class: "flat-form-control", id: 'test-query-input', autofocus: true }, label: false
 
     .filter-form__item
       %h5 Interest
@@ -26,7 +26,7 @@
         = f.input :social_profiles, as: :check_boxes, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3", label: false, collection: User::SOCIAL_PLATFORMS
     .filter-form__item
       %h5 Location
-      = f.input :near, input_html: { class: "flat-form-control" }, label: false
+      = f.input :near, input_html: { class: "flat-form-control", id: 'test-location-input' }, label: false
     .filter-form__item
       %h5 Focus
       .row
@@ -42,13 +42,13 @@
           .row
             .col-xs-6
               %h5 Minimum Age
-              = f.input :min_age, input_html: { class: "flat-form-control" }, label: false
+              = f.input :min_age, input_html: { class: "flat-form-control", id: 'test-min-age' }, label: false
             .col-xs-6
               %h5 Maximum Age
-              = f.input :max_age, input_html: { class: "flat-form-control" }, label: false
+              = f.input :max_age, input_html: { class: "flat-form-control", id: 'test-max-age' }, label: false
         .col-md-6
           %h5 Ethnicity
           .flat-select
-            = f.input :ethnicity, item_wrapper_class: "col-xs-6 col-sm-6 col-md-3", label: false, collection: User.ethnicities.keys, input_html: {class: "flat-form-control"}
+            = f.input :ethnicity, item_wrapper_class: "col-xs-6 col-sm-6 col-md-3", label: false, collection: User.ethnicities.keys, input_html: { class: "flat-form-control", id: 'test-ethnicity-selection' }
     .filter-form__item.text-center
       = f.submit class: "btn btn-default btn-lg search-button", value: "Search"

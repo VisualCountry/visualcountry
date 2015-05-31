@@ -6,7 +6,7 @@
         -@influencer_list.users.each do |user|
           .col-lg-4.col-md-4.col-sm-5.col-xs-12
             = render 'shared/profile_cards/show', user: user
-            .text-center
+            .text-center{ class: "test-remove-user-#{user.id}"}
               - if current_user.can_manage_list?(@influencer_list)
                 = link_to "Remove", list_membership_path(user.list_membership_in(@influencer_list)), method: :delete, class: "btn btn-default"
   - else

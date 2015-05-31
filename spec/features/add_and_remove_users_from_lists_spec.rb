@@ -8,8 +8,8 @@ feature "Add and remove users from lists" do
     login_as(admin)
 
     visit profile_path(user)
-    select list.name, from: "Influencer list"
-    click_on "Add"
+    select list.name, from: "test-influencer-list-select"
+    click_on "test-add-to-influencer-list-submit"
 
     visit influencer_list_path(list)
     expect(page).to have_link user.name
@@ -23,7 +23,7 @@ feature "Add and remove users from lists" do
 
     visit profile_path(user)
 
-    expect(find_field("Influencer list")).to have_no_content list.name
+    expect(find_field("test-influencer-list-select")).to have_no_content list.name
   end
 
   scenario "an admin can remove a user from one of their lists" do
@@ -34,7 +34,7 @@ feature "Add and remove users from lists" do
     login_as(admin)
 
     visit influencer_list_path(list)
-    within ".user-#{user_2.id}" do
+    within ".test-remove-user-#{user_2.id}" do
       click_link "Remove"
     end
 

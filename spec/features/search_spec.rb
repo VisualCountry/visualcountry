@@ -11,7 +11,7 @@ feature "Searching User profiles" do
       bob = create(:user, name: "Bob")
 
       visit profile_search_path
-      fill_in "Query", with: "alice"
+      fill_in "test-query-input", with: "alice"
       click_button "Search"
 
       expect(page).to have_content alice.name
@@ -23,7 +23,7 @@ feature "Searching User profiles" do
       bob = create(:user, name: "Ramen enthusiast")
 
       visit profile_search_path
-      fill_in "Query", with: "Explorer"
+      fill_in "test-query-input", with: "Explorer"
       click_button "Search"
 
       expect(page).to have_content alice.name
@@ -35,7 +35,7 @@ feature "Searching User profiles" do
       bob = create(:user, special_interests: "Embroidery and arson")
 
       visit profile_search_path
-      fill_in "Query", with: "capybara"
+      fill_in "test-query-input", with: "capybara"
       click_button "Search"
 
       expect(page).to have_content alice.name
@@ -49,7 +49,7 @@ feature "Searching User profiles" do
       la_user = create(:user, city: "Los Angeles")
 
       visit profile_search_path
-      fill_in "Near", with: "NYC"
+      fill_in "test-location-input", with: "NYC"
       click_button "Search"
 
       expect(page).to have_content brooklyn_user.name
@@ -74,9 +74,7 @@ feature "Searching User profiles" do
       female_user = create(:user, gender: "Female")
 
       visit profile_search_path
-      within('.gender-selection') do
-        select("Male")
-      end
+      check('Male')
       click_button "Search"
 
       expect(page).to have_content male_user.name
@@ -101,7 +99,7 @@ feature "Searching User profiles" do
       asian_user = create(:user, ethnicity: "Asian")
 
       visit profile_search_path
-      within('.ethnicity-selection') do
+      within('#test-ethnicity-selection') do
         select("Hispanic or Latino")
       end
       click_button "Search"
@@ -128,7 +126,7 @@ feature "Searching User profiles" do
       age_30_user = create(:user, birthday: 30.years.ago)
 
       visit profile_search_path
-      fill_in "Min age", with: 25
+      fill_in "test-min-age", with: 25
       click_button "Search"
 
       expect(page).to have_content age_30_user.name
@@ -140,7 +138,7 @@ feature "Searching User profiles" do
       age_30_user = create(:user, birthday: 30.years.ago)
 
       visit profile_search_path
-      fill_in "Max age", with: 25
+      fill_in "test-max-age", with: 25
       click_button "Search"
 
       expect(page).to have_content age_20_user.name

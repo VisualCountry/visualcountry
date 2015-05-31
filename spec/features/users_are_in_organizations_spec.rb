@@ -20,8 +20,8 @@ feature "Users are in organizations" do
     login_as(admin)
 
     visit profile_path(user)
-    select organization.name, from: "Organization"
-    click_on "Add to organization"
+    select organization.name, from: "test-add-to-organization-form"
+    click_on "test-add-to-organization-submit"
 
     visit organization_path(organization)
     expect(page).to have_link user.name
@@ -40,14 +40,14 @@ feature "Users are in organizations" do
   end
 
   scenario "an organization's users are listed on its show page" do
-    user_1 = create(:user)
-    user_2 = create(:user)
-    organization = create(:organization, users: [user_1, user_2])
-    login_as(user_1)
+    admin = create(:admin)
+    user = create(:user)
+    organization = create(:organization, users: [admin, user])
+    login_as(admin)
 
     visit organization_path(organization)
 
-    expect(page).to have_link user_1.name
-    expect(page).to have_link user_2.name
+    expect(page).to have_link admin.name
+    expect(page).to have_link user.name
   end
 end

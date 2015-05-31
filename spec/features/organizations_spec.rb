@@ -10,7 +10,7 @@ describe "Creating/updating/deleting organizations" do
     fill_in "Name", with: organization.name
     click_on "Create"
 
-    within ".organization-name" do
+    within "#test-organization-name" do
       expect(page).to have_content organization.name
     end
   end
@@ -35,11 +35,11 @@ describe "Creating/updating/deleting organizations" do
     login_as(admin)
 
     visit organization_path(organization)
-    click_link "Rename Organization"
+    click_link "test-rename-organization"
     fill_in "Name", with: new_name
     click_on "Update"
 
-    within ".organization-name" do
+    within "#test-organization-name" do
       expect(page).to have_content new_name
     end
   end
@@ -51,7 +51,7 @@ describe "Creating/updating/deleting organizations" do
     login_as(admin)
 
     visit organization_path(organization_1)
-    click_on "Delete Organization"
+    click_on "test-delete-organization"
 
     expect(page).to have_content "\"#{organization_1.name}\" deleted!"
     expect(page).to have_no_link organization_1.name
@@ -80,7 +80,7 @@ describe "Creating/updating/deleting organizations" do
 
     visit organization_path(organization)
     within ".influencer-list-#{list_2.id}" do
-      click_on "Remove"
+      click_on "test-remove-membership"
     end
 
     expect(page).to have_content list_1.name

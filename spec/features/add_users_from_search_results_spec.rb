@@ -11,10 +11,10 @@ feature "Add users from search results" do
     login_as(admin)
 
     visit profile_search_path
-    fill_in "Max age", with: 30
+    fill_in "test-max-age", with: 30
     click_button "Search"
-    select list.name, from: "Influencer list"
-    click_on "Add"
+    select list.name, from: "test-influencer-list-selection"
+    click_on "test-influencer-list-submit"
 
     visit influencer_list_path(list)
     expect(page).to have_link initial_user.name

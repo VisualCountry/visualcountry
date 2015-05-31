@@ -75,8 +75,9 @@
         <% @user.interests.each do |interest| %>
           <button type="button" class="btn btn-default btn-interests"><%= interest.name %></button>
         <% end %>
+      <% end %>
         <p><%= @user.special_interests %></p>
-      <% elsif current_user == @user %>
+      <% if current_user == @user %>
         <%= link_to profile_interests_path do %>
           <h4 class="text-center">Add Interests</h4>
           <h4 class="text-center"><span class="glyphicon glyphicon-plus-sign green" title="Add Interests"></span></h4>

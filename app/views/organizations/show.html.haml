@@ -1,10 +1,10 @@
 = render "layouts/organization_nav_bar"
 - if current_user.admin?
   %p
-    = link_to edit_organization_path(@organization), class: 'glyphicon glyphicon-pencil' do
+    = link_to edit_organization_path(@organization), class: 'glyphicon glyphicon-pencil', id: 'test-rename-organization' do
       %span{:title => "Rename Organization"}
   %p
-    = link_to @organization, method: :delete, class: 'glyphicon glyphicon-trash' do
+    = link_to @organization, method: :delete, class: 'glyphicon glyphicon-trash', id: 'test-delete-organization' do
       %span{:title => "Delete Organization"}
 %h2 Lists
 - if current_user.admin?
@@ -20,7 +20,7 @@
         .col-sm-5.col-md-5
           = link_to list.name, influencer_list_path(list), class: "client-input"
         .col-sm-1.col-md-1
-          = link_to organization_list_membership_path(list.organization_membership(@organization)), method: :delete, class: "glyphicon glyphicon-remove-circle" do
+          = link_to organization_list_membership_path(list.organization_membership(@organization)), method: :delete, class: "glyphicon glyphicon-remove-circle", id: 'test-remove-membership' do
             %span{:title => "Remove List"}
 
 %h2 Members of Organization
