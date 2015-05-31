@@ -1,0 +1,10 @@
+= render "layouts/index_organization_nav_bar"
+.sub-layout
+  .table-responsive
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Organization Name
+          %th Members
+      %tbody
+        = render @organizations

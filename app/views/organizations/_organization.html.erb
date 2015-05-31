@@ -1,3 +1,20 @@
-<div class="organization">
-  <p><%= link_to organization.name, organization %></p>
-</div>
+<tr>
+  <td><h4><%= link_to organization.name.capitalize, organization %></h4></td>
+
+  <td>
+    <% organization.users.each do |user| %>
+        <%= link_to image_tag(user.picture.url(:medium), :size => '40', alt: 'Profile Pic'), profile_path(id: user.id) %>
+    <% end %>
+  </td>
+
+  <td>
+    <h4>
+      <%= link_to edit_organization_path(organization) do %>
+        <span class="glyphicon glyphicon-pencil pink" title="Edit Org Name"></span>
+      <% end %>
+      <%= link_to organization, method: :delete do %>
+        <span class="glyphicon glyphicon-trash pink" title="Delete Org"></span>
+      <% end %>
+    </h4>
+  </td>
+</tr>

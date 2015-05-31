@@ -1,0 +1,22 @@
+- content_for :sub_nav do
+  .main-layout.text-center
+    %h2.list-name Search Results
+  .dropdown.pull-left
+    %button#list-dropdown.btn.btn-menu.dropdown-toggle{"aria-expanded" => "true", "data-toggle" => "dropdown", :type => "button"}
+      Menu
+      %span.caret
+    %ul.dropdown-menu.dropdown-menu--form{"aria-labelledby" => "list-dropdown", :role => "menu"}
+      %li{:role => "presentation"}
+        = simple_form_for(:bulk_list_membership, url: bulk_list_memberships_path ) do |f|
+          - @profiles.each do |profile|
+            = f.hidden_field :user_ids, multiple: true, value: profile.id
+          %p
+            Add all users to list
+          %label.select.text-small.text-muted{for: 'bulk_list_membership_influencer_list'} Select List
+          = f.input :influencer_list, as: :select, collection: current_user.influencer_lists, label: false, input_html: { class: "flat-form-control", id: 'test-influencer-list-selection' }
+          = f.submit "Save", class: "center-block btn btn-default btn-sm", id: 'test-influencer-list-submit'
+  = link_to profile_search_path do
+    %span.glyphicon.glyphicon-search.pink{:title => "Search"}
+    New Search
+    %span
+  %hr/

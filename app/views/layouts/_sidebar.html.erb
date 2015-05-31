@@ -1,0 +1,49 @@
+<ul class="nav nav-sidebar">
+
+  <% if current_user.admin? %>
+    <li class="active">
+      <%= link_to admin_path do %><span class="glyphicon glyphicon-stats" title="Admin Dashboard"></span> Admin Dashboard <span class="sr-only">(current)</span><% end %>
+    </li>
+    <li class="active">
+      <%= link_to profile_social_path do %><span class="glyphicon glyphicon glyphicon-cog" title="User Settings"></span> User Settings <span class="sr-only">(current)</span><% end %>
+    </li>
+    <li class="active">
+      <%= link_to profile_search_path do %><span class="glyphicon glyphicon-search" title="Search"></span> Search <span class="sr-only">(current)</span><% end %>
+    </li>
+    <li class="active">
+      <%= link_to organizations_path do %><span class="glyphicon glyphicon glyphicon-user" title="Organizations"></span> Organizations <span class="sr-only">(current)</span><% end %>
+    </li>
+    <li class="active">
+      <%= link_to influencer_lists_path do %><span class="glyphicon glyphicon-list" title="lists"></span> Lists <span class="sr-only">(current)</span><% end %>
+    </li>
+
+  <% elsif current_user.has_account? %>
+    <li class="active">
+      <%= link_to profile_social_path do %><span class="glyphicon glyphicon glyphicon-cog" title="User Settings"></span> User Settings <span class="sr-only">(current)</span><% end %>
+    </li>
+
+    <li class="active">
+      <%= link_to influencer_lists_path do %><span class="glyphicon glyphicon-list" title="lists"></span> Lists <span class="sr-only">(current)</span><% end %>
+    </li>
+  <% else %>
+    nothing
+  <% end %>
+</ul>
+
+<% if current_user.has_account? %>
+  <ul class="nav nav-sidebar">
+    <li>
+      <% current_user.influencer_lists.each do |list| %>
+        <%= link_to list.name, list, class: "well" %>
+      <% end %>
+    </li>
+  </ul>
+<% end %>
+  <hr>
+<% if current_user.admin? %>
+  <div class="text-center">
+    <%= link_to new_influencer_list_path, class: "btn btn-new-list" do %>
+      <span class="glyphicon glyphicon-plus-sign green " aria-hidden="true"></span> New List
+    <% end%>
+  </div>
+<% end %>

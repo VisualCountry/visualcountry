@@ -1,0 +1,40 @@
+ul.dropdown-menu--form {
+  border-radius: 0px;
+  left: 10px;
+  width: 250px;
+  text-align: left;
+  label {
+    font-size: 0.75em;
+  }
+
+  select {
+    font-size: 1em;
+    padding: 0.25em 0.75em;
+  }
+
+  li {
+    padding: 3px 20px;
+  }
+
+  .btn {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+}
+
+ul.dropdown-menu--icons {
+  border-radius: 0px;
+  left: 10px;
+  text-align: left;
+
+  .btn-link {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+    color: #333333;
+    white-space: nowrap;
+  }
+}
+

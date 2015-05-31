@@ -1,5 +1,16 @@
-<div class="container">
-  <h2>Contact Us</h2>
-  <h3>Reach out below, we would love to chat.</h3>
-  <%= render "shared/contact_form" %>
+<div class="container contact">
+  <div class="text-center">
+    <h2>Contact</h2>
+    <h4>Reach out below, we would love to chat.</h4>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-6">
+      <h4>Whether you are a brand/agency or looking to work with us as talent on a project,  we would love to talk more about how we can work together and answer any questions you might have.</h4>
+      <h5 class="pink-link" >Need help getting started, reach out at <%= mail_to "help@visualcountry.com", "help@visualcountry.com" %></h5>
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-6">
+      <%= render "shared/contact_form" %>
+    </div>
+  </div>
 </div>

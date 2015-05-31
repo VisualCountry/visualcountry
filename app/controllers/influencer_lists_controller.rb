@@ -2,6 +2,8 @@ class InfluencerListsController < ApplicationController
   before_action :authorize_admin!, except: [:show, :index]
   skip_before_action :authenticate_user!, only: [:show]
 
+  layout 'application_with_sidebar'
+
   def new
     @influencer_list = InfluencerList.new
   end
@@ -32,6 +34,12 @@ class InfluencerListsController < ApplicationController
 
   def show
     @influencer_list = find_influencer_list
+    case current_user
+    when Guest
+      render :show, layout: "application"
+    else
+      render :show, layout: "application_with_sidebar"
+    end
   end
 
   def index

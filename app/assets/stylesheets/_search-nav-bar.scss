@@ -1,0 +1,16 @@
+.search-navbar-fixed-top {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  top: 50px;
+  border-width: 0 0 1px;
+  background-color: #fff;
+  padding-bottom: 0;
+  padding-top: 0;
+  margin-bottom: 20px;
+
+  hr {
+    margin-bottom: 0;
+  }
+}

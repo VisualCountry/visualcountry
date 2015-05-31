@@ -2,7 +2,7 @@ class ProfileSearchQuery
   def initialize(options = {})
     @query = options[:query]
     @near = options[:near]
-    @gender = options[:gender]
+    @genders = remove_blanks(options[:gender])
     @ethnicity = options[:ethnicity]
     @min_age = options[:min_age]
     @max_age = options[:max_age]
@@ -17,7 +17,7 @@ class ProfileSearchQuery
     relation.
       by_query(query).
       by_location(near).
-      by_gender(gender).
+      by_genders(genders).
       by_ethnicity(ethnicity).
       by_minimum_age(min_age).
       by_maximum_age(max_age).
@@ -34,7 +34,7 @@ class ProfileSearchQuery
   attr_reader(
     :ethnicity,
     :focuses,
-    :gender,
+    :genders,
     :interests,
     :max_age,
     :max_followers,
@@ -62,9 +62,9 @@ class ProfileSearchQuery
       end
     end
 
-    def by_gender(gender)
-      if gender.present?
-        where(gender: User.genders[gender])
+    def by_genders(genders)
+      if genders.present?
+        where(gender: genders.map { |g| User.genders[g] })
       else
         all
       end
@@ -160,5 +160,13 @@ class ProfileSearchQuery
       (profiles & User::SOCIAL_PLATFORMS).
         map { |platform| "cached_#{platform}_follower_count" }
     end
+  end
+
+  private
+
+  def remove_blanks(array)
+    return unless array
+
+    array.delete_if(&:blank?)
   end
 end

@@ -1,0 +1,25 @@
+.panel-group--flat{
+  .collapse-arrow {
+    @extend .glyphicon-chevron-down
+  }
+
+  .collapsed {
+    .collapse-arrow {
+      @extend .glyphicon-chevron-up
+    }
+  }
+
+  .panel-heading + .panel-collapse > .panel-body {
+    border-top: 0px ;
+  }
+
+
+  .panel-body {
+    margin-left: 15px;
+  }
+
+
+
+}
+
+

@@ -1,9 +1,0 @@
-<div class="container">
-  <h1>All Organizations</h1>
-
-  <% if current_user.admin? %>
-    <%= link_to "New Organization", new_organization_path %>
-  <% end %>
-
-  <%= render @organizations %>
-</div>

@@ -1,8 +1,10 @@
 class Profile::RegistrationsController < Devise::RegistrationsController
+
   def edit
     @user = User.find(current_user)
     @user.presses.build
     @user.clients.build
+    render "edit", layout: 'application_with_sidebar'
   end
 
   def update
@@ -23,7 +25,7 @@ class Profile::RegistrationsController < Devise::RegistrationsController
       sign_in @user, :bypass => true
       redirect_to edit_user_registration_path
     else
-      render "edit"
+      render "edit", layout: 'application_with_sidebar'
     end
   end
 

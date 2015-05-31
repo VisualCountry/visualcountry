@@ -2,7 +2,7 @@
   /* Brands Jumbotron*/
   .brands {
     h1 {
-      margin: 0 0 25px 0;
+      margin: 30px 0 25px 0;
       padding: 0 0 0 0;
     }
 
@@ -40,6 +40,14 @@
       height: 159px;
       margin: 0 5px 10px 5px;
     }
+
+    .platform-summary {
+      margin-bottom: 50px;
+    }
+
+    .ending-summary {
+      margin-top: 50px;
+    }
   }
   /* Brands campaign stages*/
   .container-social-icons {
@@ -69,11 +77,27 @@
     width: 130px;
     height: 130px;
   }
-  /* Brands List*/
+  /* Client List*/
+
+  .client-blurb {
+    margin-bottom: 20px;
+  }
+
+  .client-logo-container {
+    padding: 0 70px;
+  }
+
   .client-logos {
     width: 130px;
-    padding: 0 10px 0 10px;
+    padding: 0 10px 10px 10px;
   }
+
+  .client-logos-wide {
+    width: 100px;
+    padding: 0 10px 10px 10px;
+  }
+
+
   /* Work Examples*/
   .work-examples-container {
     margin: 40px 0;

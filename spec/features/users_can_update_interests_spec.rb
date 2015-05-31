@@ -7,8 +7,8 @@ feature "Users can update interests" do
     login_as(user)
 
     visit profile_interests_path
-    fill_in "Special interests", with: interests
-    click_on "Update Interests"
+    fill_in "user_special_interests", with: interests
+    click_on "Update User"
 
     visit profile_path(user)
     expect(page).to have_content(interests)

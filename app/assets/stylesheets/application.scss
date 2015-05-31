@@ -11,13 +11,16 @@
  * file per style scope.
  *
  *= require video-js
- *= require token-input
+ *= require owl.carousel
+ *= require owl.theme
+ *= require jquery.jcrop
  *= require_self
  */
 
 // Vendor
 @import "bourbon";
 @import "bootstrap-and-customization";
+
 
 // Base
 @import "variables";
@@ -38,7 +41,6 @@
 @import "home";
 @import "interests";
 @import "profile";
-@import "search-results";
 @import "user";
 @import "about";
 @import "faq";
@@ -48,10 +50,18 @@
 @import "terms";
 @import "admin";
 @import "search";
-
-
-
-
+@import "sidebar";
+@import "sidebar";
+@import "search-nav-bar";
+@import "list-nav-bar";
+@import "profile-card";
+@import "links_manager";
+@import "carousel";
+@import "filter_form";
+@import "token-input";
+@import "contact";
+@import "dropdown_menu";
+@import "organization_lists";
 
 
 .clear {
@@ -65,6 +75,7 @@ body {
   font-size: 14px;
   color: $medium-color;
   background-color: #fff;
+  padding-top: 70px;
 }
 
 p {
@@ -76,13 +87,14 @@ p {
 
 h1 {
   font-family: 'brandon_med';
-  font-size: 58px;
+  font-size: 48px;
   letter-spacing: 3px;
   color: $light-color;
+  text-transform: uppercase;
 }
 
 h2 {
-  font-family: 'AkkBd_Pro';
+  font-family: 'Akklg_Pro';
   font-size: 38px;
   text-transform: none;
   letter-spacing: 2px;
@@ -115,6 +127,15 @@ a:hover,
 a:focus {
   color: $medium-color;
   text-decoration: none;
+}
+
+.pink-link {
+  a,
+  a:hover,
+  a:focus {
+    color: $accent-color;
+    text-decoration: none;
+  }
 }
 
 .dropdown-menu {
@@ -154,6 +175,58 @@ a:focus {
     opacity: 1;
   }
 
+.btn-menu {
+  color: $medium-color;
+  background-color: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 0;
+  margin: 0 10px 0 10px;
+}
+
+.btn-menu:hover,
+.btn-menu:focus,
+.btn-menu.focus,
+.btn-menu:active,
+.btn-menu.active,
+.open > .dropdown-toggle.btn-menu {
+  color: $medium-color;
+}
+
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.well {
+  padding: 10px;
+  margin: 5px 10px;
+  background-color: #fff;
+  border-radius: 0;
+}
+
+.pink {
+color: $accent-color;
+}
+
+.green {
+color: $green;
+}
+
+.centered-button {
+  margin-top: 30px;
+}
+
+.main-layout {
+  @media (min-width: $screen-sm-min) {
+    width: $container-sm;
+  }
+  @media (min-width: $screen-md-min) {
+    width: $container-md;
+  }
+  @media (min-width: $screen-lg-min) {
+    width: $container-lg;
+  }
+}
+
+.sublayout {
+  padding-top: 100px;
 }

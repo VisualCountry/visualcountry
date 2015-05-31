@@ -1,16 +1,28 @@
 <%= render 'layouts/user_navigation' %>
-<div class="container">
-  <div class="profile">
+<div class="interests">
+  <div class="text-center">
     <h2>Press</h2>
-    <h3>Share some stories or articles written about you.</h3>
+    <h5>Share some stories or articles written about you.</h5>
+  </div>
+  <div id="press" class="links-manager">
     <%= simple_form_for current_user, url: profile_press_path, html: { novalidate: true } do |f| %>
-      <div id="press" class="press">
+      <ol role="list-to-manage">
         <%= f.simple_fields_for :press do |press| %>
           <%= render 'press_fields', f: press %>
         <% end %>
-        <%= link_to_add_association 'add press', f, :press %>
+      </ol>
+      <div class="row">
+        <div class="col-sm-12">
+          <%= link_to_add_association f, :press, "data-association-insertion-node" => "[role='list-to-manage']" , "data-association-insertion-method" => :append do %>
+            <span class="glyphicon glyphicon-plus-sign green add-row">
+          <% end %>
+        </div>
       </div>
-      <%= f.submit %>
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <%= f.submit class: "btn btn-default centered-button" %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>

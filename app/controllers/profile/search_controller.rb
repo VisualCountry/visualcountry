@@ -1,6 +1,8 @@
 class Profile::SearchController < ApplicationController
   before_action :authorize_admin!
 
+  layout "application_with_sidebar"
+
   def index
     @profiles = ProfileSearchQuery.new(search_params).search
   end
@@ -18,10 +20,10 @@ class Profile::SearchController < ApplicationController
         :min_followers,
         :near,
         :query,
-        :gender,
         :ethnicity,
         :min_age,
         :max_age,
+        gender: [],
         social_profiles: [],
         focuses: [],
         interests: [],

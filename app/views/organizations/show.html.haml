@@ -1,0 +1,38 @@
+= render "layouts/organization_nav_bar"
+- if current_user.admin?
+  %p
+    = link_to edit_organization_path(@organization), class: 'glyphicon glyphicon-pencil', id: 'test-rename-organization' do
+      %span{:title => "Rename Organization"}
+  %p
+    = link_to @organization, method: :delete, class: 'glyphicon glyphicon-trash', id: 'test-delete-organization' do
+      %span{:title => "Delete Organization"}
+%h2 Lists
+- if current_user.admin?
+  %p Add list
+  = simple_form_for(:organization_list_membership, url: organization_list_memberships_path) do |f|
+    = f.hidden_field :organization_id, value: @organization.id
+    = f.input :influencer_list_id, as: :select, collection: @available_lists
+    = f.submit "Add List", class: 'btn btn-default'
+%ul
+  - @organization.influencer_lists.each do |list|
+    %li{class: "influencer-list-#{list.id}"}
+      .row
+        .col-sm-5.col-md-5
+          = link_to list.name, influencer_list_path(list), class: "client-input"
+        .col-sm-1.col-md-1
+          = link_to organization_list_membership_path(list.organization_membership(@organization)), method: :delete, class: "glyphicon glyphicon-remove-circle", id: 'test-remove-membership' do
+            %span{:title => "Remove List"}
+
+%h2 Members of Organization
+%ul
+  - @organization.users.each do |user|
+    %li
+      = link_to image_tag(user.picture.url(:medium), :size => '175', alt: 'Profile Pic'), profile_path(id: user.id)
+      %h4= link_to user.name, profile_path(user)
+      %p
+        %span.glyphicon.glyphicon-envelope{"aria-hidden" => "true"}
+        = mail_to user.email, user.email
+      %h5
+        = link_to organization_membership_path(user.organization_membership_in(@organization)), method: :delete, role: 'remove_user_from_organization', class: 'glyphicon glyphicon-remove-circle' do
+          %span{:title => "Remove Member From Organization"}
+      %p Remove User

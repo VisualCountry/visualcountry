@@ -1,5 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
 
+  layout "application_with_sidebar", only: [:update, :edit]
+
   protected
 
   def update_resource(resource, params)
@@ -17,6 +19,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(_)
-    profile_interests_path
+    edit_user_registration_path
   end
 end

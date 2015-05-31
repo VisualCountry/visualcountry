@@ -1,4 +1,5 @@
 // Core variables and mixins
+@import 'bootstrap-sprockets';
 @import "bootstrap/variables";
 
 
@@ -54,7 +55,6 @@ $container-lg: $container-md;
 // Utility classes
 @import "bootstrap/utilities";
 @import "bootstrap/responsive-utilities";
-@import 'bootstrap-sprockets';
 
 
 

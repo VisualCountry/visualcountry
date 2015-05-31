@@ -121,4 +121,22 @@ describe User do
       expect(user.owns_list?(list)).to eq false
     end
   end
+
+  describe "#can_manage_list" do
+    let(:organization) { create(:organization) }
+    let(:user) { create(:user) }
+    let(:list) { create(:influencer_list) }
+    before do
+      organization.add_user user
+    end
+    context 'when the user is a member of an organization the list belongs to' do
+      before do
+        organization.add_list list
+      end
+      specify { expect(user.can_manage_list?(list)).to eq true }
+    end
+    context 'when the user is not a member of an organization the list belogns to' do
+      specify { expect(user.can_manage_list?(list)).to eq false }
+    end
+  end
 end

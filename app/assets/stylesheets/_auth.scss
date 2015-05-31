@@ -64,10 +64,14 @@
 }
 
 .sign-up-form {
-  margin-top: 2em;
+  margin-top: 3em;
 
   @media (min-width: $md-breakpoint) {
-    margin-top: 4em;
+    margin-top: 3em;
+  }
+
+  h3 {
+  margin-top: 80px;
   }
 }
 
@@ -83,4 +87,18 @@
 .sign-up-button {
   @include margin(null auto null auto);
   display: block;
+}
+
+.sign-in-social-auth {
+  margin-top: 30px;
+}
+
+.sign-in-social-auth-buttons {
+  @media (min-width: $md-breakpoint) {
+      width: 210px;
+    }
+}
+
+.sign-in-button {
+  margin-bottom: 20px;
 }

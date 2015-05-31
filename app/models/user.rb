@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
 
   has_many :press
   has_many :influencer_lists, dependent: :destroy
-
   has_many :list_memberships, dependent: :destroy
 
   has_many :organization_memberships, dependent: :destroy
@@ -23,8 +22,11 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :press, allow_destroy: true
 
   has_attached_file :picture, :styles => { :medium => "300x300#", :thumb => "50x50#" }, :default_url => "missing.png"
+  crop_attached_file :picture
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
+
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
+  validates :bio, length: { maximum: 300 }
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -116,6 +118,17 @@ class User < ActiveRecord::Base
 
   def owns_list?(list)
     list.owner == self
+  end
+
+  def lists_member_of
+    list_memberships.map(&:influencer_list).compact
+  end
+
+  def can_manage_list?(list)
+    return true if admin?
+    return true if list.owner == self
+
+    list.organizations.where(id: organization_ids).any?
   end
 
   private

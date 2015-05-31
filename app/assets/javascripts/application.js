@@ -13,9 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.tokeninput
+//= require jquery.jcrop
+//= require papercrop
 //= require bootstrap
 //= require cocoon
 //= require video
+//= require owl.carousel
 //= require_tree .
 
 
@@ -27,7 +30,7 @@ $(document).ready(function() {
   // Initialize token inputs for user profile page
   $("#user_focus_tokens").tokenInput("/api/focuses.json", {
     searchingText: 'Searching...',
-    minChars: 1,
+    minChars: 0,
     preventDuplicates: true,
     prePopulate: $('#user_focus_tokens').data('pre'),
     theme: "visual-country",
@@ -36,9 +39,11 @@ $(document).ready(function() {
   // Manually set posters for mobile since Video.js doesn't automagically
   $('[data-videojs-thumbnail]').each(function(index, element) {
     var $id     = $(element).attr('id'),
-        $poster = $(element).data('videojs-thumbnail'),
-        player  = videojs($id);
+      $poster = $(element).data('videojs-thumbnail'),
+      player  = videojs($id);
 
     player.poster($poster);
-  })
+  });
+
 });
+

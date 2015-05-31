@@ -1,9 +1,19 @@
 <div class="brands-creators-marketing_page">
   <div class="container">
-    <%= render "pages/brands_jumbotron" %>
-    <%= render "pages/brand_campaign_stages" %>
+    <div class="row">
+      <%= render "pages/brands_jumbotron" %>
+      <%= render "pages/brand_campaign_stages" %>
+    </div>
+  </div>
+  <div class="row">
     <%= render "pages/brands_list" %>
     <%= render "pages/work_samples" %>
-    <%= render "shared/contact_form" %>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <%= render "shared/contact_form" %>
+      </div>
+    </div>
   </div>
 </div>

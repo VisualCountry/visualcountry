@@ -1,0 +1,10 @@
+.well.profile-card{ class: "user-#{user.id}"}
+  .text-center
+    = link_to image_tag(user.picture.url(:medium), :size => '250', alt: 'Profile Pic'), profile_path(id: user.id)
+  .all-social-icons
+    %h1{class: user.name.size > 20 ? "small-header" : ""}
+      =link_to user.name, profile_path(id: user.id)
+    %h2
+      %span.glyphicon.glyphicon-envelope{"aria-hidden" => "true"}
+      = mail_to user.email, user.email
+

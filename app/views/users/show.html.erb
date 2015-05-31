@@ -6,24 +6,46 @@
 
     <div class="col-sm-8">
       <h2><%= @user.name %></h2>
-      <h5><%= @user.focuses.pluck(:name).join(', ') %></h5>
-      <h4 class="user-bio"><%= @user.bio %></h4>
+      <h5><% if @user.website.present? %>
+        <%= @user.focuses.pluck(:name).join(', ') %>
+      <% elsif current_user == @user %>
+        <%= link_to edit_user_registration_path do %>
+          <span class="glyphicon glyphicon-plus-sign green" title="Add Focuses"></span> Add your skills
+        <% end %>
+      <% end %></h5>
+      <h4<% if @user.website.present? %>
+         class="user-bio"><%= @user.bio %>
+      <% elsif current_user == @user %>
+        <%= link_to edit_user_registration_path do %>
+          <span class="glyphicon glyphicon-plus-sign green" title="Create a Bio"></span> Add a bio
+        <% end %>
+      <% end %></h4>
 
       <ul class="user-meta">
-        <% if @user.city.present? %>
-          <li data-role="geo-contact">
+        <li data-role="geo-contact">
+          <% if @user.city.present? %>
             <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
             <%= @user.city %>
-          </li>
-        <% end %>
+          <% elsif current_user == @user %>
+            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+            <%= link_to edit_user_registration_path do %>
+              <span class="glyphicon glyphicon-plus-sign green" title="Add City"></span> add your city
+            <% end %>
+          <% end %>
+        </li>
 
-        <% if @user.website.present? %>
-          <li>
+        <li>
+          <% if @user.website.present? %>
             <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
             <%= link_to @user.website, "http://#{@user.website}" %>
-          </li>
-        <% end %>
-        <% if signed_in_admin? %>
+          <% elsif current_user == @user %>
+            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+            <%= link_to edit_user_registration_path do %>
+              <span class="glyphicon glyphicon-plus-sign green" title="Add Website"></span> add your website
+            <% end %>
+          <% end %>
+        </li>
+        <% if signed_in_admin? || current_user == @user %>
           <li>
             <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
             <%= mail_to @user.email, @user.email %>
@@ -33,38 +55,7 @@
     </div>
   </header>
 
-  <% if current_user.admin? %>
-    <div class="row">
-      <p>Add to lists</p>
-      <%= simple_form_for(:list_membership, url: list_memberships_path) do |f| %>
-        <%= f.hidden_field :profile_id, value: @user.id %>
-        <%= f.input :influencer_list_id, as: :select, collection: @available_lists %>
-        <%= f.submit "Add" %>
-      <% end %>
-    </div>
-  <% end %>
-
-  <% if @user.organizations.any? %>
-    <div class="row">
-      <p>Organizations:</p>
-      <ul>
-        <% @user.organizations.each do |organization| %>
-          <li><%= link_to organization.name, organization %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <% if current_user.admin? %>
-    <div class="row">
-      <p>Add to organization</p>
-      <%= simple_form_for(:organization_membership, url: organization_memberships_path) do |f| %>
-        <%= f.hidden_field :profile_id, value: @user.id %>
-        <%= f.input :organization_id, as: :select, collection: @available_organizations %>
-        <%= f.submit "Add to organization" %>
-      <% end %>
-    </div>
-  <% end %>
+  <%= render 'admin_user_options'%>
 
   <div class="row user-row user-total-follower-row">
     <dl class="user-total-follower-count col-sm-4">
@@ -80,21 +71,44 @@
   <div class="row">
     <div class="col-sm-4 user-subsection">
       <h2>Interests</h2>
-      <% @user.interests.each do |interest| %>
-        <button type="button" class="btn btn-default btn-interests"><%= interest.name %></button>
+      <% if @user.interests.present? %>
+        <% @user.interests.each do |interest| %>
+          <button type="button" class="btn btn-default btn-interests"><%= interest.name %></button>
+        <% end %>
       <% end %>
-      <p><%= @user.special_interests %></p>
+        <p><%= @user.special_interests %></p>
+      <% if current_user == @user %>
+        <%= link_to profile_interests_path do %>
+          <h4 class="text-center">Add Interests</h4>
+          <h4 class="text-center"><span class="glyphicon glyphicon-plus-sign green" title="Add Interests"></span></h4>
+        <% end %>
+      <% end %>
     </div>
+
     <div class="col-sm-4 user-subsection">
       <h2>Press</h2>
-      <% @user.press.each do |press| %>
-        <h5><%= link_to press.name, press.url %></h5>
+      <% if @user.press.present? %>
+        <% @user.press.each do |press| %>
+          <h5><%= link_to press.name, press.url %></h5>
+        <% end %>
+      <% elsif current_user == @user %>
+        <%= link_to profile_press_path do %>
+          <h4 class="text-center">Add Press</h4>
+          <h4 class="text-center"><span class="glyphicon glyphicon-plus-sign green" title="Add Press"></span></h4>
+        <% end %>
       <% end %>
     </div>
     <div class="col-sm-4 user-subsection">
       <h2>Clients</h2>
-      <% @user.clients.each do |client| %>
-        <h5><%= link_to client.name, client.url %></h5>
+      <% if @user.clients.present? %>
+        <% @user.clients.each do |client| %>
+          <h5><%= link_to client.name, client.url %></h5>
+        <% end %>
+      <% elsif current_user == @user %>
+        <%= link_to profile_clients_path do %>
+          <h4 class="text-center">Add Clients</h4>
+          <h4 class="text-center"><span class="glyphicon glyphicon-plus-sign green" title="Add Clients"></span></h4>
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -117,6 +131,12 @@
         </div>
       <% end %>
     </div>
+  <% elsif current_user == @user %>
+    <h6>Recent Instagram Posts</h6>
+    <%= link_to profile_social_path do %>
+      <h4 class="text-center">Connect your Instagram profile to showcase your latests posts.</h4>
+      <h4 class="text-center"><span class="glyphicon glyphicon-plus-sign green" title="Connect Vine"></span></h4>
+    <% end %>
   <% end %>
 
   <% if @user.vine_media %>
@@ -144,6 +164,12 @@
             </li>
           </ul>
         </div>
+      <% end %>
+    <% elsif current_user == @user %>
+    <h6>Recent Vine Videos</h6>
+      <%= link_to profile_social_path do %>
+        <h4 class="text-center">Connect your Vine profile to showcase your latests posts.</h4>
+        <h4 class="text-center"><span class="glyphicon glyphicon-plus-sign green" title="Connect Vine"></span></h4>
       <% end %>
     <% end %>
   </div>

@@ -1,0 +1,60 @@
+= render "layouts/user_navigation"
+.social-profile
+  .row.text-center
+    %h2 Social Profiles
+    %h3 Connect your accounts
+    - if current_user.total_follower_count.present?
+      %dl.total-reach
+        %dd.total-reach-count= number_with_delimiter(current_user.total_follower_count)
+        %dt Total Reach
+  .row
+    .col-md-8.col-md-offset-2
+      %h5 Connect at least 2 accounts.
+      %ul.social-profiles
+        %li.social-profile
+          = embedded_svg "vine_logo.svg"
+          %h4.social-network Vine
+          - if current_user.vine_token?
+            %p.social-follower-count
+              followed by: #{number_with_delimiter(current_user.vine_follower_count)}
+            = render "shared/social_connection_link", social_link: profile_link_vine_path
+          - else
+            = link_to "Connect", new_profile_link_vine_path, class: "btn btn-default"
+        %li.social-profile
+          = embedded_svg "twitter_logo.svg"
+          %h4.social-network Twitter
+          - if current_user.twitter_token?
+            %p.social-follower-count
+              followed by: #{number_with_delimiter(current_user.twitter_follower_count)}
+            = render "shared/social_connection_link", social_link: profile_link_twitter_path
+          - else
+            = link_to "Connect", user_omniauth_authorize_path(:twitter), class: "btn btn-default"
+        %li.social-profile
+          = embedded_svg "instagram_logo.svg"
+          %h4.social-network Instagram
+          - if current_user.instagram_token?
+            %p.social-follower-count
+              followed by: #{number_with_delimiter(current_user.instagram_follower_count)}
+            = render "shared/social_connection_link", social_link: profile_link_instagram_path
+          - else
+            = link_to "Connect", user_omniauth_authorize_path(:instagram), class: "btn btn-default"
+        %li.social-profile
+          = embedded_svg "facebook_logo.svg"
+          %h4.social-network Facebook
+          - if current_user.facebook_token?
+            %p.social-follower-count
+              followed by: #{number_with_delimiter(current_user.facebook_follower_count)}
+            = render "shared/social_connection_link", social_link: profile_link_facebook_path
+          - else
+            = link_to "Connect", user_omniauth_authorize_path(:facebook), class: "btn btn-default"
+        %li.social-profile
+          = embedded_svg "pinterest_logo.svg"
+          %h4.social-network Pinterest
+          - if current_user.pinterest_token?
+            %p.social-follower-count
+              followed by: #{number_with_delimiter(current_user.pinterest_follower_count)}
+            = render "shared/social_connection_link", social_link: profile_link_pinterest_path
+          - else
+            = link_to "Coming Soon", "#pinterest", class: "btn btn-default"
+  .text-center
+    = link_to "Continue", edit_user_registration_path, class: "btn btn-default centered-button"

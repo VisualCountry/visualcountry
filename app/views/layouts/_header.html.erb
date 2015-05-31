@@ -1,5 +1,5 @@
 <div class="header">
-  <nav class="navbar navbar-default" role="navigation">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
          <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -16,57 +16,30 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
              <ul class="nav nav-pills pull-right" role="tablist">
                <% if current_user.admin? %>
-                <li><%= link_to profile_search_path do %><p><span class="glyphicon glyphicon-search pink" title="Search Users"></span></p><% end %></li>
-                <li><%= link_to admin_path do %><p><span class="glyphicon glyphicon-stats pink" title="Admin Dashboard"></span></p><% end %></li>
-                <li><%= link_to influencer_lists_path do %><p><span class="glyphicon glyphicon-list pink" title="Influencers Lists"></span></p><% end %></li>
+                <li><%= link_to "Production by Meagan Cignoli", "http://www.ilovemeagan.com", target: :_blank, title: "production by meagan cignoli", class: "ilovemeagan-link"%></li>
+                <li><%= link_to profile_search_path do %><h4><span class="glyphicon glyphicon-search pink" title="Search Users"></span></h4><% end %></li>
+                <li><%= link_to admin_path do %><h4><span class="glyphicon glyphicon-stats pink" title="Admin Dashboard"></span></h4><% end %></li>
+                <li><%= link_to influencer_lists_path do %><h4><span class="glyphicon glyphicon-list pink" title="Lists"></span></h4><% end %></li>
+                <li><%= link_to organizations_path do %><h4><span class="glyphicon glyphicon glyphicon-user pink" title="Organizations"></span></h4><% end %></li>
                 <li><%= link_to(image_tag(current_user.picture.url(:thumb), :class =>"navbar-profile", :alt => "Profile Pic", :title => "Profile"), profile_path(current_user)) %></li>
-                <li><%= link_to current_user.name, profile_path(current_user)%></li>
-
-                <ul class="nav navbar-nav pull-right">
-                  <li class="dropdown">
-                    <li class="dropdown-toggle" data-toggle="dropdown"><%= image_tag("settings_icon.svg", :alt => "settings_icon", :class => "dropdown-toggle settings-icon", :data => {:toggle=>"dropdown"}) %>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><%= link_to 'Settings', edit_user_registration_path, method: :get %></li>
-                        <li><%= link_to 'Profile', profile_path(current_user), method: :get %></li>
-                        <li><%= link_to 'Search', profile_search_path, method: :get %></li>
-                        <li><%= link_to 'Dashboard', admin_path, method: :get %></li>
-                        <li class="divider"></li>
-                        <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-                      </ul>
-                    </li>
-                  </li>
-                </ul>
+                <li><h5><%= link_to current_user.name, profile_path(current_user)%></h5></li>
+                <li><%= link_to edit_user_registration_path, method: :get do %><h4><span class="glyphicon glyphicon-cog pink" title="User Settings"></span></h4><% end %></li>
+                <li><%= link_to destroy_user_session_path, method: :delete do %><h4><span class="glyphicon glyphicon-off pink" title="Log Out"></span></h4><% end %></li>
 
                <% elsif current_user.has_account? %>
-                <li><%= link_to edit_user_registration_path do %><p><span class="glyphicon glyphicon-info-sign pink" title="Edit Basic Info"></span></p><% end %></li>
-                <li><%= link_to profile_social_path do %><p><span class="glyphicon glyphicon-plus-sign pink" title="Connect Social Profiles"></span></p><% end %></li>
-                <li><%= link_to profile_interests_path do %><p><span class="glyphicon glyphicon-pencil pink" title="Edit Interests"></span></p><% end %></li>
-                <li><%= link_to profile_press_path do %><p><span class="glyphicon glyphicon-bullhorn pink" title="Edit Press"></span></p><% end %></li>
-                <li><%= link_to profile_clients_path do %><p><span class="glyphicon glyphicon-briefcase pink" title="Edit Clients"></span></p><% end %></li>
-                <li><%= link_to faq_path do %><p><span class="glyphicon glyphicon-question-sign pink" title="Help"></span></p><% end %></li>
+                <li><%= link_to "Production by Meagan Cignoli", "http://www.ilovemeagan.com", target: :_blank, title: "production by meagan cignoli", class: "ilovemeagan-link"%></li>
+                <li><%= link_to influencer_lists_path do %><h4><span class="glyphicon glyphicon-list pink" title="Lists"></span></h4><% end %></li>
                 <li><%= link_to(image_tag(current_user.picture.url(:thumb), :class =>"navbar-profile", :alt => "Profile Pic", :title => "Profile"), profile_path(current_user)) %></li>
-                <li><%= link_to current_user.name, profile_path(current_user), :title => "User"%></li>
-
-                <ul class="nav navbar-nav pull-right">
-                  <li class="dropdown">
-                    <li class="dropdown-toggle" data-toggle="dropdown"><%= image_tag("settings_icon.svg", :alt => "settings_icon", :class => "dropdown-toggle settings-icon",:title => "Settings", :data => {:toggle=>"dropdown"}) %>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><%= link_to 'Settings', edit_user_registration_path, method: :get %></li>
-                        <li><%= link_to 'Profile', profile_path(current_user), method: :get %></li>
-                        <li><%= link_to 'Search', profile_search_path, method: :get %></li>
-                        <li><%= link_to 'Dashboard', admin_path, method: :get %></li>
-                        <li class="divider"></li>
-                        <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-                      </ul>
-                    </li>
-                  </li>
-                </ul>
+                <li><h5><%= link_to current_user.name, profile_path(current_user)%></h5></li>
+                <li><%= link_to edit_user_registration_path, method: :get do %><h4><span class="glyphicon glyphicon-cog pink" title="User Settings"></span></h4><% end %></li>
+                <li><%= link_to destroy_user_session_path, method: :delete do %><h4><span class="glyphicon glyphicon-off pink" title="Log Out"></span></h4><% end %></li>
 
                <% else %>
+                <li><%= link_to "Production by Meagan Cignoli", "http://www.ilovemeagan.com", target: :_blank, title: "production by meagan cignoli", class: "ilovemeagan-link"%></li>
                 <li><%= link_to 'Content Creators', content_creators_path, :class =>"navbar-titles", :alt => "Content Creators" %></li>
                 <li><%= link_to 'Brands / Agencies', brands_agencies_path, :class =>"navbar-titles", :alt => "Content Creators"%></li>
-                <li><%= link_to 'Sign In', new_user_session_path %></li>
-                <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+                <li><%= link_to 'Sign In', new_user_session_path, :class =>"navbar-titles" %></li>
+                <li><%= link_to 'Sign Up', new_user_registration_path, :class =>"navbar-titles" %></li>
                <% end %>
             </ul><!-- /nav nav-pills  -->
 

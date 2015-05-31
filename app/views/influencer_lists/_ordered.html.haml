@@ -1,0 +1,6 @@
+%table.table.table-striped
+  -lists.each_with_index do |list, index|
+    %tr
+      %td{style: "width: 25px;"}= index + 1
+      %td
+        =link_to list.name, influencer_list_path(id: list.uuid)

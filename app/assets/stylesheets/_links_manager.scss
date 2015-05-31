@@ -1,0 +1,33 @@
+.links-manager {
+  text-align: center;
+  ol {
+    list-style-type: decimal;
+    padding-left: 15px;
+    width: 75%;
+    display: inline-block;
+  }
+
+  .input-groups {
+    input {
+      margin-bottom: 0px ;
+    }
+  }
+
+  .remove-button {
+    margin-top: 30px;
+    font-size: 26px;
+  }
+
+  .list-row {
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 15px;
+    padding-left: 15px;
+  }
+
+  .add-row {
+    font-size: 26px;
+    text-align: center;
+  }
+
+}

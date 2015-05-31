@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def close_nested_form_icon
-    content_tag :span, '', class: 'glyphicon glyphicon-inbox'
+    content_tag :span, '', class: 'glyphicon glyphicon-remove-circle'
   end
 
   def truncated_count(count)
@@ -56,6 +56,16 @@ module ApplicationHelper
       "active"
     else
       ""
+    end
+  end
+
+  def bootstrap_class_for flash_type
+    { success: "alert-success", error: "alert-danger", alert: "alert-warning", notice: "alert-info" }.stringify_keys[flash_type] || flash_type.to_s
+  end
+
+  def flash_messages(opts = {})
+    flash.each do |msg_type, message|
+      yield bootstrap_class_for(msg_type), message
     end
   end
 end

@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
     super || Guest.new
   end
 
+  def after_sign_in_path_for(resource)
+    request.env['omniauth.origin'] || profile_path(resource)
+  end
+
   protected
 
   def configure_permitted_parameters
