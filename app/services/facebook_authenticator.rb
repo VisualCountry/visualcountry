@@ -24,7 +24,7 @@ class FacebookAuthenticator
     if can_update_facebook_token?
       user.update_without_password(
         facebook_token: token,
-        facebook_token_expiration: expiry,
+        facebook_token_expires_at: expiry,
       )
       user
     end
