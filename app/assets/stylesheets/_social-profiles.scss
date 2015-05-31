@@ -75,7 +75,7 @@
 }
 
 .social-profile__connected {
-  @extend .glyphicon-ok;
+  @extend .glyphicon-ok-sign;
   @extend .green;
   font-size: 30px;
   width: 30px;
@@ -83,6 +83,6 @@
 
 }
 .social-profile__connected:hover {
-  @extend .glyphicon-remove;
-  color: red;
+  @extend .glyphicon-remove-sign;
+  color: $light-color;
 }

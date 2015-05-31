@@ -130,6 +130,15 @@ a:focus {
   text-decoration: none;
 }
 
+.pink-link {
+  a,
+  a:hover,
+  a:focus {
+    color: $accent-color;
+    text-decoration: none;
+  }
+}
+
 .dropdown-menu {
   left: -120px;
   text-align: right;
