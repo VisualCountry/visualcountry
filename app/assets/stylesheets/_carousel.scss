@@ -5,6 +5,9 @@
   text-align: center;
 }
 
+.marketing-links {
+  margin-top: 50px;
+}
 
 
 @media (min-width: 240px) {
@@ -41,7 +44,7 @@
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  margin-top: 40px;
+  margin-top: 90px;
 }
 
 .carousel__item{
@@ -61,6 +64,7 @@
 
 .carousel__navigation{
   text-align: center;
+  margin-top: 210px;
   .btn {
     font-size: 20px;
     margin: 0 0px;
