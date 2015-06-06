@@ -6,18 +6,20 @@
 
     <div class="col-sm-8">
       <h2><%= @user.name %></h2>
-      <h5><% if @user.website.present? %>
+
+      <h5><% if @user.focuses.present? %>
         <%= @user.focuses.pluck(:name).join(', ') %>
       <% elsif current_user == @user %>
         <%= link_to edit_user_registration_path do %>
-          <span class="glyphicon glyphicon-plus-sign green" title="Add Focuses"></span> Add your skills
+          <span class="glyphicon glyphicon-plus-sign green" title="Add Website"></span> Add your skills
         <% end %>
       <% end %></h5>
-      <h4<% if @user.website.present? %>
-         class="user-bio"><%= @user.bio %>
+
+      <h4><% if @user.bio.present? %>
+        <%= @user.bio  %>
       <% elsif current_user == @user %>
         <%= link_to edit_user_registration_path do %>
-          <span class="glyphicon glyphicon-plus-sign green" title="Create a Bio"></span> Add a bio
+          <span class="glyphicon glyphicon-plus-sign green" title="Add Bio"></span> Add your Bio
         <% end %>
       <% end %></h4>
 
@@ -75,14 +77,13 @@
         <% @user.interests.each do |interest| %>
           <button type="button" class="btn btn-default btn-interests"><%= interest.name %></button>
         <% end %>
-      <% end %>
-        <p><%= @user.special_interests %></p>
-      <% if current_user == @user %>
+      <% elsif current_user == @user %>
         <%= link_to profile_interests_path do %>
           <h4 class="text-center">Add Interests</h4>
           <h4 class="text-center"><span class="glyphicon glyphicon-plus-sign green" title="Add Interests"></span></h4>
         <% end %>
       <% end %>
+      <p><%= @user.special_interests %></p>
     </div>
 
     <div class="col-sm-4 user-subsection">
@@ -118,7 +119,7 @@
     <div class="row user-social-instagram">
       <% @user.instagram_media.first(9).each do |instagram_picture| %>
         <div class="col-sm-6 col-md-4">
-          <%= link_to(image_tag(instagram_picture['images']['standard_resolution']['url'], class: 'platform-media'),instagram_picture['link']) %>
+          <%= link_to(image_tag(instagram_picture['images']['standard_resolution']['url'], class: 'platform-media'), instagram_picture['link']) %>
           <ul class="user-post-icons">
             <li class="user-post-icon">
               <span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span>
