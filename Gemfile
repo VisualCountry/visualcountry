@@ -77,7 +77,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'vcr'
   gem 'webmock'
-  gem 'selenium-webdriver'
+  gem 'poltergeist'
   gem 'database_cleaner'
 end
 
