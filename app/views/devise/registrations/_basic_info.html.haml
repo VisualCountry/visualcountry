@@ -8,11 +8,13 @@
         = f.input :picture, :as => :file, label: (render "label_for_image_upload", f: f), input_html: { role: "auto-submit-file" }
     .col-md-7
       .form-group
+        %label Skills
         = f.input :focus_tokens, as: :text, id: "focus_tokens", input_html: { data: { pre: current_user.focuses.map(&:attributes) }, class: "flat-form-control" }, label: false
         .form-help-text
-          Choose some focuses that best describe your strongests skills. Are
+          Choose some skills that best describe what you love to do. Are
           you a director, model, animator, viner, makeup artist?
       .form-group
+        %label Bio
         = f.text_area :bio, as: :text, autofocus: true, class: "flat-form-control basic-info__bio", placeholder: 'Short Bio'
         .form-help-text
           max 300 characters
