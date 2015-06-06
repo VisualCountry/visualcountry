@@ -185,4 +185,10 @@ class User < ActiveRecord::Base
   def follower_counts
     FOLLOWER_COUNT_METHODS.map { |p| send(p) }.compact
   end
+
+  protected
+
+  def confirmation_required?
+    facebook_token? ? false : true
+  end
 end

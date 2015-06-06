@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150519133354) do
+ActiveRecord::Schema.define(version: 20150606163805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
 
   create_table "clients", force: true do |t|
     t.string   "name"
@@ -173,6 +172,7 @@ ActiveRecord::Schema.define(version: 20150519133354) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.text     "special_interests"
+    t.text     "facebook_uid"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

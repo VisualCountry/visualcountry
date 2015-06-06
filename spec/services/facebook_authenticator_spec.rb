@@ -1,54 +1,64 @@
 require "rails_helper"
 
 describe FacebookAuthenticator do
-  describe "#authenticate" do
-    it "finds, updates, and returns an existing user if one exists" do
-      user = create(:user)
-      expiration = 1.week.from_now
-      auth_data = {
-        "info" => {
-          "email" => user.email,
+  let(:uid) { '42' }
+  let(:email) { 'pickle.lee@gmail.com' }
+  let(:name) { 'Pickle Lee' }
+  let(:token) { 'kittens' }
+  let(:expires_at) { 1.week.from_now }
+  let(:gender) { 'Female' }
+  let(:auth_data) do
+    {
+      "uid" => uid,
+      "info" => {
+        "email" => email,
+      },
+      "credentials" => {
+        "token" => token,
+        "expires_at" => expires_at,
+      },
+      "extra" => {
+        "raw_info" => {
+          "name" => name,
+          "gender" => gender,
         },
-        "credentials" => {
-          "token" => "my-new-token",
-          "expires_at" => expiration,
-        },
-      }
-      authenticator = FacebookAuthenticator.new(auth_data)
+      },
+    }
+  end
 
-      updated_user = authenticator.authenticate
+  context 'user is already signed in' do
+    let!(:user) { create :user, email: email, name: name, gender: gender }
 
-      expect(updated_user.id).to eq user.id
-      expect(updated_user.facebook_token).to eq "my-new-token"
-      expect(updated_user.facebook_token_expiration).to eq Time.at(expiration)
+    subject { FacebookAuthenticator.from_current_user(user, auth_data) }
+
+    it 'finds and updates the Facebook attributes on User' do
+      subject
+      expect(user.facebook_uid).to eq uid
+      expect(user.facebook_token).to eq token
+      expect(user.facebook_token_expiration).to eq Time.at(expires_at)
     end
 
-    it "creates and authenticates a new user if one doesn't exist" do
-      user = build(:user)
-      expiration = 1.week.from_now
-      auth_data = {
-        "info" => {
-          "email" => user.email,
-        },
-        "credentials" => {
-          "token" => "my-new-token",
-          "expires_at" => expiration,
-        },
-        "extra" => {
-          "raw_info" => {
-            "name" => user.name,
-          },
-        },
-      }
-      authenticator = FacebookAuthenticator.new(auth_data)
+    it 'does not create a new user' do
+      expect { subject }.to_not change { User.count }
+    end
+  end
 
-      updated_user = authenticator.authenticate
+  context 'new user' do
+    subject { FacebookAuthenticator.from_facebook_login(auth_data) }
 
-      expect(updated_user.email).to eq user.email
-      expect(updated_user.name).to eq user.name
-      expect(updated_user.gender).to eq user.gender
-      expect(updated_user.facebook_token).to eq "my-new-token"
-      expect(updated_user.facebook_token_expiration).to eq Time.at(expiration)
+    it 'creates a new user' do
+      expect { subject }.to change { User.count }.by(1)
+    end
+
+    it 'sets the user data appropriately' do
+      updated_user = subject
+
+      expect(updated_user.email).to eq email
+      expect(updated_user.name).to eq name
+      expect(updated_user.gender).to eq gender
+      expect(updated_user.facebook_uid).to eq uid
+      expect(updated_user.facebook_token).to eq token
+      expect(updated_user.facebook_token_expiration).to eq Time.at(expires_at)
     end
   end
 end

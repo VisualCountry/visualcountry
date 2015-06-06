@@ -1,6 +1,10 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
-    user = FacebookAuthenticator.new(auth_data).authenticate
+    if current_user.has_account?
+      user = FacebookAuthenticator.from_current_user(current_user, auth_data)
+    else
+      user = FacebookAuthenticator.from_facebook_login(auth_data)
+    end
 
     if user
       sign_in(user)
