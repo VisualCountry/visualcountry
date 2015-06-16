@@ -3,5 +3,6 @@ class Admin::DashboardController < ApplicationController
   layout "application_with_sidebar"
 
   def index
+    @users = User.all.by_created_at.page(params[:page])
   end
 end

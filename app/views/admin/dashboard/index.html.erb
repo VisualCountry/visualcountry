@@ -20,3 +20,26 @@
       <% end %>
     </div>
   </div>
+</div>
+
+<div class="sub-layout">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Influencer Name</th>
+          <th>Followers</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= link_to user.name, profile_path(user) %></td>
+            <td><%= user.total_follower_count %></td>
+          </tr>
+        <% end  %>
+      </tbody>
+    </table>
+  </div>
+  <%= paginate @users %>
+</div>
