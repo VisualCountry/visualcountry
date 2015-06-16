@@ -53,9 +53,13 @@ gem 'simple_form'
 # Debuggers
 gem 'pry-rails'
 
+# Front End
 gem 'owlcarousel-rails'
 gem 'haml'
 gem 'papercrop'
+
+# pagination
+gem 'kaminari'
 
 group :production, :staging do
   gem 'rails_12factor'

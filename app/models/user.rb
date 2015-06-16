@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
   validates :bio, length: { maximum: 300 }
 
+  scope :by_created_at, -> { order(created_at: :desc) }
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :confirmable,
