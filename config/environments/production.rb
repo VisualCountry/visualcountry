@@ -89,12 +89,12 @@ Rails.application.configure do
   }
 
   config.action_mailer.smtp_settings = {
-    address:              'smtp.mandrillapp.com',
-    port:                 25,
+    address:              ENV.fetch('SMTP_HOST'),
+    port:                 ENV.fetch('SMTP_PORT'),
     enable_starttls_auto: true,
-    user_name:            ENV.fetch('MANDRILL_USERNAME'),
-    password:             ENV.fetch('MANDRILL_APIKEY'),
-    authentication:       'login',
+    user_name:            ENV.fetch('SMTP_USERNAME'),
+    password:             ENV.fetch('SMTP_PASSWORD'),
+    authentication:       ENV.fetch('SMTP_AUTHENTICATION'),
     domain:               ENV.fetch('SMTP_DOMAIN'),
   }
 end
