@@ -62,6 +62,9 @@ gem 'papercrop'
 # pagination
 gem 'kaminari'
 
+# Caching
+gem 'redis-rails'
+
 group :production, :staging do
   gem 'rails_12factor'
   gem 'raygun4ruby'
