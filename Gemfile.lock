@@ -31,6 +31,7 @@ GEM
     arel (5.0.1.20140414130214)
     autoprefixer-rails (3.0.1.20140826)
       execjs
+    awesome_print (1.6.1)
     aws-sdk (1.20.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4, < 1.6.0)
@@ -324,6 +325,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  awesome_print
   aws-sdk (~> 1.20.0)
   better_errors
   binding_of_caller

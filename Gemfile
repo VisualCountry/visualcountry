@@ -52,6 +52,7 @@ gem 'simple_form'
 
 # Debuggers
 gem 'pry-rails'
+gem 'awesome_print'
 
 # Front End
 gem 'owlcarousel-rails'
