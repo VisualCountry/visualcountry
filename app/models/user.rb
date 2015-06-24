@@ -63,6 +63,10 @@ class User < ActiveRecord::Base
 
   after_validation :normalize_city_name, if: :city_changed?
 
+  def self.total_reach
+    sum(:total_follower_count)
+  end
+
   def update_total_follower_count!
     return unless (changed & FOLLOWER_COUNT_COLUMNS).present?
 

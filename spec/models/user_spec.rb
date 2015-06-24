@@ -69,6 +69,19 @@ describe User do
     end
   end
 
+  describe ".total_reach" do
+    let(:total_user_count) { 10 }
+    let(:total_follower_count) { 10000 }
+
+    before do
+      create_list :user, total_user_count, total_follower_count: total_follower_count
+    end
+
+    it "Returns the total reach of all users across Visual Country" do
+      expect(User.total_reach).to eq total_user_count * total_follower_count
+    end
+  end
+
   describe "#lists_without" do
     it "returns the lists that the user's not on" do
       user = create(:user)
