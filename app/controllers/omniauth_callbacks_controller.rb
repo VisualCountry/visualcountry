@@ -1,5 +1,9 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
+    unless facebook_client.permissions.include? :user_friends
+      return redirect_to root_path, alert: "Whoops! It looks like you didn't share the required Facebook permissions. Please try again."
+    end
+
     if current_user.has_account?
       user = FacebookAuthenticator.from_current_user(current_user, auth_data)
     else
@@ -41,5 +45,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def auth_data
     request.env["omniauth.auth"]
+  end
+
+  def facebook_client
+    FacebookAdapter.new(auth_data.fetch('credentials').fetch('token'))
   end
 end
