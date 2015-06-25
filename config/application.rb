@@ -22,6 +22,6 @@ module Visualcountry
     # config.i18n.default_locale = :de
 
     # include files inside lib
-    config.autoload_paths += %W(#{config.root}/lib #{config.root}/app/services)
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end

@@ -65,6 +65,10 @@ gem 'kaminari'
 # Caching
 gem 'redis-rails'
 
+# Workers
+gem 'sidekiq'
+gem 'sinatra', require: false # Dependency of Sidekiq Web UI
+
 group :production, :staging do
   gem 'rails_12factor'
   gem 'raygun4ruby'
