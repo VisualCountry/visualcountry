@@ -8,12 +8,16 @@ class VineAdapter < BaseAdapter
   end
 
   def media
-    @media ||= Rails.cache.fetch("vine-media-#{service_token}") do
+    @media ||= Rails.cache.fetch(media_cache_key, expires_in: 6.hours) do
       client.media
     end
   end
 
   private
+
+  def media_cache_key
+    "vine-media-#{service_token}-v2"
+  end
 
   def client
     @client ||= Vine.new(service_token)
