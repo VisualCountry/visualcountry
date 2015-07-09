@@ -61,10 +61,10 @@ describe OmniauthCallbacksController do
 
     context 'user did not provide appropriate permissions' do
       let(:user) { build_stubbed :user }
-      let(:facebook_adapter) { double(permissions: []) }
+      let(:facebook_adapter) { double(permissions: [], deauthenticate: true) }
 
       before do
-        expect(FacebookAdapter).to receive(:new).and_return facebook_adapter
+        allow(FacebookAdapter).to receive(:new).and_return facebook_adapter
       end
 
       it 'redirects to the homepage with an error' do

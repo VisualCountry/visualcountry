@@ -1,6 +1,7 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     unless facebook_client.permissions.include? :user_friends
+      facebook_client.deauthenticate
       return redirect_to root_path, alert: "Whoops! It looks like you didn't share the required Facebook permissions. Please try again."
     end
 
