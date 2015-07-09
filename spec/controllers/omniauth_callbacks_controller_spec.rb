@@ -6,60 +6,87 @@ describe OmniauthCallbacksController do
   end
 
   describe "GET facebook" do
-    it "we have a facebook user and can successfully update the token" do
-      user = create(:user)
+    context 'user gave appropriate permissions' do
+      let(:facebook_adapter) do
+        double(permissions: [
+          :user_friends, :user_posts, :read_stream, :email, :public_profile
+        ])
+      end
 
-      request.env["omniauth.auth"] = {
-        "info" => {
-          "email" => user.email,
-        },
-        "credentials" => {
-          "token" => "my-facebook-token",
-          "expires_at" => 1.week.from_now,
-        },
-      }
-      get :facebook
+      before do
+        expect(FacebookAdapter).to receive(:new).and_return facebook_adapter
+      end
 
-      expect(controller.current_user).to eq user
-      expect(response).to redirect_to profile_social_path
-    end
+      it "we have a facebook user and can successfully update the token" do
+        user = create(:user)
 
-    it "we have a facebook user but can't update the token" do
-      user = create(:user)
-
-      request.env["omniauth.auth"] = {
-        "info" => {
-          "email" => user.email,
-        },
-      }
-      get :facebook
-
-      expect(controller.current_user).not_to have_account
-      expect(response).to redirect_to root_path
-      expect(flash[:alert]).to eq "Unable to sign into Facebook"
-    end
-
-    it "we don't have a facebook user and can create one" do
-      user = build(:user)
-
-      request.env["omniauth.auth"] = {
-        "info" => {
-          "email" => user.email,
-        },
-        "extra" => {
-          "raw_info" => {
-            "name" => user.name,
+        request.env["omniauth.auth"] = {
+          "info" => {
+            "email" => user.email,
           },
-        },
-        "credentials" => {
-          "token" => "my-facebook-token",
-          "expires_at" => 1.week.from_now,
-        },
-      }
-      get :facebook
+          "credentials" => {
+            "token" => "my-facebook-token",
+            "expires_at" => 1.week.from_now,
+          },
+        }
+        get :facebook
 
-      expect(controller.current_user.email).to eq user.email
-      expect(response).to redirect_to profile_social_path
+        expect(controller.current_user).to eq user
+        expect(response).to redirect_to profile_social_path
+      end
+
+      it "we don't have a facebook user and can create one" do
+        user = build(:user)
+
+        request.env["omniauth.auth"] = {
+          "info" => {
+            "email" => user.email,
+          },
+          "extra" => {
+            "raw_info" => {
+              "name" => user.name,
+            },
+          },
+          "credentials" => {
+            "token" => "my-facebook-token",
+            "expires_at" => 1.week.from_now,
+          },
+        }
+        get :facebook
+
+        expect(controller.current_user.email).to eq user.email
+        expect(response).to redirect_to profile_social_path
+      end
+    end
+
+    context 'user did not provide appropriate permissions' do
+      let(:user) { build_stubbed :user }
+      let(:facebook_adapter) { double(permissions: []) }
+
+      before do
+        expect(FacebookAdapter).to receive(:new).and_return facebook_adapter
+      end
+
+      it 'redirects to the homepage with an error' do
+        request.env["omniauth.auth"] = {
+          "info" => {
+            "email" => user.email,
+          },
+          "extra" => {
+            "raw_info" => {
+              "name" => user.name,
+            },
+          },
+          "credentials" => {
+            "token" => "my-facebook-token",
+            "expires_at" => 1.week.from_now,
+          },
+        }
+        get :facebook
+
+        expect(response).to redirect_to root_path
+        expect(flash[:alert]).to include 'Whoops!'
+      end
     end
   end
 

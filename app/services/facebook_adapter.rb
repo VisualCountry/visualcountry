@@ -1,15 +1,35 @@
-class FacebookAdapter < BaseAdapter
+class FacebookAdapter
+  def initialize(token)
+    @token = token
+  end
+
   def self.from_user(user)
-    super(user, :facebook)
+    return unless token = user.facebook_token
+
+    new(token)
   end
 
   def follower_count
     client.get_connections('me', 'friends').raw_response['summary']['total_count']
   end
 
+  def permissions
+    granted_permissions.map { |permission| permission.fetch('permission').to_sym }
+  end
+
   private
 
+  attr_reader :token
+
+  def granted_permissions
+    raw_permissions.select { |permission| permission.fetch('status') == 'granted' }
+  end
+
+  def raw_permissions
+    client.get_connections('me', 'permissions')
+  end
+
   def client
-    @client ||= Koala::Facebook::API.new(service_token)
+    @client ||= Koala::Facebook::API.new(token)
   end
 end
