@@ -17,6 +17,10 @@ class FacebookAdapter
     granted_permissions.map { |permission| permission.fetch('permission').to_sym }
   end
 
+  def deauthenticate
+    client.delete_connections('me', 'permissions')
+  end
+
   private
 
   attr_reader :token
