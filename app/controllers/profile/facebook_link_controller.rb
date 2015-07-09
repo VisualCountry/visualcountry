@@ -1,6 +1,6 @@
 class Profile::FacebookLinkController < ApplicationController
   def destroy
-    if current_user.update(facebook_token: nil, cached_facebook_follower_count: nil)
+    if current_user.update(facebook_token: nil, cached_facebook_follower_count: nil, facebook_uid: nil)
       redirect_to profile_social_path
     else
       current_user.reload
