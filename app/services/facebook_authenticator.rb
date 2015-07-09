@@ -24,7 +24,18 @@ class FacebookAuthenticator
   attr_reader :auth_data
 
   def find_or_create_user
-    User.find_or_create_by(facebook_uid: uid, email: email) do |user|
+    existing_user || create_user
+  end
+
+  def existing_user
+    user_from_facebook_uid = User.find_by(facebook_uid: uid)
+    user_from_facebook_email = User.find_by(email: email)
+
+    user_from_facebook_uid || user_from_facebook_email
+  end
+
+  def create_user
+    User.create(facebook_uid: uid, email: email) do |user|
       user.email = email
       user.facebook_uid = uid
       user.gender = gender
