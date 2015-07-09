@@ -4,12 +4,14 @@ class InstagramAdapter < BaseAdapter
   end
 
   def follower_count
-    client.user.counts.followed_by
+    handle_exception { client.user.counts.followed_by }
   end
 
   def media
-    @media ||= Rails.cache.fetch(media_cache_key, expires_in: 6.hours) do
-      client.user_recent_media
+    handle_exception do
+      @media ||= Rails.cache.fetch(media_cache_key, expires_in: 6.hours) do
+        client.user_recent_media
+      end
     end
   end
 
@@ -21,5 +23,12 @@ class InstagramAdapter < BaseAdapter
 
   def client
     @client ||= Instagram.client(access_token: service_token)
+  end
+
+  def handle_exception(&block)
+    yield
+  rescue Instagram::BadRequest => exception
+    user.update(instagram_token: nil)
+    false
   end
 end
