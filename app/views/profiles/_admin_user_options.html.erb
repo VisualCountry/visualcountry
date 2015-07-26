@@ -1,0 +1,46 @@
+<div class="row">
+  <% if current_user.admin? %>
+    <hr>
+    <div class="col-md-4">
+      <p>Add User to list</p>
+      <%= simple_form_for(:list_membership, url: list_memberships_path) do |f| %>
+        <%= f.hidden_field :profile_id, value: @profile.id %>
+        <%= f.input :influencer_list_id, as: :select, label: false, collection: @available_lists, input_html: { class: "flat-form-control", id: 'test-influencer-list-select' } %>
+        <%= f.submit "Add", id: 'test-add-to-influencer-list-submit' %>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <p>Add User to Organization</p>
+      <%= simple_form_for(:organization_membership, url: organization_memberships_path) do |f| %>
+        <%= f.hidden_field :profile_id, value: @profile.id %>
+        <%= f.input :organization_id, as: :select, label: false, collection: @available_organizations, input_html: {class: "flat-form-control", id: 'test-add-to-organization-form'} %>
+        <%= f.submit "Add", id: 'test-add-to-organization-submit' %>
+      <% end %>
+    </div>
+  <% end %>
+  <% if @profile.organizations.any? %>
+    <div class="col-md-4">
+      <div class="row">
+        <p>Organizations:</p>
+        <ul>
+          <% @profile.organizations.each do |organization| %>
+            <li><p><%= link_to organization.name, organization %></p></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if @profile.influencer_lists.any? %>
+  <div class="col-md-4">
+    <div class="row">
+      <p>Lists</p>
+      <ul>
+        <% @profile.influencer_lists.each do |list| %>
+          <li><p><%= link_to list_memberships_path %></p></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

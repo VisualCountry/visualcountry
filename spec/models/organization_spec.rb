@@ -2,35 +2,35 @@ require "rails_helper"
 
 describe Organization do
   it { is_expected.to have_many(:organization_memberships).dependent(:destroy) }
-  it { is_expected.to have_many(:users) }
+  it { is_expected.to have_many(:profiles) }
   it { is_expected.to have_many(:organization_list_memberships).dependent(:destroy) }
   it { is_expected.to have_many(:influencer_lists) }
 
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_uniqueness_of(:name) }
 
-  describe "#add_user" do
-    it "adds a user to the organization" do
+  describe "#add_profile" do
+    it "adds a profile to the organization" do
       organization = create(:organization)
-      user = create(:user)
+      profile = create(:profile)
 
-      organization.add_user(user)
+      organization.add_profile(profile)
 
-      expect(organization.users).to include user
+      expect(organization.profiles).to include profile
     end
 
-    it "does nothing if the user is already in the organization" do
-      user = create(:user)
-      organization = create(:organization, users: [user])
+    it "does nothing if the profile is already in the organization" do
+      profile = create(:profile)
+      organization = create(:organization, profiles: [profile])
 
-      organization.add_user(user)
+      organization.add_profile(profile)
 
-      expect(organization.users).to include user
+      expect(organization.profiles).to include profile
     end
   end
 
   describe "#add_list" do
-    it "adds a user to the organization" do
+    it "adds a profile to the organization" do
       list = create(:influencer_list)
       organization = create(:organization)
 

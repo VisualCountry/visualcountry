@@ -9,7 +9,7 @@
     .col-md-7
       .form-group
         %label Skills
-        = f.input :focus_tokens, as: :text, id: "focus_tokens", input_html: { data: { pre: current_user.focuses.map(&:attributes) }, class: "flat-form-control" }, label: false
+        = f.input :focus_tokens, as: :text, id: "focus_tokens", input_html: { data: { pre: current_user.profile.focuses.map(&:attributes) }, class: "flat-form-control" }, label: false
         .form-help-text
           Choose some skills that best describe what you love to do. Are
           you a director, model, animator, viner, makeup artist?
@@ -30,8 +30,8 @@
           %label Birthday
           = f.input :birthday, start_year: Date.current.year - 120, end_year: Date.current.year, input_html: {class: 'flat-form-control flat-form-date' }, label: false
           .clearfix
-        = f.input :ethnicity, collection: User.ethnicities.keys, input_html: {class: "flat-form-control" }
-        = f.input :gender, collection: User.genders.keys, input_html: { class: "flat-form-control" }
+        = f.input :ethnicity, collection: Profile.ethnicities.keys, input_html: {class: "flat-form-control" }
+        = f.input :gender, collection: Profile.genders.keys, input_html: { class: "flat-form-control" }
   %hr
   .row.basic-info__section
     .col-md-6

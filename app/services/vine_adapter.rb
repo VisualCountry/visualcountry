@@ -1,6 +1,7 @@
-class VineAdapter < BaseAdapter
-  def self.from_user(user)
-    super(user, :vine)
+class VineAdapter
+  def initialize(access_token, user)
+    @access_token = access_token
+    @user = user
   end
 
   def follower_count
@@ -15,12 +16,14 @@ class VineAdapter < BaseAdapter
 
   private
 
+  attr_reader :access_token, :user
+
   def media_cache_key
-    "vine-media-#{service_token}-v2"
+    "vine-media-#{access_token}-v2"
   end
 
   def client
-    @client ||= Vine.new(service_token)
+    @client ||= Vine.new(access_token)
   rescue Vine::InvalidToken
     token = Vine.new(nil, user.vine_email, user.vine_password).token
     user.update(vine_token: token)

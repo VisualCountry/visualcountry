@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     resources :contact_messages, only: [:index, :show]
   end
 
+  resources :profiles, only: [:show]
+
   namespace :profile do
     scope :edit do
       get 'social' => 'social_profiles_connection#show'

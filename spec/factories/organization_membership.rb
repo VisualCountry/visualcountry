@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :organization_membership do
-    user
+    profile
     organization
   end
 end

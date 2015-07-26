@@ -1,8 +1,8 @@
 class ListMembershipsController < ApplicationController
   def create
-    user = find_user
-    find_list.add_user(user)
-    redirect_to profile_path(user)
+    profile = find_profile
+    find_list.add_profile(profile)
+    redirect_to profile_path(profile)
   end
 
   def destroy
@@ -13,8 +13,8 @@ class ListMembershipsController < ApplicationController
 
   private
 
-  def find_user
-    User.find(list_membership_params[:profile_id])
+  def find_profile
+    Profile.find(list_membership_params[:profile_id])
   end
 
   def find_list

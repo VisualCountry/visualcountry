@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150606163805) do
+ActiveRecord::Schema.define(version: 20150726232006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "clients", force: true do |t|
     t.string   "name"
@@ -24,14 +25,19 @@ ActiveRecord::Schema.define(version: 20150606163805) do
     t.datetime "updated_at"
   end
 
+  create_table "clients_profiles", force: true do |t|
+    t.integer "client_id"
+    t.integer "profile_id"
+  end
+
+  add_index "clients_profiles", ["client_id", "profile_id"], name: "index_clients_profiles_on_client_id_and_profile_id", unique: true, using: :btree
+
   create_table "clients_users", force: true do |t|
     t.integer  "client_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "clients_users", ["client_id", "user_id"], name: "index_clients_users_on_client_id_and_user_id", unique: true, using: :btree
 
   create_table "contact_messages", force: true do |t|
     t.string   "name"
@@ -50,6 +56,13 @@ ActiveRecord::Schema.define(version: 20150606163805) do
     t.datetime "updated_at"
   end
 
+  create_table "focuses_profiles", force: true do |t|
+    t.integer "focus_id"
+    t.integer "profile_id"
+  end
+
+  add_index "focuses_profiles", ["focus_id", "profile_id"], name: "index_focuses_profiles_on_focus_id_and_profile_id", unique: true, using: :btree
+
   create_table "focuses_users", force: true do |t|
     t.integer  "focus_id"
     t.integer  "user_id"
@@ -57,14 +70,13 @@ ActiveRecord::Schema.define(version: 20150606163805) do
     t.datetime "updated_at"
   end
 
-  add_index "focuses_users", ["focus_id", "user_id"], name: "index_focuses_users_on_focus_id_and_user_id", using: :btree
-
   create_table "influencer_lists", force: true do |t|
     t.string   "name",       null: false
-    t.integer  "user_id",    null: false
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "uuid"
+    t.integer  "profile_id"
   end
 
   add_index "influencer_lists", ["user_id"], name: "index_influencer_lists_on_user_id", using: :btree
@@ -75,20 +87,26 @@ ActiveRecord::Schema.define(version: 20150606163805) do
     t.datetime "updated_at"
   end
 
+  create_table "interests_profiles", force: true do |t|
+    t.integer "interest_id"
+    t.integer "profile_id"
+  end
+
   create_table "interests_users", force: true do |t|
     t.integer "interest_id"
     t.integer "user_id"
   end
 
   create_table "list_memberships", force: true do |t|
-    t.integer  "user_id",            null: false
+    t.integer  "user_id"
     t.integer  "influencer_list_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "profile_id"
   end
 
   add_index "list_memberships", ["influencer_list_id"], name: "index_list_memberships_on_influencer_list_id", using: :btree
-  add_index "list_memberships", ["user_id"], name: "index_list_memberships_on_user_id", using: :btree
+  add_index "list_memberships", ["profile_id"], name: "index_list_memberships_on_profile_id", using: :btree
 
   create_table "organization_list_memberships", force: true do |t|
     t.datetime "created_at"
@@ -103,12 +121,13 @@ ActiveRecord::Schema.define(version: 20150606163805) do
   create_table "organization_memberships", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id",         null: false
+    t.integer  "user_id"
     t.integer  "organization_id", null: false
+    t.integer  "profile_id"
   end
 
   add_index "organization_memberships", ["organization_id"], name: "index_organization_memberships_on_organization_id", using: :btree
-  add_index "organization_memberships", ["user_id"], name: "index_organization_memberships_on_user_id", using: :btree
+  add_index "organization_memberships", ["profile_id"], name: "index_organization_memberships_on_profile_id", using: :btree
 
   create_table "organizations", force: true do |t|
     t.datetime "created_at"
@@ -122,6 +141,34 @@ ActiveRecord::Schema.define(version: 20150606163805) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "profile_id"
+  end
+
+  create_table "profiles", force: true do |t|
+    t.integer  "user_id"
+    t.string   "username"
+    t.string   "name"
+    t.string   "city"
+    t.string   "bio",                      limit: 300
+    t.text     "website"
+    t.integer  "instagram_follower_count"
+    t.integer  "twitter_follower_count"
+    t.integer  "vine_follower_count"
+    t.integer  "facebook_follower_count"
+    t.integer  "pinterest_follower_count"
+    t.integer  "total_follower_count"
+    t.integer  "gender"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.date     "birthday"
+    t.integer  "ethnicity"
+    t.text     "special_interests"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
@@ -173,6 +220,7 @@ ActiveRecord::Schema.define(version: 20150606163805) do
     t.datetime "confirmation_sent_at"
     t.text     "special_interests"
     t.text     "facebook_uid"
+    t.integer  "profile_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

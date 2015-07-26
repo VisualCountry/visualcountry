@@ -1,0 +1,8 @@
+<% if profile.send("#{social}_follower_count") %>
+  <ul class="user-social-follower-counts">
+    <li class="user-social-follower-count col-md-1">
+      <%= image_tag("#{social}_logo_sq.svg", class: 'user-social-icon', alt: "#{social} Logo") %>
+      <%= truncated_count(profile.send("#{social}_follower_count")) %>
+    </li>
+  </ul>
+<% end %>
