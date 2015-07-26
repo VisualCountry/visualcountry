@@ -15,22 +15,22 @@
 
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
              <ul class="nav nav-pills pull-right" role="tablist">
-               <% if current_user.admin? %>
+               <% if current_user.profile.admin? %>
                 <li><%= link_to "Production by Meagan Cignoli", "http://www.ilovemeagan.com", target: :_blank, title: "production by meagan cignoli", class: "ilovemeagan-link"%></li>
                 <li><%= link_to profile_search_path do %><h4><span class="glyphicon glyphicon-search pink" title="Search Users"></span></h4><% end %></li>
                 <li><%= link_to admin_path do %><h4><span class="glyphicon glyphicon-stats pink" title="Admin Dashboard"></span></h4><% end %></li>
                 <li><%= link_to influencer_lists_path do %><h4><span class="glyphicon glyphicon-list pink" title="Lists"></span></h4><% end %></li>
                 <li><%= link_to organizations_path do %><h4><span class="glyphicon glyphicon glyphicon-user pink" title="Organizations"></span></h4><% end %></li>
-                <li><%= link_to(image_tag(current_user.picture.url(:thumb), :class =>"navbar-profile", :alt => "Profile Pic", :title => "Profile"), profile_path(current_user)) %></li>
-                <li><h5><%= link_to current_user.name, profile_path(current_user)%></h5></li>
+                <li><%= link_to(image_tag(current_user.profile.picture.url(:thumb), :class =>"navbar-profile", :alt => "Profile Pic", :title => "Profile"), profile_path(current_user.profile)) %></li>
+                <li><h5><%= link_to current_user.profile.name, profile_path(current_user.profile)%></h5></li>
                 <li><%= link_to edit_user_registration_path, method: :get do %><h4><span class="glyphicon glyphicon-cog pink" title="User Settings"></span></h4><% end %></li>
                 <li><%= link_to destroy_user_session_path, method: :delete do %><h4><span class="glyphicon glyphicon-off pink" title="Log Out"></span></h4><% end %></li>
 
-               <% elsif current_user.has_account? %>
+               <% elsif current_user.profile.has_account? %>
                 <li><%= link_to "Production by Meagan Cignoli", "http://www.ilovemeagan.com", target: :_blank, title: "production by meagan cignoli", class: "ilovemeagan-link"%></li>
                 <li><%= link_to influencer_lists_path do %><h4><span class="glyphicon glyphicon-list pink" title="Lists"></span></h4><% end %></li>
-                <li><%= link_to(image_tag(current_user.picture.url(:thumb), :class =>"navbar-profile", :alt => "Profile Pic", :title => "Profile"), profile_path(current_user)) %></li>
-                <li><h5><%= link_to current_user.name, profile_path(current_user)%></h5></li>
+                <li><%= link_to(image_tag(current_user.profile.picture.url(:thumb), :class =>"navbar-profile", :alt => "Profile Pic", :title => "Profile"), profile_path(current_user.profile)) %></li>
+                <li><h5><%= link_to current_user.profile.name, profile_path(current_user.profile)%></h5></li>
                 <li><%= link_to edit_user_registration_path, method: :get do %><h4><span class="glyphicon glyphicon-cog pink" title="User Settings"></span></h4><% end %></li>
                 <li><%= link_to destroy_user_session_path, method: :delete do %><h4><span class="glyphicon glyphicon-off pink" title="Log Out"></span></h4><% end %></li>
 
