@@ -47,7 +47,7 @@ class ProfileSearchQuery
   )
 
   def relation
-    User.all.extending(Scopes)
+    Profile.all.extending(Scopes)
   end
 
   module Scopes
