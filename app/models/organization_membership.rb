@@ -1,6 +1,6 @@
 class OrganizationMembership < ActiveRecord::Base
   belongs_to :organization
-  belongs_to :user
+  belongs_to :profile
 
-  validates :user_id, uniqueness: { scope: :organization_id }
+  validates :profile_id, uniqueness: { scope: :organization_id }
 end
