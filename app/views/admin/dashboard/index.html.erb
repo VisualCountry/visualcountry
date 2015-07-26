@@ -15,7 +15,7 @@
   <div class="col-lg-4 col-md-4 col-sm-4">
     <div class="well">
       <h2>Lists</h2>
-      <% current_user.influencer_lists.each do |list| %>
+      <% current_user.profile.influencer_lists.each do |list| %>
         <%= link_to list.name, influencer_list_path(id: list.uuid) %>
       <% end %>
     </div>
@@ -24,7 +24,7 @@
 <div class="row">
   <div class="well">
     <h4>Total Reach on VC:</h4>
-  <%= number_with_delimiter(User.total_reach) %>
+  <%= number_with_delimiter(Profile.total_reach) %>
   </div>
 </div>
 

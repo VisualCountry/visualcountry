@@ -3,7 +3,6 @@ namespace :once_and_done do
     User.all.each do |user|
       puts "Creating profile for #{user.name}"
       user.create_profile(
-        id: user.id,
         user_id: user.id,
         created_at: user.created_at,
         updated_at: user.updated_at,

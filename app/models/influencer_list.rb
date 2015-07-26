@@ -2,6 +2,7 @@ class InfluencerList < ActiveRecord::Base
   belongs_to :owner, class_name: 'Profile', foreign_key: :profile_id
   has_many :list_memberships, dependent: :destroy
   has_many :profiles, through: :list_memberships
+  has_many :users, through: :list_memberships #TODO: Remove after rake task has been run
   has_many :organization_list_memberships, dependent: :destroy
   has_many :organizations, through: :organization_list_memberships
 

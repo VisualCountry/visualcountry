@@ -43,8 +43,8 @@ class InfluencerListsController < ApplicationController
   end
 
   def index
-    @my_lists = current_user.influencer_lists
-    @organizations = current_user.organizations
+    @my_lists = current_user.profile.influencer_lists
+    @organizations = current_user.profile.organizations
   end
 
   def destroy
@@ -63,6 +63,6 @@ class InfluencerListsController < ApplicationController
     params.
       require(:influencer_list).
       permit(:name).
-      merge(owner: current_user)
+      merge(owner: current_user.profile)
   end
 end

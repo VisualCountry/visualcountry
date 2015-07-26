@@ -1,11 +1,16 @@
 class Profile < ActiveRecord::Base
+  attr_reader :focus_tokens
+
+  FOLLOWER_COUNT_METHODS = User::SOCIAL_PLATFORMS.map { |p| "#{p}_follower_count"}
+  FOLLOWER_COUNT_COLUMNS = FOLLOWER_COUNT_METHODS.map { |p| "cached_#{p}"}
+
   has_one :user
 
   has_and_belongs_to_many :interests
   has_and_belongs_to_many :focuses
   has_and_belongs_to_many :clients
 
-  has_many :press
+  has_many :press, dependent: :destroy
   has_many :influencer_lists, dependent: :destroy
   has_many :list_memberships, dependent: :destroy
   has_many :organization_memberships, dependent: :destroy
@@ -17,8 +22,10 @@ class Profile < ActiveRecord::Base
   validates :bio, length: { maximum: 300 }
 
   after_validation :normalize_city_name, if: :city_changed?
+  after_save :update_total_follower_count!
 
   delegate :email, :admin?, to: :user, allow_nil: true
+  delegate :instagram_account, :vine_account, to: :user
 
   enum gender: {
     'Female' => 0,
@@ -56,6 +63,26 @@ class Profile < ActiveRecord::Base
     sum(:total_follower_count)
   end
 
+  def update_total_follower_count!
+    return unless (changed & FOLLOWER_COUNT_COLUMNS).present?
+
+    changes_applied
+    total_follower_count = follower_counts.inject(:+)
+    update(total_follower_count: total_follower_count)
+  end
+
+  def warm_follower_count_cache
+    !!follower_counts
+  end
+
+  def instagram_media
+    instagram_account.media
+  end
+
+  def vine_media
+    vine_account.media
+  end
+
   def lists_without(profile)
     influencer_lists.select { |list| list.profiles.exclude?(profile) }
   end
@@ -84,6 +111,10 @@ class Profile < ActiveRecord::Base
   end
 
   private
+
+  def follower_counts
+    FOLLOWER_COUNT_METHODS.map { |p| send(p) }.compact
+  end
 
   def normalize_city_name
     find_coordinates_from_city_name

@@ -17,8 +17,8 @@ class OrganizationMembershipsController < ApplicationController
     OrganizationMembership.find(params[:id])
   end
 
-  def find_user
-    User.find(organization_membership_params[:profile_id])
+  def find_
+    Profile.find(organization_membership_params[:profile_id])
   end
 
   def find_organization

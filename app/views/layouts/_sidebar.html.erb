@@ -33,7 +33,7 @@
 <% if current_user.has_account? %>
   <ul class="nav nav-sidebar">
     <li>
-      <% current_user.influencer_lists.each do |list| %>
+      <% current_user.profile.influencer_lists.each do |list| %>
         <%= link_to list.name, list, class: "well" %>
       <% end %>
     </li>

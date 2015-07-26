@@ -1,14 +1,14 @@
 = render "layouts/list_nav_bar"
 .list-users
-  - if @influencer_list.users.any?
+  - if @influencer_list.profiles.any?
     .profile-cards
       .row
-        -@influencer_list.users.each do |user|
+        -@influencer_list.profiles.each do |profile|
           .col-lg-4.col-md-4.col-sm-5.col-xs-12
-            = render 'shared/profile_cards/show', user: user
-            .text-center{ class: "test-remove-user-#{user.id}"}
-              - if current_user.can_manage_list?(@influencer_list)
-                = link_to "Remove", list_membership_path(user.list_membership_in(@influencer_list)), method: :delete, class: "btn btn-default"
+            = render 'shared/profile_cards/show', profile: profile
+            .text-center{ class: "test-remove-user-#{profile.id}"}
+              - if current_user.profile.can_manage_list?(@influencer_list)
+                = link_to "Remove", list_membership_path(profile.list_membership_in(@influencer_list)), method: :delete, class: "btn btn-default"
   - else
     .row
       .col-md-6.col-md-offset-3

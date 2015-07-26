@@ -1,6 +1,7 @@
-class InstagramAdapter < BaseAdapter
-  def self.from_user(user)
-    super(user, :instagram)
+class InstagramAdapter
+  def initialize(access_token, user)
+    @access_token = access_token
+    @user = user
   end
 
   def follower_count
@@ -17,17 +18,19 @@ class InstagramAdapter < BaseAdapter
 
   private
 
+  attr_reader :access_token, :user
+
   def media_cache_key
-    "instagram-media-#{service_token}-v2"
+    "instagram-media-#{access_token}-v2"
   end
 
   def client
-    @client ||= Instagram.client(access_token: service_token)
+    @client ||= Instagram.client(access_token: access_token)
   end
 
   def handle_exception(&block)
     yield
-  rescue Instagram::BadRequest => exception
+  rescue Instagram::BadRequest
     user.update(instagram_token: nil)
     false
   end

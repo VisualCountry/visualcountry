@@ -34,7 +34,7 @@
     .filter-form__item
       %h5 Gender
       .row
-        = f.input :gender, as: :check_boxes, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3 gender", label: false, collection: User.genders.keys
+        = f.input :gender, as: :check_boxes, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3 gender", label: false, collection: Profile.genders.keys
 
     .filter-form__item
       .row
@@ -49,6 +49,6 @@
         .col-md-6
           %h5 Ethnicity
           .flat-select
-            = f.input :ethnicity, item_wrapper_class: "col-xs-6 col-sm-6 col-md-3", label: false, collection: User.ethnicities.keys, input_html: { class: "flat-form-control", id: 'test-ethnicity-selection' }
+            = f.input :ethnicity, item_wrapper_class: "col-xs-6 col-sm-6 col-md-3", label: false, collection: Profile.ethnicities.keys, input_html: { class: "flat-form-control", id: 'test-ethnicity-selection' }
     .filter-form__item.text-center
       = f.submit class: "btn btn-default btn-lg search-button", value: "Search"

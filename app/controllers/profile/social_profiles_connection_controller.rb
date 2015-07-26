@@ -10,6 +10,6 @@ class Profile::SocialProfilesConnectionController < ApplicationController
   private
 
   def warm_follower_count_cache
-    current_user.warm_follower_count_cache
+    current_user.profile.warm_follower_count_cache
   end
 end

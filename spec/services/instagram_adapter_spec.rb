@@ -2,10 +2,10 @@ require 'rails_helper'
 
 describe InstagramAdapter do
   let(:access_token) { 42 }
-  let(:user) { build_stubbed :user, instagram_token: access_token }
   let(:client) { double }
+  let(:user) { create :user }
 
-  subject { InstagramAdapter.from_user(user) }
+  subject { InstagramAdapter.new(access_token, user) }
 
   before { Rails.cache.clear }
 

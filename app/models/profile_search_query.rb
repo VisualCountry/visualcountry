@@ -158,7 +158,7 @@ class ProfileSearchQuery
 
     def columns_for(profiles)
       (profiles & User::SOCIAL_PLATFORMS).
-        map { |platform| "cached_#{platform}_follower_count" }
+        map { |platform| "#{platform}_follower_count" }
     end
   end
 

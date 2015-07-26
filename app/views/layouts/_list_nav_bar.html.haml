@@ -7,7 +7,7 @@
         Menu
         %span.caret
       %ul.dropdown-menu.dropdown-menu--icons.text-center{"aria-labelledby" => "list-dropdown", :role => "menu"}
-        - if current_user.owns_list?(@influencer_list)
+        - if current_user.profile.owns_list?(@influencer_list)
           %li{:role => "presentation"}
             = link_to edit_influencer_list_path(@influencer_list) do
               Rename List...
