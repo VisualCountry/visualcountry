@@ -47,7 +47,7 @@ class Vine
       post("#{VINE_BASE_URL}/users/authenticate", payload).fetch('key')
     end
   rescue InvalidUsernameOrPassword
-    false
+    nil
   end
 
   def fetch_user_id
