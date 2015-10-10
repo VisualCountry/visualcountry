@@ -18,7 +18,7 @@ class UpdateFollowerCount
   attr_reader :user, :platform
 
   def remove_token
-    user.update(platform_token_attribute: nil)
+    user.update(platform_token_attribute => nil)
   end
 
   def follower_count_attribute
