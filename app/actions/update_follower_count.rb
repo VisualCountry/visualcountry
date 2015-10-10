@@ -6,7 +6,10 @@ class UpdateFollowerCount
 
   def perform
     return unless user
-    user.update(follower_count_attribute => platform_follower_count)
+
+    if platform_follower_count
+      user.update(follower_count_attribute => platform_follower_count)
+    end
   rescue Twitter::Error::Unauthorized
     remove_token
   rescue Koala::Facebook::AuthenticationError
@@ -30,6 +33,7 @@ class UpdateFollowerCount
   end
 
   def platform_follower_count
+    return unless platform_adapter
     platform_adapter.follower_count
   end
 
