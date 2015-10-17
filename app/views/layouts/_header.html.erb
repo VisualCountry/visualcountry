@@ -43,12 +43,12 @@
               <% end %>
             </li>
             <li>
-              <%= link_to profile_path(current_user) do %>
-                <%= image_tag(current_user.picture.url(:thumb), class: 'navbar-profile', alt: 'Profile Pic', title: 'Profile') %>
+              <%= link_to profile_path(current_user_profile) do %>
+                <%= image_tag(current_user_profile.picture.url(:thumb), class: 'navbar-profile', alt: 'Profile Pic', title: 'Profile') %>
               <% end %>
             </li>
             <li>
-              <h5><%= link_to current_user.name, profile_path(current_user)%></h5>
+              <h5><%= link_to current_user_profile.name, profile_path(current_user_profile)%></h5>
             </li>
             <li>
               <%= link_to edit_user_registration_path, method: :get do %>
@@ -67,12 +67,12 @@
               <% end %>
             </li>
             <li>
-              <%= link_to profile_path(current_user) do %>
-                <%= image_tag(current_user.picture.url(:thumb), class: 'navbar-profile', alt: 'Profile Pic', title: 'Profile') %>
+              <%= link_to profile_path(current_user_profile) do %>
+                <%= image_tag(current_user_profile.picture.url(:thumb), class: 'navbar-profile', alt: 'Profile Pic', title: 'Profile') %>
               <% end %>
             </li>
             <li>
-              <h5><%= link_to current_user.name, profile_path(current_user)%></h5>
+              <h5><%= link_to current_user.name, profile_path(current_user_profile)%></h5>
             </li>
             <li>
               <%= link_to edit_user_registration_path, method: :get do %>

@@ -1,0 +1,25 @@
+<h6>Recent Vine Videos</h6>
+<div class="row">
+  <% feed.first(9).each do |vine| %>
+    <div class="col-sm-6 col-md-4">
+    <%= videojs_tag(vine.videoUrl, class: 'platform-video', thumbnail: vine.thumbnailUrl) %>
+    <ul class="user-post-icons">
+      <li class="user-post-icon">
+        <span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span>
+        <%= vine.likes['count'] %>
+      </li>
+      <li class="user-post-icon">
+        <span class="glyphicon glyphicon-refresh pink" aria-hidden="true"></span>
+        <%= vine.reposts['count'] %>
+      </li>
+      <li class="user-post-icon">
+        <span class="glyphicon glyphicon-play-circle pink" aria-hidden="true"></span>
+        <%= truncated_count(vine.loops['count'].round) %>
+      </li>
+      <li class="user-post-icon">
+        <span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span>
+        <%= truncated_count(vine.comments['count'].round) %>
+      </li>
+    </ul>
+  </div>
+<% end %>

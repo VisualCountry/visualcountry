@@ -21,6 +21,11 @@ class ApplicationController < ActionController::Base
     super || Guest.new
   end
 
+  def current_user_profile
+    current_user.profile
+  end
+  helper_method :current_user_profile
+
   def after_sign_in_path_for(resource)
     request.env['omniauth.origin'] || profile_path(resource)
   end

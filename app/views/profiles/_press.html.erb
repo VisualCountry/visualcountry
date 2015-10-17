@@ -1,0 +1,13 @@
+<div class="col-sm-4 user-subsection">
+  <h2>Press</h2>
+  <% if press.present? %>
+    <% press.each do |press| %>
+      <h5><%= link_to press.name, press.url %></h5>
+    <% end %>
+  <% elsif @profile.user == current_user %>
+    <%= link_to profile_press_path do %>
+      <h4 class="text-center">Add Press</h4>
+      <h4 class="text-center"><span class="glyphicon glyphicon-plus-sign green" title="Add Press"></span></h4>
+    <% end %>
+  <% end %>
+</div>

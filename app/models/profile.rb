@@ -19,4 +19,6 @@ class Profile < ActiveRecord::Base
     }
   crop_attached_file :picture
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
+
+  delegate :email, to: :user
 end
