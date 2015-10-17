@@ -1,15 +1,9 @@
 class Profile::SocialProfilesConnectionController < ApplicationController
   before_action :authenticate_user!
-  before_action :warm_follower_count_cache
 
-  layout "application_with_sidebar"
+  layout :application_with_sidebar
 
   def show
-  end
-
-  private
-
-  def warm_follower_count_cache
-    current_user.warm_follower_count_cache
+    @profile = current_user.profile
   end
 end
