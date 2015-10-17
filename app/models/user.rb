@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   has_many :organization_memberships, dependent: :destroy
   has_many :organizations, through: :organization_memberships
 
+  has_one :profile
+
   accepts_nested_attributes_for :clients, allow_destroy: true
   accepts_nested_attributes_for :press, allow_destroy: true
 
