@@ -37,6 +37,6 @@
           %label Birthday
           = f.input :birthday, start_year: Date.current.year - 120, end_year: Date.current.year, input_html: {class: 'flat-form-control flat-form-date' }, label: false
           .clearfix
-        = f.input :ethnicity, collection: User.ethnicities.keys, input_html: {class: "flat-form-control" }
-        = f.input :gender, collection: User.genders.keys, input_html: { class: "flat-form-control" }
-    = f.submit 'Update User', class: 'btn btn-default sign-up-button', id: 'test-update-user-submit'
+        = f.input :ethnicity, collection: Profile.ethnicities.keys, input_html: {class: "flat-form-control" }
+        = f.input :gender, collection: Profile.genders.keys, input_html: { class: "flat-form-control" }
+    = f.submit 'Update Profile', class: 'btn btn-default sign-up-button', id: 'test-update-user-submit'
