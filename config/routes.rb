@@ -33,6 +33,8 @@ Rails.application.routes.draw do
         delete 'vine' => 'vine#destroy'
         resources :vine, only: [:new, :create]
       end
+      get 'basic_info' => 'basic_info#edit'
+      patch 'basic_info' => 'basic_info#update'
       get 'interests' => 'interests#edit'
       patch 'interests' => 'interests#update'
       get 'press' => 'press#edit'

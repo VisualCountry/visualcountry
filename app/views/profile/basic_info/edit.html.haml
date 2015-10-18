@@ -1,15 +1,22 @@
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, defaults: { input_html: { class: "form-control" } }) do |f|
-  - if resource.errors.any?
-    .alert.alert-danger
-      = devise_error_messages!
-  .row.basic-info__section
+= render 'layouts/user_navigation'
+.row
+  .col-xsm-10.col-sm-10.col-md-10.col-md-offset-1.col-sm-offset-1.col-xsm-3
+    %header.text-center.basic-info__section
+      %h2 Basic Info
+      %h3 Tell us a little bit about yourself.
+      %p
+        We are excited to work together on some great projects. The more
+        detailed your profile, the better we can match you to campaigns that
+        suit your interests and skill sets.
+= simple_form_for(@profile, url: profile_basic_info_path, html: { method: :patch }, defaults: { input_html: { class: 'form-control' } }) do |f|
+  .col-xsm-10.col-sm-10.col-md-10.col-md-offset-1.col-sm-offset-1.col-xsm-3
     .col-md-5
       .basic-info__photo
-        = f.input :picture, :as => :file, label: (render "label_for_image_upload", f: f), input_html: { role: "auto-submit-file" }
+        = f.input :picture, :as => :file, label: (render 'label_for_image_upload', f: f), input_html: { role: 'auto-submit-file' }
     .col-md-7
       .form-group
         %label Skills
-        = f.input :focus_tokens, as: :text, id: "focus_tokens", input_html: { data: { pre: current_user.focuses.map(&:attributes) }, class: "flat-form-control" }, label: false
+        = f.input :focus_tokens, as: :text, id: "focus_tokens", input_html: { data: { pre: @profile.focuses.map(&:attributes) }, class: "flat-form-control" }, label: false
         .form-help-text
           Choose some skills that best describe what you love to do. Are
           you a director, model, animator, viner, makeup artist?
@@ -18,7 +25,7 @@
         = f.text_area :bio, as: :text, autofocus: true, class: "flat-form-control basic-info__bio", placeholder: 'Short Bio'
         .form-help-text
           max 300 characters
-  .row.basic-info__section
+  .col-xsm-10.col-sm-10.col-md-10.col-md-offset-1.col-sm-offset-1.col-xsm-3
     .col-md-6
       .form-group
         = f.input :name, autofocus: true, input_html: { class: "flat-form-control" }, placeholder: 'Name'
@@ -32,15 +39,4 @@
           .clearfix
         = f.input :ethnicity, collection: User.ethnicities.keys, input_html: {class: "flat-form-control" }
         = f.input :gender, collection: User.genders.keys, input_html: { class: "flat-form-control" }
-  %hr
-  .row.basic-info__section
-    .col-md-6
-      .form-group
-        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-          %div
-            Currently waiting confirmation for: #{resource.unconfirmed_email}
-        = f.input :email, autofocus: true, input_html: { class: 'flat-form-control' }
-        = f.input :password, label: "Password (leave blank if you don't want to change it)", autocomplete: "off", input_html: { class: 'flat-form-control' }
-        = f.input :password_confirmation, autocomplete: "off", input_html: { class: 'flat-form-control' }
-  .actions
     = f.submit 'Update User', class: 'btn btn-default sign-up-button', id: 'test-update-user-submit'

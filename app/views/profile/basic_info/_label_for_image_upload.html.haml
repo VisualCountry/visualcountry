@@ -1,6 +1,6 @@
 .basic-info__photo__label
   - if f.object.picture.exists?
-    = image_tag f.object.picture.url(:medium), alt: "Click to upload"
+    = image_tag f.object.picture.url(:medium), alt: 'Click to upload'
     .basic-info__photo__reupload
       %span.glyphicon.glyphicon-camera
       upload a picture

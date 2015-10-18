@@ -27,12 +27,12 @@ videojs.options.flash.swf = "/assets/swf/video-js.swf";
 
 $(document).ready(function() {
 
-  // Initialize token inputs for user profile page
-  $("#user_focus_tokens").tokenInput("/api/focuses.json", {
+  // Initialize token inputs for profile page
+  $("#profile_focus_tokens").tokenInput("/api/focuses.json", {
     searchingText: 'Searching...',
     minChars: 0,
     preventDuplicates: true,
-    prePopulate: $('#user_focus_tokens').data('pre'),
+    prePopulate: $('#profile_focus_tokens').data('pre'),
     theme: "visual-country",
   });
 
