@@ -5,7 +5,7 @@
       %h2 Interests
       %h3 What are your passions?
       %h5 Select as many as you like.
-  = simple_form_for current_user, url: profile_interests_path do |f|
+  = simple_form_for @profile, url: profile_interests_path do |f|
     .row
       .col-xsm-10.col-sm-10.col-md-10.col-md-offset-1.col-sm-offset-1.col-xsm-3
         = f.association :interests, as: :check_boxes, item_wrapper_class: "checkbox-button col-sm-6 col-md-3", label: false
