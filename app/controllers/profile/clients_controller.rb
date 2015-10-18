@@ -1,14 +1,15 @@
 class Profile::ClientsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_profile
 
-  layout "application_with_sidebar"
+  layout 'application_with_sidebar'
 
   def edit
-    current_user.clients.build
+    @profile.clients.build
   end
 
   def update
-    if current_user.update(clients_params)
+    if @profile.update(clients_params)
       redirect_to profile_clients_path, notice: "Successfully Updated Clients"
     else
       render :edit
@@ -17,8 +18,12 @@ class Profile::ClientsController < ApplicationController
 
   private
 
+  def set_profile
+    @profile = current_user.profile
+  end
+
   def clients_params
-    safe_params = params.require(:user).permit(clients_attributes: [:id, :name, :url, :_destroy])
+    safe_params = params.require(:profile).permit(clients_attributes: [:id, :name, :url, :_destroy])
     rejected_params = safe_params[:clients_attributes].reject do |id, client|
       client[:name].blank? && client[:url].blank?
     end
