@@ -44,6 +44,10 @@ class Profile < ActiveRecord::Base
   crop_attached_file :picture
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
 
+  def self.total_reach
+    sum(:total_follower_count)
+  end
+
   def lists_without(profile)
     influencer_lists.select { |list| list.profiles.exclude?(profile) }
   end
