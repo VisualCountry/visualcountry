@@ -4,5 +4,5 @@ class ListMembership < ActiveRecord::Base
   belongs_to :influencer_list
 
   validates :user_id, uniqueness: { scope: :influencer_list_id } #TODO: Remove after profile refactor
-  validates :profile_id, uniqueness: { scope: :influencer_list_id }
+  #validates :profile_id, uniqueness: { scope: :influencer_list_id } #TODO: Add after profile refactor
 end
