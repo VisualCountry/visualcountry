@@ -25,14 +25,14 @@
 
 %h2 Members of Organization
 %ul
-  - @organization.users.each do |user|
+  - @organization.profiles.each do |profile|
     %li
-      = link_to image_tag(user.picture.url(:medium), :size => '175', alt: 'Profile Pic'), profile_path(id: user.id)
-      %h4= link_to user.name, profile_path(user)
+      = link_to image_tag(profile.picture.url(:medium), :size => '175', alt: 'Profile Pic'), profile_path(id: profile.id)
+      %h4= link_to profile.name, profile_path(profile)
       %p
         %span.glyphicon.glyphicon-envelope{"aria-hidden" => "true"}
-        = mail_to user.email, user.email
+        = mail_to profile.user.email, profile.user.email
       %h5
-        = link_to organization_membership_path(user.organization_membership_in(@organization)), method: :delete, role: 'remove_user_from_organization', class: 'glyphicon glyphicon-remove-circle' do
+        = link_to organization_membership_path(profile.organization_membership_in(@organization)), method: :delete, role: 'remove_user_from_organization', class: 'glyphicon glyphicon-remove-circle' do
           %span{:title => "Remove Member From Organization"}
-      %p Remove User
+      %p Remove Profile

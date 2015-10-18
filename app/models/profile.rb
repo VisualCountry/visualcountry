@@ -43,4 +43,20 @@ class Profile < ActiveRecord::Base
     }
   crop_attached_file :picture
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
+
+  def lists_without(profile)
+    influencer_lists.select { |list| list.profiles.exclude?(profile) }
+  end
+
+  def list_membership_in(list)
+    list_memberships.find_by(influencer_list: list)
+  end
+
+  def lists_member_of
+    list_memberships.map(&:influencer_list).compact
+  end
+
+  def organization_membership_in(organization)
+    organization_memberships.find_by(organization: organization)
+  end
 end
