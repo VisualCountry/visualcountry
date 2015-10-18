@@ -22,7 +22,7 @@
         TOTAL FOLLOWERS: #{number_with_delimiter(profile.total_follower_count)}
   .all-social-icons
     .text-center
-      - User::SOCIAL_PLATFORMS.each do |platform|
+      - %w(vine twitter instagram facebook pinterest).each do |platform|
         - if profile.send("#{platform}_follower_count")
           .social-icons.pull-left
             = image_tag("#{platform}_logo.svg", size: '30', alt: "#{platform} Logo")
