@@ -9,28 +9,28 @@ class User < ActiveRecord::Base
 
   after_save :update_total_follower_count!
 
-  has_and_belongs_to_many :interests
-  has_and_belongs_to_many :focuses
-  has_and_belongs_to_many :clients
+  has_and_belongs_to_many :interests #TODO: Remove after profile refactor
+  has_and_belongs_to_many :focuses #TODO: Remove after profile refactor
+  has_and_belongs_to_many :clients #TODO: Remove after profile refactor
 
-  has_many :press
+  has_many :press #TODO: Remove after profile refactor
   has_many :influencer_lists, dependent: :destroy
-  has_many :list_memberships, dependent: :destroy
+  has_many :list_memberships, dependent: :destroy #TODO: Remove after profile refactor
 
-  has_many :organization_memberships, dependent: :destroy
-  has_many :organizations, through: :organization_memberships
+  has_many :organization_memberships, dependent: :destroy #TODO: Remove after profile refactor
+  has_many :organizations, through: :organization_memberships #TODO: Remove after profile refactor
 
   has_one :profile
 
-  accepts_nested_attributes_for :clients, allow_destroy: true
-  accepts_nested_attributes_for :press, allow_destroy: true
+  accepts_nested_attributes_for :clients, allow_destroy: true #TODO: Remove after profile refactor
+  accepts_nested_attributes_for :press, allow_destroy: true #TODO: Remove after profile refactor
 
   has_attached_file :picture, :styles => { :medium => "300x300#", :thumb => "50x50#" }, :default_url => "missing.png"
   crop_attached_file :picture
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
 
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
-  validates :bio, length: { maximum: 300 }
+  validates :bio, length: { maximum: 300 } #TODO: Remove after profile refactor
 
   scope :by_created_at, -> { order(created_at: :desc) }
 
@@ -39,14 +39,18 @@ class User < ActiveRecord::Base
          :omniauthable, :confirmable,
          omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
 
-  delegate :media, to: :instagram, prefix: true, allow_nil: true
-  delegate :media, to: :vine, prefix: true, allow_nil: true
+  delegate :media, to: :instagram, prefix: true, allow_nil: true #TODO: Remove after profile refactor
+  delegate :media, to: :vine, prefix: true, allow_nil: true #TODO: Remove after profile refactor
 
+  #TODO: Remove after profile refactor
   enum gender: {
     "Female" => 0,
     "Male" => 1,
     "Other" => 2,
   }
+
+
+  #TODO: Remove after profile refactor
   enum ethnicity: {
     "Hispanic or Latino" => 0,
     "Native American" => 1,
@@ -114,14 +118,17 @@ class User < ActiveRecord::Base
     result
   end
 
+  #TODO: Remove after profile refactor
   def lists_without(user)
     influencer_lists.select { |list| list.users.exclude?(user) }
   end
 
+  #TODO: Remove after profile refactor
   def list_membership_in(list)
     list_memberships.find_by(influencer_list: list)
   end
 
+  #TODO: Remove after profile refactor
   def organization_membership_in(organization)
     organization_memberships.find_by(organization: organization)
   end
@@ -130,6 +137,7 @@ class User < ActiveRecord::Base
     list.owner == self
   end
 
+  #TODO: Remove after profile refactor
   def lists_member_of
     list_memberships.map(&:influencer_list).compact
   end
