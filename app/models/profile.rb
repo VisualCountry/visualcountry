@@ -1,4 +1,6 @@
 class Profile < ActiveRecord::Base
+  SOCIAL_PLATFORMS = %w(vine twitter instagram facebook pinterest)
+
   attr_reader :focus_tokens
 
   belongs_to :user

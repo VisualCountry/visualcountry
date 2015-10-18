@@ -9,7 +9,7 @@ class Profile::SearchController < ApplicationController
 
   def new
     @interests = Interest.all
-    @social_platforms = %w(vine twitter instagram facebook pinterest)
+    @social_platforms = Profile::SOCIAL_PLATFORMS
     @focuses = Focus.all
     @genders = Profile.genders.keys
     @ethnicities = Profile.ethnicities.keys
