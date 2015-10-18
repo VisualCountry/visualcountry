@@ -47,7 +47,7 @@ class ProfileSearchQuery
   )
 
   def relation
-    User.all.extending(Scopes)
+    Profile.all.extending(Scopes)
   end
 
   module Scopes
@@ -112,7 +112,7 @@ class ProfileSearchQuery
 
     def by_social_profiles(social_profiles)
       query = social_profiles.inject({}) do |attrs, profile|
-        attrs.merge("#{profile}_token" => nil)
+        attrs.merge("#{profile}_follower_count" => nil)
       end
 
       if query.present?
