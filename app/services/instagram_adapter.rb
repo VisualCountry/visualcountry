@@ -1,10 +1,11 @@
 class InstagramAdapter
-  def initialize(token)
-    @token = token
+  def initialize(user)
+    @token = user.instagram_token
+    @user = user
   end
 
   def self.from_user(user)
-    new(user.instagram_token)
+    new(user)
   end
 
   def follower_count
@@ -25,7 +26,7 @@ class InstagramAdapter
 
   private
 
-  attr_reader :token
+  attr_reader :token, :user
 
   def media_cache_key
     "instagram-media-#{token}-v2"
