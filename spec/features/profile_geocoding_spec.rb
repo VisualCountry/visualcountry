@@ -3,15 +3,11 @@ require "rails_helper"
 feature "User addresses are normalized through reverse geocoding" do
   scenario "translates 'NYC' to 'New York, NY'" do
     user = create(:user)
+    user.reload
     login_as(user)
 
-    visit edit_user_registration_path
+    visit profile_basic_info_path
     fill_in("City", with: "NYC")
-    fill_in(
-      "Password (leave blank if you don't want to change it)",
-      with: user.password,
-    )
-    fill_in("Password confirmation", with: user.password)
     click_on "test-update-user-submit"
 
     visit profile_path(user)

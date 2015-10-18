@@ -7,18 +7,20 @@ module ProfileAttributesWarning
 
   ATTR_BLACKLIST.each do |attr|
     define_method(attr) do
-      log("'#{attr}' called on '#{self.class}'")
+      log("WARNING: '#{attr}' called on '#{self.class}'")
+      log("At: #{caller.first}")
       super()
     end
 
     define_method("#{attr}=") do |value|
-      log("'#{attr}=' called on '#{self.class}'")
+      log("WARNING: '#{attr}=' called on '#{self.class}'")
+      log("At: #{caller.first}")
       super(value)
     end
   end
 
   def log(message)
-    logger.info("WARNING: #{message}".yellow)
+    logger.info("#{message}".yellow)
   end
 
   def logger

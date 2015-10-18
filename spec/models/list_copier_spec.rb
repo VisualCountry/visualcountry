@@ -18,13 +18,13 @@ describe ListCopier do
       expect(new_list.uuid).not_to eq old_list.uuid
     end
 
-    it "keeps the same users" do
-      user = create(:user)
-      old_list = create(:influencer_list, users: [user])
+    it "keeps the same profiles" do
+      profile = create(:profile)
+      old_list = create(:influencer_list, profiles: [profile])
 
       new_list = ListCopier.new(old_list).copy
 
-      expect(new_list.users).to eq old_list.users
+      expect(new_list.profiles).to eq old_list.profiles
     end
 
     it "keeps the same owner" do

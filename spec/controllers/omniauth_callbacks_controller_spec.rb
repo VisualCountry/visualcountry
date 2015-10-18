@@ -36,7 +36,7 @@ describe OmniauthCallbacksController do
       end
 
       it "we don't have a facebook user and can create one" do
-        user = build(:user)
+        user = create(:user)
 
         request.env["omniauth.auth"] = {
           "info" => {
@@ -44,7 +44,7 @@ describe OmniauthCallbacksController do
           },
           "extra" => {
             "raw_info" => {
-              "name" => user.name,
+              "name" => user.profile.name,
             },
           },
           "credentials" => {
@@ -60,7 +60,7 @@ describe OmniauthCallbacksController do
     end
 
     context 'user did not provide appropriate permissions' do
-      let(:user) { build_stubbed :user }
+      let(:user) { create :user }
       let(:facebook_adapter) { double(permissions: [], deauthenticate: true) }
 
       before do
@@ -74,7 +74,7 @@ describe OmniauthCallbacksController do
           },
           "extra" => {
             "raw_info" => {
-              "name" => user.name,
+              "name" => user.profile.name,
             },
           },
           "credentials" => {

@@ -72,7 +72,7 @@
               <% end %>
             </li>
             <li>
-              <h5><%= link_to current_user.name, profile_path(current_user_profile)%></h5>
+              <h5><%= link_to current_user_profile.name, profile_path(current_user_profile)%></h5>
             </li>
             <li>
               <%= link_to edit_user_registration_path, method: :get do %>

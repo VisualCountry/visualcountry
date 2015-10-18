@@ -23,7 +23,7 @@ describe Profile::InterestsController do
 
     context 'with valid data' do
       it 'redirects to the profile_interests_path' do
-        patch :update, {'user'=>{'interest_ids'=>interests.map(&:id)}}
+        patch :update, {'profile'=>{'interest_ids'=>interests.map(&:id)}}
         expect(response).to redirect_to profile_interests_path
       end
     end
