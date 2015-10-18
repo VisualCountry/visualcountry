@@ -99,7 +99,7 @@ class MigrateUserToProfile
   end
 
   def create_profile
-    Profile.create(user_id: user.id).tap do |profile|
+    Profile.create(id: user.id, user_id: user.id).tap do |profile|
       puts "Creating profile for #{user.name}" if profile
     end
   end
