@@ -12,6 +12,7 @@ class Profile < ActiveRecord::Base
   has_many :organizations, through: :organization_memberships
 
   accepts_nested_attributes_for :clients, allow_destroy: true
+  accepts_nested_attributes_for :press, allow_destroy: true
 
   has_attached_file :picture,
     default_url: 'missing.png',
