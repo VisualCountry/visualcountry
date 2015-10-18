@@ -1,8 +1,8 @@
 class Admin::DashboardController < ApplicationController
   before_action :authorize_admin!
-  layout "application_with_sidebar"
+  layout 'application_with_sidebar'
 
   def index
-    @users = User.all.by_created_at.page(params[:page])
+    @users = Profile.all.order(created_at: :desc).page(params[:page])
   end
 end
