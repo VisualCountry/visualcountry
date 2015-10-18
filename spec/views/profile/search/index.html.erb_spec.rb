@@ -8,9 +8,9 @@ describe "profile/search/index.html.haml" do
       :profiles,
       [
         create(
-          :user,
-          cached_twitter_follower_count: 45_678,
-          cached_vine_follower_count: 1_234_567,
+          :profile,
+          twitter_follower_count: 45_678,
+          vine_follower_count: 1_234_567,
         ),
       ],
     )
