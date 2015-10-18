@@ -3,6 +3,6 @@ class Admin::DashboardController < ApplicationController
   layout 'application_with_sidebar'
 
   def index
-    @users = Profile.all.order(created_at: :desc).page(params[:page])
+    @profiles = Profile.all.order(created_at: :desc).page(params[:page])
   end
 end
