@@ -40,7 +40,7 @@ class MigrateUserToProfile
       copy_user_interests_to_profile
       copy_user_press_to_profile
       copy_user_list_memberships_to_profile
-      copy_user_influencer_lists_to_profile
+      copy_organization_memberships_to_profile
     end
   end
 
@@ -78,12 +78,16 @@ class MigrateUserToProfile
 
   def copy_user_list_memberships_to_profile
     puts "Creating list memberships for #{profile.name}"
-    profile.list_memberships = user.list_memberships
+    user.list_memberships.map do |membership|
+      membership.update(profile: profile)
+    end
   end
 
-  def copy_user_influencer_lists_to_profile
-    puts "Creating influencer lists for #{profile.name}"
-    profile.influencer_lists = user.influencer_lists
+  def copy_organization_memberships_to_profile
+    puts "Creating organization memberships for #{profile.name}"
+    user.organization_memberships.map do |membership|
+      membership.update(profile: profile)
+    end
   end
 
   def profile_data
