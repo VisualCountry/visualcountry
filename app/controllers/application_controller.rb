@@ -46,6 +46,7 @@ class ApplicationController < ActionController::Base
         :password_confirmation,
         :remember_me,
         :name,
+        :username,
         :website,
         :city,
         :bio,

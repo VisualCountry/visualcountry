@@ -1,4 +1,10 @@
 class User < ActiveRecord::Base
+  # HACK: Because the sign up page requires information that needs to make its
+  # way to the corresponding Profile, we need a way to temporarily store those
+  # attributes until the create_profile after_action is called. This can
+  # eventually be refactored into an action object.
+  attr_accessor :name, :username
+
   include ProfileAttributesWarning
 
   has_many :press, dependent: :destroy
@@ -31,7 +37,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
 
   def create_profile
-    profile || Profile.create(user_id: id)
+    profile || Profile.create(user_id: id, name: name, username: username)
   end
 
   def profile
