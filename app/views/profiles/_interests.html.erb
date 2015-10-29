@@ -1,0 +1,14 @@
+<div class="col-sm-4 user-subsection">
+  <h2>Interests</h2>
+  <% if interests.present? %>
+    <% interests.each do |interest| %>
+      <button type="button" class="btn btn-default btn-interests"><%= interest.name %></button>
+    <% end %>
+  <% elsif @profile.user == current_user %>
+    <%= link_to profile_interests_path do %>
+      <h4 class="text-center">Add Interests</h4>
+      <h4 class="text-center"><span class="glyphicon glyphicon-plus-sign green" title="Add Interests"></span></h4>
+    <% end %>
+  <% end %>
+  <p><%= special_interests %></p>
+</div>

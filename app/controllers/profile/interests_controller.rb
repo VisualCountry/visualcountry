@@ -1,5 +1,6 @@
 class Profile::InterestsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_profile
 
   layout 'application_with_sidebar'
 
@@ -7,7 +8,7 @@ class Profile::InterestsController < ApplicationController
   end
 
   def update
-    if current_user.update(interest_params)
+    if @profile.update(interest_params)
       redirect_to profile_interests_path, notice: "Successfully Updated Interests"
     else
       render :edit
@@ -16,7 +17,11 @@ class Profile::InterestsController < ApplicationController
 
   private
 
+  def set_profile
+    @profile = current_user.profile
+  end
+
   def interest_params
-    params.require(:user).permit(:special_interests, interest_ids: [])
+    params.require(:profile).permit(:special_interests, interest_ids: [])
   end
 end

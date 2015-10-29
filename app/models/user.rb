@@ -1,106 +1,48 @@
 class User < ActiveRecord::Base
-  attr_reader :focus_tokens
+  # HACK: Because the sign up page requires information that needs to make its
+  # way to the corresponding Profile, we need a way to temporarily store those
+  # attributes until the create_profile after_action is called. This can
+  # eventually be refactored into an action object.
+  attr_accessor :name, :username
 
-  SOCIAL_PLATFORMS = %w(vine twitter instagram facebook pinterest)
-  FOLLOWER_COUNT_METHODS = SOCIAL_PLATFORMS.map { |p| "#{p}_follower_count"}
-  FOLLOWER_COUNT_COLUMNS = FOLLOWER_COUNT_METHODS.map { |p| "cached_#{p}"}
+  include ProfileAttributesWarning
 
-  after_save :update_total_follower_count!
-
+  has_many :press, dependent: :destroy
+  has_many :list_memberships, dependent: :destroy
+  has_many :organization_memberships, dependent: :destroy
+  has_many :organizations, through: :organization_memberships
   has_and_belongs_to_many :interests
   has_and_belongs_to_many :focuses
   has_and_belongs_to_many :clients
 
-  has_many :press
   has_many :influencer_lists, dependent: :destroy
-  has_many :list_memberships, dependent: :destroy
-
-  has_many :organization_memberships, dependent: :destroy
-  has_many :organizations, through: :organization_memberships
-
   has_one :profile
 
-  accepts_nested_attributes_for :clients, allow_destroy: true
-  accepts_nested_attributes_for :press, allow_destroy: true
-
-  has_attached_file :picture, :styles => { :medium => "300x300#", :thumb => "50x50#" }, :default_url => "missing.png"
-  crop_attached_file :picture
-  validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
+  after_create :create_profile
 
   validates :password, length: { in: 6..128 }, on: :update, allow_blank: true
-  validates :bio, length: { maximum: 300 }
-
-  scope :by_created_at, -> { order(created_at: :desc) }
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :confirmable,
          omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
 
-  delegate :media, to: :instagram, prefix: true, allow_nil: true
-  delegate :media, to: :vine, prefix: true, allow_nil: true
+  has_attached_file :picture,
+    default_url: 'missing.png',
+    styles: {
+      medium: '300x300#',
+      thumb: '50x50#'
+    }
+  crop_attached_file :picture
+  validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
 
-  enum gender: {
-    "Female" => 0,
-    "Male" => 1,
-    "Other" => 2,
-  }
-  enum ethnicity: {
-    "Hispanic or Latino" => 0,
-    "Native American" => 1,
-    "Asian" => 2,
-    "Black or African American" => 3,
-    "Native Hawaiian or other Pacific Islander" => 4,
-    "White" => 5,
-    "Other/prefer not to answer" => 6,
-}
-
-  geocoded_by :city
-
-  reverse_geocoded_by :latitude, :longitude do |obj, (result, _)|
-    if result.present?
-      obj.city = "#{result.city}, #{result.state_code}"
-    end
+  def create_profile
+    profile || Profile.create(user_id: id, name: name, username: username)
   end
 
-  has_paper_trail
-
-  after_validation :normalize_city_name, if: :city_changed?
-
-  def self.total_reach
-    sum(:total_follower_count)
-  end
-
-  def update_total_follower_count!
-    return unless (changed & FOLLOWER_COUNT_COLUMNS).present?
-
-    changes_applied
-    total_follower_count = follower_counts.inject(:+)
-    update(total_follower_count: total_follower_count)
-  end
-
-  def warm_follower_count_cache
-    !!follower_counts
-  end
-
-  def instagram_follower_count
-    from_database_or_service(:instagram)
-  end
-
-  def vine_follower_count
-    from_database_or_service(:vine)
-  end
-
-  def twitter_follower_count
-    from_database_or_service(:twitter)
-  end
-
-  def facebook_follower_count
-    from_database_or_service(:facebook)
-  end
-
-  def pinterest_follower_count
-    #TODO
+  def profile
+    reload
+    super()
   end
 
   def has_account?
@@ -114,86 +56,15 @@ class User < ActiveRecord::Base
     result
   end
 
-  def lists_without(user)
-    influencer_lists.select { |list| list.users.exclude?(user) }
-  end
-
-  def list_membership_in(list)
-    list_memberships.find_by(influencer_list: list)
-  end
-
-  def organization_membership_in(organization)
-    organization_memberships.find_by(organization: organization)
-  end
-
   def owns_list?(list)
     list.owner == self
-  end
-
-  def lists_member_of
-    list_memberships.map(&:influencer_list).compact
   end
 
   def can_manage_list?(list)
     return true if admin?
     return true if list.owner == self
 
-    list.organizations.where(id: organization_ids).any?
-  end
-
-  private
-
-  def normalize_city_name
-    find_coordinates_from_city_name
-    find_canonical_city_name_from_coordinates
-  end
-
-  def find_coordinates_from_city_name
-    self.latitude, self.longitude = Rails.cache.fetch([:geocode, city]) do
-      geocode
-      [latitude, longitude]
-    end
-  end
-
-  def find_canonical_city_name_from_coordinates
-    self.city = Rails.cache.fetch([:reverse_geocode, latitude, longitude]) do
-      reverse_geocode
-      city
-    end
-  end
-
-  def instagram
-    @instagram ||= InstagramAdapter.from_user(self)
-  end
-
-  def vine
-    @vine ||= VineAdapter.from_user(self)
-  end
-
-  def twitter
-    @twitter ||= TwitterAdapter.from_user(self)
-  end
-
-  def facebook
-    @facebook ||= FacebookAdapter.from_user(self)
-  end
-
-  def from_database_or_service(platform)
-    follower_count = "cached_#{platform}_follower_count"
-
-    if attribute_present?(follower_count)
-      attributes[follower_count]
-    else
-      return unless send(platform)
-
-      send(platform).follower_count.tap do |count|
-        update!(follower_count => count)
-      end
-    end
-  end
-
-  def follower_counts
-    FOLLOWER_COUNT_METHODS.map { |p| send(p) }.compact
+    list.organizations.where(id: profile.organization_ids).any?
   end
 
   protected

@@ -3,7 +3,7 @@
   %h2 Clients
   %h5 Links to some projects you have worked on and clients you have worked with.
   #client.links-manager
-    = simple_form_for current_user, url: profile_clients_path, html: { novalidate: true } do |f|
+    = simple_form_for @profile, url: profile_clients_path, html: { novalidate: true } do |f|
       %ol{:role => "list-to-manage"}
         = f.simple_fields_for :clients do |client|
           = render 'client_fields', f: client

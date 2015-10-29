@@ -1,0 +1,17 @@
+<h6>Recent Instagram Posts</h6>
+<div class="row user-social-instagram">
+  <% feed.first(9).each do |photo_data| %>
+    <div class="col-sm-6 col-md-4">
+      <%= link_to(image_tag(photo_data['images']['standard_resolution']['url'], class: 'platform-media'), photo_data['link']) %>
+      <ul class="user-post-icons">
+        <li class="user-post-icon">
+          <span class="glyphicon glyphicon-thumbs-up pink" aria-hidden="true"></span>
+          <%= truncated_count(photo_data['likes']['count'].round) %>
+        </li>
+        <li class="user-post-icon">
+          <span class="glyphicon glyphicon-comment pink" aria-hidden="true"></span>
+          <%= truncated_count(photo_data['comments']['count'].round) %>
+      </ul>
+    </div>
+  <% end %>
+</div>

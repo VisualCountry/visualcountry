@@ -1,13 +1,18 @@
 class Profile::SearchController < ApplicationController
   before_action :authorize_admin!
 
-  layout "application_with_sidebar"
+  layout 'application_with_sidebar'
 
   def index
     @profiles = ProfileSearchQuery.new(search_params).search
   end
 
   def new
+    @interests = Interest.all
+    @social_platforms = Profile::SOCIAL_PLATFORMS
+    @focuses = Focus.all
+    @genders = Profile.genders.keys
+    @ethnicities = Profile.ethnicities.keys
   end
 
   private

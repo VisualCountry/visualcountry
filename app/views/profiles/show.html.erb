@@ -1,0 +1,102 @@
+<div class="container user">
+  <header class="row user-row">
+    <div class="col-sm-4">
+      <%= image_tag(@profile.picture.url(:medium), alt: 'Profile Pic') %>
+    </div>
+
+    <div class="col-sm-8">
+      <h2><%= @profile.name %></h2>
+
+      <h5>
+        <% if @profile.focuses.present? %>
+          <%= @profile.focuses.pluck(:name).join(', ') %>
+        <% elsif current_user == @profile %>
+          <%= link_to edit_user_registration_path do %>
+            <span class="glyphicon glyphicon-plus-sign green" title="Add Website"></span> Add your skills
+          <% end %>
+        <% end %>
+      </h5>
+
+      <h4>
+        <% if @profile.bio.present? %>
+          <%= @profile.bio  %>
+        <% elsif current_user == @profile %>
+          <%= link_to edit_user_registration_path do %>
+            <span class="glyphicon glyphicon-plus-sign green" title="Add Bio"></span> Add your Bio
+          <% end %>
+        <% end %>
+      </h4>
+
+      <ul class="user-meta">
+        <li data-role="geo-contact">
+          <% if @profile.city.present? %>
+            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+            <%= @profile.city %>
+          <% elsif @profile.user == current_user %>
+            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+            <%= link_to edit_user_registration_path do %>
+              <span class="glyphicon glyphicon-plus-sign green" title="Add City"></span> add your city
+            <% end %>
+          <% end %>
+        </li>
+
+        <li>
+          <% if @profile.website.present? %>
+            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+            <%= link_to @profile.website, "http://#{@profile.website}" %>
+          <% elsif current_user == @profile %>
+            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+            <%= link_to edit_user_registration_path do %>
+              <span class="glyphicon glyphicon-plus-sign green" title="Add Website"></span> add your website
+            <% end %>
+          <% end %>
+        </li>
+        <% if signed_in_admin? || current_user.profile == @profile %>
+          <li>
+            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+            <%= mail_to @profile.email, @profile.email %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </header>
+
+  <%= render 'admin_user_options'%>
+
+  <div class="row user-row user-total-follower-row">
+    <dl class="user-total-follower-count col-sm-4">
+      <dt>TOTAL FOLLOWERS:</dt>
+      <dd><%= number_with_delimiter(@profile.total_follower_count) %></dd>
+    </dl>
+
+    <% %w(vine twitter instagram facebook pinterest).each do |social_platform| %>
+      <%= render 'follower_counts', social: social_platform %>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <%= render 'interests', interests: @profile.interests, special_interests: @profile.special_interests %>
+    <%= render 'press', press: @profile.press %>
+    <%= render 'clients', clients: @profile.clients %>
+  </div>
+
+  <% if @instagram_feed %>
+    <%= render 'instagram_feed', feed: @instagram_feed %>
+  <% elsif @profile.user == current_user %>
+    <h6>Recent Instagram Posts</h6>
+    <%= link_to profile_social_path do %>
+      <h4 class="text-center">Connect your Instagram profile to showcase your latests posts.</h4>
+      <h4 class="text-center"><span class="glyphicon glyphicon-plus-sign green" title="Connect Vine"></span></h4>
+    <% end %>
+  <% end %>
+
+  <% if @vine_feed %>
+    <%= render 'vine_feed', feed: @vine_feed %>
+  <% elsif @profile.user == current_user %>
+    <h6>Recent Vine Videos</h6>
+    <%= link_to profile_social_path do %>
+      <h4 class="text-center">Connect your Vine profile to showcase your latests posts.</h4>
+      <h4 class="text-center"><span class="glyphicon glyphicon-plus-sign green" title="Connect Vine"></span></h4>
+    <% end %>
+  <% end %>
+</div>

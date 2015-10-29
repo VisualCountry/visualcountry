@@ -1,8 +1,8 @@
 class OrganizationMembershipsController < ApplicationController
   def create
-    user = find_user
-    find_organization.add_user(user)
-    redirect_to profile_path(user)
+    profile = find_user.profile
+    find_organization.add_profile(profile)
+    redirect_to profile_path(profile)
   end
 
   def destroy

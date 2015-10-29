@@ -8,7 +8,7 @@ class ListCopier
       list.update(
         name: "#{old_list.name} (copy)",
         uuid: old_list.fresh_uuid,
-        users: old_list.users,
+        profiles: old_list.profiles,
       )
     end
   end

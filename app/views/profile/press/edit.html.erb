@@ -5,7 +5,7 @@
     <h5>Share some stories or articles written about you.</h5>
   </div>
   <div id="press" class="links-manager">
-    <%= simple_form_for current_user, url: profile_press_path, html: { novalidate: true } do |f| %>
+    <%= simple_form_for @profile, url: profile_press_path, html: { novalidate: true } do |f| %>
       <ol role="list-to-manage">
         <%= f.simple_fields_for :press do |press| %>
           <%= render 'press_fields', f: press %>

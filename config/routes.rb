@@ -33,6 +33,8 @@ Rails.application.routes.draw do
         delete 'vine' => 'vine#destroy'
         resources :vine, only: [:new, :create]
       end
+      get 'basic_info' => 'basic_info#edit'
+      patch 'basic_info' => 'basic_info#update'
       get 'interests' => 'interests#edit'
       patch 'interests' => 'interests#update'
       get 'press' => 'press#edit'
@@ -44,7 +46,7 @@ Rails.application.routes.draw do
     get 'search/results' => 'search#index'
   end
 
-  resources :users, only: [:show], path: :profiles, as: :profiles
+  resources :profiles, only: [:show]
   resources :contact_messages, only: [:create, :destroy]
   resources :influencer_lists, path: :lists
   resources :list_memberships, only: [:create, :destroy]

@@ -5,8 +5,8 @@ describe "users/_follower_counts.html.erb" do
     assign(
       :user,
       build(
-        :user,
-        cached_twitter_follower_count: 45_678,
+        :profile,
+        twitter_follower_count: 45_678,
       ),
     )
 
@@ -19,8 +19,8 @@ describe "users/_follower_counts.html.erb" do
     assign(
       :user,
       build(
-        :user,
-        cached_twitter_follower_count: 1_234_567,
+        :profile,
+        twitter_follower_count: 1_234_567,
       ),
     )
 

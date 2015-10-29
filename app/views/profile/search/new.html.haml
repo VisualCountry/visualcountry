@@ -10,7 +10,7 @@
     .filter-form__item
       %h5 Interest
       .row
-        = f.input :interests, as: :check_boxes, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3", label: false, collection: Interest.all
+        = f.input :interests, as: :check_boxes, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3", label: false, collection: @interests
 
     .filter-form__item
       %h5 Followers
@@ -23,18 +23,18 @@
     .filter-form__item
       %h5 Social Platform
       .row
-        = f.input :social_profiles, as: :check_boxes, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3", label: false, collection: User::SOCIAL_PLATFORMS
+        = f.input :social_profiles, as: :check_boxes, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3", label: false, collection: @social_platforms
     .filter-form__item
       %h5 Location
       = f.input :near, input_html: { class: "flat-form-control", id: 'test-location-input' }, label: false
     .filter-form__item
       %h5 Focus
       .row
-        = f.input :focuses, as: :check_boxes, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3", label: false, collection: Focus.all
+        = f.input :focuses, as: :check_boxes, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3", label: false, collection: @focuses
     .filter-form__item
       %h5 Gender
       .row
-        = f.input :gender, as: :check_boxes, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3 gender", label: false, collection: User.genders.keys
+        = f.input :gender, as: :check_boxes, item_wrapper_class: "checkbox-button col-xs-6 col-sm-6 col-md-3 gender", label: false, collection: @genders
 
     .filter-form__item
       .row
@@ -49,6 +49,6 @@
         .col-md-6
           %h5 Ethnicity
           .flat-select
-            = f.input :ethnicity, item_wrapper_class: "col-xs-6 col-sm-6 col-md-3", label: false, collection: User.ethnicities.keys, input_html: { class: "flat-form-control", id: 'test-ethnicity-selection' }
+            = f.input :ethnicity, item_wrapper_class: "col-xs-6 col-sm-6 col-md-3", label: false, collection: @ethnicities, input_html: { class: "flat-form-control", id: 'test-ethnicity-selection' }
     .filter-form__item.text-center
       = f.submit class: "btn btn-default btn-lg search-button", value: "Search"

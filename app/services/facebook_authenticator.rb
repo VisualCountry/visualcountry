@@ -35,13 +35,15 @@ class FacebookAuthenticator
   end
 
   def create_user
-    User.create(facebook_uid: uid, email: email) do |user|
+    user = User.create(facebook_uid: uid, email: email) do |user|
       user.email = email
       user.facebook_uid = uid
-      user.gender = gender
-      user.name = name
       user.password = Devise.friendly_token
     end
+
+    user.reload
+    user.profile.update(gender: gender, name: name)
+    user
   end
 
   def update_facebook_data
@@ -70,7 +72,7 @@ class FacebookAuthenticator
   end
 
   def gender
-    User.genders[auth_data["extra"]["raw_info"]["gender"]]
+    Profile.genders[auth_data["extra"]["raw_info"]["gender"]]
   end
 
   def email

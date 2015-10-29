@@ -15,16 +15,16 @@ feature "Creating/updating/deleting influencer lists" do
     end
   end
 
-  scenario "can view the users in a list" do
+  scenario "can view the profiles in a list" do
     admin = create(:admin)
-    users = create_list(:user, 3)
-    list = create(:influencer_list, owner: admin, users: users)
+    profiles = create_list(:profile, 3)
+    list = create(:influencer_list, owner: admin, profiles: profiles)
     login_as(admin)
 
     visit influencer_list_path(list)
 
-    users.each do |user|
-      expect(page).to have_link user.name
+    profiles.each do |profile|
+      expect(page).to have_link profile.name
     end
   end
 

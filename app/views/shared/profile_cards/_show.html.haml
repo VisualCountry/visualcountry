@@ -1,29 +1,29 @@
-.well.profile-card{ class: "user-#{user.id}"}
+.well.profile-card{ class: "user-#{profile.id}"}
   .text-center
-    = link_to image_tag(user.picture.url(:medium), :size => '250', alt: 'Profile Pic'), profile_path(id: user.id)
+    = link_to image_tag(profile.picture.url(:medium), :size => '250', alt: 'Profile Pic'), profile_path(id: profile.id)
   .all-social-icons
-    %h1= link_to user.name, profile_path(id: user.id)
-    %p= user.focuses.map(&:name).join(', ')
+    %h1= link_to profile.name, profile_path(id: profile.id)
+    %p= profile.focuses.map(&:name).join(', ')
     %br/
     %h2
       %span.glyphicon.glyphicon-map-marker{"aria-hidden" => "true"}
-      = user.city if user.city
+      = profile.city if profile.city
     %h2
       %span.glyphicon.glyphicon-link{"aria-hidden" => "true"}
-      - if user.website
-        = link_to user.website, "http://#{user.website}"
+      - if profile.website
+        = link_to profile.website, "http://#{profile.website}"
     %h2
       %span.glyphicon.glyphicon-envelope{"aria-hidden" => "true"}
-      = mail_to user.email, user.email
+      = mail_to profile.email, profile.email
   %hr/
   .follower-count
     .text-center
       %h3
-        TOTAL FOLLOWERS: #{number_with_delimiter(user.total_follower_count)}
+        TOTAL FOLLOWERS: #{number_with_delimiter(profile.total_follower_count)}
   .all-social-icons
     .text-center
-      - User::SOCIAL_PLATFORMS.each do |platform|
-        - if user.send("#{platform}_follower_count")
+      - Profile::SOCIAL_PLATFORMS.each do |platform|
+        - if profile.send("#{platform}_follower_count")
           .social-icons.pull-left
             = image_tag("#{platform}_logo.svg", size: '30', alt: "#{platform} Logo")
-            %h4= truncated_count(user.send("#{platform}_follower_count"))
+            %h4= truncated_count(profile.send("#{platform}_follower_count"))

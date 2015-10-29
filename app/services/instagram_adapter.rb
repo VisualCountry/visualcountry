@@ -1,13 +1,22 @@
-class InstagramAdapter < BaseAdapter
+class InstagramAdapter
+  def initialize(user)
+    @token = user.instagram_token
+    @user = user
+  end
+
   def self.from_user(user)
-    super(user, :instagram)
+    new(user)
   end
 
   def follower_count
+    return unless token
+
     handle_exception { client.user.counts.followed_by }
   end
 
   def media
+    return unless token
+
     handle_exception do
       @media ||= Rails.cache.fetch(media_cache_key, expires_in: 6.hours) do
         client.user_recent_media
@@ -17,12 +26,14 @@ class InstagramAdapter < BaseAdapter
 
   private
 
+  attr_reader :token, :user
+
   def media_cache_key
-    "instagram-media-#{service_token}-v2"
+    "instagram-media-#{token}-v2"
   end
 
   def client
-    @client ||= Instagram.client(access_token: service_token)
+    @client ||= Instagram.client(access_token: token)
   end
 
   def handle_exception(&block)

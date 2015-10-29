@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20151029034422) do
   end
 
   create_table "list_memberships", force: true do |t|
-    t.integer  "user_id",            null: false
+    t.integer  "user_id"
     t.integer  "influencer_list_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20151029034422) do
   create_table "organization_memberships", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id",         null: false
+    t.integer  "user_id"
     t.integer  "organization_id", null: false
     t.integer  "profile_id"
   end

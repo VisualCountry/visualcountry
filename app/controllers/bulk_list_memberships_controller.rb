@@ -1,7 +1,7 @@
 class BulkListMembershipsController < ApplicationController
   def create
     list = find_list
-    list.add_users(find_users)
+    list.add_profiles(find_profiles)
     redirect_to list
   end
 
@@ -11,8 +11,8 @@ class BulkListMembershipsController < ApplicationController
     InfluencerList.find(bulk_params[:influencer_list])
   end
 
-  def find_users
-    User.find(bulk_params[:user_ids])
+  def find_profiles
+    Profile.find(bulk_params[:profile_ids])
   end
 
   def bulk_params
@@ -20,7 +20,7 @@ class BulkListMembershipsController < ApplicationController
       require(:bulk_list_membership).
       permit(
         :influencer_list,
-        user_ids: [],
+        profile_ids: [],
       )
   end
 end

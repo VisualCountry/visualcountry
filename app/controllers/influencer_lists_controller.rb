@@ -44,7 +44,7 @@ class InfluencerListsController < ApplicationController
 
   def index
     @my_lists = current_user.influencer_lists
-    @organizations = current_user.organizations
+    @organizations = current_user.profile.organizations
   end
 
   def destroy

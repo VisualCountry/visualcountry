@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :list_membership do
-    user
+    profile
     influencer_list
   end
 end

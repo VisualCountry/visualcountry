@@ -47,7 +47,7 @@ class ProfileSearchQuery
   )
 
   def relation
-    User.all.extending(Scopes)
+    Profile.all.extending(Scopes)
   end
 
   module Scopes
@@ -64,7 +64,7 @@ class ProfileSearchQuery
 
     def by_genders(genders)
       if genders.present?
-        where(gender: genders.map { |g| User.genders[g] })
+        where(gender: genders.map { |g| Profile.genders[g] })
       else
         all
       end
@@ -72,7 +72,7 @@ class ProfileSearchQuery
 
     def by_ethnicity(ethnicity)
       if ethnicity.present?
-        where(ethnicity: User.ethnicities[ethnicity])
+        where(ethnicity: Profile.ethnicities[ethnicity])
       else
         all
       end
@@ -112,7 +112,7 @@ class ProfileSearchQuery
 
     def by_social_profiles(social_profiles)
       query = social_profiles.inject({}) do |attrs, profile|
-        attrs.merge("#{profile}_token" => nil)
+        attrs.merge("#{profile}_follower_count" => nil)
       end
 
       if query.present?
@@ -157,8 +157,8 @@ class ProfileSearchQuery
     end
 
     def columns_for(profiles)
-      (profiles & User::SOCIAL_PLATFORMS).
-        map { |platform| "cached_#{platform}_follower_count" }
+      (profiles & Profile::SOCIAL_PLATFORMS).
+        map { |platform| "#{platform}_follower_count" }
     end
   end
 

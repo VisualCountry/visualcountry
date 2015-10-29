@@ -3,18 +3,22 @@ require "rails_helper"
 describe OmniauthCallbacksController do
   before do
     request.env["devise.mapping"] = Devise.mappings[:user]
+    allow_any_instance_of(UpdateFollowerCount).to receive(:perform)
   end
 
   describe "GET facebook" do
     context 'user gave appropriate permissions' do
       let(:facebook_adapter) do
-        double(permissions: [
-          :user_friends, :user_posts, :read_stream, :email, :public_profile
-        ])
+        double(
+          follower_count: 1_000_000,
+          permissions: [
+            :user_friends, :user_posts, :read_stream, :email, :public_profile
+          ]
+        )
       end
 
       before do
-        expect(FacebookAdapter).to receive(:new).and_return facebook_adapter
+        allow(FacebookAdapter).to receive(:new).and_return facebook_adapter
       end
 
       it "we have a facebook user and can successfully update the token" do
@@ -36,7 +40,7 @@ describe OmniauthCallbacksController do
       end
 
       it "we don't have a facebook user and can create one" do
-        user = build(:user)
+        user = create(:user)
 
         request.env["omniauth.auth"] = {
           "info" => {
@@ -44,7 +48,7 @@ describe OmniauthCallbacksController do
           },
           "extra" => {
             "raw_info" => {
-              "name" => user.name,
+              "name" => user.profile.name,
             },
           },
           "credentials" => {
@@ -60,7 +64,7 @@ describe OmniauthCallbacksController do
     end
 
     context 'user did not provide appropriate permissions' do
-      let(:user) { build_stubbed :user }
+      let(:user) { create :user }
       let(:facebook_adapter) { double(permissions: [], deauthenticate: true) }
 
       before do
@@ -74,7 +78,7 @@ describe OmniauthCallbacksController do
           },
           "extra" => {
             "raw_info" => {
-              "name" => user.name,
+              "name" => user.profile.name,
             },
           },
           "credentials" => {
@@ -155,6 +159,10 @@ describe OmniauthCallbacksController do
   end
 
   describe "GET instagram" do
+    before do
+      allow_any_instance_of(UpdateFollowerCount).to receive(:perform)
+    end
+
     it "updates the credentials of logged-in users" do
       user = create(:user)
       sign_in(user)
@@ -172,7 +180,7 @@ describe OmniauthCallbacksController do
     end
   end
 
-  describe "GET pinterest" do
+  xdescribe "GET pinterest" do
     it "updates the credentials of logged-in users" do
       user = create(:user)
       sign_in(user)

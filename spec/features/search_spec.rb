@@ -1,14 +1,17 @@
-require "rails_helper"
+require 'rails_helper'
 
-feature "Searching User profiles" do
+feature 'Searching Profiles' do
+  let(:admin) { create :admin }
+
   before do
-    login_as(create(:admin))
+    login_as(admin)
+    admin.reload
   end
 
   feature "searching by query" do
-    scenario "matches users by name" do
-      alice = create(:user, name: "Alice")
-      bob = create(:user, name: "Bob")
+    scenario "matches profiles by name" do
+      alice = create(:profile, name: "Alice")
+      bob = create(:profile, name: "Bob")
 
       visit profile_search_path
       fill_in "test-query-input", with: "alice"
@@ -18,9 +21,9 @@ feature "Searching User profiles" do
       expect(page).to have_no_content bob.name
     end
 
-    scenario "matches users by bio" do
-      alice = create(:user, bio: "Antarctic explorer")
-      bob = create(:user, name: "Ramen enthusiast")
+    scenario "matches profiles by bio" do
+      alice = create(:profile, bio: "Antarctic explorer")
+      bob = create(:profile, name: "Ramen enthusiast")
 
       visit profile_search_path
       fill_in "test-query-input", with: "Explorer"
@@ -30,9 +33,9 @@ feature "Searching User profiles" do
       expect(page).to have_no_content bob.name
     end
 
-    scenario "matches users by special interests" do
-      alice = create(:user, special_interests: "Writing Capybara tests")
-      bob = create(:user, special_interests: "Embroidery and arson")
+    scenario "matches profiles by special interests" do
+      alice = create(:profile, special_interests: "Writing Capybara tests")
+      bob = create(:profile, special_interests: "Embroidery and arson")
 
       visit profile_search_path
       fill_in "test-query-input", with: "capybara"
@@ -44,59 +47,59 @@ feature "Searching User profiles" do
   end
 
   feature "searching by location" do
-    scenario "specifying a location only retrieves users near that location" do
-      brooklyn_user = create(:user, city: "Brooklyn")
-      la_user = create(:user, city: "Los Angeles")
+    scenario "specifying a location only retrieves profiles near that location" do
+      brooklyn_profile = create(:profile, city: "Brooklyn")
+      la_profile = create(:profile, city: "Los Angeles")
 
       visit profile_search_path
       fill_in "test-location-input", with: "NYC"
       click_button "Search"
 
-      expect(page).to have_content brooklyn_user.name
-      expect(page).to have_no_content la_user.name
+      expect(page).to have_content brooklyn_profile.name
+      expect(page).to have_no_content la_profile.name
     end
 
-    scenario "not specifying a location searches all users" do
-      brooklyn_user = create(:user, city: "Brooklyn")
-      la_user = create(:user, city: "Los Angeles")
+    scenario "not specifying a location searches all profiles" do
+      brooklyn_profile = create(:profile, city: "Brooklyn")
+      la_profile = create(:profile, city: "Los Angeles")
 
       visit profile_search_path
       click_button "Search"
 
-      expect(page).to have_content brooklyn_user.name
-      expect(page).to have_content la_user.name
+      expect(page).to have_content brooklyn_profile.name
+      expect(page).to have_content la_profile.name
     end
   end
 
   feature "searching by gender" do
-    scenario "specifying a gender only retrieves users with that gender" do
-      male_user = create(:user, gender: "Male")
-      female_user = create(:user, gender: "Female")
+    scenario "specifying a gender only retrieves profiles with that gender" do
+      male_profile = create(:profile, gender: "Male")
+      female_profile = create(:profile, gender: "Female")
 
       visit profile_search_path
       check('Male')
       click_button "Search"
 
-      expect(page).to have_content male_user.name
-      expect(page).to have_no_content female_user.name
+      expect(page).to have_content male_profile.name
+      expect(page).to have_no_content female_profile.name
     end
 
-    scenario "not specifying a gender searches all users" do
-      male_user = create(:user, gender: "Male")
-      female_user = create(:user, gender: "Female")
+    scenario "not specifying a gender searches all profiles" do
+      male_profile = create(:profile, gender: "Male")
+      female_profile = create(:profile, gender: "Female")
 
       visit profile_search_path
       click_button "Search"
 
-      expect(page).to have_content male_user.name
-      expect(page).to have_content female_user.name
+      expect(page).to have_content male_profile.name
+      expect(page).to have_content female_profile.name
     end
   end
 
   feature "searching by ethnicity" do
-    scenario "specifying an ethnicity only retrieves users with that ethnicity" do
-      hispanic_user = create(:user, ethnicity: "Hispanic or Latino")
-      asian_user = create(:user, ethnicity: "Asian")
+    scenario "specifying an ethnicity only retrieves profiles with that ethnicity" do
+      hispanic_profile = create(:profile, ethnicity: "Hispanic or Latino")
+      asian_profile = create(:profile, ethnicity: "Asian")
 
       visit profile_search_path
       within('#test-ethnicity-selection') do
@@ -104,66 +107,66 @@ feature "Searching User profiles" do
       end
       click_button "Search"
 
-      expect(page).to have_content hispanic_user.name
-      expect(page).to have_no_content asian_user.name
+      expect(page).to have_content hispanic_profile.name
+      expect(page).to have_no_content asian_profile.name
     end
 
-    scenario "not specifying an ethnicity searches all users" do
-      hispanic_user = create(:user, ethnicity: "Hispanic or Latino")
-      asian_user = create(:user, ethnicity: "Asian")
+    scenario "not specifying an ethnicity searches all profiles" do
+      hispanic_profile = create(:profile, ethnicity: "Hispanic or Latino")
+      asian_profile = create(:profile, ethnicity: "Asian")
 
       visit profile_search_path
       click_button "Search"
 
-      expect(page).to have_content hispanic_user.name
-      expect(page).to have_content asian_user.name
+      expect(page).to have_content hispanic_profile.name
+      expect(page).to have_content asian_profile.name
     end
   end
 
   feature "searching by age" do
-    scenario "specifying a minimum age only returns older users" do
-      age_20_user = create(:user, birthday: 20.years.ago)
-      age_30_user = create(:user, birthday: 30.years.ago)
+    scenario "specifying a minimum age only returns older profiles" do
+      age_20_profile = create(:profile, birthday: 20.years.ago)
+      age_30_profile = create(:profile, birthday: 30.years.ago)
 
       visit profile_search_path
       fill_in "test-min-age", with: 25
       click_button "Search"
 
-      expect(page).to have_content age_30_user.name
-      expect(page).to have_no_content age_20_user.name
+      expect(page).to have_content age_30_profile.name
+      expect(page).to have_no_content age_20_profile.name
     end
 
-    scenario "specifying a maximum age only returns younger users" do
-      age_20_user = create(:user, birthday: 20.years.ago)
-      age_30_user = create(:user, birthday: 30.years.ago)
+    scenario "specifying a maximum age only returns younger profiles" do
+      age_20_profile = create(:profile, birthday: 20.years.ago)
+      age_30_profile = create(:profile, birthday: 30.years.ago)
 
       visit profile_search_path
       fill_in "test-max-age", with: 25
       click_button "Search"
 
-      expect(page).to have_content age_20_user.name
-      expect(page).to have_no_content age_30_user.name
+      expect(page).to have_content age_20_profile.name
+      expect(page).to have_no_content age_30_profile.name
     end
 
-    scenario "not specifying an age returns all users" do
-      age_20_user = create(:user, birthday: 20.years.ago)
-      age_30_user = create(:user, birthday: 30.years.ago)
+    scenario "not specifying an age returns all profiles" do
+      age_20_profile = create(:profile, birthday: 20.years.ago)
+      age_30_profile = create(:profile, birthday: 30.years.ago)
 
       visit profile_search_path
       click_button "Search"
 
-      expect(page).to have_content age_20_user.name
-      expect(page).to have_content age_30_user.name
+      expect(page).to have_content age_20_profile.name
+      expect(page).to have_content age_30_profile.name
     end
   end
 
   feature "filtering by focus" do
-    scenario "returns only those users with that focus" do
+    scenario "returns only those profiles with that focus" do
       photography = create(:focus, name: "Photography")
       cooking = create(:focus, name: "Cooking")
-      photographer = create(:user, focuses: [photography])
-      cook = create(:user, focuses: [cooking])
-      disinterested = create(:user)
+      photographer = create(:profile, focuses: [photography])
+      cook = create(:profile, focuses: [cooking])
+      disinterested = create(:profile)
 
       visit profile_search_path
       check "Photography"
@@ -174,12 +177,12 @@ feature "Searching User profiles" do
       expect(page).to have_no_content disinterested.name
     end
 
-    scenario "multiple focuses return users that satisfy any of them" do
+    scenario "multiple focuses return profiles that satisfy any of them" do
       photography = create(:focus, name: "Photography")
       cooking = create(:focus, name: "Cooking")
-      photographer = create(:user, focuses: [photography])
-      cook = create(:user, focuses: [cooking])
-      disinterested = create(:user)
+      photographer = create(:profile, focuses: [photography])
+      cook = create(:profile, focuses: [cooking])
+      disinterested = create(:profile)
 
       visit profile_search_path
       check "Photography"
@@ -193,12 +196,12 @@ feature "Searching User profiles" do
   end
 
   feature "filtering by interest" do
-    scenario "returns only those users with that interest" do
+    scenario "returns only those profiles with that interest" do
       photography = create(:interest, name: "Photographer")
       directing = create(:interest, name: "Director")
-      photographer = create(:user, interests: [photography])
-      director = create(:user, interests: [directing])
-      disinterested = create(:user)
+      photographer = create(:profile, interests: [photography])
+      director = create(:profile, interests: [directing])
+      disinterested = create(:profile)
 
       visit profile_search_path
       check "Photographer"
@@ -209,12 +212,12 @@ feature "Searching User profiles" do
       expect(page).to have_no_content disinterested.name
     end
 
-    scenario "multiple interests return users that satisfy any of them" do
+    scenario "multiple interests return profiles that satisfy any of them" do
       photography = create(:interest, name: "Photographer")
       directing = create(:interest, name: "Director")
-      photographer = create(:user, interests: [photography])
-      director = create(:user, interests: [directing])
-      disinterested = create(:user)
+      photographer = create(:profile, interests: [photography])
+      director = create(:profile, interests: [directing])
+      disinterested = create(:profile)
 
       visit profile_search_path
       check "Photographer"
@@ -228,21 +231,18 @@ feature "Searching User profiles" do
   end
 
   feature "filtering by followers and social media profiles" do
-    scenario "returns users between the min and max numbers of followers" do
-      unpopular_user = create(
-        :user,
-        :with_twitter,
-        cached_twitter_follower_count: 10,
+    scenario "returns profiles between the min and max numbers of followers" do
+      unpopular_profile = create(
+        :profile,
+        twitter_follower_count: 10,
       )
-      target_user = create(
-        :user,
-        :with_twitter,
-        cached_twitter_follower_count: 100,
+      target_profile = create(
+        :profile,
+        twitter_follower_count: 100,
       )
-      popular_user = create(
-        :user,
-        :with_twitter,
-        cached_twitter_follower_count: 1000,
+      popular_profile = create(
+        :profile,
+        twitter_follower_count: 1000,
       )
 
       visit profile_search_path
@@ -250,29 +250,25 @@ feature "Searching User profiles" do
       fill_in "Max followers", with: 500
       click_button "Search"
 
-      expect(page).to have_content target_user.name
-      expect(page).to have_no_content unpopular_user.name
-      expect(page).to have_no_content popular_user.name
+      expect(page).to have_content target_profile.name
+      expect(page).to have_no_content unpopular_profile.name
+      expect(page).to have_no_content popular_profile.name
     end
 
     context "when a specific social media platform is selected" do
-      scenario "only users with the right number of followers from that platform are returned" do
-        twitter_user = create(
-          :user,
-          :with_twitter,
-          cached_twitter_follower_count: 100,
+      scenario "only profiles with the right number of followers from that platform are returned" do
+        twitter_profile = create(
+          :profile,
+          twitter_follower_count: 100,
         )
-        target_user = create(
-          :user,
-          :with_twitter,
-          :with_instagram,
-          cached_twitter_follower_count: 10,
-          cached_instagram_follower_count: 100,
+        target_profile = create(
+          :profile,
+          twitter_follower_count: 10,
+          instagram_follower_count: 100,
         )
-        popular_user = create(
-          :user,
-          :with_instagram,
-          cached_instagram_follower_count: 1000,
+        popular_profile = create(
+          :profile,
+          instagram_follower_count: 1000,
         )
 
         visit profile_search_path
@@ -281,49 +277,44 @@ feature "Searching User profiles" do
         check "instagram"
         click_button "Search"
 
-        expect(page).to have_content target_user.name
-        expect(page).to have_no_content twitter_user.name
-        expect(page).to have_no_content popular_user.name
+        expect(page).to have_content target_profile.name
+        expect(page).to have_no_content twitter_profile.name
+        expect(page).to have_no_content popular_profile.name
       end
     end
 
     context "when no min/max are selected" do
-      scenario "only users on the selected social media platforms are returned" do
-        twitter_user = create(
-          :user,
-          :with_twitter,
-          cached_twitter_follower_count: 100,
+      scenario "only profiles on the selected social media platforms are returned" do
+        twitter_profile = create(
+          :profile,
+          twitter_follower_count: 100,
         )
-        instagram_user = create(
-          :user,
-          :with_instagram,
-          cached_instagram_follower_count: 100,
+        instagram_profile = create(
+          :profile,
+          instagram_follower_count: 100,
         )
 
         visit profile_search_path
         check "instagram"
         click_button "Search"
 
-        expect(page).to have_content instagram_user.name
-        expect(page).to have_no_content twitter_user.name
+        expect(page).to have_content instagram_profile.name
+        expect(page).to have_no_content twitter_profile.name
       end
 
       context "when only certain platforms are selected" do
         scenario "allows omitting the minimum" do
-          unpopular_user = create(
-            :user,
-            :with_twitter,
-            cached_twitter_follower_count: 10,
+          unpopular_profile = create(
+            :profile,
+            twitter_follower_count: 10,
           )
-          middle_user = create(
-            :user,
-            :with_twitter,
-            cached_twitter_follower_count: 100,
+          middle_profile = create(
+            :profile,
+            twitter_follower_count: 100,
           )
-          popular_user = create(
-            :user,
-            :with_twitter,
-            cached_twitter_follower_count: 1000,
+          popular_profile = create(
+            :profile,
+            twitter_follower_count: 1000,
           )
 
           visit profile_search_path
@@ -331,26 +322,23 @@ feature "Searching User profiles" do
           check "twitter"
           click_button "Search"
 
-          expect(page).to have_content middle_user.name
-          expect(page).to have_content unpopular_user.name
-          expect(page).to have_no_content popular_user.name
+          expect(page).to have_content middle_profile.name
+          expect(page).to have_content unpopular_profile.name
+          expect(page).to have_no_content popular_profile.name
         end
 
         scenario "allows omitting the maximum" do
-          unpopular_user = create(
-            :user,
-            :with_twitter,
-            cached_twitter_follower_count: 10,
+          unpopular_profile = create(
+            :profile,
+            twitter_follower_count: 10,
           )
-          middle_user = create(
-            :user,
-            :with_twitter,
-            cached_twitter_follower_count: 100,
+          middle_profile = create(
+            :profile,
+            twitter_follower_count: 100,
           )
-          popular_user = create(
-            :user,
-            :with_twitter,
-            cached_twitter_follower_count: 1000,
+          popular_profile = create(
+            :profile,
+            twitter_follower_count: 1000,
           )
 
           visit profile_search_path
@@ -358,9 +346,9 @@ feature "Searching User profiles" do
           check "twitter"
           click_button "Search"
 
-          expect(page).to have_content middle_user.name
-          expect(page).to have_content popular_user.name
-          expect(page).to have_no_content unpopular_user.name
+          expect(page).to have_content middle_profile.name
+          expect(page).to have_content popular_profile.name
+          expect(page).to have_no_content unpopular_profile.name
         end
       end
     end
@@ -372,9 +360,9 @@ feature "Searching User profiles" do
       technology = create(:focus, name: "Technology")
       directing = create(:interest, name: "Director")
       photography = create(:interest, name: "Photographer")
-      cooking_director = create(:user, interests: [directing], focuses: [cooking])
-      tech_photographer = create(:user, interests: [photography], focuses: [technology])
-      cooking_photographer = create(:user, interests: [photography], focuses: [cooking])
+      cooking_director = create(:profile, interests: [directing], focuses: [cooking])
+      tech_photographer = create(:profile, interests: [photography], focuses: [technology])
+      cooking_photographer = create(:profile, interests: [photography], focuses: [cooking])
 
       visit profile_search_path
       check "Cooking"
@@ -388,32 +376,26 @@ feature "Searching User profiles" do
 
     scenario "returns only the intersection of followers and interests" do
       directing = create(:interest, name: "Director")
-      directing_twitter_user = create(
-        :user,
-        :with_twitter,
+      directing_twitter_profile = create(
+        :profile,
         interests: [directing],
-        cached_twitter_follower_count: 100,
+        twitter_follower_count: 100,
       )
-      non_directing_target_user = create(
-        :user,
-        :with_twitter,
-        :with_instagram,
-        cached_twitter_follower_count: 10,
-        cached_instagram_follower_count: 100,
+      non_directing_target_profile = create(
+        :profile,
+        twitter_follower_count: 10,
+        instagram_follower_count: 100,
       )
-      target_user = create(
-        :user,
-        :with_twitter,
-        :with_instagram,
+      target_profile = create(
+        :profile,
         interests: [directing],
-        cached_twitter_follower_count: 10,
-        cached_instagram_follower_count: 100,
+        twitter_follower_count: 10,
+        instagram_follower_count: 100,
       )
-      directing_popular_user = create(
-        :user,
-        :with_instagram,
+      directing_popular_profile = create(
+        :profile,
         interests: [directing],
-        cached_instagram_follower_count: 1000,
+        instagram_follower_count: 1000,
       )
 
       visit profile_search_path
@@ -424,10 +406,10 @@ feature "Searching User profiles" do
       check "Director"
       click_button "Search"
 
-      expect(page).to have_content target_user.name
-      expect(page).to have_no_content directing_twitter_user.name
-      expect(page).to have_no_content non_directing_target_user.name
-      expect(page).to have_no_content directing_popular_user.name
+      expect(page).to have_content target_profile.name
+      expect(page).to have_no_content directing_twitter_profile.name
+      expect(page).to have_no_content non_directing_target_profile.name
+      expect(page).to have_no_content directing_popular_profile.name
     end
   end
 end

@@ -27,7 +27,12 @@ describe FacebookAuthenticator do
   end
 
   context 'user is already signed in' do
-    let!(:user) { create :user, email: email, name: name, gender: gender }
+    let!(:user) do
+      user = create(:user, email: email)
+      user.reload
+      user.profile.update(name: name, gender: gender)
+      user
+    end
 
     subject { FacebookAuthenticator.from_current_user(user, auth_data) }
 
@@ -54,11 +59,11 @@ describe FacebookAuthenticator do
       updated_user = subject
 
       expect(updated_user.email).to eq email
-      expect(updated_user.name).to eq name
-      expect(updated_user.gender).to eq gender
       expect(updated_user.facebook_uid).to eq uid
       expect(updated_user.facebook_token).to eq token
       expect(updated_user.facebook_token_expiration).to eq Time.at(expires_at)
+      expect(updated_user.profile.name).to eq name
+      expect(updated_user.profile.gender).to eq gender
     end
   end
 end
