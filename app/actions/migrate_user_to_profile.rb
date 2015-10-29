@@ -15,11 +15,9 @@ class MigrateUserToProfile
     :facebook_follower_count    => :cached_facebook_follower_count,
     :pinterest_follower_count   => :cached_pinterest_follower_count,
     :total_follower_count       => :total_follower_count,
-    :gender                     => :gender,
     :latitude                   => :latitude,
     :longitude                  => :longitude,
     :birthday                   => :birthday,
-    :ethnicity                  => :ethnicity,
     :special_interests          => :special_interests,
   }
 
@@ -36,7 +34,9 @@ class MigrateUserToProfile
     find_or_create_profile.tap do
       copy_user_attributes_to_profile
       copy_user_clients_to_profile
+      copy_user_ethnicity_to_profile
       copy_user_focuses_to_profile
+      copy_user_gender_to_profile
       copy_user_interests_to_profile
       copy_user_press_to_profile
       copy_user_list_memberships_to_profile
@@ -61,9 +61,19 @@ class MigrateUserToProfile
     profile.clients = user.clients
   end
 
+  def copy_user_ethnicity_to_profile
+    puts "Setting ethnicity for #{profile.name}"
+    profile.ethnicity = user.ethnicity
+  end
+
   def copy_user_focuses_to_profile
     puts "Creating focuses for #{profile.name}"
     profile.focuses = user.focuses
+  end
+
+  def copy_user_gender_to_profile
+    puts "Setting gender for #{profile.name}"
+    profile.gender = user.gender
   end
 
   def copy_user_interests_to_profile
