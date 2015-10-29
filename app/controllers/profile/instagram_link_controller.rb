@@ -1,6 +1,7 @@
 class Profile::InstagramLinkController < ApplicationController
   def destroy
-    if current_user.update(instagram_token: nil, cached_instagram_follower_count: nil)
+    if current_user.update(instagram_token: nil)
+      current_user.profile.update(instagram_follower_count: nil)
       Rails.cache.delete("instagram-media-#{current_user.instagram_token}")
       redirect_to profile_social_path
     else

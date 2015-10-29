@@ -1,14 +1,14 @@
 class UpdateFollowerCount
-  def initialize(user_id, platform)
-    @user = User.find(user_id)
+  def initialize(profile_id, platform)
+    @profile = Profile.find(profile_id)
     @platform = platform
   end
 
   def perform
-    return unless user
+    return unless profile
 
     if platform_follower_count
-      user.update(follower_count_attribute => platform_follower_count)
+      profile.update!(follower_count_attribute => platform_follower_count)
     end
   rescue Twitter::Error::Unauthorized
     remove_token
@@ -18,14 +18,14 @@ class UpdateFollowerCount
 
   private
 
-  attr_reader :user, :platform
+  attr_reader :profile, :platform
 
   def remove_token
-    user.update(platform_token_attribute => nil)
+    profile.user.update(platform_token_attribute => nil)
   end
 
   def follower_count_attribute
-    "cached_#{platform}_follower_count"
+    "#{platform}_follower_count"
   end
 
   def platform_token_attribute
@@ -38,6 +38,10 @@ class UpdateFollowerCount
   end
 
   def platform_adapter
-    user.send(platform)
+    platform_adapter_class.from_user(profile.user)
+  end
+
+  def platform_adapter_class
+    "#{platform.capitalize}Adapter".constantize
   end
 end
