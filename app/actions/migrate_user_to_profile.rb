@@ -63,7 +63,7 @@ class MigrateUserToProfile
 
   def copy_user_ethnicity_to_profile
     puts "Setting ethnicity for #{profile.name}"
-    profile.ethnicity = user.ethnicity
+    profile.update(ethnicity: user.ethnicity)
   end
 
   def copy_user_focuses_to_profile
@@ -73,7 +73,7 @@ class MigrateUserToProfile
 
   def copy_user_gender_to_profile
     puts "Setting gender for #{profile.name}"
-    profile.gender = user.gender
+    profile.update(gender: user.gender)
   end
 
   def copy_user_interests_to_profile
