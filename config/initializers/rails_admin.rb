@@ -16,7 +16,16 @@ RailsAdmin.config do |config|
     history_show
   end
 
-  config.included_models = ['ContactMessage', 'Profile', 'User']
+  config.included_models = %w(ContactMessage InfluencerList Profile User)
+
+  config.model 'InfluncerList' do
+    list do
+      field :id
+      field :name
+      field :owner
+      field :uuid
+    end
+  end
 
   config.model 'Profile' do
     list do
