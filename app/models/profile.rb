@@ -35,5 +35,5 @@ class Profile < ActiveRecord::Base
   crop_attached_file :picture
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
 
-  #has_paper_trail
+  has_paper_trail
 end
