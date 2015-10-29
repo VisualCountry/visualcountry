@@ -22,7 +22,8 @@ class Profile::VineController < ApplicationController
   end
 
    def destroy
-    current_user.update(vine_email: nil, vine_password: nil, vine_token: nil, cached_vine_follower_count: nil)
+    current_user.update(vine_email: nil, vine_password: nil, vine_token: nil)
+    current_user.profile.update(vine_follower_count: nil)
     Rails.cache.delete("vine-media-#{current_user.vine_token}")
     redirect_to profile_social_path
   end

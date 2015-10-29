@@ -13,6 +13,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user
       sign_in(user)
+      UpdateFollowerCount.new(current_user.profile.id, :facebook).perform
       redirect_to profile_social_path
     else
       redirect_to root_path, alert: "Unable to sign into Facebook"
@@ -25,6 +26,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user
       sign_in(user)
+      UpdateFollowerCount.new(user.profile.id, :twitter).perform
       redirect_to profile_social_path
     else
       session[:omniauth_data] = authenticator.credentials
@@ -34,11 +36,13 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def instagram
     InstagramAuthenticator.new(current_user, auth_data).authenticate
+    UpdateFollowerCount.new(current_user.profile.id, :instagram).perform
     redirect_to profile_social_path
   end
 
   def pinterest
     PinterestAuthenticator.new(current_user, auth_data).authenticate
+    UpdateFollowerCount.new(current_user.profile.id, :pinterest).perform
     redirect_to profile_social_path
   end
 
