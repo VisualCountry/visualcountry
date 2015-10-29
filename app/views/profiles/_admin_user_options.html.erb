@@ -39,7 +39,7 @@
       <ul>
         <% @profile.list_memberships.each do |membership| %>
           <li>
-            <p><%= link_to influencer_list_path(membership.influencer_list) %></p>
+            <p><%= link_to membership.influencer_list.name, influencer_list_path(membership.influencer_list) %></p>
           </li>
         <% end %>
       </ul>
