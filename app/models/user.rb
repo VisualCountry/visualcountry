@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  has_paper_trail
+  #has_paper_trail
 
   after_validation :normalize_city_name, if: :city_changed?
 
