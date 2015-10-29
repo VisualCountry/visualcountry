@@ -69,9 +69,6 @@ gem 'redis-rails'
 gem 'sidekiq'
 gem 'sinatra', require: false # Dependency of Sidekiq Web UI
 
-# Administration
-gem 'paper_trail'
-
 group :production, :staging do
   gem 'rails_12factor'
   gem 'raygun4ruby'
