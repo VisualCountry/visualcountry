@@ -36,6 +36,8 @@ class User < ActiveRecord::Base
   crop_attached_file :picture
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
 
+  has_paper_trail
+
   def create_profile
     profile || Profile.create(user_id: id, name: name, username: username)
   end
