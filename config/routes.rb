@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     resources :focuses, only: [:index]
   end
 
+  get '/old-admin' => 'old_admin/dashboard#index'
+
   namespace :admin do
     resources :contact_messages, only: [:index, :show]
   end
