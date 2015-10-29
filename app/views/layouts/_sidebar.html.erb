@@ -2,7 +2,7 @@
 
   <% if current_user.admin? %>
     <li class="active">
-      <%= link_to admin_path do %><span class="glyphicon glyphicon-stats" title="Admin Dashboard"></span> Admin Dashboard <span class="sr-only">(current)</span><% end %>
+      <%= link_to rails_admin_path do %><span class="glyphicon glyphicon-stats" title="Admin Dashboard"></span> Admin Dashboard <span class="sr-only">(current)</span><% end %>
     </li>
     <li class="active">
       <%= link_to profile_social_path do %><span class="glyphicon glyphicon glyphicon-cog" title="User Settings"></span> User Settings <span class="sr-only">(current)</span><% end %>
