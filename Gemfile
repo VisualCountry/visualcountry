@@ -71,7 +71,6 @@ gem 'sinatra', require: false # Dependency of Sidekiq Web UI
 
 # Administration
 gem 'rails_admin'
-gem 'paper_trail'
 
 group :production, :staging do
   gem 'rails_12factor'

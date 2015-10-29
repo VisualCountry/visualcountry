@@ -57,8 +57,6 @@ class Profile < ActiveRecord::Base
     end
   end
 
-  has_paper_trail
-
   def self.total_reach
     sum(:total_follower_count)
   end
