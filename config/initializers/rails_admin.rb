@@ -1,8 +1,6 @@
 RailsAdmin.config do |config|
   config.main_app_name = 'Visual Country'
 
-  config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
-
   config.actions do
     dashboard
     index
