@@ -5,6 +5,7 @@
     %h1{class: profile.name.size > 20 ? "small-header" : ""}
       =link_to profile.name, profile_path(id: profile.id)
     %h2
-      %span.glyphicon.glyphicon-envelope{"aria-hidden" => "true"}
-      = mail_to profile.user.email, profile.user.email
+      - if profile.user
+        %span.glyphicon.glyphicon-envelope{"aria-hidden" => "true"}
+        = mail_to profile.user.email, profile.user.email
 

@@ -51,7 +51,7 @@
             <% end %>
           <% end %>
         </li>
-        <% if signed_in_admin? || current_user.profile == @profile %>
+        <% if (signed_in_admin? || current_user.profile == @profile) && @profile.user %>
           <li>
             <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
             <%= mail_to @profile.email, @profile.email %>

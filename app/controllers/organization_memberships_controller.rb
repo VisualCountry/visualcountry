@@ -1,6 +1,6 @@
 class OrganizationMembershipsController < ApplicationController
   def create
-    profile = find_user.profile
+    profile = find_profile
     find_organization.add_profile(profile)
     redirect_to profile_path(profile)
   end
@@ -17,8 +17,8 @@ class OrganizationMembershipsController < ApplicationController
     OrganizationMembership.find(params[:id])
   end
 
-  def find_user
-    User.find(organization_membership_params[:profile_id])
+  def find_profile
+    Profile.find(organization_membership_params[:profile_id])
   end
 
   def find_organization

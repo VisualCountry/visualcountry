@@ -13,8 +13,9 @@
       - if profile.website
         = link_to profile.website, "http://#{profile.website}"
     %h2
-      %span.glyphicon.glyphicon-envelope{"aria-hidden" => "true"}
-      = mail_to profile.email, profile.email
+      - if profile.user
+        %span.glyphicon.glyphicon-envelope{"aria-hidden" => "true"}
+        = mail_to profile.email, profile.email
   %hr/
   .follower-count
     .text-center

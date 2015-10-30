@@ -30,8 +30,9 @@
       = link_to image_tag(profile.picture.url(:medium), :size => '175', alt: 'Profile Pic'), profile_path(id: profile.id)
       %h4= link_to profile.name, profile_path(profile)
       %p
-        %span.glyphicon.glyphicon-envelope{"aria-hidden" => "true"}
-        = mail_to profile.user.email, profile.user.email
+        - if profile.user
+          %span.glyphicon.glyphicon-envelope{"aria-hidden" => "true"}
+          = mail_to profile.user.email, profile.user.email
       %h5
         = link_to organization_membership_path(profile.organization_membership_in(@organization)), method: :delete, role: 'remove_user_from_organization', class: 'glyphicon glyphicon-remove-circle' do
           %span{:title => "Remove Member From Organization"}
