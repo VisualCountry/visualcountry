@@ -1,4 +1,4 @@
-class Admin::DashboardController < ApplicationController
+class OldAdmin::DashboardController < ApplicationController
   before_action :authorize_admin!
   layout 'application_with_sidebar'
 

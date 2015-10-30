@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   authenticate :user, lambda(&:admin?) do
     mount Sidekiq::Web => '/sidekiq'
+    mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   end
 
   devise_for :users, controllers: {
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
     resources :focuses, only: [:index]
   end
 
-  get '/admin' => 'admin/dashboard#index'
+  get '/old-admin' => 'old_admin/dashboard#index'
 
   namespace :admin do
     resources :contact_messages, only: [:index, :show]
