@@ -10,20 +10,9 @@ RailsAdmin.config do |config|
     edit
     delete
     show_in_app
-    history_index
-    history_show
   end
 
-  config.included_models = %w(ContactMessage InfluencerList Profile User)
-
-  config.model 'InfluncerList' do
-    list do
-      field :id
-      field :name
-      field :owner
-      field :uuid
-    end
-  end
+  config.included_models = %w(ContactMessage Profile User)
 
   config.model 'Profile' do
     list do
@@ -68,7 +57,28 @@ RailsAdmin.config do |config|
       :updated_at,
       :vine_email,
       :vine_password,
-      :vine_token
+      :vine_token,
+
+      #TODO: Remove after columns are removed
+      :username,
+      :name,
+      :city,
+      :bio,
+      :picture,
+      :website,
+      :cached_instagram_follower_count,
+      :cached_twitter_follower_count,
+      :cached_vine_follower_count,
+      :cached_facebook_follower_count,
+      :cached_pinterest_follower_count,
+      :total_follower_count,
+      :gender,
+      :latitude,
+      :longitude,
+      :birthday,
+      :ethnicity,
+      :special_interests,
+      :influencer_lists
     )
   end
 end
