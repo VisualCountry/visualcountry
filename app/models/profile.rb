@@ -33,7 +33,7 @@ class Profile < ActiveRecord::Base
     'Other/prefer not to answer'                => 6,
   }
 
-  delegate :email, to: :user
+  delegate :email, to: :user, allow_nil: true
 
   validates :bio, length: { maximum: 300 }
 
