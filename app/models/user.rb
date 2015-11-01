@@ -5,16 +5,6 @@ class User < ActiveRecord::Base
   # eventually be refactored into an action object.
   attr_accessor :name, :username
 
-  include ProfileAttributesWarning
-
-  has_many :press, dependent: :destroy
-  has_many :list_memberships, dependent: :destroy
-  has_many :organization_memberships, dependent: :destroy
-  has_many :organizations, through: :organization_memberships
-  has_and_belongs_to_many :interests
-  has_and_belongs_to_many :focuses
-  has_and_belongs_to_many :clients
-
   has_many :influencer_lists, dependent: :destroy
   has_one :profile
 
@@ -26,15 +16,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :confirmable,
          omniauth_providers: [:facebook, :instagram, :twitter, :pinterest]
-
-  has_attached_file :picture,
-    default_url: 'missing.png',
-    styles: {
-      medium: '300x300#',
-      thumb: '50x50#'
-    }
-  crop_attached_file :picture
-  validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
 
   def create_profile
     profile || Profile.create(user_id: id, name: name, username: username)
