@@ -39,10 +39,10 @@ feature "Users are in organizations" do
     expect(page).to have_no_link profile.name
   end
 
-  scenario "an organization's users are listed on its show page" do
+  scenario "an organization's profiles are listed on its show page" do
     admin = create(:admin)
     user = create(:user)
-    organization = create(:organization, users: [admin, user])
+    organization = create(:organization, profiles: [admin.profile, user.profile])
     login_as(admin)
 
     visit organization_path(organization)
