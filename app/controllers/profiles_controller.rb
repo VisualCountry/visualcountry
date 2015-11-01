@@ -1,5 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :set_profile
+  before_action :set_instagram_feed
+  before_action :set_vine_feed
 
   def show
     if current_user.admin?
