@@ -15,6 +15,9 @@ RailsAdmin.config do |config|
   config.included_models = %w(ContactMessage Profile User)
 
   config.model 'Profile' do
+    configure(:created_at) { read_only true }
+    configure(:updated_at) { read_only true }
+
     list do
       field :id
       field :name
@@ -25,6 +28,9 @@ RailsAdmin.config do |config|
 
   config.model 'User' do
     object_label_method :email
+
+    configure(:created_at) { read_only true }
+    configure(:updated_at) { read_only true }
 
     list do
       field :id
