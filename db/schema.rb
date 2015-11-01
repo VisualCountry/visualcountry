@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151030010247) do
+ActiveRecord::Schema.define(version: 20151101225552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,16 @@ ActiveRecord::Schema.define(version: 20151030010247) do
     t.string   "name",       null: false
   end
 
+  create_table "portfolio_items", force: true do |t|
+    t.integer  "item_id"
+    t.text     "item_type"
+    t.integer  "profile_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "portfolio_items", ["profile_id"], name: "index_portfolio_items_on_profile_id", using: :btree
+
   create_table "presses", force: true do |t|
     t.string   "name"
     t.string   "url"
@@ -255,5 +265,19 @@ ActiveRecord::Schema.define(version: 20151030010247) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   add_index "versions", ["transaction_id"], name: "index_versions_on_transaction_id", using: :btree
+
+  create_table "vimeo_videos", force: true do |t|
+    t.text     "guid"
+    t.text     "source"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "youtube_videos", force: true do |t|
+    t.text     "guid"
+    t.text     "source"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
