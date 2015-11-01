@@ -89,6 +89,10 @@ class Profile < ActiveRecord::Base
     organization_memberships.find_by(organization: organization)
   end
 
+  def portfolio
+    PortfolioItem.for(self).map(&:item)
+  end
+
   private
 
   def normalize_city_name
