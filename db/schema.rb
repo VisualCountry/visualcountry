@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151030010247) do
+ActiveRecord::Schema.define(version: 20151101155938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20151030010247) do
   create_table "clients", force: true do |t|
     t.string   "name"
     t.string   "url"
-    t.string   "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,15 +30,6 @@ ActiveRecord::Schema.define(version: 20151030010247) do
   end
 
   add_index "clients_profiles", ["client_id", "profile_id"], name: "index_clients_profiles_on_client_id_and_profile_id", unique: true, using: :btree
-
-  create_table "clients_users", force: true do |t|
-    t.integer  "client_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "clients_users", ["client_id", "user_id"], name: "index_clients_users_on_client_id_and_user_id", unique: true, using: :btree
 
   create_table "contact_messages", force: true do |t|
     t.string   "name"
@@ -65,15 +55,6 @@ ActiveRecord::Schema.define(version: 20151030010247) do
 
   add_index "focuses_profiles", ["focus_id", "profile_id"], name: "index_focuses_profiles_on_focus_id_and_profile_id", unique: true, using: :btree
 
-  create_table "focuses_users", force: true do |t|
-    t.integer  "focus_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "focuses_users", ["focus_id", "user_id"], name: "index_focuses_users_on_focus_id_and_user_id", using: :btree
-
   create_table "influencer_lists", force: true do |t|
     t.string   "name",       null: false
     t.integer  "user_id",    null: false
@@ -95,13 +76,7 @@ ActiveRecord::Schema.define(version: 20151030010247) do
     t.integer "profile_id"
   end
 
-  create_table "interests_users", force: true do |t|
-    t.integer "interest_id"
-    t.integer "user_id"
-  end
-
   create_table "list_memberships", force: true do |t|
-    t.integer  "user_id"
     t.integer  "influencer_list_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -110,7 +85,6 @@ ActiveRecord::Schema.define(version: 20151030010247) do
 
   add_index "list_memberships", ["influencer_list_id"], name: "index_list_memberships_on_influencer_list_id", using: :btree
   add_index "list_memberships", ["profile_id"], name: "index_list_memberships_on_profile_id", using: :btree
-  add_index "list_memberships", ["user_id"], name: "index_list_memberships_on_user_id", using: :btree
 
   create_table "organization_list_memberships", force: true do |t|
     t.datetime "created_at"
@@ -145,7 +119,6 @@ ActiveRecord::Schema.define(version: 20151030010247) do
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
     t.integer  "profile_id"
   end
 
@@ -178,26 +151,18 @@ ActiveRecord::Schema.define(version: 20151030010247) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                                       default: "", null: false
-    t.string   "encrypted_password",                          default: "", null: false
+    t.string   "email",                     default: "", null: false
+    t.string   "encrypted_password",        default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                               default: 0,  null: false
+    t.integer  "sign_in_count",             default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "username"
-    t.string   "name"
-    t.string   "city"
-    t.string   "bio",                             limit: 300
-    t.string   "picture_file_name"
-    t.string   "picture_content_type"
-    t.integer  "picture_file_size"
-    t.datetime "picture_updated_at"
     t.text     "facebook_token"
     t.text     "twitter_token"
     t.text     "instagram_token"
@@ -206,54 +171,17 @@ ActiveRecord::Schema.define(version: 20151030010247) do
     t.string   "vine_password"
     t.string   "twitter_token_secret"
     t.boolean  "admin"
-    t.text     "website"
     t.text     "vine_token"
-    t.integer  "cached_instagram_follower_count"
-    t.integer  "cached_twitter_follower_count"
-    t.integer  "cached_vine_follower_count"
-    t.integer  "cached_facebook_follower_count"
-    t.integer  "cached_pinterest_follower_count"
-    t.integer  "total_follower_count"
     t.datetime "facebook_token_expiration"
-    t.integer  "gender"
     t.text     "twitter_uid"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.date     "birthday"
-    t.integer  "ethnicity"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.text     "special_interests"
     t.text     "facebook_uid"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
-
-  create_table "version_associations", force: true do |t|
-    t.integer "version_id"
-    t.string  "foreign_key_name", null: false
-    t.integer "foreign_key_id"
-  end
-
-  add_index "version_associations", ["foreign_key_name", "foreign_key_id"], name: "index_version_associations_on_foreign_key", using: :btree
-  add_index "version_associations", ["version_id"], name: "index_version_associations_on_version_id", using: :btree
-
-  create_table "versions", force: true do |t|
-    t.string   "item_type",      null: false
-    t.integer  "item_id",        null: false
-    t.string   "event",          null: false
-    t.string   "whodunnit"
-    t.text     "object"
-    t.datetime "created_at"
-    t.text     "object_changes"
-    t.integer  "transaction_id"
-  end
-
-  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
-  add_index "versions", ["transaction_id"], name: "index_versions_on_transaction_id", using: :btree
 
 end
