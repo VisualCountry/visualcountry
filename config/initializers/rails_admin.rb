@@ -58,27 +58,6 @@ RailsAdmin.config do |config|
       :vine_email,
       :vine_password,
       :vine_token,
-
-      #TODO: Remove after columns are removed
-      :username,
-      :name,
-      :city,
-      :bio,
-      :picture,
-      :website,
-      :cached_instagram_follower_count,
-      :cached_twitter_follower_count,
-      :cached_vine_follower_count,
-      :cached_facebook_follower_count,
-      :cached_pinterest_follower_count,
-      :total_follower_count,
-      :gender,
-      :latitude,
-      :longitude,
-      :birthday,
-      :ethnicity,
-      :special_interests,
-      :influencer_lists
     )
   end
 end
