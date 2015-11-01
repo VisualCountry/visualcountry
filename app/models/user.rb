@@ -5,8 +5,6 @@ class User < ActiveRecord::Base
   # eventually be refactored into an action object.
   attr_accessor :name, :username
 
-  include ProfileAttributesWarning
-
   has_many :influencer_lists, dependent: :destroy
   has_one :profile
 
