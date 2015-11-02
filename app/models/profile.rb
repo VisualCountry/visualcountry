@@ -89,6 +89,8 @@ class Profile < ActiveRecord::Base
     organization_memberships.find_by(organization: organization)
   end
 
+  #OPTIMIZE: If this turns into an expensive query, it may be worthwhile to
+  # rewrite in AREL
   def portfolio
     PortfolioItem.for(self).map(&:item)
   end
