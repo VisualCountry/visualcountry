@@ -1,7 +1,6 @@
 <h6>Recent Vine Videos</h6>
-<div class="row">
-  <% feed.first(9).each do |vine| %>
-    <div class="col-sm-6 col-md-4">
+<% feed.each do |vine| %>
+  <div class="col-sm-6 col-md-4">
     <%= videojs_tag(vine.videoUrl, class: 'platform-video', thumbnail: vine.thumbnailUrl) %>
     <ul class="user-post-icons">
       <li class="user-post-icon">

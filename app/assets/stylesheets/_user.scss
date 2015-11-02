@@ -1,4 +1,9 @@
 .user {
+  iframe {
+    border: 0;
+    margin-bottom: 40px;
+  }
+
   h6 {
     border-bottom: $base-border;
     color: $light-color;

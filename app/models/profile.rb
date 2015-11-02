@@ -92,7 +92,7 @@ class Profile < ActiveRecord::Base
   #OPTIMIZE: If this turns into an expensive query, it may be worthwhile to
   # rewrite in AREL
   def portfolio
-    PortfolioItem.for(self).map(&:item)
+    PortfolioItem.for(self).last(3).map(&:item)
   end
 
   private
