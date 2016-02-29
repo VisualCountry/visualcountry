@@ -21,6 +21,10 @@ RailsAdmin.config do |config|
       field :total_follower_count
       field :user
     end
+
+    edit do
+      field :portfolio_items
+    end
   end
 
   config.model 'User' do

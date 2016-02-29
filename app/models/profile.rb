@@ -13,6 +13,7 @@ class Profile < ActiveRecord::Base
   has_many :list_memberships, dependent: :destroy
   has_many :organization_memberships, dependent: :destroy
   has_many :organizations, through: :organization_memberships
+  has_many :portfolio_items
 
   accepts_nested_attributes_for :clients, allow_destroy: true
   accepts_nested_attributes_for :press, allow_destroy: true
@@ -92,7 +93,7 @@ class Profile < ActiveRecord::Base
   #OPTIMIZE: If this turns into an expensive query, it may be worthwhile to
   # rewrite in AREL
   def portfolio
-    PortfolioItem.for(self).last(3).map(&:item)
+    portfolio_items.includes(:item).last(3).map(&:item)
   end
 
   private
